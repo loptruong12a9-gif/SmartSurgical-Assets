@@ -78,6 +78,13 @@ h1 {
     font-size: 1.1rem;
     font-weight: 500;
     color: var(--text-secondary);
+    margin-bottom: 5px;
+}
+
+.developer-header {
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--primary-color);
     margin-bottom: 25px;
 }
 
@@ -456,6 +463,7 @@ h1 {
         margin: 10% auto;
     }
 }
+
 /* Flashy & Professional Footer */
 .app-footer {
     margin-top: 80px;
