@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SmartSurgical Assets</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body>
+    <div class="app-container">
+        <header>
+            <div class="header-content">
+                <img src="logo.png" alt="Logo" class="app-logo">
+                <h1>SmartSurgical Assets</h1>
+                <p class="subtitle">(Quản Lý Dụng Cụ Phẫu Thuật)</p>
+                <div class="search-bar">
+                    <i class="fa-solid fa-search"></i>
+                    <input type="text" id="searchInput" placeholder="Tìm kiếm bộ dụng cụ...">
+                </div>
+            </div>
+        </header>
+
+        <main>
+            <div id="kitGrid" class="kit-grid">
+                <!-- Items will be injected here via JavaScript -->
+            </div>
+
+            <footer class="app-footer">
+                <p>Phát triển bởi <strong>Tân Nguyễn</strong> (036.728.7102)</p>
+                <p class="quote">"Code một lần - Dùng một đời"</p>
+                <p class="version">Phiên bản cuối v1.0 (2026)</p>
+            </footer>
+        </main>
+
+        <!-- Modal for details -->
+        <div id="detailModal" class="modal">
+            <div class="modal-content">
+                <span class="close-btn">&times;</span>
+                <h2 id="modalTitle">Tên Bộ Dụng Cụ</h2>
+                <div class="modal-body">
+                    <div id="modalSelection" class="modal-selection" style="display: none;">
+                        <!-- Sub-kit buttons will be injected here -->
+                    </div>
+
+                    <div id="modalDetails" style="display: none;">
+                        <button id="backBtn" class="back-btn" style="display: none;"><i
+                                class="fa-solid fa-arrow-left"></i> Quay lại</button>
+                        <div class="search-in-modal">
+                            <input type="text" id="itemSearchProps" placeholder="Tìm dụng cụ trong bộ này..."
+                                style="width: 100%; padding: 10px; margin-bottom: 15px; border-radius: 8px; border: 1px solid #ddd; display: none;">
+                            <!-- Hidden for now, can enable if needed -->
+                        </div>
+                        <table class="item-table">
+                            <thead>
+                                <tr>
+                                    <th>STT</th>
+                                    <th>DANH MỤC</th>
+                                    <th>MÃ SỐ</th>
+                                    <th>SỐ LƯỢNG</th>
+                                    <th>GHI CHÚ</th>
+                                </tr>
+                            </thead>
+                            <tbody id="modalItemsList">
+                                <!-- Items will be injected here -->
+                            </tbody>
+                        </table>
+                        <div id="emptyState" class="empty-state" style="display: none;">
+                            <p>Chưa có dữ liệu cho bộ này.</p>
+                        </div>
+                        <div id="modalFooter" class="modal-footer"></div>
+                    </div> <!-- End modalDetails -->
+                </div>
+            </div>
+        </div>
+
+        <script src="script.js"></script>
+</body>
+
+</html>

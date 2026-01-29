@@ -1,0 +1,41 @@
+TRONG ĐÓ BỘ 
+BỘ CẮT TỬ CUNG GỒM 3 BỘ 1,2,3
+KHỚP GỐI -1 BỘ
+HC Ố CỔ TAY -1  BỘ
+NẠO VA -1 BỘ
+NIỆU  -- 3 BỘ .1.2.3
+NỘI SOI SẢN 1 BỘ
+NỘI SOI TỔNG QUÁT - 2 BỘ 1,2
+SỌ NÃO 1 BỘ
+SOI TREO TMH 1 BỘ
+BỘ THẦN KINH 15 BỘ (1-15)
+BỘ TIỂU PHẪU 4 BỘ
+ĐẠI PHẪU 1 BỘ
+TRUNG PHẪU 2 BỘ 1 VÀ 2
+XƯƠNG CHI TRÊN 1 BỘ
+XƯƠNG CHI DƯỚI 1 BỘ
+CAPPA 1 BỘ 
+BỘ CẮT A 3 BỘ (1-3)
+VI PHẪU THẦN KINH 1 BỘ
+THOÁT VỊ LƯNG 2 BỘ 1,2
+THOÁT VỊ CỔ 1 BỘ
+VI PHẪU CŨ 1 BỘ
+BỘ KHOAN PIN 1 BỘ
+VI PHẪU CỘT SỐNG 1 BỘ
+NỘI SOI TAI MŨI HỌNG 1 BỘ
+BẮT CON 3 BỘ 1,2,3
+
+
+HÃY TẠO MỤC CHO LÍT TRÊN , ĐỐI VỚI MỘT BỘ THÌ TẠO MỘT  ĐỐI VỚI NHIỀU HƠN THÌ HÃY TẠO THEO THỨ TỰ 
+VÍ DỤ : BỘ CẮT TỬ CUNG GỒM 3 BỘ 1,2,3
+THÌ SẼ TẠO 
+CTC 1
+CTC 2
+CTC 3
+
+- MỖI BỘ VẪN GIỮ NGUYÊN DANH SÁCH KHI BẤM VÀO ĐC SỔ RA GỒM : 
++STT
++ DANH MỤC
++ MÃ SỐ
++ SỐ LƯỢNG
++GHI CHÚ
