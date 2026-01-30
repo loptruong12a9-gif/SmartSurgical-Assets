@@ -1541,6 +1541,9 @@ document.addEventListener('DOMContentLoaded', () => {
             return matchesBase || matchesExtra || matchesNumbered;
         });
 
+        // Sort alphabetically by baseName (ABC)
+        filteredCats.sort((a, b) => a.baseName.localeCompare(b.baseName, 'vi', { sensitivity: 'base' }));
+
         filteredCats.forEach(def => {
             const card = document.createElement('div');
             card.className = 'kit-card';
@@ -1577,24 +1580,26 @@ document.addEventListener('DOMContentLoaded', () => {
         modalDetails.style.display = 'none';
         modalTitle.textContent = def.baseName;
 
+        let allSubKits = [];
+
         for (let i = 1; i <= def.count; i++) {
-            const subName = `${def.prefix} ${i}`;
+            allSubKits.push(`${def.prefix} ${i}`);
+        }
+
+        if (def.extraSubKits) {
+            allSubKits = allSubKits.concat(def.extraSubKits);
+        }
+
+        // Sort alphabetically (ABC)
+        allSubKits.sort((a, b) => a.localeCompare(b, 'vi', { sensitivity: 'base' }));
+
+        allSubKits.forEach(subName => {
             const btn = document.createElement('button');
             btn.className = 'sub-kit-btn';
             btn.textContent = subName;
             btn.addEventListener('click', () => showDetailsView(subName, true));
             modalSelection.appendChild(btn);
-        }
-
-        if (def.extraSubKits) {
-            def.extraSubKits.forEach(subName => {
-                const btn = document.createElement('button');
-                btn.className = 'sub-kit-btn';
-                btn.textContent = subName;
-                btn.addEventListener('click', () => showDetailsView(subName, true));
-                modalSelection.appendChild(btn);
-            });
-        }
+        });
     }
 
     function showDetailsView(kitName, showBack = false) {
@@ -1606,11 +1611,107 @@ document.addEventListener('DOMContentLoaded', () => {
             backBtn.style.display = 'flex';
         }
 
+        // Add Export Button if not exists
+        let exportBtn = document.getElementById('exportBtn');
+        if (!exportBtn) {
+            exportBtn = document.createElement('button');
+            exportBtn.id = 'exportBtn';
+            exportBtn.className = 'back-btn'; // Reusing style
+            exportBtn.innerHTML = '<i class="fa-solid fa-file-excel"></i> Xuất Excel';
+            exportBtn.style.marginLeft = 'auto'; // Float right
+
+            // Insert after Search Input or append to container
+            const searchContainer = document.querySelector('.search-in-modal');
+            if (searchContainer) {
+                searchContainer.style.display = 'flex'; // Ensure flex layout
+                searchContainer.style.gap = '10px';
+                searchContainer.appendChild(exportBtn);
+            }
+        }
+
+        // Update listener
+        exportBtn.onclick = () => exportToExcel(kitName);
+
         renderTable(kitName);
     }
 
-    // Persistence for modified notes
+    // Persistence for modified notes AND names
     let modifiedNotes = JSON.parse(localStorage.getItem('kitModifiedNotes') || '{}');
+    let modifiedNames = JSON.parse(localStorage.getItem('kitModifiedNames') || '{}');
+
+    // Export Functionality
+    function exportToExcel(kitName) {
+        let table = document.querySelector(".item-table");
+
+        // Create a clone to manipulate
+        let cloneTable = table.cloneNode(true);
+
+        // Create professional header row
+        let headerRow = document.createElement('tr');
+        let headerCell = document.createElement('td');
+        headerCell.colSpan = 5;
+        headerCell.textContent = kitName.toUpperCase();
+        headerCell.style.cssText = "font-size: 26pt; font-weight: bold; text-align: center; padding: 20px; background-color: #2563eb; color: white; border: 2px solid #000; font-family: 'Times New Roman';";
+
+        headerRow.appendChild(headerCell);
+
+        // Add header to table
+        let thead = cloneTable.querySelector('thead');
+        if (thead) {
+            thead.insertBefore(headerRow, thead.firstChild);
+        } else {
+            cloneTable.prepend(headerRow);
+        }
+
+        // Add Footer Row (Status/Checked By)
+        const footerDiv = document.getElementById('modalFooter');
+        if (footerDiv && footerDiv.style.display !== 'none' && footerDiv.textContent) {
+            let footerRow = document.createElement('tr');
+            let footerCell = document.createElement('td');
+            footerCell.colSpan = 5; // Span across all columns
+            footerCell.textContent = footerDiv.textContent;
+            // Styling for the footer row in Excel
+            footerCell.style.cssText = "font-size: 14pt; font-style: italic; font-weight: bold; text-align: right; padding: 10px; border: 1px solid #000; background-color: #f1f5f9;";
+            footerRow.appendChild(footerCell);
+            cloneTable.appendChild(footerRow);
+        }
+
+        // Add borders to all cells for "Excel grid" look AND set font size 12 bold
+        cloneTable.querySelectorAll('th, td').forEach(cell => {
+            // Keep existing borders logic but add font styling
+            if (!cell.style.fontSize) {
+                cell.style.border = "1px solid #000";
+                cell.style.padding = "5px";
+                cell.style.fontSize = "12pt";
+                cell.style.fontWeight = "bold";
+                cell.style.fontFamily = "'Times New Roman'"; // Consistent font
+            }
+
+            // Special styling for "Tổng cộng"
+            if (cell.textContent && cell.textContent.toLowerCase().includes("tổng cộng")) {
+                cell.textContent = cell.textContent.toUpperCase();
+                cell.style.fontSize = "20pt";
+            }
+        });
+
+        let html = cloneTable.outerHTML;
+
+        // Add UTF-8 BOM
+        let blob = new Blob(["\ufeff", html], {
+            type: "application/vnd.ms-excel"
+        });
+
+        let url = URL.createObjectURL(blob);
+        let a = document.createElement("a");
+        a.href = url;
+
+        // Filename is exactly the kit name
+        a.download = `${kitName}.xls`;
+
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+    }
 
     function renderTable(kitName) {
         modalItemsList.innerHTML = '';
@@ -1628,15 +1729,23 @@ document.addEventListener('DOMContentLoaded', () => {
             // Handle editable note logic
             const noteKey = `${kitName}-${index}`;
             const currentNote = modifiedNotes[noteKey] !== undefined ? modifiedNotes[noteKey] : (item.note || '');
-            const isEdited = modifiedNotes[noteKey] !== undefined && modifiedNotes[noteKey] !== (item.note || '');
+            const isNoteEdited = modifiedNotes[noteKey] !== undefined && modifiedNotes[noteKey] !== (item.note || '');
+
+            // Handle editable name logic
+            const nameKey = `${kitName}-name-${index}`;
+            const currentName = modifiedNames[nameKey] !== undefined ? modifiedNames[nameKey] : item.name;
+            const isNameEdited = modifiedNames[nameKey] !== undefined && modifiedNames[nameKey] !== item.name;
 
             row.innerHTML = `
                 <td>${sttDisplay}</td>
-                <td>${item.name}</td>
+                <td contenteditable="${!item.bold}" 
+                    class="name-cell ${isNameEdited ? 'note-edited' : ''}" 
+                    data-key="${nameKey}"
+                    data-original="${item.name}">${currentName}</td>
                 <td>${item.code || ''}</td>
                 <td>${item.quantity > 0 ? item.quantity : (item.quantity === 0 ? '0' : '-')}</td>
                 <td contenteditable="${!item.bold}" 
-                    class="note-cell ${isEdited ? 'note-edited' : ''}" 
+                    class="note-cell ${isNoteEdited ? 'note-edited' : ''}" 
                     data-key="${noteKey}"
                     data-original="${item.note || ''}">${currentNote}</td>
             `;
@@ -1644,6 +1753,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
 
         // Add listeners for the newly created editable cells
+        // Listeners for Notes
         document.querySelectorAll('.note-cell').forEach(cell => {
             cell.addEventListener('blur', (e) => {
                 const key = e.target.getAttribute('data-key');
@@ -1660,7 +1770,41 @@ document.addEventListener('DOMContentLoaded', () => {
                 localStorage.setItem('kitModifiedNotes', JSON.stringify(modifiedNotes));
             });
 
-            // Prevent Enter key from creating new lines in cell
+            cell.addEventListener('keydown', (e) => {
+                if (e.key === 'Enter') {
+                    e.preventDefault();
+                    e.target.blur();
+                }
+            });
+        });
+
+        // Listeners for Names
+        document.querySelectorAll('.name-cell').forEach(cell => {
+            // Highlight on click logic
+            cell.addEventListener('click', (e) => {
+                // Toggle highlight class
+                if (e.target.classList.contains('highlight-bold')) {
+                    e.target.classList.remove('highlight-bold');
+                } else {
+                    e.target.classList.add('highlight-bold');
+                }
+            });
+
+            cell.addEventListener('blur', (e) => {
+                const key = e.target.getAttribute('data-key');
+                const originalValue = e.target.getAttribute('data-original');
+                const newValue = e.target.innerText.trim();
+
+                if (newValue !== originalValue) {
+                    modifiedNames[key] = newValue;
+                    e.target.classList.add('note-edited');
+                } else {
+                    delete modifiedNames[key];
+                    e.target.classList.remove('note-edited');
+                }
+                localStorage.setItem('kitModifiedNames', JSON.stringify(modifiedNames));
+            });
+
             cell.addEventListener('keydown', (e) => {
                 if (e.key === 'Enter') {
                     e.preventDefault();
