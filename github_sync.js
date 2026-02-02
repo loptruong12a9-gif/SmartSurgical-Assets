@@ -84,15 +84,21 @@ function initializeGitHubSync() {
 }
 
 async function saveDataToGitHub() {
-    const token = localStorage.getItem('githubToken');
-    const owner = localStorage.getItem('ghOwner');
-    const repo = localStorage.getItem('ghRepo');
+    const token = (localStorage.getItem('githubToken') || '').trim();
+    const owner = (localStorage.getItem('ghOwner') || '').trim();
+    const repo = (localStorage.getItem('ghRepo') || '').trim();
     const path = 'data.js';
 
     if (!token || !owner || !repo) throw new Error("Chưa cấu hình GitHub!");
 
+    // Validate Token (Simple check for non-ASCII)
+    if (/[^\x00-\x7F]/.test(token)) {
+        throw new Error("Token chứa ký tự không hợp lệ (có thể do lỗi copy-paste). Vui lòng nhập lại Token.");
+    }
+
     // 1. Get current SHA
-    const getUrl = `https://api.github.com/repos/${owner}/${repo}/contents/${path}`;
+    // Encode components to ensure valid URL
+    const getUrl = `https://api.github.com/repos/${encodeURIComponent(owner)}/${encodeURIComponent(repo)}/contents/${path}`;
     const getResp = await fetch(getUrl, {
         headers: {
             'Authorization': `token ${token}`,
@@ -100,12 +106,13 @@ async function saveDataToGitHub() {
         }
     });
 
-    if (!getResp.ok) {
-        if (getResp.status === 404) throw new Error("Không tìm thấy file data.js trên Repo này!");
+    let sha = null;
+    if (getResp.ok) {
+        const getData = await getResp.json();
+        sha = getData.sha;
+    } else if (getResp.status !== 404) {
         throw new Error("Không thể kết nối GitHub (Get SHA) - Kiểm tra Token/Mạng");
     }
-    const getData = await getResp.json();
-    const sha = getData.sha;
 
     // 2. Construct Content
     let modifiedNotes = JSON.parse(localStorage.getItem('kitModifiedNotes') || '{}');
@@ -197,8 +204,10 @@ async function saveDataToGitHub() {
     });
 
     if (!putResp.ok) {
-        const err = await putResp.json();
-        throw new Error("Lỗi GitHub: " + (err.message || putResp.statusText));
+        const err = await putResp.json().catch(() => ({ message: putResp.statusText }));
+        const errorMsg = `Lỗi GitHub (${putResp.status}): ${err.message}\nURL: ${getUrl}`;
+        console.error("GitHub Sync Error:", putResp, err);
+        throw new Error(errorMsg);
     }
 
     if (confirm('Lưu thành công! Dữ liệu đã được cập nhật trên GitHub.\nBạn có muốn tải lại trang để xóa các chỉnh sửa tạm thời?')) {
