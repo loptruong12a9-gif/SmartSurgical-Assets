@@ -1,4 +1,4 @@
-const APP_VERSION = "v1.3 PRO (Cập nhật 23:28:13 2/2/2026)";
+const APP_VERSION = "v1.3 PRO (Cập nhật 23:36:43 2/2/2026)";
 const kitDefinitions = [
     {
         "id": 1,
@@ -7490,14 +7490,13 @@ allKitsData["XƯƠNG CHI TRÊN"] = [
         "name": "KÉO CẮT CHỈ",
         "code": "",
         "quantity": 1,
-        "note": "Cùn"
+        "note": "CÙN"
     },
     {
         "stt": 7,
         "name": "KÉO MESK",
         "code": "",
-        "quantity": 1,
-        "note": "Cùn"
+        "quantity": 1
     },
     {
         "stt": 8,
@@ -7546,22 +7545,19 @@ allKitsData["XƯƠNG CHI TRÊN"] = [
         "stt": 15,
         "name": "ĐỤC LÒNG MÁNG NHỎ",
         "code": "FL136R",
-        "quantity": 1,
-        "note": "Mẻ"
+        "quantity": 1
     },
     {
         "stt": 16,
         "name": "ĐỤC LÒNG MÁNG LỚN",
         "code": "FL574",
-        "quantity": 2,
-        "note": "Mẻ"
+        "quantity": 2
     },
     {
         "stt": 17,
         "name": "ĐỤC THẲNG",
         "code": "FL524",
-        "quantity": 2,
-        "note": "CÙN"
+        "quantity": 2
     },
     {
         "stt": 18,
