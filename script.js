@@ -1510,6 +1510,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const modal = document.getElementById('detailModal');
     const modalTitle = document.getElementById('modalTitle');
     const modalItemsList = document.getElementById('modalItemsList');
+    const mobileItemsList = document.getElementById('mobileItemsList');
+
     const emptyState = document.getElementById('emptyState');
     const closeBtn = document.querySelector('.close-btn');
     const modalSelection = document.getElementById('modalSelection');
