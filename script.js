@@ -665,20 +665,51 @@
         renderCategoryGrid(e.target.value);
     });
 
-    renderCategoryGrid();
+    // Smart Data Loading - Fetch from GitHub if configured
+    const token = localStorage.getItem('githubToken');
+    const owner = localStorage.getItem('ghOwner');
+    const repo = localStorage.getItem('ghRepo');
 
-    // Inject version into UI
-    const versionBadge = document.getElementById('appVersion');
-    if (versionBadge) {
-        versionBadge.textContent = APP_VERSION;
-        versionBadge.addEventListener('click', () => {
-            const originalText = versionBadge.textContent;
-            versionBadge.textContent = "✓ Đã cập nhật bản mới nhất";
-            versionBadge.style.background = "var(--success-color, #22c55e)";
-            setTimeout(() => {
-                versionBadge.textContent = originalText;
-                versionBadge.style.background = "";
-            }, 2000);
-        });
+    if (token && owner && repo) {
+        console.log("Fetching from GitHub...");
+        fetch(`https://api.github.com/repos/${encodeURIComponent(owner)}/${encodeURIComponent(repo)}/contents/data.js`, {
+            headers: { 'Authorization': `token ${token}`, 'Accept': 'application/vnd.github.v3+json' }
+        })
+            .then(r => r.ok ? r.json() : Promise.reject())
+            .then(data => {
+                const script = document.createElement('script');
+                script.textContent = decodeURIComponent(escape(atob(data.content)));
+                document.body.appendChild(script);
+                console.log("GitHub data loaded");
+                renderCategoryGrid();
+                updateVersionBadge();
+            })
+            .catch(() => {
+                console.warn("GitHub failed, loading local");
+                loadLocal();
+            });
+    } else {
+        loadLocal();
+    }
+
+    function loadLocal() {
+        const s = document.createElement('script');
+        s.src = 'data.js?v=' + Date.now();
+        s.onload = () => { renderCategoryGrid(); updateVersionBadge(); };
+        s.onerror = () => alert("Lỗi tải dữ liệu!");
+        document.body.appendChild(s);
+    }
+
+    function updateVersionBadge() {
+        const badge = document.getElementById('appVersion');
+        if (badge) {
+            badge.textContent = typeof APP_VERSION !== 'undefined' ? APP_VERSION : "v1.3 PRO";
+            badge.addEventListener('click', () => {
+                const orig = badge.textContent;
+                badge.textContent = "✓ Đã cập nhật";
+                badge.style.background = "#22c55e";
+                setTimeout(() => { badge.textContent = orig; badge.style.background = ""; }, 2000);
+            });
+        }
     }
 });

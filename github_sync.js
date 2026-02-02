@@ -8,9 +8,61 @@ function initializeGitHubSync() {
     // Check if token exists
     const token = localStorage.getItem('githubToken');
     const saveBtn = document.getElementById('saveToGithubBtn');
+    const refreshBtn = document.getElementById('refreshFromGithubBtn');
 
     if (token) {
         if (saveBtn) saveBtn.style.display = 'inline-flex';
+        if (refreshBtn) refreshBtn.style.display = 'inline-flex';
+    }
+
+    // Refresh button handler
+    if (refreshBtn) {
+        refreshBtn.addEventListener('click', () => {
+            refreshBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i>';
+            refreshBtn.disabled = true;
+
+            // Force reload from GitHub with cache busting
+            const owner = localStorage.getItem('ghOwner');
+            const repo = localStorage.getItem('ghRepo');
+
+            fetch(`https://api.github.com/repos/${encodeURIComponent(owner)}/${encodeURIComponent(repo)}/contents/data.js?t=${Date.now()}`, {
+                headers: {
+                    'Authorization': `token ${token}`,
+                    'Accept': 'application/vnd.github.v3+json',
+                    'Cache-Control': 'no-cache'
+                }
+            })
+                .then(r => r.ok ? r.json() : Promise.reject('Failed'))
+                .then(data => {
+                    // Clear old data
+                    if (typeof allKitsData !== 'undefined') {
+                        Object.keys(allKitsData).forEach(k => delete allKitsData[k]);
+                    }
+
+                    // Load new data
+                    const script = document.createElement('script');
+                    script.textContent = decodeURIComponent(escape(atob(data.content)));
+                    document.body.appendChild(script);
+
+                    // Re-render
+                    renderCategoryGrid();
+
+                    // Update version badge
+                    const badge = document.getElementById('appVersion');
+                    if (badge && typeof APP_VERSION !== 'undefined') {
+                        badge.textContent = APP_VERSION;
+                    }
+
+                    alert('Đã tải dữ liệu mới từ GitHub!');
+                    refreshBtn.innerHTML = '<i class="fa-solid fa-sync"></i>';
+                    refreshBtn.disabled = false;
+                })
+                .catch(err => {
+                    alert('Lỗi tải dữ liệu: ' + err);
+                    refreshBtn.innerHTML = '<i class="fa-solid fa-sync"></i>';
+                    refreshBtn.disabled = false;
+                });
+        });
     }
 
     const configBtn = document.getElementById('configGithubBtn');
