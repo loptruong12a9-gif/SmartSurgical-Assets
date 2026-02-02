@@ -1,4 +1,4 @@
-const APP_VERSION = "v1.3 PRO (Cập nhật 22:39:13 2/2/2026)";
+const APP_VERSION = "v1.3 PRO (Cập nhật 22:48:00 2/2/2026)";
 const kitDefinitions = [
     {
         "id": 1,
@@ -7387,7 +7387,8 @@ allKitsData["XƯƠNG CHI DƯỚI"] = [
         "stt": 18,
         "name": "ĐỤC LÒNG MÁNG",
         "code": "FL134",
-        "quantity": 1
+        "quantity": 1,
+        "note": "MẺ CÙN"
     },
     {
         "stt": 19,
