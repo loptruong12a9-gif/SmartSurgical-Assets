@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SmartSurgical Assets</title>
+    <title>SmartSurgical Pro Assets</title>
     <!-- Web App & Home Screen Icon Support -->
     <link rel="apple-touch-icon" href="logo.png">
     <link rel="icon" type="image/png" href="logo.png">
@@ -50,7 +50,7 @@
                 <p class="dev-info">Phát triển bởi <strong>Tân Nguyễn</strong> • <a href="tel:0367287102"
                         class="phone-link">036.728.7102</a></p>
                 <p class="quote">"Code một lần - Dùng một đời"</p>
-                <p class="version">Phiên bản cuối v1.0 (2026)</p>
+                <p class="version">Phiên bản cuối: v1.2 PRO (2026)</p>
             </footer>
         </main>
 
@@ -85,9 +85,6 @@
                                 <!-- Items will be injected here -->
                             </tbody>
                         </table>
-                        <div id="mobileItemsList" class="mobile-list-container">
-                            <!-- Mobile cards will be injected here -->
-                        </div>
                         <div id="emptyState" class="empty-state" style="display: none;">
                             <p>Chưa có dữ liệu cho bộ này.</p>
                         </div>
@@ -150,52 +147,56 @@
                     </div> <!-- End modalStatistics -->
                 </div>
             </div>
+        </div> <!-- End detailModal -->
+    </div> <!-- End app-container -->
 
-            <!-- Update Notification Toast -->
-            <div id="updateToast" class="update-toast">
-                <div class="toast-content">
-                    <i class="fa-solid fa-cloud-arrow-down"></i>
-                    <span>Đã có phiên bản mới!</span>
-                    <button id="reloadBtn" class="reload-btn">Cập nhật ngay</button>
-                </div>
-            </div>
 
-            <script src="https://cdn.sheetjs.com/xlsx-latest/package/dist/xlsx.full.min.js"></script>
-            <script src="script.js"></script>
-            <script>
-                if ('serviceWorker' in navigator) {
-                    window.addEventListener('load', () => {
-                        navigator.serviceWorker.register('sw.js').then((registration) => {
-                            console.log('ServiceWorker registration successful with scope: ', registration.scope);
+    <!-- Update Notification Toast -->
+    <div id="updateToast" class="update-toast">
+        <div class="toast-content">
+            <i class="fa-solid fa-cloud-arrow-down"></i>
+            <span>Đã có phiên bản mới!</span>
+            <button id="reloadBtn" class="reload-btn">Cập nhật ngay</button>
+        </div>
+    </div>
 
-                            // Listen for updates
-                            registration.onupdatefound = () => {
-                                const installingWorker = registration.installing;
-                                installingWorker.onstatechange = () => {
-                                    if (installingWorker.state === 'installed') {
-                                        if (navigator.serviceWorker.controller) {
-                                            // New update available - Show Toast
-                                            const toast = document.getElementById('updateToast');
-                                            const reloadBtn = document.getElementById('reloadBtn');
-                                            toast.classList.add('show');
-                                            reloadBtn.addEventListener('click', () => {
-                                                window.location.reload();
-                                            });
-                                        }
-                                    }
-                                };
-                            };
-                        }, (err) => {
-                            console.log('ServiceWorker registration failed: ', err);
-                        });
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/exceljs/4.3.0/exceljs.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script>
+    <script src="script.js"></script>
+    <script>
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('sw.js').then((registration) => {
+                    console.log('ServiceWorker registration successful with scope: ', registration.scope);
 
-                        // Reload when controller changes
-                        navigator.serviceWorker.addEventListener('controllerchange', () => {
-                            window.location.reload();
-                        });
-                    });
-                }
-            </script>
+                    // Listen for updates
+                    registration.onupdatefound = () => {
+                        const installingWorker = registration.installing;
+                        installingWorker.onstatechange = () => {
+                            if (installingWorker.state === 'installed') {
+                                if (navigator.serviceWorker.controller) {
+                                    // New update available - Show Toast
+                                    const toast = document.getElementById('updateToast');
+                                    const reloadBtn = document.getElementById('reloadBtn');
+                                    toast.classList.add('show');
+                                    reloadBtn.addEventListener('click', () => {
+                                        window.location.reload();
+                                    });
+                                }
+                            }
+                        };
+                    };
+                }, (err) => {
+                    console.log('ServiceWorker registration failed: ', err);
+                });
+
+                // Reload when controller changes
+                navigator.serviceWorker.addEventListener('controllerchange', () => {
+                    window.location.reload();
+                });
+            });
+        }
+    </script>
 </body>
 
 </html>

@@ -1,4 +1,4 @@
-const APP_VERSION = "v1.0 (2026)";
+const APP_VERSION = "v1.2 PRO";
 const kitDefinitions = [
     { id: 1, baseName: "BỘ CẮT TỬ CUNG", prefix: "CTC", count: 3, icon: "fa-scissors", color: "icon-pink" },
     { id: 2, baseName: "KHỚP GỐI", prefix: "KHỚP GỐI", count: 0, icon: "fa-bone", color: "icon-blue", extraSubKits: ["BỘ LẤY DÂY CHẰNG"] },
@@ -1510,8 +1510,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const modal = document.getElementById('detailModal');
     const modalTitle = document.getElementById('modalTitle');
     const modalItemsList = document.getElementById('modalItemsList');
-    const mobileItemsList = document.getElementById('mobileItemsList');
-
     const emptyState = document.getElementById('emptyState');
     const closeBtn = document.querySelector('.close-btn');
     const modalSelection = document.getElementById('modalSelection');
@@ -1706,10 +1704,81 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function exportStatisticsToExcel() {
-        // 1. Prepare Data - Categories
-        const sortedCatsExport = [...kitDefinitions].sort((a, b) => a.baseName.localeCompare(b.baseName, 'vi', { sensitivity: 'base', numeric: true }));
+        const workbook = new ExcelJS.Workbook();
+        const worksheet = workbook.addWorksheet('Bao Cao Tong Hop');
 
-        // 2. Prepare Data - Damaged Items
+        // Define Columns
+        worksheet.columns = [
+            { key: 'stt', width: 8 },
+            { key: 'name', width: 45 },
+            { key: 'extra', width: 25 },
+            { key: 'value', width: 35 }
+        ];
+
+        const now = new Date();
+        const timestamp = `${now.toLocaleTimeString('vi-VN')} ngày ${now.toLocaleDateString('vi-VN')}`;
+
+        // 1. Title Rows
+        const titleRow = worksheet.addRow(['BÁO CÁO TỔNG HỢP & THỐNG KÊ DỤNG CỤ']);
+        worksheet.mergeCells(`A${titleRow.number}:D${titleRow.number}`);
+        titleRow.getCell(1).font = { name: 'Times New Roman', size: 18, bold: true };
+        titleRow.getCell(1).alignment = { vertical: 'middle', horizontal: 'center' };
+        titleRow.height = 35;
+
+        const subTitleRow = worksheet.addRow([`Thời điểm thống kê: ${timestamp}`]);
+        worksheet.mergeCells(`A${subTitleRow.number}:D${subTitleRow.number}`);
+        subTitleRow.getCell(1).font = { name: 'Times New Roman', size: 12, italic: true };
+        subTitleRow.getCell(1).alignment = { vertical: 'middle', horizontal: 'center' };
+        subTitleRow.height = 20;
+
+        worksheet.addRow([]); // Blank row
+
+        // 2. Section I: Categories
+        const sec1Row = worksheet.addRow(['I. THỐNG KÊ SỐ LƯỢNG THEO PHÂN LOẠI']);
+        worksheet.mergeCells(`A${sec1Row.number}:D${sec1Row.number}`);
+        sec1Row.getCell(1).font = { name: 'Times New Roman', size: 14, bold: true, color: { argb: 'FF1E40AF' } };
+        sec1Row.height = 25;
+
+        const header1Row = worksheet.addRow(['STT', 'LOẠI BỘ DỤNG CỤ', 'MÃ TIỀN TỐ', 'SỐ LƯỢNG BỘ CON']);
+        header1Row.eachCell((cell) => {
+            cell.font = { name: 'Times New Roman', size: 12, bold: true, color: { argb: 'FFFFFFFF' } };
+            cell.fill = { type: 'pattern', pattern: 'solid', fgColor: { argb: 'FF1E40AF' } };
+            cell.border = { top: { style: 'thin' }, left: { style: 'thin' }, bottom: { style: 'thin' }, right: { style: 'thin' } };
+            cell.alignment = { vertical: 'middle', horizontal: 'center' };
+        });
+
+        const sortedCatsExport = [...kitDefinitions].sort((a, b) => a.baseName.localeCompare(b.baseName, 'vi', { sensitivity: 'base', numeric: true }));
+        sortedCatsExport.forEach((def, idx) => {
+            let subCount = def.count > 0 ? def.count : 0;
+            if (def.extraSubKits) subCount += def.extraSubKits.length;
+            if (subCount === 0 && def.count === 0) subCount = 1;
+
+            const row = worksheet.addRow([idx + 1, def.baseName, def.prefix || "---", subCount]);
+            row.eachCell((cell, colNumber) => {
+                cell.font = { name: 'Times New Roman', size: 12 };
+                cell.border = { top: { style: 'thin' }, left: { style: 'thin' }, bottom: { style: 'thin' }, right: { style: 'thin' } };
+                if (colNumber === 1 || colNumber === 4) cell.alignment = { horizontal: 'center' };
+            });
+        });
+
+        worksheet.addRow([]); // Blank row
+        worksheet.addRow([]); // Blank row
+
+        // 3. Section II: Damaged Items
+        const sec2Row = worksheet.addRow(['II. DANH SÁCH DỤNG CỤ HƯ HỎNG / CẦN BÁO CÁO']);
+        worksheet.mergeCells(`A${sec2Row.number}:D${sec2Row.number}`);
+        sec2Row.getCell(1).font = { name: 'Times New Roman', size: 14, bold: true, color: { argb: 'FFDC2626' } };
+        sec2Row.height = 25;
+
+        const header2Row = worksheet.addRow(['STT', 'BỘ DỤNG CỤ', 'TÊN DỤNG CỤ (SỐ LƯỢNG)', 'GHI CHÚ / TÌNH TRẠNG']);
+        header2Row.eachCell((cell) => {
+            cell.font = { name: 'Times New Roman', size: 12, bold: true, color: { argb: 'FFFFFFFF' } };
+            cell.fill = { type: 'pattern', pattern: 'solid', fgColor: { argb: 'FFDC2626' } };
+            cell.border = { top: { style: 'thin' }, left: { style: 'thin' }, bottom: { style: 'thin' }, right: { style: 'thin' } };
+            cell.alignment = { vertical: 'middle', horizontal: 'center' };
+        });
+
+        // Collect damaged items logic
         const kitNames = [];
         kitDefinitions.forEach(def => {
             if (def.count === 1) kitNames.push(def.prefix);
@@ -1733,109 +1802,65 @@ document.addEventListener('DOMContentLoaded', () => {
                 const endBoundary = "($|[^a-z0-9àáảãạâầấẩẫậăằắẳẵặèéẻẽẹêềếểễệìíỉĩịòóỏõọôồốổỗộơờớởỡợùúủũụưừứửữựỳýỷỹỵ])";
                 const damageRegex = new RegExp(boundary + "(" + damageKeywords.join('|') + ")" + endBoundary, 'i');
                 if (damageRegex.test(currentNote) || damageRegex.test(currentName)) {
-                    damagedItems.push({ kit: key, name: currentName, quantity: item.quantity, note: currentNote });
+                    damagedItems.push({ kit: key, name: `${currentName} (${item.quantity})`, note: currentNote });
                 }
             });
         });
 
-        damagedItems.sort((a, b) => {
-            const kitComp = a.kit.localeCompare(b.kit, 'vi', { numeric: true });
-            if (kitComp !== 0) return kitComp;
-            return a.name.localeCompare(b.name, 'vi');
-        });
-
-        // 3. Create Professional HTML Table for Excel
-        const now = new Date();
-        const timestamp = `${now.toLocaleTimeString('vi-VN')} ngày ${now.toLocaleDateString('vi-VN')}`;
-
-        let html = `
-            <meta charset="utf-8">
-            <style>
-                table { border-collapse: collapse; font-family: 'Times New Roman', serif; width: 100%; }
-                th, td { border: 1px solid #000; padding: 8px; text-align: left; }
-                .title-row { font-size: 24pt; font-weight: bold; text-align: center; color: #1e40af; padding: 20px; }
-                .subtitle-row { font-size: 14pt; font-style: italic; text-align: center; color: #475569; padding-bottom: 20px; }
-                .section-header { background-color: #2563eb; color: #ffffff; font-size: 16pt; font-weight: bold; padding: 10px; margin-top: 20px; }
-                .table-header { background-color: #f1f5f9; font-weight: bold; }
-                .damaged-text { color: #dc2626; font-weight: bold; }
-            </style>
-            <table>
-                <tr><td colspan="4" class="title-row">BÁO CÁO TỔNG HỢP & THỐNG KÊ DỤNG CỤ</td></tr>
-                <tr><td colspan="4" class="subtitle-row">Thời điểm thống kê: ${timestamp}</td></tr>
-                
-                <tr><td colspan="4" class="section-header">I. THỐNG KÊ SỐ LƯỢNG THEO PHÂN LOẠI</td></tr>
-                <tr class="table-header">
-                    <td style="width: 10%;">STT</td>
-                    <td style="width: 50%;">LOẠI BỘ DỤNG CỤ</td>
-                    <td style="width: 20%;">MÃ TIỀN TỐ</td>
-                    <td style="width: 20%;">SỐ LƯỢNG BỘ CON</td>
-                </tr>
-        `;
-
-        sortedCatsExport.forEach((def, idx) => {
-            let subCount = def.count > 0 ? def.count : 0;
-            if (def.extraSubKits) subCount += def.extraSubKits.length;
-            if (subCount === 0 && def.count === 0) subCount = 1;
-            html += `
-                <tr>
-                    <td>${idx + 1}</td>
-                    <td style="font-weight: bold;">${def.baseName}</td>
-                    <td>${def.prefix || "---"}</td>
-                    <td style="text-align: center; font-weight: bold;">${subCount}</td>
-                </tr>
-            `;
-        });
-
-        html += `
-                <tr><td colspan="4" style="border: none; height: 30px;"></td></tr>
-                <tr><td colspan="4" class="section-header">II. DANH SÁCH DỤNG CỤ HƯ HỎNG / CẦN BÁO CÁO</td></tr>
-                <tr class="table-header">
-                    <td>STT</td>
-                    <td>BỘ DỤNG CỤ</td>
-                    <td>TÊN DỤNG CỤ (SỐ LƯỢNG)</td>
-                    <td>GHI CHÚ / TÌNH TRẠNG</td>
-                </tr>
-        `;
+        damagedItems.sort((a, b) => a.kit.localeCompare(b.kit, 'vi', { numeric: true }));
 
         if (damagedItems.length === 0) {
-            html += `<tr><td colspan="4" style="text-align: center; height: 50px;">Không có dụng cụ hư hỏng ghi nhận.</td></tr>`;
+            const emptyRow = worksheet.addRow(['', 'Không có dụng cụ hư hỏng ghi nhận', '', '']);
+            worksheet.mergeCells(`B${emptyRow.number}:D${emptyRow.number}`);
+            emptyRow.getCell(2).alignment = { horizontal: 'center' };
+            emptyRow.eachCell(cell => {
+                cell.font = { name: 'Times New Roman', size: 12 };
+                cell.border = { top: { style: 'thin' }, left: { style: 'thin' }, bottom: { style: 'thin' }, right: { style: 'thin' } };
+            });
         } else {
             damagedItems.forEach((item, idx) => {
-                html += `
-                    <tr>
-                        <td>${idx + 1}</td>
-                        <td style="font-weight: bold;">${item.kit}</td>
-                        <td>${item.name} (${item.quantity})</td>
-                        <td class="damaged-text">${item.note}</td>
-                    </tr>
-                `;
+                const row = worksheet.addRow([idx + 1, item.kit, item.name, item.note]);
+                row.eachCell((cell, colNumber) => {
+                    cell.font = { name: 'Times New Roman', size: 12 };
+                    cell.border = { top: { style: 'thin' }, left: { style: 'thin' }, bottom: { style: 'thin' }, right: { style: 'thin' } };
+                    if (colNumber === 1) cell.alignment = { horizontal: 'center' };
+                    if (colNumber === 4) cell.font.color = { argb: 'FFDC2626' };
+                });
             });
         }
 
-        html += `
-                <tr><td colspan="4" style="border: none; height: 40px;"></td></tr>
-                <tr>
-                    <td colspan="2" style="border: none;"></td>
-                    <td colspan="2" style="border: none; text-align: center; font-style: italic;">
-                        Ngày ${now.getDate()} tháng ${now.getMonth() + 1} năm ${now.getFullYear()} <br>
-                        <b>NGƯỜI LẬP BÁO CÁO</b> <br>
-                        <span style="font-size: 8pt;">Phiên bản: ${APP_VERSION}</span> <br><br><br>
-                        <b>NGUYỄN VĂN TÂN</b>
-                    </td>
-                </tr>
-            </table>
-        `;
+        worksheet.addRow([]); // Blank row
+        worksheet.addRow([]); // Blank row
 
-        // 4. Save File
-        const blob = new Blob(["\ufeff", html], { type: "application/vnd.ms-excel" });
-        const url = URL.createObjectURL(blob);
-        const a = document.createElement("a");
-        a.href = url;
+        // 4. Signoff section
+        const signoffRow1 = worksheet.addRow(['', '', `Ngày ${now.getDate()} tháng ${now.getMonth() + 1} năm ${now.getFullYear()}`]);
+        worksheet.mergeCells(`C${signoffRow1.number}:D${signoffRow1.number}`);
+        signoffRow1.getCell(3).alignment = { horizontal: 'center' };
+        signoffRow1.getCell(3).font = { name: 'Times New Roman', size: 12, italic: true };
+
+        const signoffRow2 = worksheet.addRow(['', '', 'NGƯỜI LẬP BÁO CÁO']);
+        worksheet.mergeCells(`C${signoffRow2.number}:D${signoffRow2.number}`);
+        signoffRow2.getCell(3).alignment = { horizontal: 'center' };
+        signoffRow2.getCell(3).font = { name: 'Times New Roman', size: 12, bold: true };
+
+        const signoffRow3 = worksheet.addRow(['', '', `(Phiên bản: ${APP_VERSION})`]);
+        worksheet.mergeCells(`C${signoffRow3.number}:D${signoffRow3.number}`);
+        signoffRow3.getCell(3).alignment = { horizontal: 'center' };
+        signoffRow3.getCell(3).font = { name: 'Times New Roman', size: 9, italic: true };
+
+        worksheet.addRow([]);
+        worksheet.addRow([]);
+
+        const signoffRow4 = worksheet.addRow(['', '', 'NGUYỄN VĂN TÂN']);
+        worksheet.mergeCells(`C${signoffRow4.number}:D${signoffRow4.number}`);
+        signoffRow4.getCell(3).alignment = { horizontal: 'center' };
+        signoffRow4.getCell(3).font = { name: 'Times New Roman', size: 12, bold: true };
+
+        // Save File
         const fileDate = now.toLocaleDateString('vi-VN').replace(/\//g, '-');
-        a.download = `Bao_Cao_Tong_Hop_${fileDate}.xls`;
-        document.body.appendChild(a);
-        a.click();
-        document.body.removeChild(a);
+        workbook.xlsx.writeBuffer().then(buffer => {
+            saveAs(new Blob([buffer]), `Bao_Cao_Tong_Hop_${fileDate}.xlsx`);
+        });
     }
 
     function handleCategoryClick(def) {
@@ -1922,109 +1947,115 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Export Functionality
     function exportToExcel(kitName) {
-        let table = document.querySelector(".item-table");
+        const workbook = new ExcelJS.Workbook();
+        const worksheet = workbook.addWorksheet(kitName.substring(0, 31)); // Excel limit
 
-        // Create a clone to manipulate
-        let cloneTable = table.cloneNode(true);
+        // Define Columns
+        worksheet.columns = [
+            { key: 'stt', width: 8 },
+            { key: 'name', width: 50 },
+            { key: 'code', width: 20 },
+            { key: 'quantity', width: 15 },
+            { key: 'note', width: 35 }
+        ];
 
-        // Create professional header row
-        let headerRow = document.createElement('tr');
-        let headerCell = document.createElement('td');
-        headerCell.colSpan = 5;
-        headerCell.textContent = kitName.toUpperCase();
-        headerCell.style.cssText = "font-size: 26pt; font-weight: bold; text-align: center; padding: 20px; background-color: #2563eb; color: white; border: 2px solid #000; font-family: 'Times New Roman';";
+        // 1. Kit Title Row
+        const titleRow = worksheet.addRow([kitName.toUpperCase()]);
+        worksheet.mergeCells(`A${titleRow.number}:E${titleRow.number}`);
+        titleRow.getCell(1).font = { name: 'Times New Roman', size: 18, bold: true, color: { argb: 'FFFFFFFF' } };
+        titleRow.getCell(1).fill = { type: 'pattern', pattern: 'solid', fgColor: { argb: 'FF1E40AF' } };
+        titleRow.getCell(1).alignment = { vertical: 'middle', horizontal: 'center' };
+        titleRow.height = 35;
 
-        headerRow.appendChild(headerCell);
+        // 2. Table Headers
+        const headerRow = worksheet.addRow(['STT', 'DANH MỤC DỤNG CỤ', 'MÃ SỐ', 'SỐ LƯỢNG', 'GHI CHÚ']);
+        headerRow.eachCell((cell) => {
+            cell.font = { name: 'Times New Roman', size: 12, bold: true };
+            cell.fill = { type: 'pattern', pattern: 'solid', fgColor: { argb: 'FFE2E8F0' } };
+            cell.border = { top: { style: 'thin' }, left: { style: 'thin' }, bottom: { style: 'thin' }, right: { style: 'thin' } };
+            cell.alignment = { vertical: 'middle', horizontal: 'center' };
+        });
 
-        // Add header to table
-        let thead = cloneTable.querySelector('thead');
-        if (thead) {
-            thead.insertBefore(headerRow, thead.firstChild);
-        } else {
-            cloneTable.prepend(headerRow);
-        }
+        // 3. Add Data Rows
+        const items = allKitsData[kitName] && allKitsData[kitName].length > 0 ? allKitsData[kitName] : defaultItems;
+        items.forEach((item, index) => {
+            const sttDisplay = item.stt !== undefined ? item.stt : (item.name.toLowerCase().includes('tổng cộng') ? '' : (index + 1));
 
-        // Add Footer Row (Status/Checked By)
+            const noteKey = `${kitName}-${index}`;
+            const currentNote = modifiedNotes[noteKey] !== undefined ? modifiedNotes[noteKey] : (item.note || '');
+
+            const nameKey = `${kitName}-name-${index}`;
+            const currentName = modifiedNames[nameKey] !== undefined ? modifiedNames[nameKey] : item.name;
+
+            const rowData = [
+                sttDisplay,
+                currentName,
+                item.code || '',
+                item.quantity > 0 ? item.quantity : (item.quantity === 0 ? '0' : '-'),
+                currentNote || ''
+            ];
+
+            const row = worksheet.addRow(rowData);
+            row.eachCell((cell, colNumber) => {
+                cell.font = { name: 'Times New Roman', size: 12 };
+                cell.border = { top: { style: 'thin' }, left: { style: 'thin' }, bottom: { style: 'thin' }, right: { style: 'thin' } };
+
+                // Alignment
+                if (colNumber === 1 || colNumber === 4) cell.alignment = { horizontal: 'center' };
+
+                // Bold logic
+                if (item.bold || currentName.toLowerCase().includes('tổng cộng')) {
+                    cell.font.bold = true;
+                    cell.fill = { type: 'pattern', pattern: 'solid', fgColor: { argb: 'FFF1F5F9' } };
+                    if (currentName.toLowerCase().includes('tổng cộng')) {
+                        cell.font.size = 14;
+                    }
+                }
+            });
+        });
+
+        // 4. Footer Row (Optional)
         const footerDiv = document.getElementById('modalFooter');
         if (footerDiv && footerDiv.style.display !== 'none' && footerDiv.textContent) {
-            let footerRow = document.createElement('tr');
-            let footerCell = document.createElement('td');
-            footerCell.colSpan = 5; // Span across all columns
-            footerCell.textContent = footerDiv.textContent;
-            // Styling for the footer row in Excel
-            footerCell.style.cssText = "font-size: 14pt; font-style: italic; font-weight: bold; text-align: right; padding: 10px; border: 1px solid #000; background-color: #f1f5f9;";
-            footerRow.appendChild(footerCell);
-            cloneTable.appendChild(footerRow);
+            const footerRow = worksheet.addRow([footerDiv.textContent]);
+            worksheet.mergeCells(`A${footerRow.number}:E${footerRow.number}`);
+            footerRow.getCell(1).font = { name: 'Times New Roman', size: 12, italic: true, bold: true };
+            footerRow.getCell(1).alignment = { horizontal: 'right' };
+            footerRow.getCell(1).fill = { type: 'pattern', pattern: 'solid', fgColor: { argb: 'FFF8FAFC' } };
+            footerRow.getCell(1).border = { top: { style: 'thin' }, left: { style: 'thin' }, bottom: { style: 'thin' }, right: { style: 'thin' } };
         }
 
-        // Add borders to all cells for "Excel grid" look AND set font size 12 bold
-        cloneTable.querySelectorAll('th, td').forEach(cell => {
-            // Keep existing borders logic but add font styling
-            if (!cell.style.fontSize) {
-                cell.style.border = "1px solid #000";
-                cell.style.padding = "5px";
-                cell.style.fontSize = "12pt";
-                cell.style.fontWeight = "bold";
-                cell.style.fontFamily = "'Times New Roman'"; // Consistent font
-            }
-
-            // Special styling for "Tổng cộng"
-            if (cell.textContent && cell.textContent.toLowerCase().includes("tổng cộng")) {
-                cell.textContent = cell.textContent.toUpperCase();
-                cell.style.fontSize = "20pt";
-            }
+        // Save File
+        workbook.xlsx.writeBuffer().then(buffer => {
+            saveAs(new Blob([buffer]), `${kitName}.xlsx`);
         });
-
-        let html = cloneTable.outerHTML;
-
-        // Add UTF-8 BOM
-        let blob = new Blob(["\ufeff", html], {
-            type: "application/vnd.ms-excel"
-        });
-
-        let url = URL.createObjectURL(blob);
-        let a = document.createElement("a");
-        a.href = url;
-
-        // Filename is exactly the kit name
-        a.download = `${kitName}.xls`;
-
-        document.body.appendChild(a);
-        a.click();
-        document.body.removeChild(a);
     }
 
     function renderTable(kitName) {
-        modalItemsList.innerHTML = '<tr><td colspan="5" class="shimmer-loading" style="height: 100px; width: 100%;"></td></tr>';
-        if (mobileItemsList) mobileItemsList.innerHTML = '<div class="shimmer-loading" style="height: 150px; width: 100%; border-radius: 16px;"></div>';
+        modalItemsList.innerHTML = '';
 
         const items = allKitsData[kitName] && allKitsData[kitName].length > 0 ? allKitsData[kitName] : defaultItems;
 
-        // Small delay to show shimmer effect
-        setTimeout(() => {
-            modalItemsList.innerHTML = '';
-            if (mobileItemsList) mobileItemsList.innerHTML = '';
+        items.forEach((item, index) => {
+            const row = document.createElement('tr');
+            if (item.bold) {
+                row.style.fontWeight = "bold";
+                row.style.backgroundColor = "#e2e8f0";
+            }
 
-            items.forEach((item, index) => {
-                const row = document.createElement('tr');
-                if (item.bold) {
-                    row.style.fontWeight = "bold";
-                    row.style.backgroundColor = "#e2e8f0";
-                }
+            const sttDisplay = item.stt !== undefined ? item.stt : (item.name.toLowerCase().includes('tổng cộng') ? '' : (index + 1));
 
-                const sttDisplay = item.stt !== undefined ? item.stt : (item.name.toLowerCase().includes('tổng cộng') ? '' : (index + 1));
+            // Handle editable note logic
+            const noteKey = `${kitName}-${index}`;
+            const currentNote = modifiedNotes[noteKey] !== undefined ? modifiedNotes[noteKey] : (item.note || '');
+            const isNoteEdited = modifiedNotes[noteKey] !== undefined && modifiedNotes[noteKey] !== (item.note || '');
 
-                // Handle editable note logic
-                const noteKey = `${kitName}-${index}`;
-                const currentNote = modifiedNotes[noteKey] !== undefined ? modifiedNotes[noteKey] : (item.note || '');
-                const isNoteEdited = modifiedNotes[noteKey] !== undefined && modifiedNotes[noteKey] !== (item.note || '');
+            // Handle editable name logic
+            const nameKey = `${kitName}-name-${index}`;
+            const currentName = modifiedNames[nameKey] !== undefined ? modifiedNames[nameKey] : item.name;
+            const isNameEdited = modifiedNames[nameKey] !== undefined && modifiedNames[nameKey] !== item.name;
 
-                // Handle editable name logic
-                const nameKey = `${kitName}-name-${index}`;
-                const currentName = modifiedNames[nameKey] !== undefined ? modifiedNames[nameKey] : item.name;
-                const isNameEdited = modifiedNames[nameKey] !== undefined && modifiedNames[nameKey] !== item.name;
-
-                row.innerHTML = `
+            row.innerHTML = `
                 <td>${sttDisplay}</td>
                 <td contenteditable="${!item.bold}" 
                     class="name-cell ${isNameEdited ? 'note-edited' : ''}" 
@@ -2037,110 +2068,77 @@ document.addEventListener('DOMContentLoaded', () => {
                     data-key="${noteKey}"
                     data-original="${item.note || ''}">${currentNote}</td>
             `;
-                modalItemsList.appendChild(row);
+            modalItemsList.appendChild(row);
+        });
 
-                // Mobile Card
-                if (mobileItemsList && !item.name.toLowerCase().includes('tổng cộng')) {
-                    const mobileCard = document.createElement('div');
-                    mobileCard.className = 'mobile-card-item';
-                    mobileCard.innerHTML = `
-                    <div class="item-header">
-                        <span class="item-stt">#${sttDisplay}</span>
-                        <span class="item-name name-cell ${isNameEdited ? 'note-edited' : ''}" 
-                            contenteditable="true" 
-                            data-key="${nameKey}"
-                            data-original="${item.name}">${currentName}</span>
-                    </div>
-                    <div class="item-info">
-                        <div class="info-box">
-                            <div class="info-label">Mã số</div>
-                            <div class="info-value">${item.code || '---'}</div>
-                        </div>
-                        <div class="info-box">
-                            <div class="info-label">Số lượng</div>
-                            <div class="info-value">${item.quantity > 0 ? item.quantity : (item.quantity === 0 ? '0' : '-')}</div>
-                        </div>
-                    </div>
-                    <div class="item-note note-cell ${isNoteEdited ? 'note-edited' : ''}" 
-                        contenteditable="true" 
-                        data-key="${noteKey}"
-                        data-original="${item.note || ''}">
-                        ${currentNote || ''}
-                    </div>
-                `;
-                    mobileItemsList.appendChild(mobileCard);
+        // Add listeners for the newly created editable cells
+        // Listeners for Notes
+        document.querySelectorAll('.note-cell').forEach(cell => {
+            cell.addEventListener('blur', (e) => {
+                const key = e.target.getAttribute('data-key');
+                const originalValue = e.target.getAttribute('data-original');
+                const newValue = e.target.innerText.trim();
+
+                if (newValue !== originalValue) {
+                    modifiedNotes[key] = newValue;
+                    e.target.classList.add('note-edited');
+                } else {
+                    delete modifiedNotes[key];
+                    e.target.classList.remove('note-edited');
+                }
+                localStorage.setItem('kitModifiedNotes', JSON.stringify(modifiedNotes));
+            });
+
+            cell.addEventListener('keydown', (e) => {
+                if (e.key === 'Enter') {
+                    e.preventDefault();
+                    e.target.blur();
+                }
+            });
+        });
+
+        // Listeners for Names
+        document.querySelectorAll('.name-cell').forEach(cell => {
+            // Highlight on click logic
+            cell.addEventListener('click', (e) => {
+                // Toggle highlight class
+                if (e.target.classList.contains('highlight-bold')) {
+                    e.target.classList.remove('highlight-bold');
+                } else {
+                    e.target.classList.add('highlight-bold');
                 }
             });
 
-            // Add listeners for the newly created editable cells
-            // Listeners for Notes
-            document.querySelectorAll('.note-cell').forEach(cell => {
-                cell.addEventListener('blur', (e) => {
-                    const key = e.target.getAttribute('data-key');
-                    const originalValue = e.target.getAttribute('data-original');
-                    const newValue = e.target.innerText.trim();
+            cell.addEventListener('blur', (e) => {
+                const key = e.target.getAttribute('data-key');
+                const originalValue = e.target.getAttribute('data-original');
+                const newValue = e.target.innerText.trim();
 
-                    if (newValue !== originalValue) {
-                        modifiedNotes[key] = newValue;
-                        e.target.classList.add('note-edited');
-                    } else {
-                        delete modifiedNotes[key];
-                        e.target.classList.remove('note-edited');
-                    }
-                    localStorage.setItem('kitModifiedNotes', JSON.stringify(modifiedNotes));
-                });
-
-                cell.addEventListener('keydown', (e) => {
-                    if (e.key === 'Enter') {
-                        e.preventDefault();
-                        e.target.blur();
-                    }
-                });
+                if (newValue !== originalValue) {
+                    modifiedNames[key] = newValue;
+                    e.target.classList.add('note-edited');
+                } else {
+                    delete modifiedNames[key];
+                    e.target.classList.remove('note-edited');
+                }
+                localStorage.setItem('kitModifiedNames', JSON.stringify(modifiedNames));
             });
 
-            // Listeners for Names
-            document.querySelectorAll('.name-cell').forEach(cell => {
-                // Highlight on click logic
-                cell.addEventListener('click', (e) => {
-                    // Toggle highlight class
-                    if (e.target.classList.contains('highlight-bold')) {
-                        e.target.classList.remove('highlight-bold');
-                    } else {
-                        e.target.classList.add('highlight-bold');
-                    }
-                });
-
-                cell.addEventListener('blur', (e) => {
-                    const key = e.target.getAttribute('data-key');
-                    const originalValue = e.target.getAttribute('data-original');
-                    const newValue = e.target.innerText.trim();
-
-                    if (newValue !== originalValue) {
-                        modifiedNames[key] = newValue;
-                        e.target.classList.add('note-edited');
-                    } else {
-                        delete modifiedNames[key];
-                        e.target.classList.remove('note-edited');
-                    }
-                    localStorage.setItem('kitModifiedNames', JSON.stringify(modifiedNames));
-                });
-
-                cell.addEventListener('keydown', (e) => {
-                    if (e.key === 'Enter') {
-                        e.preventDefault();
-                        e.target.blur();
-                    }
-                });
+            cell.addEventListener('keydown', (e) => {
+                if (e.key === 'Enter') {
+                    e.preventDefault();
+                    e.target.blur();
+                }
             });
+        });
 
-            const footerDiv = document.getElementById('modalFooter');
-            if (footerDiv) {
-                const itemsArray = allKitsData[kitName];
-                const footerText = (itemsArray && itemsArray.footer) ? itemsArray.footer : '';
-                footerDiv.textContent = footerText;
-                footerDiv.style.display = footerText ? 'block' : 'none';
-            }
-        }, 250);
+        const footerDiv = document.getElementById('modalFooter');
+        if (footerDiv) {
+            const itemsArray = allKitsData[kitName];
+            const footerText = (itemsArray && itemsArray.footer) ? itemsArray.footer : '';
+            footerDiv.textContent = footerText;
+            footerDiv.style.display = footerText ? 'block' : 'none';
+        }
     }
 
     backBtn.addEventListener('click', () => {
