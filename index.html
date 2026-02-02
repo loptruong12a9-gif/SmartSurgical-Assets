@@ -24,7 +24,8 @@
                 <img src="logo.png" alt="Logo" class="app-logo">
                 <h1>SmartSurgical Assets</h1>
                 <p class="subtitle">(Quản Lý Dụng Cụ Phẫu Thuật)</p>
-                <p class="developer-header">Phát triển bởi Tân Nguyễn</p>
+                <p class="developer-header">Phát triển bởi Tân Nguyễn <span id="appVersion" class="version-tag"></span>
+                </p>
                 <div class="search-bar">
                     <div class="search-container">
                         <input type="text" id="searchInput" placeholder="Tìm kiếm bộ dụng cụ..." autocomplete="off">
@@ -64,7 +65,6 @@
                         <div class="search-in-modal">
                             <input type="text" id="itemSearchProps" placeholder="Tìm dụng cụ trong bộ này..."
                                 style="width: 100%; padding: 10px; margin-bottom: 15px; border-radius: 8px; border: 1px solid #ddd; display: none;">
-                            <!-- Hidden for now, can enable if needed -->
                         </div>
                         <table class="item-table">
                             <thead>
@@ -85,44 +85,109 @@
                         </div>
                         <div id="modalFooter" class="modal-footer"></div>
                     </div> <!-- End modalDetails -->
+
+                    <div id="modalStatistics" style="display: none;">
+                        <div class="stats-header-actions">
+                            <button id="exportStatsBtn" class="export-stats-btn">
+                                <i class="fa-solid fa-file-export"></i> Xuất file Báo cáo (Excel)
+                            </button>
+                        </div>
+
+                        <div class="stats-overview">
+                            <div class="stats-card-mini">
+                                <i class="fa-solid fa-boxes-stacked"></i>
+                                <div class="stats-info">
+                                    <span class="label">Tổng số bộ</span>
+                                    <span id="totalKits" class="value">0</span>
+                                </div>
+                            </div>
+                            <div class="stats-card-mini warning">
+                                <i class="fa-solid fa-triangle-exclamation"></i>
+                                <div class="stats-info">
+                                    <span class="label">Cần xử lý</span>
+                                    <span id="totalDamaged" class="value">0</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div id="statsTimestamp" class="stats-timestamp">
+                            <i class="fa-solid fa-clock"></i> Cập nhật lần cuối: <span id="lastUpdateDate">---</span>
+                        </div>
+
+                        <div class="stats-section-title">
+                            <i class="fa-solid fa-layer-group"></i> DANH SÁCH BỘ THEO PHÂN LOẠI
+                        </div>
+                        <div id="categoryBreakdown" class="category-breakdown-container">
+                            <!-- Category list will be injected here -->
+                        </div>
+
+                        <div class="stats-section-title">
+                            <i class="fa-solid fa-list-check"></i> DANH SÁCH DỤNG CỤ HƯ HỎNG / CẦN BÁO CÁO
+                        </div>
+                        <div class="table-container">
+                            <table class="item-table stats-table">
+                                <thead>
+                                    <tr>
+                                        <th>BỘ DỤNG CỤ</th>
+                                        <th>TÊN DỤNG CỤ</th>
+                                        <th>SỐ LƯỢNG</th>
+                                        <th>TÌNH TRẠNG (GHI CHÚ)</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="damagedItemsList">
+                                    <!-- Damaged items will be injected here -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div> <!-- End modalStatistics -->
                 </div>
             </div>
-        </div>
 
-        <script src="https://cdn.sheetjs.com/xlsx-latest/package/dist/xlsx.full.min.js"></script>
-        <script src="script.js"></script>
-        <script>
-            if ('serviceWorker' in navigator) {
-                window.addEventListener('load', () => {
-                    navigator.serviceWorker.register('sw.js').then((registration) => {
-                        console.log('ServiceWorker registration successful with scope: ', registration.scope);
+            <!-- Update Notification Toast -->
+            <div id="updateToast" class="update-toast">
+                <div class="toast-content">
+                    <i class="fa-solid fa-cloud-arrow-down"></i>
+                    <span>Đã có phiên bản mới!</span>
+                    <button id="reloadBtn" class="reload-btn">Cập nhật ngay</button>
+                </div>
+            </div>
 
-                        // Listen for updates
-                        registration.onupdatefound = () => {
-                            const installingWorker = registration.installing;
-                            installingWorker.onstatechange = () => {
-                                if (installingWorker.state === 'installed') {
-                                    if (navigator.serviceWorker.controller) {
-                                        // New update available
-                                        console.log('New content is available; please refresh.');
-                                        window.location.reload();
-                                    } else {
-                                        console.log('Content is cached for offline use.');
+            <script src="https://cdn.sheetjs.com/xlsx-latest/package/dist/xlsx.full.min.js"></script>
+            <script src="script.js"></script>
+            <script>
+                if ('serviceWorker' in navigator) {
+                    window.addEventListener('load', () => {
+                        navigator.serviceWorker.register('sw.js').then((registration) => {
+                            console.log('ServiceWorker registration successful with scope: ', registration.scope);
+
+                            // Listen for updates
+                            registration.onupdatefound = () => {
+                                const installingWorker = registration.installing;
+                                installingWorker.onstatechange = () => {
+                                    if (installingWorker.state === 'installed') {
+                                        if (navigator.serviceWorker.controller) {
+                                            // New update available - Show Toast
+                                            const toast = document.getElementById('updateToast');
+                                            const reloadBtn = document.getElementById('reloadBtn');
+                                            toast.classList.add('show');
+                                            reloadBtn.addEventListener('click', () => {
+                                                window.location.reload();
+                                            });
+                                        }
                                     }
-                                }
+                                };
                             };
-                        };
-                    }, (err) => {
-                        console.log('ServiceWorker registration failed: ', err);
-                    });
+                        }, (err) => {
+                            console.log('ServiceWorker registration failed: ', err);
+                        });
 
-                    // Reload when controller changes
-                    navigator.serviceWorker.addEventListener('controllerchange', () => {
-                        window.location.reload();
+                        // Reload when controller changes
+                        navigator.serviceWorker.addEventListener('controllerchange', () => {
+                            window.location.reload();
+                        });
                     });
-                });
-            }
-        </script>
+                }
+            </script>
 </body>
 
 </html>

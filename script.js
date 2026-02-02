@@ -1,3 +1,4 @@
+const APP_VERSION = "v1.0 (2026)";
 const kitDefinitions = [
     { id: 1, baseName: "BỘ CẮT TỬ CUNG", prefix: "CTC", count: 3, icon: "fa-scissors", color: "icon-pink" },
     { id: 2, baseName: "KHỚP GỐI", prefix: "KHỚP GỐI", count: 0, icon: "fa-bone", color: "icon-blue", extraSubKits: ["BỘ LẤY DÂY CHẰNG"] },
@@ -450,7 +451,8 @@ allKitsData["NS TỔNG QUÁT 2"] = [
     { stt: 25, name: "Ống hút", code: "26173BN", quantity: 1, note: "KARL-STORZ" },
     { stt: 26, name: "Hộp đựng dụng cụ", code: "27717D", quantity: 1, note: "KARL-STORZ" },
     { stt: 27, name: "Que đẩy chỉ", code: "26596D", quantity: 1, note: "KARL-STORZ" },
-    { stt: 28, name: "Kim mang kim KOH trái", code: "26596D", quantity: 1, note: "KARL-STORZ" }
+    { stt: 28, name: "Kim mang kim KOH trái", code: "26596D", quantity: 1, note: "KARL-STORZ" },
+    { stt: "", name: "Tổng cộng", code: "", quantity: 28, bold: true }
 ];
 allKitsData["NS TỔNG QUÁT 2"].footer = "ĐÃ KIỂM 01/2026";
 
@@ -1308,20 +1310,20 @@ allKitsData["THẦN KINH 7"] = [
     { stt: 2, name: "KELLY TRUNG", code: "BH135R", quantity: 12 },
     { stt: 3, name: "KELLY TRUNG", code: "BH141R", quantity: 1 },
     { stt: 4, name: "KELLY TRUNG", code: "HB0602 (HEBU)", quantity: 1 },
-    { stt: 3, name: "NHÍP CÓ MẤU", code: "BD519R", quantity: 1 },
-    { stt: 4, name: "NHÍP KHÔNG MẤU", code: "BD029R", quantity: 1 },
-    { stt: "", name: "NHÍP KHÔNG MẤU", code: "HB0225 (HEBU)", quantity: 1 },
-    { stt: 5, name: "ALISS", code: "EA016R", quantity: 6 },
-    { stt: 6, name: "KỀM KẸP KIM", code: "BM066R", quantity: 1 },
-    { stt: 7, name: "XÀ MÂU", code: "BJ057R", quantity: 1 },
-    { stt: 8, name: "FIX XĂNG", code: "BF437R", quantity: 3 },
-    { stt: "", name: "FIX XĂNG", code: "BF431R", quantity: 2 },
-    { stt: "", name: "FIX XĂNG", code: "KHÔNG MÃ", quantity: 1 },
-    { stt: 9, name: "KÉO MESK", code: "BC606R", quantity: 1 },
-    { stt: 10, name: "KÉO CẮT CHỈ", code: "05-121", quantity: 1, note: "cùn, mẻ đầu" },
-    { stt: 11, name: "PARABOP NHỎ", code: "BT020R", quantity: 2 },
-    { stt: 12, name: "PARABOP TRUNG", code: "BT021R", quantity: 2 },
-    { stt: 13, name: "CÁN DAO", code: "SỐ 3", quantity: 1 },
+    { stt: 5, name: "NHÍP CÓ MẤU", code: "BD519R", quantity: 1 },
+    { stt: 6, name: "NHÍP KHÔNG MẤU", code: "BD029R", quantity: 1 },
+    { stt: 7, name: "NHÍP KHÔNG MẤU", code: "HB0225 (HEBU)", quantity: 1 },
+    { stt: 8, name: "ALISS", code: "EA016R", quantity: 6 },
+    { stt: 9, name: "KỀM KẸP KIM", code: "BM066R", quantity: 1 },
+    { stt: 10, name: "XÀ MÂU", code: "BJ057R", quantity: 1 },
+    { stt: 11, name: "FIX XĂNG", code: "BF437R", quantity: 3 },
+    { stt: 12, name: "FIX XĂNG", code: "BF431R", quantity: 2 },
+    { stt: 13, name: "FIX XĂNG", code: "KHÔNG MÃ", quantity: 1 },
+    { stt: 14, name: "KÉO MESK", code: "BC606R", quantity: 1 },
+    { stt: 15, name: "KÉO CẮT CHỈ", code: "05-121", quantity: 1, note: "cùn, mẻ đầu" },
+    { stt: 16, name: "PARABOP NHỎ", code: "BT020R", quantity: 2 },
+    { stt: 17, name: "PARABOP TRUNG", code: "BT021R", quantity: 2 },
+    { stt: 18, name: "CÁN DAO", code: "SỐ 3", quantity: 1 },
     { stt: "", name: "Tổng cộng", code: "", quantity: 43, bold: true }
 ];
 allKitsData["THẦN KINH 7"].footer = "ĐÃ KIỂM";
@@ -1329,27 +1331,27 @@ allKitsData["THẦN KINH 7"].footer = "ĐÃ KIỂM";
 // Data for THẦN KINH 8
 allKitsData["THẦN KINH 8"] = [
     { stt: 1, name: "KELLY NHỎ 111R", code: "BH111R", quantity: 4, note: "HEBU" },
-    { stt: "", name: "KELLY NHỎ 111R", code: "HB05015", quantity: 1, note: "HEBU" },
-    { stt: 2, name: "KELLY TRUNG", code: "BH135R", quantity: 11 },
-    { stt: 3, name: "KELLY TRUNG", code: "BH141R", quantity: 1, note: "HEBU" },
-    { stt: "", name: "KELLY TRUNG", code: "HB0602", quantity: 2, note: "HEBU" },
-    { stt: 4, name: "NHÍP CÓ MẤU", code: "BD519R", quantity: 1 },
-    { stt: 5, name: "NHÍP KHÔNG MẤU", code: "BD029R", quantity: 1 },
-    { stt: "", name: "NHÍP KHÔNG MẤU", code: "BD031R", quantity: 1 },
-    { stt: 6, name: "ALISS", code: "EA016R", quantity: 4, note: "HEBU" },
-    { stt: "", name: "ALISS", code: "HB4302", quantity: 2, note: "HEBU" },
-    { stt: 7, name: "KỀM KẸP KIM", code: "BM066R", quantity: 1 },
-    { stt: 8, name: "XÀ MÂU", code: "BJ057R", quantity: 1 },
-    { stt: 9, name: "FIX XĂNG", code: "BF437R", quantity: 4 },
-    { stt: "", name: "FIX XĂNG", code: "BF431R", quantity: 1 },
-    { stt: "", name: "FIX XĂNG", code: "PAKISTAN", quantity: 1 },
-    { stt: 10, name: "KÉO MESK", code: "HB2258", quantity: 1 },
-    { stt: 11, name: "KÉO CẮT CHỈ", code: "BC346R", quantity: 1 },
-    { stt: 12, name: "PARABOP NHỎ", code: "BT020R", quantity: 1 },
-    { stt: "", name: "PARABOP NHỎ", code: "KHÔNG SỐ", quantity: 1 },
-    { stt: 13, name: "PARABOP TRUNG", code: "BT021R", quantity: 2 },
-    { stt: 14, name: "CÁN DAO SỐ 7", code: "BB077R", quantity: 1 },
-    { stt: 15, name: "NHÍP VI PHẪU", code: "PAKISTAN", quantity: 1 },
+    { stt: 2, name: "KELLY NHỎ 111R", code: "HB05015", quantity: 1, note: "HEBU" },
+    { stt: 3, name: "KELLY TRUNG", code: "BH135R", quantity: 11 },
+    { stt: 4, name: "KELLY TRUNG", code: "BH141R", quantity: 1, note: "HEBU" },
+    { stt: 5, name: "KELLY TRUNG", code: "HB0602", quantity: 2, note: "HEBU" },
+    { stt: 6, name: "NHÍP CÓ MẤU", code: "BD519R", quantity: 1 },
+    { stt: 7, name: "NHÍP KHÔNG MẤU", code: "BD029R", quantity: 1 },
+    { stt: 8, name: "NHÍP KHÔNG MẤU", code: "BD031R", quantity: 1 },
+    { stt: 9, name: "ALISS", code: "EA016R", quantity: 4, note: "HEBU" },
+    { stt: 10, name: "ALISS", code: "HB4302", quantity: 2, note: "HEBU" },
+    { stt: 11, name: "KỀM KẸP KIM", code: "BM066R", quantity: 1 },
+    { stt: 12, name: "XÀ MÂU", code: "BJ057R", quantity: 1 },
+    { stt: 13, name: "FIX XĂNG", code: "BF437R", quantity: 4 },
+    { stt: 14, name: "FIX XĂNG", code: "BF431R", quantity: 1 },
+    { stt: 15, name: "FIX XĂNG", code: "PAKISTAN", quantity: 1 },
+    { stt: 16, name: "KÉO MESK", code: "HB2258", quantity: 1 },
+    { stt: 17, name: "KÉO CẮT CHỈ", code: "BC346R", quantity: 1 },
+    { stt: 18, name: "PARABOP NHỎ", code: "BT020R", quantity: 1 },
+    { stt: 19, name: "PARABOP NHỎ", code: "KHÔNG SỐ", quantity: 1 },
+    { stt: 20, name: "PARABOP TRUNG", code: "BT021R", quantity: 2 },
+    { stt: 21, name: "CÁN DAO SỐ 7", code: "BB077R", quantity: 1 },
+    { stt: 22, name: "NHÍP VI PHẪU", code: "PAKISTAN", quantity: 1 },
     { stt: "", name: "Tổng cộng", code: "", quantity: 44, bold: true }
 ];
 allKitsData["THẦN KINH 8"].footer = "ĐÃ KIỂM";
@@ -1379,20 +1381,20 @@ allKitsData["THẦN KINH 10"] = [
     { stt: 2, name: "KELLY TRUNG", code: "BH135R", quantity: 14 },
     { stt: 3, name: "NHÍP CÓ MẤU", code: "BD559R", quantity: 1 },
     { stt: 4, name: "NHÍP KHÔNG MẤU", code: "BD029R", quantity: 1 },
-    { stt: "", name: "NHÍP KHÔNG MẤU", code: "HB0225 (HEBU)", quantity: 1 },
-    { stt: 5, name: "ALISS", code: "EA016R", quantity: 5 },
-    { stt: "", name: "ALISS", code: "HB4302 (HEBU)", quantity: 1 },
-    { stt: 6, name: "KỀM KẸP KIM", code: "HB2202 (HEBU)", quantity: 1 },
-    { stt: 7, name: "XÀ MÂU", code: "BJ057R", quantity: 1 },
-    { stt: 8, name: "FIX XĂNG", code: "BF431R", quantity: 1 },
-    { stt: "", name: "FIX XĂNG", code: "BF437R", quantity: 3 },
-    { stt: "", name: "FIX XĂNG", code: "BF432R", quantity: 1 },
-    { stt: "", name: "FIX XĂNG", code: "LAWTON", quantity: 1 },
-    { stt: 9, name: "KÉO MESK", code: "05-0620", quantity: 1 },
-    { stt: 10, name: "KÉO CẮT CHỈ ( cùn, mẻ đầu )", code: "HB1706 (HEBU)", quantity: 1 },
-    { stt: 11, name: "PARABOP NHỎ", code: "BT020R", quantity: 2 },
-    { stt: 12, name: "PARABOP TRUNG", code: "BT021R", quantity: 2 },
-    { stt: 13, name: "CÁN DAO", code: "BD077R", quantity: 1 },
+    { stt: 5, name: "NHÍP KHÔNG MẤU", code: "HB0225 (HEBU)", quantity: 1 },
+    { stt: 6, name: "ALISS", code: "EA016R", quantity: 5 },
+    { stt: 7, name: "ALISS", code: "HB4302 (HEBU)", quantity: 1 },
+    { stt: 8, name: "KỀM KẸP KIM", code: "HB2202 (HEBU)", quantity: 1 },
+    { stt: 9, name: "XÀ MÂU", code: "BJ057R", quantity: 1 },
+    { stt: 10, name: "FIX XĂNG", code: "BF431R", quantity: 1 },
+    { stt: 11, name: "FIX XĂNG", code: "BF437R", quantity: 3 },
+    { stt: 12, name: "FIX XĂNG", code: "BF432R", quantity: 1 },
+    { stt: 13, name: "FIX XĂNG", code: "LAWTON", quantity: 1 },
+    { stt: 14, name: "KÉO MESK", code: "05-0620", quantity: 1 },
+    { stt: 15, name: "KÉO CẮT CHỈ ( cùn, mẻ đầu )", code: "HB1706 (HEBU)", quantity: 1 },
+    { stt: 16, name: "PARABOP NHỎ", code: "BT020R", quantity: 2 },
+    { stt: 17, name: "PARABOP TRUNG", code: "BT021R", quantity: 2 },
+    { stt: 18, name: "CÁN DAO", code: "BD077R", quantity: 1 },
     { stt: "", name: "Tổng cộng", code: "", quantity: 43, bold: true }
 ];
 allKitsData["THẦN KINH 10"].footer = "ĐÃ KIỂM";
@@ -1513,6 +1515,17 @@ document.addEventListener('DOMContentLoaded', () => {
     const modalSelection = document.getElementById('modalSelection');
     const modalDetails = document.getElementById('modalDetails');
     const backBtn = document.getElementById('backBtn');
+    const modalStatistics = document.getElementById('modalStatistics');
+    const totalKitsSpan = document.getElementById('totalKits');
+    const totalDamagedSpan = document.getElementById('totalDamaged');
+    const damagedItemsList = document.getElementById('damagedItemsList');
+    const categoryBreakdown = document.getElementById('categoryBreakdown');
+    const lastUpdateDateSpan = document.getElementById('lastUpdateDate');
+    const exportStatsBtn = document.getElementById('exportStatsBtn');
+
+    if (exportStatsBtn) {
+        exportStatsBtn.addEventListener('click', exportStatisticsToExcel);
+    }
 
     let currentCategory = null;
 
@@ -1541,8 +1554,8 @@ document.addEventListener('DOMContentLoaded', () => {
             return matchesBase || matchesExtra || matchesNumbered;
         });
 
-        // Sort alphabetically by baseName (ABC)
-        filteredCats.sort((a, b) => a.baseName.localeCompare(b.baseName, 'vi', { sensitivity: 'base' }));
+        // Sort alphabetically by baseName (ABC) with natural numeric sorting
+        filteredCats.sort((a, b) => a.baseName.localeCompare(b.baseName, 'vi', { sensitivity: 'base', numeric: true }));
 
         filteredCats.forEach(def => {
             const card = document.createElement('div');
@@ -1556,6 +1569,271 @@ document.addEventListener('DOMContentLoaded', () => {
             card.addEventListener('click', () => handleCategoryClick(def));
             kitGrid.appendChild(card);
         });
+
+        // Add Statistics Card at the end if no searching
+        if (!filterText) {
+            const statsCard = document.createElement('div');
+            statsCard.className = 'kit-card';
+            statsCard.innerHTML = `
+                <div class="icon-wrapper icon-gray">
+                    <i class="fa-solid fa-chart-line kit-icon"></i>
+                </div>
+                <div class="kit-name">Báo cáo & Thống kê</div>
+            `;
+            statsCard.addEventListener('click', showStatisticsView);
+            kitGrid.appendChild(statsCard);
+        }
+    }
+
+    function showStatisticsView() {
+        modalTitle.textContent = "Báo cáo Tổng hợp & Thống kê";
+        modalSelection.style.display = 'none';
+        modalDetails.style.display = 'none';
+        modalStatistics.style.display = 'block';
+
+        // Calculate Statistics - iterate through ALL possible kit names (aligned with initializeData)
+        const kitNames = [];
+        kitDefinitions.forEach(def => {
+            if (def.count === 1) {
+                kitNames.push(def.prefix);
+            } else if (def.count > 1) {
+                for (let i = 1; i <= def.count; i++) kitNames.push(`${def.prefix} ${i}`);
+            } else if (!def.extraSubKits || def.extraSubKits.length === 0) {
+                // If count is 0 and no extras, still might exist as a single kit
+                kitNames.push(def.prefix);
+            }
+            if (def.extraSubKits) {
+                def.extraSubKits.forEach(sub => kitNames.push(sub));
+            }
+        });
+
+        let totalPieces = 0;
+        const damagedItems = [];
+
+        kitNames.forEach(key => {
+            const items = (allKitsData[key] && allKitsData[key].length > 0) ? allKitsData[key] : defaultItems;
+
+            items.forEach((item, index) => {
+                // Skip total rows
+                if (item.name && item.name.toLowerCase().includes("tổng cộng")) return;
+
+                // Use modified notes/names from localStorage if they exist
+                const noteKey = `${key}-${index}`;
+                const nameKey = `${key}-name-${index}`;
+
+                const currentNote = modifiedNotes[noteKey] !== undefined ? modifiedNotes[noteKey] : (item.note || '');
+                const currentName = modifiedNames[nameKey] !== undefined ? modifiedNames[nameKey] : item.name;
+                const currentCode = (item.code || "");
+
+                totalPieces += (item.quantity || 0);
+
+                // Identify damaged/broken items using whole-word matching
+                const damageKeywords = ["hư", "gãy", "cùn", "mẻ", "hỏng", "thiếu", "rỉ", "set", "hư hỏng", "hhư", "mòn", "rỉ sét"];
+                const boundary = "(^|[^a-z0-9àáảãạâầấẩẫậăằắẳẵặèéẻẽẹêềếểễệìíỉĩịòóỏõọôồốổỗộơờớởỡợùúủũụưừứửữựỳýỷỹỵ])";
+                const endBoundary = "($|[^a-z0-9àáảãạâầấẩẫậăằắẳẵặèéẻẽẹêềếểễệìíỉĩịòóỏõọôồốổỗộơờớởỡợùúủũụưừứửữựỳýỷỹỵ])";
+                const damageRegex = new RegExp(boundary + "(" + damageKeywords.join('|') + ")" + endBoundary, 'i');
+                const isDamaged = damageRegex.test(currentNote) || damageRegex.test(currentName) || damageRegex.test(currentCode);
+
+                if (isDamaged) {
+                    damagedItems.push({
+                        kit: key,
+                        name: currentName,
+                        quantity: item.quantity,
+                        note: currentNote
+                    });
+                }
+            });
+        });
+
+        // Update counts
+        totalKitsSpan.textContent = kitDefinitions.length;
+        totalDamagedSpan.textContent = damagedItems.length;
+
+        // Categorical Breakdown - SORTED ABC
+        categoryBreakdown.innerHTML = '';
+        const sortedCats = [...kitDefinitions].sort((a, b) => a.baseName.localeCompare(b.baseName, 'vi', { sensitivity: 'base', numeric: true }));
+
+        sortedCats.forEach(def => {
+            let subCount = def.count > 0 ? def.count : 0;
+            if (def.extraSubKits) subCount += def.extraSubKits.length;
+            if (subCount === 0 && def.count === 0) subCount = 1;
+
+            const catBadge = document.createElement('div');
+            catBadge.className = 'category-stat-badge';
+            catBadge.innerHTML = `
+                <span class="cat-name">${def.baseName}</span>
+                <span class="cat-count">${subCount}</span>
+            `;
+            categoryBreakdown.appendChild(catBadge);
+        });
+
+        // Render damaged items - SORTED ABC
+        damagedItemsList.innerHTML = '';
+        if (damagedItems.length === 0) {
+            damagedItemsList.innerHTML = `<tr><td colspan="4" style="text-align: center; color: var(--text-secondary);">Không có dụng cụ hư hỏng được ghi nhận.</td></tr>`;
+        } else {
+            // Sort by kit name, then item name
+            damagedItems.sort((a, b) => {
+                const kitComp = a.kit.localeCompare(b.kit, 'vi', { numeric: true });
+                if (kitComp !== 0) return kitComp;
+                return a.name.localeCompare(b.name, 'vi');
+            });
+
+            damagedItems.forEach(item => {
+                const tr = document.createElement('tr');
+                tr.className = 'stats-row-damaged';
+                tr.innerHTML = `
+                    <td>${item.kit}</td>
+                    <td>${item.name}</td>
+                    <td>${item.quantity}</td>
+                    <td><span class="damaged-tag">BÁO CÁO</span> ${item.note || 'Cần kiểm tra'}</td>
+                `;
+                damagedItemsList.appendChild(tr);
+            });
+        }
+
+        // Update Timestamp
+        const now = new Date();
+        const timeStr = now.toLocaleTimeString('vi-VN', { hour: '2-digit', minute: '2-digit' });
+        const dateStr = now.toLocaleDateString('vi-VN');
+        lastUpdateDateSpan.textContent = `${timeStr} ngày ${dateStr}`;
+
+        modal.style.display = "block";
+        void modal.offsetWidth;
+        modal.classList.add('show');
+    }
+
+    function exportStatisticsToExcel() {
+        // 1. Prepare Data - Categories
+        const sortedCatsExport = [...kitDefinitions].sort((a, b) => a.baseName.localeCompare(b.baseName, 'vi', { sensitivity: 'base', numeric: true }));
+
+        // 2. Prepare Data - Damaged Items
+        const kitNames = [];
+        kitDefinitions.forEach(def => {
+            if (def.count === 1) kitNames.push(def.prefix);
+            else if (def.count > 1) {
+                for (let i = 1; i <= def.count; i++) kitNames.push(`${def.prefix} ${i}`);
+            } else if (!def.extraSubKits || def.extraSubKits.length === 0) kitNames.push(def.prefix);
+            if (def.extraSubKits) def.extraSubKits.forEach(sub => kitNames.push(sub));
+        });
+
+        const damagedItems = [];
+        kitNames.forEach(key => {
+            const items = (allKitsData[key] && allKitsData[key].length > 0) ? allKitsData[key] : defaultItems;
+            items.forEach((item, index) => {
+                if (item.name && item.name.toLowerCase().includes("tổng cộng")) return;
+                const noteKey = `${key}-${index}`;
+                const nameKey = `${key}-name-${index}`;
+                const currentNote = modifiedNotes[noteKey] !== undefined ? modifiedNotes[noteKey] : (item.note || '');
+                const currentName = modifiedNames[nameKey] !== undefined ? modifiedNames[nameKey] : item.name;
+                const damageKeywords = ["hư", "gãy", "cùn", "mẻ", "hỏng", "thiếu", "rỉ", "set", "hư hỏng", "hhư", "mòn", "rỉ sét"];
+                const boundary = "(^|[^a-z0-9àáảãạâầấẩẫậăằắẳẵặèéẻẽẹêềếểễệìíỉĩịòóỏõọôồốổỗộơờớởỡợùúủũụưừứửữựỳýỷỹỵ])";
+                const endBoundary = "($|[^a-z0-9àáảãạâầấẩẫậăằắẳẵặèéẻẽẹêềếểễệìíỉĩịòóỏõọôồốổỗộơờớởỡợùúủũụưừứửữựỳýỷỹỵ])";
+                const damageRegex = new RegExp(boundary + "(" + damageKeywords.join('|') + ")" + endBoundary, 'i');
+                if (damageRegex.test(currentNote) || damageRegex.test(currentName)) {
+                    damagedItems.push({ kit: key, name: currentName, quantity: item.quantity, note: currentNote });
+                }
+            });
+        });
+
+        damagedItems.sort((a, b) => {
+            const kitComp = a.kit.localeCompare(b.kit, 'vi', { numeric: true });
+            if (kitComp !== 0) return kitComp;
+            return a.name.localeCompare(b.name, 'vi');
+        });
+
+        // 3. Create Professional HTML Table for Excel
+        const now = new Date();
+        const timestamp = `${now.toLocaleTimeString('vi-VN')} ngày ${now.toLocaleDateString('vi-VN')}`;
+
+        let html = `
+            <meta charset="utf-8">
+            <style>
+                table { border-collapse: collapse; font-family: 'Times New Roman', serif; width: 100%; }
+                th, td { border: 1px solid #000; padding: 8px; text-align: left; }
+                .title-row { font-size: 24pt; font-weight: bold; text-align: center; color: #1e40af; padding: 20px; }
+                .subtitle-row { font-size: 14pt; font-style: italic; text-align: center; color: #475569; padding-bottom: 20px; }
+                .section-header { background-color: #2563eb; color: #ffffff; font-size: 16pt; font-weight: bold; padding: 10px; margin-top: 20px; }
+                .table-header { background-color: #f1f5f9; font-weight: bold; }
+                .damaged-text { color: #dc2626; font-weight: bold; }
+            </style>
+            <table>
+                <tr><td colspan="4" class="title-row">BÁO CÁO TỔNG HỢP & THỐNG KÊ DỤNG CỤ</td></tr>
+                <tr><td colspan="4" class="subtitle-row">Thời điểm thống kê: ${timestamp}</td></tr>
+                
+                <tr><td colspan="4" class="section-header">I. THỐNG KÊ SỐ LƯỢNG THEO PHÂN LOẠI</td></tr>
+                <tr class="table-header">
+                    <td style="width: 10%;">STT</td>
+                    <td style="width: 50%;">LOẠI BỘ DỤNG CỤ</td>
+                    <td style="width: 20%;">MÃ TIỀN TỐ</td>
+                    <td style="width: 20%;">SỐ LƯỢNG BỘ CON</td>
+                </tr>
+        `;
+
+        sortedCatsExport.forEach((def, idx) => {
+            let subCount = def.count > 0 ? def.count : 0;
+            if (def.extraSubKits) subCount += def.extraSubKits.length;
+            if (subCount === 0 && def.count === 0) subCount = 1;
+            html += `
+                <tr>
+                    <td>${idx + 1}</td>
+                    <td style="font-weight: bold;">${def.baseName}</td>
+                    <td>${def.prefix || "---"}</td>
+                    <td style="text-align: center; font-weight: bold;">${subCount}</td>
+                </tr>
+            `;
+        });
+
+        html += `
+                <tr><td colspan="4" style="border: none; height: 30px;"></td></tr>
+                <tr><td colspan="4" class="section-header">II. DANH SÁCH DỤNG CỤ HƯ HỎNG / CẦN BÁO CÁO</td></tr>
+                <tr class="table-header">
+                    <td>STT</td>
+                    <td>BỘ DỤNG CỤ</td>
+                    <td>TÊN DỤNG CỤ (SỐ LƯỢNG)</td>
+                    <td>GHI CHÚ / TÌNH TRẠNG</td>
+                </tr>
+        `;
+
+        if (damagedItems.length === 0) {
+            html += `<tr><td colspan="4" style="text-align: center; height: 50px;">Không có dụng cụ hư hỏng ghi nhận.</td></tr>`;
+        } else {
+            damagedItems.forEach((item, idx) => {
+                html += `
+                    <tr>
+                        <td>${idx + 1}</td>
+                        <td style="font-weight: bold;">${item.kit}</td>
+                        <td>${item.name} (${item.quantity})</td>
+                        <td class="damaged-text">${item.note}</td>
+                    </tr>
+                `;
+            });
+        }
+
+        html += `
+                <tr><td colspan="4" style="border: none; height: 40px;"></td></tr>
+                <tr>
+                    <td colspan="2" style="border: none;"></td>
+                    <td colspan="2" style="border: none; text-align: center; font-style: italic;">
+                        Ngày ${now.getDate()} tháng ${now.getMonth() + 1} năm ${now.getFullYear()} <br>
+                        <b>NGƯỜI LẬP BÁO CÁO</b> <br>
+                        <span style="font-size: 8pt;">Phiên bản: ${APP_VERSION}</span> <br><br><br>
+                        <b>NGUYỄN VĂN TÂN</b>
+                    </td>
+                </tr>
+            </table>
+        `;
+
+        // 4. Save File
+        const blob = new Blob(["\ufeff", html], { type: "application/vnd.ms-excel" });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement("a");
+        a.href = url;
+        const fileDate = now.toLocaleDateString('vi-VN').replace(/\//g, '-');
+        a.download = `Bao_Cao_Tong_Hop_${fileDate}.xls`;
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
     }
 
     function handleCategoryClick(def) {
@@ -1569,6 +1847,7 @@ document.addEventListener('DOMContentLoaded', () => {
             backBtn.style.display = 'none';
         }
 
+        modalStatistics.style.display = 'none';
         modal.style.display = "block";
         void modal.offsetWidth;
         modal.classList.add('show');
@@ -1590,8 +1869,8 @@ document.addEventListener('DOMContentLoaded', () => {
             allSubKits = allSubKits.concat(def.extraSubKits);
         }
 
-        // Sort alphabetically (ABC)
-        allSubKits.sort((a, b) => a.localeCompare(b, 'vi', { sensitivity: 'base' }));
+        // Sort alphabetically (ABC) with natural numeric sorting (1, 2, 10...)
+        allSubKits.sort((a, b) => a.localeCompare(b, 'vi', { sensitivity: 'base', numeric: true }));
 
         allSubKits.forEach(subName => {
             const btn = document.createElement('button');
@@ -1851,4 +2130,19 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     renderCategoryGrid();
+
+    // Inject version into UI
+    const versionBadge = document.getElementById('appVersion');
+    if (versionBadge) {
+        versionBadge.textContent = APP_VERSION;
+        versionBadge.addEventListener('click', () => {
+            const originalText = versionBadge.textContent;
+            versionBadge.textContent = "✓ Đã cập nhật bản mới nhất";
+            versionBadge.style.background = "var(--success-color, #22c55e)";
+            setTimeout(() => {
+                versionBadge.textContent = originalText;
+                versionBadge.style.background = "";
+            }, 2000);
+        });
+    }
 });
