@@ -1,4 +1,4 @@
-const APP_VERSION = "v1.3 PRO (Cập nhật 23:38:10 2/2/2026)";
+const APP_VERSION = "v1.3 PRO (Cập nhật 23:41:22 2/2/2026)";
 const kitDefinitions = [
     {
         "id": 1,
@@ -432,13 +432,15 @@ allKitsData["BẮT CON 3"] = [
         "stt": 3,
         "name": "KÉO CẮT CHỈ (CÙN)",
         "code": "54-4034",
-        "quantity": 1
+        "quantity": 1,
+        "note": "CÙN"
     },
     {
         "stt": 4,
         "name": "KÉO MAYO (CÙN)",
         "code": "BC557R",
-        "quantity": 1
+        "quantity": 1,
+        "note": "Cùn"
     },
     {
         "stt": 5,
@@ -7375,13 +7377,15 @@ allKitsData["XƯƠNG CHI DƯỚI"] = [
         "stt": 16,
         "name": "ĐỤC LÒNG MÁNG",
         "code": "FL574",
-        "quantity": 2
+        "quantity": 2,
+        "note": "Mẻ"
     },
     {
         "stt": 17,
         "name": "ĐỤC THẲNG",
         "code": "FL524",
-        "quantity": 2
+        "quantity": 2,
+        "note": "Mẻ"
     },
     {
         "stt": 18,
