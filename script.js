@@ -1995,29 +1995,36 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function renderTable(kitName) {
-        modalItemsList.innerHTML = '';
+        modalItemsList.innerHTML = '<tr><td colspan="5" class="shimmer-loading" style="height: 100px; width: 100%;"></td></tr>';
+        if (mobileItemsList) mobileItemsList.innerHTML = '<div class="shimmer-loading" style="height: 150px; width: 100%; border-radius: 16px;"></div>';
+
         const items = allKitsData[kitName] && allKitsData[kitName].length > 0 ? allKitsData[kitName] : defaultItems;
 
-        items.forEach((item, index) => {
-            const row = document.createElement('tr');
-            if (item.bold) {
-                row.style.fontWeight = "bold";
-                row.style.backgroundColor = "#e2e8f0";
-            }
+        // Small delay to show shimmer effect
+        setTimeout(() => {
+            modalItemsList.innerHTML = '';
+            if (mobileItemsList) mobileItemsList.innerHTML = '';
 
-            const sttDisplay = item.stt !== undefined ? item.stt : (item.name.toLowerCase().includes('tổng cộng') ? '' : (index + 1));
+            items.forEach((item, index) => {
+                const row = document.createElement('tr');
+                if (item.bold) {
+                    row.style.fontWeight = "bold";
+                    row.style.backgroundColor = "#e2e8f0";
+                }
 
-            // Handle editable note logic
-            const noteKey = `${kitName}-${index}`;
-            const currentNote = modifiedNotes[noteKey] !== undefined ? modifiedNotes[noteKey] : (item.note || '');
-            const isNoteEdited = modifiedNotes[noteKey] !== undefined && modifiedNotes[noteKey] !== (item.note || '');
+                const sttDisplay = item.stt !== undefined ? item.stt : (item.name.toLowerCase().includes('tổng cộng') ? '' : (index + 1));
 
-            // Handle editable name logic
-            const nameKey = `${kitName}-name-${index}`;
-            const currentName = modifiedNames[nameKey] !== undefined ? modifiedNames[nameKey] : item.name;
-            const isNameEdited = modifiedNames[nameKey] !== undefined && modifiedNames[nameKey] !== item.name;
+                // Handle editable note logic
+                const noteKey = `${kitName}-${index}`;
+                const currentNote = modifiedNotes[noteKey] !== undefined ? modifiedNotes[noteKey] : (item.note || '');
+                const isNoteEdited = modifiedNotes[noteKey] !== undefined && modifiedNotes[noteKey] !== (item.note || '');
 
-            row.innerHTML = `
+                // Handle editable name logic
+                const nameKey = `${kitName}-name-${index}`;
+                const currentName = modifiedNames[nameKey] !== undefined ? modifiedNames[nameKey] : item.name;
+                const isNameEdited = modifiedNames[nameKey] !== undefined && modifiedNames[nameKey] !== item.name;
+
+                row.innerHTML = `
                 <td>${sttDisplay}</td>
                 <td contenteditable="${!item.bold}" 
                     class="name-cell ${isNameEdited ? 'note-edited' : ''}" 
@@ -2030,77 +2037,110 @@ document.addEventListener('DOMContentLoaded', () => {
                     data-key="${noteKey}"
                     data-original="${item.note || ''}">${currentNote}</td>
             `;
-            modalItemsList.appendChild(row);
-        });
+                modalItemsList.appendChild(row);
 
-        // Add listeners for the newly created editable cells
-        // Listeners for Notes
-        document.querySelectorAll('.note-cell').forEach(cell => {
-            cell.addEventListener('blur', (e) => {
-                const key = e.target.getAttribute('data-key');
-                const originalValue = e.target.getAttribute('data-original');
-                const newValue = e.target.innerText.trim();
-
-                if (newValue !== originalValue) {
-                    modifiedNotes[key] = newValue;
-                    e.target.classList.add('note-edited');
-                } else {
-                    delete modifiedNotes[key];
-                    e.target.classList.remove('note-edited');
-                }
-                localStorage.setItem('kitModifiedNotes', JSON.stringify(modifiedNotes));
-            });
-
-            cell.addEventListener('keydown', (e) => {
-                if (e.key === 'Enter') {
-                    e.preventDefault();
-                    e.target.blur();
-                }
-            });
-        });
-
-        // Listeners for Names
-        document.querySelectorAll('.name-cell').forEach(cell => {
-            // Highlight on click logic
-            cell.addEventListener('click', (e) => {
-                // Toggle highlight class
-                if (e.target.classList.contains('highlight-bold')) {
-                    e.target.classList.remove('highlight-bold');
-                } else {
-                    e.target.classList.add('highlight-bold');
+                // Mobile Card
+                if (mobileItemsList && !item.name.toLowerCase().includes('tổng cộng')) {
+                    const mobileCard = document.createElement('div');
+                    mobileCard.className = 'mobile-card-item';
+                    mobileCard.innerHTML = `
+                    <div class="item-header">
+                        <span class="item-stt">#${sttDisplay}</span>
+                        <span class="item-name name-cell ${isNameEdited ? 'note-edited' : ''}" 
+                            contenteditable="true" 
+                            data-key="${nameKey}"
+                            data-original="${item.name}">${currentName}</span>
+                    </div>
+                    <div class="item-info">
+                        <div class="info-box">
+                            <div class="info-label">Mã số</div>
+                            <div class="info-value">${item.code || '---'}</div>
+                        </div>
+                        <div class="info-box">
+                            <div class="info-label">Số lượng</div>
+                            <div class="info-value">${item.quantity > 0 ? item.quantity : (item.quantity === 0 ? '0' : '-')}</div>
+                        </div>
+                    </div>
+                    <div class="item-note note-cell ${isNoteEdited ? 'note-edited' : ''}" 
+                        contenteditable="true" 
+                        data-key="${noteKey}"
+                        data-original="${item.note || ''}">
+                        ${currentNote || ''}
+                    </div>
+                `;
+                    mobileItemsList.appendChild(mobileCard);
                 }
             });
 
-            cell.addEventListener('blur', (e) => {
-                const key = e.target.getAttribute('data-key');
-                const originalValue = e.target.getAttribute('data-original');
-                const newValue = e.target.innerText.trim();
+            // Add listeners for the newly created editable cells
+            // Listeners for Notes
+            document.querySelectorAll('.note-cell').forEach(cell => {
+                cell.addEventListener('blur', (e) => {
+                    const key = e.target.getAttribute('data-key');
+                    const originalValue = e.target.getAttribute('data-original');
+                    const newValue = e.target.innerText.trim();
 
-                if (newValue !== originalValue) {
-                    modifiedNames[key] = newValue;
-                    e.target.classList.add('note-edited');
-                } else {
-                    delete modifiedNames[key];
-                    e.target.classList.remove('note-edited');
-                }
-                localStorage.setItem('kitModifiedNames', JSON.stringify(modifiedNames));
+                    if (newValue !== originalValue) {
+                        modifiedNotes[key] = newValue;
+                        e.target.classList.add('note-edited');
+                    } else {
+                        delete modifiedNotes[key];
+                        e.target.classList.remove('note-edited');
+                    }
+                    localStorage.setItem('kitModifiedNotes', JSON.stringify(modifiedNotes));
+                });
+
+                cell.addEventListener('keydown', (e) => {
+                    if (e.key === 'Enter') {
+                        e.preventDefault();
+                        e.target.blur();
+                    }
+                });
             });
 
-            cell.addEventListener('keydown', (e) => {
-                if (e.key === 'Enter') {
-                    e.preventDefault();
-                    e.target.blur();
-                }
-            });
-        });
+            // Listeners for Names
+            document.querySelectorAll('.name-cell').forEach(cell => {
+                // Highlight on click logic
+                cell.addEventListener('click', (e) => {
+                    // Toggle highlight class
+                    if (e.target.classList.contains('highlight-bold')) {
+                        e.target.classList.remove('highlight-bold');
+                    } else {
+                        e.target.classList.add('highlight-bold');
+                    }
+                });
 
-        const footerDiv = document.getElementById('modalFooter');
-        if (footerDiv) {
-            const itemsArray = allKitsData[kitName];
-            const footerText = (itemsArray && itemsArray.footer) ? itemsArray.footer : '';
-            footerDiv.textContent = footerText;
-            footerDiv.style.display = footerText ? 'block' : 'none';
-        }
+                cell.addEventListener('blur', (e) => {
+                    const key = e.target.getAttribute('data-key');
+                    const originalValue = e.target.getAttribute('data-original');
+                    const newValue = e.target.innerText.trim();
+
+                    if (newValue !== originalValue) {
+                        modifiedNames[key] = newValue;
+                        e.target.classList.add('note-edited');
+                    } else {
+                        delete modifiedNames[key];
+                        e.target.classList.remove('note-edited');
+                    }
+                    localStorage.setItem('kitModifiedNames', JSON.stringify(modifiedNames));
+                });
+
+                cell.addEventListener('keydown', (e) => {
+                    if (e.key === 'Enter') {
+                        e.preventDefault();
+                        e.target.blur();
+                    }
+                });
+            });
+
+            const footerDiv = document.getElementById('modalFooter');
+            if (footerDiv) {
+                const itemsArray = allKitsData[kitName];
+                const footerText = (itemsArray && itemsArray.footer) ? itemsArray.footer : '';
+                footerDiv.textContent = footerText;
+                footerDiv.style.display = footerText ? 'block' : 'none';
+            }
+        }, 250);
     }
 
     backBtn.addEventListener('click', () => {
