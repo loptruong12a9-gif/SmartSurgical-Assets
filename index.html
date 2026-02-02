@@ -36,6 +36,16 @@
                         <input type="text" id="searchInput" placeholder="Tìm kiếm bộ dụng cụ..." autocomplete="off">
                         <i class="fa-solid fa-search search-icon"></i>
                     </div>
+                    <div class="header-actions" style="display: flex; gap: 10px; margin-left: 10px;">
+                        <button id="configGithubBtn" class="action-btn" title="Cấu hình GitHub"
+                            style="padding: 8px 12px; font-size: 1.2rem; cursor: pointer; background: rgba(255,255,255,0.2); border: none; border-radius: 8px; color: white;">
+                            <i class="fa-solid fa-cog"></i>
+                        </button>
+                        <button id="saveToGithubBtn" class="action-btn" title="Lưu Dữ Liệu"
+                            style="display: none; padding: 8px 12px; font-size: 1.2rem; cursor: pointer; background: #22c55e; border: none; border-radius: 8px; color: white; animation: pulse 2s infinite;">
+                            <i class="fa-solid fa-cloud-upload"></i>
+                        </button>
+                    </div>
                 </div>
 
             </div>
@@ -53,6 +63,8 @@
                 <p class="version">Phiên bản cuối: v1.2 PRO (2026)</p>
             </footer>
         </main>
+
+
 
         <!-- Modal for details -->
         <div id="detailModal" class="modal">
@@ -160,9 +172,43 @@
         </div>
     </div>
 
+    <!-- GitHub Config Modal -->
+    <div id="githubModal" class="modal" style="z-index: 10001;">
+        <div class="modal-content" style="max-width: 400px;">
+            <span class="close-btn" id="closeGithubModal">&times;</span>
+            <h2>Kết Nối GitHub</h2>
+            <div class="modal-body" style="padding-top: 10px;">
+                <p style="font-size: 0.9rem; color: #666; margin-bottom: 15px;">
+                    Nhập Personal Access Token để lưu dữ liệu.
+                </p>
+                <div class="form-group" style="margin-bottom: 15px;">
+                    <label style="font-weight: 600; display: block; margin-bottom: 5px;">GitHub Token</label>
+                    <input type="password" id="ghToken" placeholder="ghp_..."
+                        style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 6px;">
+                </div>
+                <div class="form-group" style="margin-bottom: 15px;">
+                    <label style="font-weight: 600; display: block; margin-bottom: 5px;">Username (Owner)</label>
+                    <input type="text" id="ghOwner" placeholder="Ví dụ: tannguyen"
+                        style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 6px;">
+                </div>
+                <div class="form-group" style="margin-bottom: 20px;">
+                    <label style="font-weight: 600; display: block; margin-bottom: 5px;">Repository Name</label>
+                    <input type="text" id="ghRepo" placeholder="Ví dụ: my-app"
+                        style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 6px;">
+                </div>
+                <button id="saveConfigBtn"
+                    style="width: 100%; padding: 12px; background: var(--primary-color); color: white; border: none; border-radius: 8px; font-weight: bold; cursor: pointer;">
+                    Lưu Cấu Hình
+                </button>
+            </div>
+        </div>
+    </div>
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/exceljs/4.3.0/exceljs.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script>
+    <script src="data.js"></script>
     <script src="script.js"></script>
+    <script src="github_sync.js"></script>
     <script>
         if ('serviceWorker' in navigator) {
             window.addEventListener('load', () => {

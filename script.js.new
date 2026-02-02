@@ -26,7 +26,7 @@
     let currentCategory = null;
 
     const defaultItems = [
-        { name: "Chưa cập nhật", code: "---", quantity: 0, note: "Đang chờ dữ liệu" }
+        { name: "ChÆ°a cáº­p nháº­t", code: "---", quantity: 0, note: "Äang chá» dá»¯ liá»‡u" }
     ];
 
     function renderCategoryGrid(filterText = '') {
@@ -74,7 +74,7 @@
                 <div class="icon-wrapper icon-gray">
                     <i class="fa-solid fa-chart-line kit-icon"></i>
                 </div>
-                <div class="kit-name">Báo cáo & Thống kê</div>
+                <div class="kit-name">BÃ¡o cÃ¡o & Thá»‘ng kÃª</div>
             `;
             statsCard.addEventListener('click', showStatisticsView);
             kitGrid.appendChild(statsCard);
@@ -82,7 +82,7 @@
     }
 
     function showStatisticsView() {
-        modalTitle.textContent = "Báo cáo Tổng hợp & Thống kê";
+        modalTitle.textContent = "BÃ¡o cÃ¡o Tá»•ng há»£p & Thá»‘ng kÃª";
         modalSelection.style.display = 'none';
         modalDetails.style.display = 'none';
         modalStatistics.style.display = 'block';
@@ -111,7 +111,7 @@
 
             items.forEach((item, index) => {
                 // Skip total rows
-                if (item.name && item.name.toLowerCase().includes("tổng cộng")) return;
+                if (item.name && item.name.toLowerCase().includes("tá»•ng cá»™ng")) return;
 
                 // Use modified notes/names from localStorage if they exist
                 const noteKey = `${key}-${index}`;
@@ -124,9 +124,9 @@
                 totalPieces += (item.quantity || 0);
 
                 // Identify damaged/broken items using whole-word matching
-                const damageKeywords = ["hư", "gãy", "cùn", "mẻ", "hỏng", "thiếu", "rỉ", "set", "hư hỏng", "hhư", "mòn", "rỉ sét"];
-                const boundary = "(^|[^a-z0-9àáảãạâầấẩẫậăằắẳẵặèéẻẽẹêềếểễệìíỉĩịòóỏõọôồốổỗộơờớởỡợùúủũụưừứửữựỳýỷỹỵ])";
-                const endBoundary = "($|[^a-z0-9àáảãạâầấẩẫậăằắẳẵặèéẻẽẹêềếểễệìíỉĩịòóỏõọôồốổỗộơờớởỡợùúủũụưừứửữựỳýỷỹỵ])";
+                const damageKeywords = ["hÆ°", "gÃ£y", "cÃ¹n", "máº»", "há»ng", "thiáº¿u", "rá»‰", "set", "hÆ° há»ng", "hhÆ°", "mÃ²n", "rá»‰ sÃ©t"];
+                const boundary = "(^|[^a-z0-9Ã Ã¡áº£Ã£áº¡Ã¢áº§áº¥áº©áº«áº­Äƒáº±áº¯áº³áºµáº·Ã¨Ã©áº»áº½áº¹Ãªá»áº¿á»ƒá»…á»‡Ã¬Ã­á»‰Ä©á»‹Ã²Ã³á»Ãµá»Ã´á»“á»‘á»•á»—á»™Æ¡á»á»›á»Ÿá»¡á»£Ã¹Ãºá»§Å©á»¥Æ°á»«á»©á»­á»¯á»±á»³Ã½á»·á»¹á»µ])";
+                const endBoundary = "($|[^a-z0-9Ã Ã¡áº£Ã£áº¡Ã¢áº§áº¥áº©áº«áº­Äƒáº±áº¯áº³áºµáº·Ã¨Ã©áº»áº½áº¹Ãªá»áº¿á»ƒá»…á»‡Ã¬Ã­á»‰Ä©á»‹Ã²Ã³á»Ãµá»Ã´á»“á»‘á»•á»—á»™Æ¡á»á»›á»Ÿá»¡á»£Ã¹Ãºá»§Å©á»¥Æ°á»«á»©á»­á»¯á»±á»³Ã½á»·á»¹á»µ])";
                 const damageRegex = new RegExp(boundary + "(" + damageKeywords.join('|') + ")" + endBoundary, 'i');
                 const isDamaged = damageRegex.test(currentNote) || damageRegex.test(currentName) || damageRegex.test(currentCode);
 
@@ -166,7 +166,7 @@
         // Render damaged items - SORTED ABC
         damagedItemsList.innerHTML = '';
         if (damagedItems.length === 0) {
-            damagedItemsList.innerHTML = `<tr><td colspan="4" style="text-align: center; color: var(--text-secondary);">Không có dụng cụ hư hỏng được ghi nhận.</td></tr>`;
+            damagedItemsList.innerHTML = `<tr><td colspan="4" style="text-align: center; color: var(--text-secondary);">KhÃ´ng cÃ³ dá»¥ng cá»¥ hÆ° há»ng Ä‘Æ°á»£c ghi nháº­n.</td></tr>`;
         } else {
             // Sort by kit name, then item name
             damagedItems.sort((a, b) => {
@@ -182,7 +182,7 @@
                     <td>${item.kit}</td>
                     <td>${item.name}</td>
                     <td>${item.quantity}</td>
-                    <td><span class="damaged-tag">BÁO CÁO</span> ${item.note || 'Cần kiểm tra'}</td>
+                    <td><span class="damaged-tag">BÃO CÃO</span> ${item.note || 'Cáº§n kiá»ƒm tra'}</td>
                 `;
                 damagedItemsList.appendChild(tr);
             });
@@ -192,7 +192,7 @@
         const now = new Date();
         const timeStr = now.toLocaleTimeString('vi-VN', { hour: '2-digit', minute: '2-digit' });
         const dateStr = now.toLocaleDateString('vi-VN');
-        lastUpdateDateSpan.textContent = `${timeStr} ngày ${dateStr}`;
+        lastUpdateDateSpan.textContent = `${timeStr} ngÃ y ${dateStr}`;
 
         modal.style.display = "block";
         void modal.offsetWidth;
@@ -212,16 +212,16 @@
         ];
 
         const now = new Date();
-        const timestamp = `${now.toLocaleTimeString('vi-VN')} ngày ${now.toLocaleDateString('vi-VN')}`;
+        const timestamp = `${now.toLocaleTimeString('vi-VN')} ngÃ y ${now.toLocaleDateString('vi-VN')}`;
 
         // 1. Title Rows
-        const titleRow = worksheet.addRow(['BÁO CÁO TỔNG HỢP & THỐNG KÊ DỤNG CỤ']);
+        const titleRow = worksheet.addRow(['BÃO CÃO Tá»”NG Há»¢P & THá»NG KÃŠ Dá»¤NG Cá»¤']);
         worksheet.mergeCells(`A${titleRow.number}:D${titleRow.number}`);
         titleRow.getCell(1).font = { name: 'Times New Roman', size: 18, bold: true };
         titleRow.getCell(1).alignment = { vertical: 'middle', horizontal: 'center' };
         titleRow.height = 35;
 
-        const subTitleRow = worksheet.addRow([`Thời điểm thống kê: ${timestamp}`]);
+        const subTitleRow = worksheet.addRow([`Thá»i Ä‘iá»ƒm thá»‘ng kÃª: ${timestamp}`]);
         worksheet.mergeCells(`A${subTitleRow.number}:D${subTitleRow.number}`);
         subTitleRow.getCell(1).font = { name: 'Times New Roman', size: 12, italic: true };
         subTitleRow.getCell(1).alignment = { vertical: 'middle', horizontal: 'center' };
@@ -230,12 +230,12 @@
         worksheet.addRow([]); // Blank row
 
         // 2. Section I: Categories
-        const sec1Row = worksheet.addRow(['I. THỐNG KÊ SỐ LƯỢNG THEO PHÂN LOẠI']);
+        const sec1Row = worksheet.addRow(['I. THá»NG KÃŠ Sá» LÆ¯á»¢NG THEO PHÃ‚N LOáº I']);
         worksheet.mergeCells(`A${sec1Row.number}:D${sec1Row.number}`);
         sec1Row.getCell(1).font = { name: 'Times New Roman', size: 14, bold: true, color: { argb: 'FF1E40AF' } };
         sec1Row.height = 25;
 
-        const header1Row = worksheet.addRow(['STT', 'LOẠI BỘ DỤNG CỤ', 'MÃ TIỀN TỐ', 'SỐ LƯỢNG BỘ CON']);
+        const header1Row = worksheet.addRow(['STT', 'LOáº I Bá»˜ Dá»¤NG Cá»¤', 'MÃƒ TIá»€N Tá»', 'Sá» LÆ¯á»¢NG Bá»˜ CON']);
         header1Row.eachCell((cell) => {
             cell.font = { name: 'Times New Roman', size: 12, bold: true, color: { argb: 'FFFFFFFF' } };
             cell.fill = { type: 'pattern', pattern: 'solid', fgColor: { argb: 'FF1E40AF' } };
@@ -261,12 +261,12 @@
         worksheet.addRow([]); // Blank row
 
         // 3. Section II: Damaged Items
-        const sec2Row = worksheet.addRow(['II. DANH SÁCH DỤNG CỤ HƯ HỎNG / CẦN BÁO CÁO']);
+        const sec2Row = worksheet.addRow(['II. DANH SÃCH Dá»¤NG Cá»¤ HÆ¯ Há»ŽNG / Cáº¦N BÃO CÃO']);
         worksheet.mergeCells(`A${sec2Row.number}:D${sec2Row.number}`);
         sec2Row.getCell(1).font = { name: 'Times New Roman', size: 14, bold: true, color: { argb: 'FFDC2626' } };
         sec2Row.height = 25;
 
-        const header2Row = worksheet.addRow(['STT', 'BỘ DỤNG CỤ', 'TÊN DỤNG CỤ (SỐ LƯỢNG)', 'GHI CHÚ / TÌNH TRẠNG']);
+        const header2Row = worksheet.addRow(['STT', 'Bá»˜ Dá»¤NG Cá»¤', 'TÃŠN Dá»¤NG Cá»¤ (Sá» LÆ¯á»¢NG)', 'GHI CHÃš / TÃŒNH TRáº NG']);
         header2Row.eachCell((cell) => {
             cell.font = { name: 'Times New Roman', size: 12, bold: true, color: { argb: 'FFFFFFFF' } };
             cell.fill = { type: 'pattern', pattern: 'solid', fgColor: { argb: 'FFDC2626' } };
@@ -288,14 +288,14 @@
         kitNames.forEach(key => {
             const items = (allKitsData[key] && allKitsData[key].length > 0) ? allKitsData[key] : defaultItems;
             items.forEach((item, index) => {
-                if (item.name && item.name.toLowerCase().includes("tổng cộng")) return;
+                if (item.name && item.name.toLowerCase().includes("tá»•ng cá»™ng")) return;
                 const noteKey = `${key}-${index}`;
                 const nameKey = `${key}-name-${index}`;
                 const currentNote = modifiedNotes[noteKey] !== undefined ? modifiedNotes[noteKey] : (item.note || '');
                 const currentName = modifiedNames[nameKey] !== undefined ? modifiedNames[nameKey] : item.name;
-                const damageKeywords = ["hư", "gãy", "cùn", "mẻ", "hỏng", "thiếu", "rỉ", "set", "hư hỏng", "hhư", "mòn", "rỉ sét"];
-                const boundary = "(^|[^a-z0-9àáảãạâầấẩẫậăằắẳẵặèéẻẽẹêềếểễệìíỉĩịòóỏõọôồốổỗộơờớởỡợùúủũụưừứửữựỳýỷỹỵ])";
-                const endBoundary = "($|[^a-z0-9àáảãạâầấẩẫậăằắẳẵặèéẻẽẹêềếểễệìíỉĩịòóỏõọôồốổỗộơờớởỡợùúủũụưừứửữựỳýỷỹỵ])";
+                const damageKeywords = ["hÆ°", "gÃ£y", "cÃ¹n", "máº»", "há»ng", "thiáº¿u", "rá»‰", "set", "hÆ° há»ng", "hhÆ°", "mÃ²n", "rá»‰ sÃ©t"];
+                const boundary = "(^|[^a-z0-9Ã Ã¡áº£Ã£áº¡Ã¢áº§áº¥áº©áº«áº­Äƒáº±áº¯áº³áºµáº·Ã¨Ã©áº»áº½áº¹Ãªá»áº¿á»ƒá»…á»‡Ã¬Ã­á»‰Ä©á»‹Ã²Ã³á»Ãµá»Ã´á»“á»‘á»•á»—á»™Æ¡á»á»›á»Ÿá»¡á»£Ã¹Ãºá»§Å©á»¥Æ°á»«á»©á»­á»¯á»±á»³Ã½á»·á»¹á»µ])";
+                const endBoundary = "($|[^a-z0-9Ã Ã¡áº£Ã£áº¡Ã¢áº§áº¥áº©áº«áº­Äƒáº±áº¯áº³áºµáº·Ã¨Ã©áº»áº½áº¹Ãªá»áº¿á»ƒá»…á»‡Ã¬Ã­á»‰Ä©á»‹Ã²Ã³á»Ãµá»Ã´á»“á»‘á»•á»—á»™Æ¡á»á»›á»Ÿá»¡á»£Ã¹Ãºá»§Å©á»¥Æ°á»«á»©á»­á»¯á»±á»³Ã½á»·á»¹á»µ])";
                 const damageRegex = new RegExp(boundary + "(" + damageKeywords.join('|') + ")" + endBoundary, 'i');
                 if (damageRegex.test(currentNote) || damageRegex.test(currentName)) {
                     damagedItems.push({ kit: key, name: `${currentName} (${item.quantity})`, note: currentNote });
@@ -306,7 +306,7 @@
         damagedItems.sort((a, b) => a.kit.localeCompare(b.kit, 'vi', { numeric: true }));
 
         if (damagedItems.length === 0) {
-            const emptyRow = worksheet.addRow(['', 'Không có dụng cụ hư hỏng ghi nhận', '', '']);
+            const emptyRow = worksheet.addRow(['', 'KhÃ´ng cÃ³ dá»¥ng cá»¥ hÆ° há»ng ghi nháº­n', '', '']);
             worksheet.mergeCells(`B${emptyRow.number}:D${emptyRow.number}`);
             emptyRow.getCell(2).alignment = { horizontal: 'center' };
             emptyRow.eachCell(cell => {
@@ -329,17 +329,17 @@
         worksheet.addRow([]); // Blank row
 
         // 4. Signoff section
-        const signoffRow1 = worksheet.addRow(['', '', `Ngày ${now.getDate()} tháng ${now.getMonth() + 1} năm ${now.getFullYear()}`]);
+        const signoffRow1 = worksheet.addRow(['', '', `NgÃ y ${now.getDate()} thÃ¡ng ${now.getMonth() + 1} nÄƒm ${now.getFullYear()}`]);
         worksheet.mergeCells(`C${signoffRow1.number}:D${signoffRow1.number}`);
         signoffRow1.getCell(3).alignment = { horizontal: 'center' };
         signoffRow1.getCell(3).font = { name: 'Times New Roman', size: 12, italic: true };
 
-        const signoffRow2 = worksheet.addRow(['', '', 'NGƯỜI LẬP BÁO CÁO']);
+        const signoffRow2 = worksheet.addRow(['', '', 'NGÆ¯á»œI Láº¬P BÃO CÃO']);
         worksheet.mergeCells(`C${signoffRow2.number}:D${signoffRow2.number}`);
         signoffRow2.getCell(3).alignment = { horizontal: 'center' };
         signoffRow2.getCell(3).font = { name: 'Times New Roman', size: 12, bold: true };
 
-        const signoffRow3 = worksheet.addRow(['', '', `(Phiên bản: ${APP_VERSION})`]);
+        const signoffRow3 = worksheet.addRow(['', '', `(PhiÃªn báº£n: ${APP_VERSION})`]);
         worksheet.mergeCells(`C${signoffRow3.number}:D${signoffRow3.number}`);
         signoffRow3.getCell(3).alignment = { horizontal: 'center' };
         signoffRow3.getCell(3).font = { name: 'Times New Roman', size: 9, italic: true };
@@ -347,7 +347,7 @@
         worksheet.addRow([]);
         worksheet.addRow([]);
 
-        const signoffRow4 = worksheet.addRow(['', '', 'NGUYỄN VĂN TÂN']);
+        const signoffRow4 = worksheet.addRow(['', '', 'NGUYá»„N VÄ‚N TÃ‚N']);
         worksheet.mergeCells(`C${signoffRow4.number}:D${signoffRow4.number}`);
         signoffRow4.getCell(3).alignment = { horizontal: 'center' };
         signoffRow4.getCell(3).font = { name: 'Times New Roman', size: 12, bold: true };
@@ -419,7 +419,7 @@
             exportBtn = document.createElement('button');
             exportBtn.id = 'exportBtn';
             exportBtn.className = 'back-btn'; // Reusing style
-            exportBtn.innerHTML = '<i class="fa-solid fa-file-excel"></i> Xuất Excel';
+            exportBtn.innerHTML = '<i class="fa-solid fa-file-excel"></i> Xuáº¥t Excel';
             exportBtn.style.marginLeft = 'auto'; // Float right
 
             // Insert after Search Input or append to container
@@ -464,7 +464,7 @@
         titleRow.height = 35;
 
         // 2. Table Headers
-        const headerRow = worksheet.addRow(['STT', 'DANH MỤC DỤNG CỤ', 'MÃ SỐ', 'SỐ LƯỢNG', 'GHI CHÚ']);
+        const headerRow = worksheet.addRow(['STT', 'DANH Má»¤C Dá»¤NG Cá»¤', 'MÃƒ Sá»', 'Sá» LÆ¯á»¢NG', 'GHI CHÃš']);
         headerRow.eachCell((cell) => {
             cell.font = { name: 'Times New Roman', size: 12, bold: true };
             cell.fill = { type: 'pattern', pattern: 'solid', fgColor: { argb: 'FFE2E8F0' } };
@@ -475,7 +475,7 @@
         // 3. Add Data Rows
         const items = allKitsData[kitName] && allKitsData[kitName].length > 0 ? allKitsData[kitName] : defaultItems;
         items.forEach((item, index) => {
-            const sttDisplay = item.stt !== undefined ? item.stt : (item.name.toLowerCase().includes('tổng cộng') ? '' : (index + 1));
+            const sttDisplay = item.stt !== undefined ? item.stt : (item.name.toLowerCase().includes('tá»•ng cá»™ng') ? '' : (index + 1));
 
             const noteKey = `${kitName}-${index}`;
             const currentNote = modifiedNotes[noteKey] !== undefined ? modifiedNotes[noteKey] : (item.note || '');
@@ -500,10 +500,10 @@
                 if (colNumber === 1 || colNumber === 4) cell.alignment = { horizontal: 'center' };
 
                 // Bold logic
-                if (item.bold || currentName.toLowerCase().includes('tổng cộng')) {
+                if (item.bold || currentName.toLowerCase().includes('tá»•ng cá»™ng')) {
                     cell.font.bold = true;
                     cell.fill = { type: 'pattern', pattern: 'solid', fgColor: { argb: 'FFF1F5F9' } };
-                    if (currentName.toLowerCase().includes('tổng cộng')) {
+                    if (currentName.toLowerCase().includes('tá»•ng cá»™ng')) {
                         cell.font.size = 14;
                     }
                 }
@@ -539,7 +539,7 @@
                 row.style.backgroundColor = "#e2e8f0";
             }
 
-            const sttDisplay = item.stt !== undefined ? item.stt : (item.name.toLowerCase().includes('tổng cộng') ? '' : (index + 1));
+            const sttDisplay = item.stt !== undefined ? item.stt : (item.name.toLowerCase().includes('tá»•ng cá»™ng') ? '' : (index + 1));
 
             // Handle editable note logic
             const noteKey = `${kitName}-${index}`;
@@ -673,7 +673,7 @@
         versionBadge.textContent = APP_VERSION;
         versionBadge.addEventListener('click', () => {
             const originalText = versionBadge.textContent;
-            versionBadge.textContent = "✓ Đã cập nhật bản mới nhất";
+            versionBadge.textContent = "âœ“ ÄÃ£ cáº­p nháº­t báº£n má»›i nháº¥t";
             versionBadge.style.background = "var(--success-color, #22c55e)";
             setTimeout(() => {
                 versionBadge.textContent = originalText;

@@ -1,11 +1,11 @@
-const CACHE_NAME = 'smart-surgical-v1.4';
+const CACHE_NAME = 'smart-surgical-v1.5';
 const ASSETS_TO_CACHE = [
     './',
     './index.html',
     './style.css',
+    './data.js',
     './script.js',
     './manifest.json',
-    './logo.png',
     'https://cdnjs.cloudflare.com/ajax/libs/exceljs/4.3.0/exceljs.min.js',
     'https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js'
 ];
