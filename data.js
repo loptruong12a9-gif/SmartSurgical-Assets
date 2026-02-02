@@ -1,4 +1,4 @@
-const APP_VERSION = "v1.3 PRO (Cập nhật 22:48:00 2/2/2026)";
+const APP_VERSION = "v1.3 PRO (Cập nhật 22:50:26 2/2/2026)";
 const kitDefinitions = [
     {
         "id": 1,
