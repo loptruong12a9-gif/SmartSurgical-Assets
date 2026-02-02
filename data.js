@@ -1,4 +1,4 @@
-const APP_VERSION = "v1.3 PRO (Cập nhật 23:13:32 2/2/2026)";
+const APP_VERSION = "v1.3 PRO (Cập nhật 23:14:15 2/2/2026)";
 const kitDefinitions = [
     {
         "id": 1,
@@ -7489,8 +7489,7 @@ allKitsData["XƯƠNG CHI TRÊN"] = [
         "stt": 6,
         "name": "KÉO CẮT CHỈ",
         "code": "",
-        "quantity": 1,
-        "note": "CÙN"
+        "quantity": 1
     },
     {
         "stt": 7,
