@@ -1,4 +1,4 @@
-const APP_VERSION = "v1.3 PRO (Cập nhật 23:41:22 2/2/2026)";
+const APP_VERSION = "v1.3 PRO (Cập nhật 09:31:40 3/2/2026)";
 const kitDefinitions = [
     {
         "id": 1,
@@ -1617,13 +1617,15 @@ allKitsData["CTC 2"] = [
         "stt": 19,
         "name": "KÉO CẮT CHỈ",
         "code": "LAWTON",
-        "quantity": 1
+        "quantity": 1,
+        "note": "Cùn"
     },
     {
         "stt": 20,
         "name": "KÉO MESK (CÙN)",
         "code": "BC277",
-        "quantity": 1
+        "quantity": 1,
+        "note": "Cùn"
     },
     {
         "stt": 21,
@@ -1898,7 +1900,8 @@ allKitsData["CTC 3"] = [
         "stt": 29,
         "name": "KÉO CẮT CHỈ",
         "code": "LAWTON",
-        "quantity": 1
+        "quantity": 1,
+        "note": "Cùn"
     },
     {
         "stt": 30,
@@ -5022,7 +5025,8 @@ allKitsData["THẦN KINH 10"] = [
         "stt": 8,
         "name": "KỀM KẸP KIM",
         "code": "HB2202 (HEBU)",
-        "quantity": 1
+        "quantity": 1,
+        "note": "Hư"
     },
     {
         "stt": 9,
@@ -7391,7 +7395,8 @@ allKitsData["XƯƠNG CHI DƯỚI"] = [
         "stt": 18,
         "name": "ĐỤC LÒNG MÁNG",
         "code": "FL134",
-        "quantity": 1
+        "quantity": 1,
+        "note": "Mẻ"
     },
     {
         "stt": 19,
@@ -7439,13 +7444,15 @@ allKitsData["XƯƠNG CHI DƯỚI"] = [
         "stt": 26,
         "name": "KÉO CẮT CHỈ",
         "code": "5060",
-        "quantity": 1
+        "quantity": 1,
+        "note": "Cùn"
     },
     {
         "stt": 27,
         "name": "KÉO MESK",
         "code": "",
-        "quantity": 1
+        "quantity": 1,
+        "note": "Cùn"
     },
     {
         "stt": "",
@@ -7550,19 +7557,22 @@ allKitsData["XƯƠNG CHI TRÊN"] = [
         "stt": 15,
         "name": "ĐỤC LÒNG MÁNG NHỎ",
         "code": "FL136R",
-        "quantity": 1
+        "quantity": 1,
+        "note": "Mẻ"
     },
     {
         "stt": 16,
         "name": "ĐỤC LÒNG MÁNG LỚN",
         "code": "FL574",
-        "quantity": 2
+        "quantity": 2,
+        "note": "Mẻ"
     },
     {
         "stt": 17,
         "name": "ĐỤC THẲNG",
         "code": "FL524",
-        "quantity": 2
+        "quantity": 2,
+        "note": "Mẻ"
     },
     {
         "stt": 18,
