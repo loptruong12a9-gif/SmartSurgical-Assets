@@ -1,4 +1,4 @@
-const APP_VERSION = "v1.3 PRO (Cập nhật 09:31:40 3/2/2026)";
+const APP_VERSION = "v1.3 PRO (Cập nhật 00:29:06 10/2/2026)";
 const kitDefinitions = [
     {
         "id": 1,
@@ -5822,7 +5822,8 @@ allKitsData["TIỂU PHẪU 3"] = [
         "stt": 1,
         "name": "KELLY NHỎ",
         "code": "BH111R",
-        "quantity": 2
+        "quantity": 2,
+        "note": "HEBU-0515"
     },
     {
         "stt": 2,
