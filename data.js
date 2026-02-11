@@ -1,4 +1,4 @@
-const APP_VERSION = "v1.3 PRO (Cập nhật 10:18:33 11/2/2026)";
+const APP_VERSION = "v1.3 PRO (Cập nhật 13:43:03 11/2/2026)";
 const kitDefinitions = [
     {
         "id": 1,
@@ -312,7 +312,8 @@ allKitsData["BẮT CON 2"] = [
         "stt": 1,
         "name": "KELLY TRUNG",
         "code": "BH165R",
-        "quantity": 4
+        "quantity": 4,
+        "note": "6"
     },
     {
         "stt": 2,
@@ -2132,7 +2133,7 @@ allKitsData["HC Ố CỔ TAY"] = [
     },
     {
         "stt": 2,
-        "name": "KÉO MESS ĐẦN CẮN VÀNG",
+        "name": "KÉO MESS CÁN VÀNG",
         "code": "BC271R",
         "quantity": 1,
         "note": ""
@@ -2212,7 +2213,7 @@ allKitsData["HC Ố CỔ TAY"] = [
         "name": "PARAPOP MÓC",
         "code": "",
         "quantity": 2,
-        "note": ""
+        "note": "Hư 1"
     },
     {
         "stt": 13,
