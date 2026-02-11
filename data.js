@@ -1,4 +1,4 @@
-const APP_VERSION = "v1.3 PRO (Cập nhật 00:29:06 10/2/2026)";
+const APP_VERSION = "v1.3 PRO (Cập nhật 10:18:33 11/2/2026)";
 const kitDefinitions = [
     {
         "id": 1,
@@ -5026,7 +5026,7 @@ allKitsData["THẦN KINH 10"] = [
         "name": "KỀM KẸP KIM",
         "code": "HB2202 (HEBU)",
         "quantity": 1,
-        "note": "Hư"
+        "note": "Hư thay tạm pakistan"
     },
     {
         "stt": 9,
@@ -5062,13 +5062,15 @@ allKitsData["THẦN KINH 10"] = [
         "stt": 14,
         "name": "KÉO MESK",
         "code": "05-0620",
-        "quantity": 1
+        "quantity": 1,
+        "note": "Cùn"
     },
     {
         "stt": 15,
         "name": "KÉO CẮT CHỈ ( cùn, mẻ đầu )",
         "code": "HB1706 (HEBU)",
-        "quantity": 1
+        "quantity": 1,
+        "note": "Cùn"
     },
     {
         "stt": 16,
@@ -7315,7 +7317,8 @@ allKitsData["XƯƠNG CHI DƯỚI"] = [
         "stt": 5,
         "name": "KELLY CONG",
         "code": "BH167",
-        "quantity": 6
+        "quantity": 6,
+        "note": "GÃY 1"
     },
     {
         "stt": 6,
