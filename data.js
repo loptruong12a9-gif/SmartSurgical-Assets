@@ -1,4 +1,4 @@
-const APP_VERSION = "v1.3 PRO (Cập nhật 12:51:11 12/2/2026)";
+const APP_VERSION = "v1.3 PRO (Cập nhật 04:43:28 13/2/2026)";
 const kitDefinitions = [
     {
         "id": 1,
@@ -241,37 +241,43 @@ allKitsData["BẮT CON 1"] = [
         "stt": 4,
         "name": "KỀM KẸP KIM",
         "code": "HB2202",
-        "quantity": 1
+        "quantity": 1,
+        "note": "2 CÁI"
     },
     {
         "stt": 5,
         "name": "NHÍP CÓ MẤU",
         "code": "HB0302",
-        "quantity": 3
+        "quantity": 3,
+        "note": "1"
     },
     {
         "stt": 6,
         "name": "NHÍP KHÔNG MẤU",
         "code": "BD051R",
-        "quantity": 3
+        "quantity": 3,
+        "note": "1"
     },
     {
         "stt": 7,
         "name": "KOCHER THẲNG",
         "code": "BH646R",
-        "quantity": 2
+        "quantity": 2,
+        "note": "3 Cái"
     },
     {
         "stt": 8,
         "name": "KẸP TAM GIÁC",
         "code": "EA061R",
-        "quantity": 1
+        "quantity": 1,
+        "note": "3"
     },
     {
         "stt": 9,
         "name": "KẸP TĂM BÔNG",
         "code": "BF122R",
-        "quantity": 1
+        "quantity": 1,
+        "note": "2"
     },
     {
         "stt": 10,
