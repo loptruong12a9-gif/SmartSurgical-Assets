@@ -1,4 +1,4 @@
-const APP_VERSION = "v1.3 PRO (Cập nhật 16:24:31 11/2/2026)";
+const APP_VERSION = "v1.3 PRO (Cập nhật 12:51:11 12/2/2026)";
 const kitDefinitions = [
     {
         "id": 1,
@@ -6232,7 +6232,8 @@ allKitsData["TRUNG PHẪU 2"] = [
         "stt": 7,
         "name": "KỀM KẸP KIM",
         "code": "BM066R",
-        "quantity": 1
+        "quantity": 1,
+        "note": "Mẻ đầu"
     },
     {
         "stt": 8,
@@ -6275,7 +6276,7 @@ allKitsData["TRUNG PHẪU 2"] = [
         "name": "ALISS NHỎ",
         "code": "HB4302",
         "quantity": 4,
-        "note": "đã thay 4 aliss hebu"
+        "note": "HEBU"
     },
     {
         "stt": 14,
@@ -6347,13 +6348,15 @@ allKitsData["TRUNG PHẪU 2"] = [
         "stt": 24,
         "name": "KÉO MAYO",
         "code": "",
-        "quantity": 1
+        "quantity": 1,
+        "note": "Lệch"
     },
     {
         "stt": 25,
         "name": "QUE THĂM DÒ",
         "code": "BN095",
-        "quantity": 1
+        "quantity": 1,
+        "note": "Ép lẻ"
     },
     {
         "stt": 26,
