@@ -1,4 +1,4 @@
-const APP_VERSION = "v1.3 PRO (Cập nhật 23:49:46 15/2/2026)";
+const APP_VERSION = "v1.3 PRO (Cập nhật 15:23:20 23/2/2026)";
 const kitDefinitions = [
     {
         "id": 1,
@@ -5238,7 +5238,8 @@ allKitsData["THẦN KINH 12"] = [
         "stt": 5,
         "name": "NHÍP KHÔNG MẤU",
         "code": "HB0223",
-        "quantity": 2
+        "quantity": 2,
+        "note": "1"
     },
     {
         "stt": 6,
