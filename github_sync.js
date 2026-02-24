@@ -179,7 +179,7 @@ async function saveDataToGitHub() {
 
     // Optimization: Use an array and join for faster large string building
     const contentLines = [
-        `const APP_VERSION = "v1.7 PRO (${dateStr})";`,
+        `const APP_VERSION = "v2.0 PRO (FINAL) (${dateStr})";`,
         `const kitDefinitions = ${JSON.stringify(kitDefinitions, null, 4)};`,
         `let allKitsData = {};`,
         '',
