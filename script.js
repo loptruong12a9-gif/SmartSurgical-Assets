@@ -769,7 +769,7 @@
     function updateVersionBadge() {
         const badge = document.getElementById('appVersion');
         const footerUpdate = document.getElementById('lastUpdateFooter');
-        const versionStr = typeof APP_VERSION !== 'undefined' ? APP_VERSION : "v1.7 PRO";
+        const versionStr = typeof APP_VERSION !== 'undefined' ? APP_VERSION : "v2.0 PRO (FINAL)";
 
         if (badge) {
             badge.textContent = versionStr;
