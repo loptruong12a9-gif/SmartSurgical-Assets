@@ -169,71 +169,115 @@ async function saveDataToGitHub() {
     // 2. Construct Content
     let modifiedNotes = JSON.parse(localStorage.getItem('kitModifiedNotes') || '{}');
     let modifiedNames = JSON.parse(localStorage.getItem('kitModifiedNames') || '{}');
+    let modifiedSTTs = JSON.parse(localStorage.getItem('kitModifiedSTTs') || '{}');
+    let modifiedCodes = JSON.parse(localStorage.getItem('kitModifiedCodes') || '{}');
+    let modifiedQuantities = JSON.parse(localStorage.getItem('kitModifiedQuantities') || '{}');
 
     // Use global kitDefinitions and allKitsData
     // We assume they are available globally
-
     const dateStr = new Date().toLocaleString('vi-VN');
 
-    // Helper to escape strings in JSON safely
-    // JSON.stringify handles this, but we are building JS code source.
-
-    let fileContent = `const APP_VERSION = "v1.3 PRO (Cập nhật ${dateStr})";\n`;
-    fileContent += `const kitDefinitions = ${JSON.stringify(kitDefinitions, null, 4)};\n\n`;
-    fileContent += `let allKitsData = {};\n\n`;
-
-    fileContent += `function initializeData() {\n`;
-    fileContent += `    kitDefinitions.forEach(def => {\n`;
-    fileContent += `        if (def.count === 1) {\n`;
-    fileContent += `            if (!allKitsData[def.prefix]) allKitsData[def.prefix] = [];\n`;
-    fileContent += `        } else if (def.count > 1) {\n`;
-    fileContent += `            for (let i = 1; i <= def.count; i++) {\n`;
-    fileContent += `                const key = \`\${def.prefix} \${i}\`;\n`;
-    fileContent += `                if (!allKitsData[key]) allKitsData[key] = [];\n`;
-    fileContent += `            }\n`;
-    fileContent += `        }\n`;
-    fileContent += `        if (def.extraSubKits) {\n`;
-    fileContent += `            def.extraSubKits.forEach(subName => {\n`;
-    fileContent += `                if (!allKitsData[subName]) allKitsData[subName] = [];\n`;
-    fileContent += `            });\n`;
-    fileContent += `        }\n`;
-    fileContent += `    });\n`;
-    fileContent += `}\n`;
-    fileContent += `initializeData();\n\n`;
+    // Optimization: Use an array and join for faster large string building
+    const contentLines = [
+        `const APP_VERSION = "v1.7 PRO (${dateStr})";`,
+        `const kitDefinitions = ${JSON.stringify(kitDefinitions, null, 4)};`,
+        `let allKitsData = {};`,
+        '',
+        `function initializeData() {`,
+        `    kitDefinitions.forEach(def => {`,
+        `        if (def.count === 1) {`,
+        `            if (!allKitsData[def.prefix]) allKitsData[def.prefix] = [];`,
+        `        } else if (def.count > 1) {`,
+        `            for (let i = 1; i <= def.count; i++) {`,
+        `                const key = \`\${def.prefix} \${i}\`;`,
+        `                if (!allKitsData[key]) allKitsData[key] = [];`,
+        `            }`,
+        `        }`,
+        `        if (def.extraSubKits) {`,
+        `            def.extraSubKits.forEach(subName => {`,
+        `                if (!allKitsData[subName]) allKitsData[subName] = [];`,
+        `            });`,
+        `        }`,
+        `    });`,
+        `}`,
+        `initializeData();`,
+        ''
+    ];
 
     const keys = Object.keys(allKitsData).sort((a, b) => a.localeCompare(b, 'vi', { numeric: true }));
 
     for (const key of keys) {
-        // Deep copy items to avoid modifying in-memory objects permanently (if we wanted to reset)
-        // But we want to save edits.
+        const rawItems = allKitsData[key];
+        let sttCounter = 1;
+        let totalQty = 0;
+        let hasTotalRow = false;
 
-        let items = allKitsData[key];
-
-        // Merge modifications for this key
-        // We create a new array for export to avoid messing up the runtime state too much (though reloading is best)
-
-        const exportItems = items.map((item, index) => {
-            const newItem = { ...item }; // Shallow copy
-            const noteKey = `${key}-${index}`;
+        // 1. First pass: Apply modifications and find/calculate total
+        const mergedItems = rawItems.map((item, index) => {
+            const newItem = { ...item };
             const nameKey = `${key}-name-${index}`;
+            const codeKey = `${key}-code-${index}`;
+            const qtyKey = `${key}-qty-${index}`;
+            const noteKey = `${key}-note-${index}`;
 
-            if (modifiedNotes[noteKey] !== undefined) {
-                newItem.note = modifiedNotes[noteKey];
+            if (modifiedNames[nameKey] !== undefined) newItem.name = modifiedNames[nameKey];
+            if (modifiedCodes[codeKey] !== undefined) newItem.code = modifiedCodes[codeKey];
+            if (modifiedNotes[noteKey] !== undefined) newItem.note = modifiedNotes[noteKey];
+            if (modifiedQuantities[qtyKey] !== undefined) {
+                const q = modifiedQuantities[qtyKey];
+                newItem.quantity = (q === '-' || q === '' || isNaN(parseInt(q))) ? 0 : parseInt(q);
             }
-            if (modifiedNames[nameKey] !== undefined) {
-                newItem.name = modifiedNames[nameKey];
+
+            const isTotalRow = (newItem.name && newItem.name.toLowerCase().includes("tông cộng")) || newItem.bold;
+            if (isTotalRow) {
+                hasTotalRow = true;
+                newItem.name = "TỔNG CỘNG";
+                newItem.bold = true;
+            } else {
+                totalQty += (newItem.quantity || 0);
             }
             return newItem;
         });
 
-        fileContent += `// Data for ${key}\n`;
-        fileContent += `allKitsData["${key}"] = ${JSON.stringify(exportItems, null, 4)};\n`;
+        // 2. Second pass: Set STT and finalize Totals
+        const finalItems = mergedItems.map((item, index) => {
+            const sttKey = `${key}-stt-${index}`;
+            const isTotalRow = item.bold || (item.name && item.name.toUpperCase().includes("TỔNG CỘNG"));
 
-        // Check for footer on original array
-        if (items.footer) {
-            fileContent += `allKitsData["${key}"].footer = "${items.footer}";\n`;
+            if (isTotalRow) {
+                item.stt = modifiedSTTs[sttKey] !== undefined ? modifiedSTTs[sttKey] : "";
+                item.quantity = totalQty;
+            } else {
+                if (modifiedSTTs[sttKey] !== undefined && modifiedSTTs[sttKey] !== "") {
+                    item.stt = modifiedSTTs[sttKey];
+                    if (!isNaN(parseInt(item.stt))) sttCounter = parseInt(item.stt) + 1;
+                } else {
+                    item.stt = sttCounter++;
+                }
+            }
+            return item;
+        });
+
+        // 3. Add Total row if missing
+        if (!hasTotalRow && rawItems.length > 0) {
+            finalItems.push({
+                stt: "",
+                name: "TỔNG CỘNG",
+                code: "",
+                quantity: totalQty,
+                bold: true
+            });
+        }
+
+        contentLines.push(`// Data for ${key}`);
+        contentLines.push(`allKitsData["${key}"] = ${JSON.stringify(finalItems, null, 2)};`);
+
+        if (rawItems.footer) {
+            contentLines.push(`allKitsData["${key}"].footer = ${JSON.stringify(rawItems.footer)};`);
         }
     }
+
+    const fileContent = contentLines.join('\n');
 
     // Encode
     // handling utf8 strings for base64
