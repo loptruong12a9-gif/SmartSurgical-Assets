@@ -1,4 +1,4 @@
-const CACHE_NAME = 'smart-surgical-v1.7';
+const CACHE_NAME = 'smart-surgical-v2.0';
 const ASSETS_TO_CACHE = [
     './',
     './index.html',
