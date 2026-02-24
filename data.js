@@ -1,4 +1,4 @@
-const APP_VERSION = "v2.0 PRO (FINAL) (00:12:33 25/2/2026)";
+const APP_VERSION = "v2.0 PRO (FINAL) (00:14:18 25/2/2026)";
 const kitDefinitions = [
     {
         "id": 1,
@@ -4498,15 +4498,17 @@ allKitsData["THẦN KINH 5"] = [
   },
   {
     "stt": 12,
-    "name": "KÉO MESK (CÙN)",
+    "name": "KÉO MESK",
     "code": "CÁN VÀNG",
-    "quantity": 1
+    "quantity": 1,
+    "note": "(CÙN)"
   },
   {
     "stt": 13,
-    "name": "KÉO CẮT CHỈ (CÙN)",
+    "name": "KÉO CẮT CHỈ",
     "code": "LAWTON",
-    "quantity": 1
+    "quantity": 1,
+    "note": "(CÙN)"
   },
   {
     "stt": 14,
@@ -4719,7 +4721,7 @@ allKitsData["THẦN KINH 7"] = [
     "name": "KÉO CẮT CHỈ",
     "code": "05-121",
     "quantity": 1,
-    "note": "cùn, mẻ đầu"
+    "note": "(CÙN)"
   },
   {
     "stt": 16,
@@ -4950,15 +4952,17 @@ allKitsData["THẦN KINH 9"] = [
   },
   {
     "stt": 9,
-    "name": "KÉO MESK ( Cùn )",
+    "name": "KÉO MESK",
     "code": "B0271R",
-    "quantity": 1
+    "quantity": 1,
+    "note": "(CÙN)"
   },
   {
     "stt": 10,
-    "name": "KÉO CẮT CHỈ ( Cùn )",
+    "name": "KÉO CẮT CHỈ",
     "code": "ROLAN 04113016",
-    "quantity": 1
+    "quantity": 1,
+    "note": "(CÙN)"
   },
   {
     "stt": 11,
