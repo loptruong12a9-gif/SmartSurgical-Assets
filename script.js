@@ -16,9 +16,14 @@
     const categoryBreakdown = document.getElementById('categoryBreakdown');
     const lastUpdateDateSpan = document.getElementById('lastUpdateDate');
     const exportStatsBtn = document.getElementById('exportStatsBtn');
+    const bulkExportBtn = document.getElementById('bulkExportBtn');
 
     if (exportStatsBtn) {
         exportStatsBtn.addEventListener('click', exportStatisticsToExcel);
+    }
+
+    if (bulkExportBtn) {
+        bulkExportBtn.addEventListener('click', exportAllKitsToExcel);
     }
 
 
@@ -541,6 +546,48 @@
         const workbook = new ExcelJS.Workbook();
         const worksheet = workbook.addWorksheet(kitName.substring(0, 31)); // Excel limit
 
+        setupExcelSheet(worksheet, kitName);
+
+        // Save File
+        workbook.xlsx.writeBuffer().then(buffer => {
+            saveAs(new Blob([buffer]), `${kitName}.xlsx`);
+        });
+    }
+
+    function exportAllKitsToExcel() {
+        const workbook = new ExcelJS.Workbook();
+
+        // Collect all kits names
+        const allKitNames = [];
+        kitDefinitions.forEach(def => {
+            if (def.count === 1) allKitNames.push(def.prefix);
+            else if (def.count > 1) {
+                for (let i = 1; i <= def.count; i++) allKitNames.push(`${def.prefix} ${i}`);
+            }
+            if (def.extraSubKits) def.extraSubKits.forEach(sub => allKitNames.push(sub));
+        });
+
+        // Unique and sort
+        const sortedKits = [...new Set(allKitNames)].sort((a, b) => a.localeCompare(b, 'vi', { numeric: true }));
+
+        sortedKits.forEach(kitName => {
+            const sheetName = kitName.replace(/[\\\/\?\*\[\]]/g, '').substring(0, 31);
+            const worksheet = workbook.addWorksheet(sheetName);
+            setupExcelSheet(worksheet, kitName);
+        });
+
+        // Save File
+        const now = new Date();
+        const dateStr = now.toLocaleDateString('vi-VN').replace(/\//g, '-');
+        workbook.xlsx.writeBuffer().then(buffer => {
+            saveAs(new Blob([buffer]), `TONG_HOP_TAT_CA_BO_DUNG_CU_${dateStr}.xlsx`);
+        });
+    }
+
+    /**
+     * Shared logic to setup an individual Excel sheet for a kit
+     */
+    function setupExcelSheet(worksheet, kitName) {
         // Define Columns
         worksheet.columns = [
             { key: 'stt', width: 8 },
@@ -569,39 +616,27 @@
 
         // 3. Add Data Rows
         const items = getProcessedItems(kitName);
-        items.forEach((item, index) => {
-            const rowData = [
-                item.stt,
-                item.name,
-                item.code || '',
-                item.quantity,
-                item.note || ''
-            ];
-
+        items.forEach((item) => {
+            const rowData = [item.stt, item.name, item.code || '', item.quantity, item.note || ''];
             const row = worksheet.addRow(rowData);
             row.eachCell((cell, colNumber) => {
                 cell.font = { name: 'Times New Roman', size: 12 };
                 cell.border = { top: { style: 'thin' }, left: { style: 'thin' }, bottom: { style: 'thin' }, right: { style: 'thin' } };
-
-                // Alignment
                 if (colNumber === 1 || colNumber === 4) cell.alignment = { horizontal: 'center' };
-
-                // Bold logic
                 if (item.bold) {
                     cell.font.bold = true;
                     cell.fill = { type: 'pattern', pattern: 'solid', fgColor: { argb: 'FFF1F5F9' } };
-                    cell.font.color = { argb: 'FF1E3A8A' }; // Match Navy theme
-                    if (item.name.toUpperCase().includes('TỔNG CỘNG')) {
-                        cell.font.size = 15; // Increased size
-                    }
+                    cell.font.color = { argb: 'FF1E3A8A' };
+                    if (item.name.toUpperCase().includes('TỔNG CỘNG')) cell.font.size = 15;
                 }
             });
         });
 
-        // 4. Footer Row (Optional)
-        const footerDiv = document.getElementById('modalFooter');
-        if (footerDiv && footerDiv.style.display !== 'none' && footerDiv.textContent) {
-            const dynamicFooter = getDynamicFooter(footerDiv.textContent);
+        // 4. Footer Row
+        const itemsArray = allKitsData[kitName];
+        const rawFooter = (itemsArray && itemsArray.footer) ? itemsArray.footer : '';
+        if (rawFooter) {
+            const dynamicFooter = getDynamicFooter(rawFooter);
             const footerRow = worksheet.addRow([dynamicFooter]);
             worksheet.mergeCells(`A${footerRow.number}:E${footerRow.number}`);
             footerRow.getCell(1).font = { name: 'Times New Roman', size: 12, italic: true, bold: true };
@@ -609,11 +644,6 @@
             footerRow.getCell(1).fill = { type: 'pattern', pattern: 'solid', fgColor: { argb: 'FFF8FAFC' } };
             footerRow.getCell(1).border = { top: { style: 'thin' }, left: { style: 'thin' }, bottom: { style: 'thin' }, right: { style: 'thin' } };
         }
-
-        // Save File
-        workbook.xlsx.writeBuffer().then(buffer => {
-            saveAs(new Blob([buffer]), `${kitName}.xlsx`);
-        });
     }
 
 
