@@ -29,7 +29,7 @@
                 <img src="logo.png" alt="Logo" class="app-logo">
                 <h1>SmartSurgical Assets</h1>
                 <p class="subtitle">(Quản Lý Dụng Cụ Phẫu Thuật)</p>
-                <p class="developer-header">Phát triển bởi Tân Nguyễn <span id="appVersion" class="version-tag"></span>
+                <p class="developer-header"><span id="appVersion" class="version-tag"></span>
                 </p>
                 <div class="search-bar">
                     <div class="search-container">
@@ -61,10 +61,13 @@
             </div>
 
             <footer class="app-footer">
-                <p class="dev-info">Phát triển bởi <strong>Tân Nguyễn</strong> • <a href="tel:0367287102"
-                        class="phone-link">036.728.7102</a></p>
-                <p class="quote">"Code một lần - Dùng một đời"</p>
-                <p class="version">Phiên bản cuối: v1.2 PRO (2026)</p>
+                <div class="footer-compact">
+                    <span class="footer-dev"><strong>Tân Nguyễn</strong> • <a
+                            href="tel:0367287102">036.728.7102</a></span>
+                    <span class="footer-divider">|</span>
+                    <span class="footer-version" id="lastUpdateFooter">v1.3 PRO</span>
+                </div>
+                <div class="footer-sub">"Code một lần - Dùng một đời"</div>
             </footer>
         </main>
 
@@ -87,20 +90,22 @@
                             <input type="text" id="itemSearchProps" placeholder="Tìm dụng cụ trong bộ này..."
                                 style="width: 100%; padding: 10px; margin-bottom: 15px; border-radius: 8px; border: 1px solid #ddd; display: none;">
                         </div>
-                        <table class="item-table">
-                            <thead>
-                                <tr>
-                                    <th>STT</th>
-                                    <th>DANH MỤC</th>
-                                    <th>MÃ SỐ</th>
-                                    <th>SỐ LƯỢNG</th>
-                                    <th>GHI CHÚ</th>
-                                </tr>
-                            </thead>
-                            <tbody id="modalItemsList">
-                                <!-- Items will be injected here -->
-                            </tbody>
-                        </table>
+                        <div class="table-container">
+                            <table class="item-table">
+                                <thead>
+                                    <tr>
+                                        <th>STT</th>
+                                        <th>DANH MỤC</th>
+                                        <th>MÃ SỐ</th>
+                                        <th>SỐ LƯỢNG</th>
+                                        <th>GHI CHÚ</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="modalItemsList">
+                                    <!-- Items will be injected here -->
+                                </tbody>
+                            </table>
+                        </div>
                         <div id="emptyState" class="empty-state" style="display: none;">
                             <p>Chưa có dữ liệu cho bộ này.</p>
                         </div>
