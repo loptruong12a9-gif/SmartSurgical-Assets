@@ -584,50 +584,55 @@
         });
     }
 
-    /**
-     * Shared logic to setup an individual Excel sheet for a kit
-     */
     function setupExcelSheet(worksheet, kitName) {
-        // Define Columns
+        const items = getProcessedItems(kitName);
+
         worksheet.columns = [
-            { key: 'stt', width: 8 },
-            { key: 'name', width: 50 },
-            { key: 'code', width: 20 },
-            { key: 'quantity', width: 15 },
-            { key: 'note', width: 35 }
+            { key: 'stt' },
+            { key: 'name' },
+            { key: 'code' },
+            { key: 'quantity' },
+            { key: 'note' }
         ];
 
-        // 1. Kit Title Row
+        // 1. Kit Title Row - Grayscale for printing
         const titleRow = worksheet.addRow([kitName.toUpperCase()]);
         worksheet.mergeCells(`A${titleRow.number}:E${titleRow.number}`);
-        titleRow.getCell(1).font = { name: 'Times New Roman', size: 18, bold: true, color: { argb: 'FFFFFFFF' } };
-        titleRow.getCell(1).fill = { type: 'pattern', pattern: 'solid', fgColor: { argb: 'FF1E40AF' } };
+        titleRow.getCell(1).font = { name: 'Times New Roman', size: 16, bold: true, color: { argb: 'FF000000' } };
+        titleRow.getCell(1).fill = { type: 'pattern', pattern: 'solid', fgColor: { argb: 'FFE2E8F0' } }; // Light Gray
         titleRow.getCell(1).alignment = { vertical: 'middle', horizontal: 'center' };
-        titleRow.height = 35;
+        titleRow.height = 30;
 
-        // 2. Table Headers
+        // 2. Table Headers - Grayscale
         const headerRow = worksheet.addRow(['STT', 'DANH MỤC DỤNG CỤ', 'MÃ SỐ', 'SỐ LƯỢNG', 'GHI CHÚ']);
+        headerRow.height = 20;
         headerRow.eachCell((cell) => {
-            cell.font = { name: 'Times New Roman', size: 12, bold: true, color: { argb: 'FFFFFFFF' } };
-            cell.fill = { type: 'pattern', pattern: 'solid', fgColor: { argb: 'FF1E3A8A' } }; // Deep Navy
+            cell.font = { name: 'Times New Roman', size: 12, bold: true, color: { argb: 'FF000000' } };
+            cell.fill = { type: 'pattern', pattern: 'solid', fgColor: { argb: 'FFCBD5E1' } }; // Medium Gray
             cell.border = { top: { style: 'thin' }, left: { style: 'thin' }, bottom: { style: 'thin' }, right: { style: 'thin' } };
             cell.alignment = { vertical: 'middle', horizontal: 'center' };
         });
 
         // 3. Add Data Rows
-        const items = getProcessedItems(kitName);
-        items.forEach((item) => {
+        items.forEach((item, index) => {
             const rowData = [item.stt, item.name, item.code || '', item.quantity, item.note || ''];
             const row = worksheet.addRow(rowData);
+            row.height = 17.5; // Tighter (approx 15% increase from base 15)
+
             row.eachCell((cell, colNumber) => {
-                cell.font = { name: 'Times New Roman', size: 12 };
+                cell.font = { name: 'Times New Roman', size: 11, bold: true }; // Bold all
                 cell.border = { top: { style: 'thin' }, left: { style: 'thin' }, bottom: { style: 'thin' }, right: { style: 'thin' } };
-                if (colNumber === 1 || colNumber === 4) cell.alignment = { horizontal: 'center' };
+
+                if (colNumber === 1 || colNumber === 4) cell.alignment = { horizontal: 'center', vertical: 'middle' };
+                else cell.alignment = { vertical: 'middle' };
+
+                // ZEBRA STRIPING - Very faint for printing
+                if (index % 2 !== 0) {
+                    cell.fill = { type: 'pattern', pattern: 'solid', fgColor: { argb: 'FFF8FAFC' } };
+                }
+
                 if (item.bold) {
-                    cell.font.bold = true;
-                    cell.fill = { type: 'pattern', pattern: 'solid', fgColor: { argb: 'FFF1F5F9' } };
-                    cell.font.color = { argb: 'FF1E3A8A' };
-                    if (item.name.toUpperCase().includes('TỔNG CỘNG')) cell.font.size = 15;
+                    cell.fill = { type: 'pattern', pattern: 'solid', fgColor: { argb: 'FFDBEAFE' } }; // Light blue/gray for totals
                 }
             });
         });
@@ -639,11 +644,21 @@
             const dynamicFooter = getDynamicFooter(rawFooter);
             const footerRow = worksheet.addRow([dynamicFooter]);
             worksheet.mergeCells(`A${footerRow.number}:E${footerRow.number}`);
-            footerRow.getCell(1).font = { name: 'Times New Roman', size: 12, italic: true, bold: true };
-            footerRow.getCell(1).alignment = { horizontal: 'right' };
-            footerRow.getCell(1).fill = { type: 'pattern', pattern: 'solid', fgColor: { argb: 'FFF8FAFC' } };
-            footerRow.getCell(1).border = { top: { style: 'thin' }, left: { style: 'thin' }, bottom: { style: 'thin' }, right: { style: 'thin' } };
+            footerRow.height = 18;
+            footerRow.getCell(1).font = { name: 'Times New Roman', size: 11, italic: true, bold: true };
+            footerRow.getCell(1).alignment = { horizontal: 'right', vertical: 'middle' };
         }
+
+        // AUTO-FIT COLUMNS - Tightened multiplier
+        worksheet.columns.forEach(column => {
+            let maxColLength = 0;
+            column.eachCell({ includeEmpty: true }, (cell) => {
+                let len = cell.value ? cell.value.toString().length : 0;
+                if (len > maxColLength) maxColLength = len;
+            });
+            // Tight factor: 1.15 instead of 1.35
+            column.width = maxColLength < 6 ? 8 : (maxColLength * 1.15 + 1);
+        });
     }
 
 
