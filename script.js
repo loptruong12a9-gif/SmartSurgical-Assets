@@ -25,9 +25,107 @@
 
     let currentCategory = null;
 
+    // Persistence for all kit fields
+    let modifiedSTTs = JSON.parse(localStorage.getItem('kitModifiedSTTs') || '{}');
+    let modifiedNames = JSON.parse(localStorage.getItem('kitModifiedNames') || '{}');
+    let modifiedCodes = JSON.parse(localStorage.getItem('kitModifiedCodes') || '{}');
+    let modifiedQuantities = JSON.parse(localStorage.getItem('kitModifiedQuantities') || '{}');
+    let modifiedNotes = JSON.parse(localStorage.getItem('kitModifiedNotes') || '{}');
+
     const defaultItems = [
         { name: "Chưa cập nhật", code: "---", quantity: 0, note: "Đang chờ dữ liệu" }
     ];
+
+    /**
+     * Centralized logic to process kit items:
+     * 1. Merges data from allKitsData with localStorage modifications.
+     * 2. Automatically calculates sequential STT (skipping bold/total rows).
+     * 3. Automatically calculates sums for "Tổng cộng" row.
+     */
+    function getProcessedItems(kitName) {
+        let items = (allKitsData[kitName] && allKitsData[kitName].length > 0)
+            ? JSON.parse(JSON.stringify(allKitsData[kitName]))
+            : JSON.parse(JSON.stringify(defaultItems));
+
+        let sttCounter = 1;
+        let totalQty = 0;
+        let hasTotalRow = false;
+
+        // 1. First pass: Apply modifications and find/calculate total
+        items.forEach((item, index) => {
+            const sttKey = `${kitName}-stt-${index}`;
+            const nameKey = `${kitName}-name-${index}`;
+            const codeKey = `${kitName}-code-${index}`;
+            const qtyKey = `${kitName}-qty-${index}`;
+            const noteKey = `${kitName}-note-${index}`;
+
+            if (modifiedNames[nameKey] !== undefined) item.name = modifiedNames[nameKey];
+            if (modifiedCodes[codeKey] !== undefined) item.code = modifiedCodes[codeKey];
+            if (modifiedNotes[noteKey] !== undefined) item.note = modifiedNotes[noteKey];
+            if (modifiedQuantities[qtyKey] !== undefined) {
+                const qVal = modifiedQuantities[qtyKey];
+                item.quantity = (qVal === '-' || qVal === '' || isNaN(parseInt(qVal))) ? 0 : parseInt(qVal);
+            }
+
+            const isTotalRow = (item.name && item.name.toLowerCase().includes("tông cộng")) || item.bold;
+            if (isTotalRow) {
+                hasTotalRow = true;
+                item.name = "TỔNG CỘNG"; // Standardize name to Uppercase
+                item.bold = true;
+                // We'll set the quantity after the loop
+            } else {
+                totalQty += (item.quantity || 0);
+            }
+        });
+
+        // 2. Second pass: Set STT and finalize Totals
+        items.forEach((item, index) => {
+            const sttKey = `${kitName}-stt-${index}`;
+            const isTotalRow = item.bold || (item.name && item.name.toLowerCase().includes("tổng cộng"));
+
+            if (isTotalRow) {
+                item.stt = modifiedSTTs[sttKey] !== undefined ? modifiedSTTs[sttKey] : "";
+                item.quantity = totalQty;
+            } else {
+                if (modifiedSTTs[sttKey] !== undefined && modifiedSTTs[sttKey] !== "") {
+                    item.stt = modifiedSTTs[sttKey];
+                    // If it's a number, update counter to maintain sequence
+                    if (!isNaN(parseInt(item.stt))) sttCounter = parseInt(item.stt) + 1;
+                } else {
+                    item.stt = sttCounter++;
+                }
+            }
+        });
+
+        // 3. Add Total row if missing
+        if (!hasTotalRow && items !== defaultItems) {
+            items.push({
+                stt: "",
+                name: "TỔNG CỘNG",
+                code: "",
+                quantity: totalQty,
+                bold: true
+            });
+        }
+
+        return items;
+    }
+
+    /**
+     * Helper to make footer dynamic if it contains "ĐÃ KIỂM"
+     */
+    function getDynamicFooter(rawFooter) {
+        if (!rawFooter) return "";
+        const now = new Date();
+        const dateStr = `${String(now.getDate()).padStart(2, '0')}/${String(now.getMonth() + 1).padStart(2, '0')}/${now.getFullYear()}`;
+
+        // Match "ĐÃ KIỂM" or "DA KIEM" case-insensitively
+        const footerNorm = rawFooter.toUpperCase();
+        if (footerNorm.includes("ĐÃ KIỂM") || footerNorm.includes("DA KIEM")) {
+            return `ĐÃ KIỂM ${dateStr}`;
+        }
+        return rawFooter;
+    }
 
     function renderCategoryGrid(filterText = '') {
         kitGrid.innerHTML = '';
@@ -107,21 +205,18 @@
         const damagedItems = [];
 
         kitNames.forEach(key => {
-            const items = (allKitsData[key] && allKitsData[key].length > 0) ? allKitsData[key] : defaultItems;
+            const items = getProcessedItems(key);
 
-            items.forEach((item, index) => {
-                // Skip total rows
-                if (item.name && item.name.toLowerCase().includes("tổng cộng")) return;
+            items.forEach((item) => {
+                // Skip total rows for damage tracking/summing (the loop will count them otherwise)
+                if (item.bold) return;
 
-                // Use modified notes/names from localStorage if they exist
-                const noteKey = `${key}-${index}`;
-                const nameKey = `${key}-name-${index}`;
+                const currentName = item.name;
+                const currentCode = item.code || '';
+                const currentNote = item.note || '';
+                const currentQtyValue = item.quantity || 0;
 
-                const currentNote = modifiedNotes[noteKey] !== undefined ? modifiedNotes[noteKey] : (item.note || '');
-                const currentName = modifiedNames[nameKey] !== undefined ? modifiedNames[nameKey] : item.name;
-                const currentCode = (item.code || "");
-
-                totalPieces += (item.quantity || 0);
+                totalPieces += currentQtyValue;
 
                 // Identify damaged/broken items using whole-word matching
                 const damageKeywords = ["hư", "gãy", "cùn", "mẻ", "hỏng", "thiếu", "rỉ", "set", "hư hỏng", "hhư", "mòn", "rỉ sét"];
@@ -134,7 +229,7 @@
                     damagedItems.push({
                         kit: key,
                         name: currentName,
-                        quantity: item.quantity,
+                        quantity: currentQtyValue,
                         note: currentNote
                     });
                 }
@@ -238,7 +333,7 @@
         const header1Row = worksheet.addRow(['STT', 'LOẠI BỘ DỤNG CỤ', 'MÃ TIỀN TỐ', 'SỐ LƯỢNG BỘ CON']);
         header1Row.eachCell((cell) => {
             cell.font = { name: 'Times New Roman', size: 12, bold: true, color: { argb: 'FFFFFFFF' } };
-            cell.fill = { type: 'pattern', pattern: 'solid', fgColor: { argb: 'FF1E40AF' } };
+            cell.fill = { type: 'pattern', pattern: 'solid', fgColor: { argb: 'FF1E3A8A' } }; // Use Deep Navy
             cell.border = { top: { style: 'thin' }, left: { style: 'thin' }, bottom: { style: 'thin' }, right: { style: 'thin' } };
             cell.alignment = { vertical: 'middle', horizontal: 'center' };
         });
@@ -286,19 +381,21 @@
 
         const damagedItems = [];
         kitNames.forEach(key => {
-            const items = (allKitsData[key] && allKitsData[key].length > 0) ? allKitsData[key] : defaultItems;
-            items.forEach((item, index) => {
-                if (item.name && item.name.toLowerCase().includes("tổng cộng")) return;
-                const noteKey = `${key}-${index}`;
-                const nameKey = `${key}-name-${index}`;
-                const currentNote = modifiedNotes[noteKey] !== undefined ? modifiedNotes[noteKey] : (item.note || '');
-                const currentName = modifiedNames[nameKey] !== undefined ? modifiedNames[nameKey] : item.name;
+            const items = getProcessedItems(key);
+            items.forEach((item) => {
+                if (item.bold) return;
+
+                const currentName = item.name;
+                const currentCode = item.code || '';
+                const currentNote = item.note || '';
+                const currentQty = item.quantity || 0;
+
                 const damageKeywords = ["hư", "gãy", "cùn", "mẻ", "hỏng", "thiếu", "rỉ", "set", "hư hỏng", "hhư", "mòn", "rỉ sét"];
                 const boundary = "(^|[^a-z0-9àáảãạâầấẩẫậăằắẳẵặèéẻẽẹêềếểễệìíỉĩịòóỏõọôồốổỗộơờớởỡợùúủũụưừứửữựỳýỷỹỵ])";
                 const endBoundary = "($|[^a-z0-9àáảãạâầấẩẫậăằắẳẵặèéẻẽẹêềếểễệìíỉĩịòóỏõọôồốổỗộơờớởỡợùúủũụưừứửữựỳýỷỹỵ])";
                 const damageRegex = new RegExp(boundary + "(" + damageKeywords.join('|') + ")" + endBoundary, 'i');
-                if (damageRegex.test(currentNote) || damageRegex.test(currentName)) {
-                    damagedItems.push({ kit: key, name: `${currentName} (${item.quantity})`, note: currentNote });
+                if (damageRegex.test(currentNote) || damageRegex.test(currentName) || damageRegex.test(currentCode)) {
+                    damagedItems.push({ kit: key, name: `${currentName} (${currentQty})`, note: currentNote });
                 }
             });
         });
@@ -437,9 +534,7 @@
         renderTable(kitName);
     }
 
-    // Persistence for modified notes AND names
-    let modifiedNotes = JSON.parse(localStorage.getItem('kitModifiedNotes') || '{}');
-    let modifiedNames = JSON.parse(localStorage.getItem('kitModifiedNames') || '{}');
+
 
     // Export Functionality
     function exportToExcel(kitName) {
@@ -466,29 +561,21 @@
         // 2. Table Headers
         const headerRow = worksheet.addRow(['STT', 'DANH MỤC DỤNG CỤ', 'MÃ SỐ', 'SỐ LƯỢNG', 'GHI CHÚ']);
         headerRow.eachCell((cell) => {
-            cell.font = { name: 'Times New Roman', size: 12, bold: true };
-            cell.fill = { type: 'pattern', pattern: 'solid', fgColor: { argb: 'FFE2E8F0' } };
+            cell.font = { name: 'Times New Roman', size: 12, bold: true, color: { argb: 'FFFFFFFF' } };
+            cell.fill = { type: 'pattern', pattern: 'solid', fgColor: { argb: 'FF1E3A8A' } }; // Deep Navy
             cell.border = { top: { style: 'thin' }, left: { style: 'thin' }, bottom: { style: 'thin' }, right: { style: 'thin' } };
             cell.alignment = { vertical: 'middle', horizontal: 'center' };
         });
 
         // 3. Add Data Rows
-        const items = allKitsData[kitName] && allKitsData[kitName].length > 0 ? allKitsData[kitName] : defaultItems;
+        const items = getProcessedItems(kitName);
         items.forEach((item, index) => {
-            const sttDisplay = item.stt !== undefined ? item.stt : (item.name.toLowerCase().includes('tổng cộng') ? '' : (index + 1));
-
-            const noteKey = `${kitName}-${index}`;
-            const currentNote = modifiedNotes[noteKey] !== undefined ? modifiedNotes[noteKey] : (item.note || '');
-
-            const nameKey = `${kitName}-name-${index}`;
-            const currentName = modifiedNames[nameKey] !== undefined ? modifiedNames[nameKey] : item.name;
-
             const rowData = [
-                sttDisplay,
-                currentName,
+                item.stt,
+                item.name,
                 item.code || '',
-                item.quantity > 0 ? item.quantity : (item.quantity === 0 ? '0' : '-'),
-                currentNote || ''
+                item.quantity,
+                item.note || ''
             ];
 
             const row = worksheet.addRow(rowData);
@@ -500,11 +587,12 @@
                 if (colNumber === 1 || colNumber === 4) cell.alignment = { horizontal: 'center' };
 
                 // Bold logic
-                if (item.bold || currentName.toLowerCase().includes('tổng cộng')) {
+                if (item.bold) {
                     cell.font.bold = true;
                     cell.fill = { type: 'pattern', pattern: 'solid', fgColor: { argb: 'FFF1F5F9' } };
-                    if (currentName.toLowerCase().includes('tổng cộng')) {
-                        cell.font.size = 14;
+                    cell.font.color = { argb: 'FF1E3A8A' }; // Match Navy theme
+                    if (item.name.toUpperCase().includes('TỔNG CỘNG')) {
+                        cell.font.size = 15; // Increased size
                     }
                 }
             });
@@ -513,7 +601,8 @@
         // 4. Footer Row (Optional)
         const footerDiv = document.getElementById('modalFooter');
         if (footerDiv && footerDiv.style.display !== 'none' && footerDiv.textContent) {
-            const footerRow = worksheet.addRow([footerDiv.textContent]);
+            const dynamicFooter = getDynamicFooter(footerDiv.textContent);
+            const footerRow = worksheet.addRow([dynamicFooter]);
             worksheet.mergeCells(`A${footerRow.number}:E${footerRow.number}`);
             footerRow.getCell(1).font = { name: 'Times New Roman', size: 12, italic: true, bold: true };
             footerRow.getCell(1).alignment = { horizontal: 'right' };
@@ -527,97 +616,73 @@
         });
     }
 
+
+
     function renderTable(kitName) {
         modalItemsList.innerHTML = '';
-
-        const items = allKitsData[kitName] && allKitsData[kitName].length > 0 ? allKitsData[kitName] : defaultItems;
+        const items = getProcessedItems(kitName);
 
         items.forEach((item, index) => {
             const row = document.createElement('tr');
             if (item.bold) {
-                row.style.fontWeight = "bold";
-                row.style.backgroundColor = "#e2e8f0";
+                row.classList.add('total-row');
             }
 
-            const sttDisplay = item.stt !== undefined ? item.stt : (item.name.toLowerCase().includes('tổng cộng') ? '' : (index + 1));
-
-            // Handle editable note logic
-            const noteKey = `${kitName}-${index}`;
-            const currentNote = modifiedNotes[noteKey] !== undefined ? modifiedNotes[noteKey] : (item.note || '');
-            const isNoteEdited = modifiedNotes[noteKey] !== undefined && modifiedNotes[noteKey] !== (item.note || '');
-
-            // Handle editable name logic
+            const sttKey = `${kitName}-stt-${index}`;
             const nameKey = `${kitName}-name-${index}`;
-            const currentName = modifiedNames[nameKey] !== undefined ? modifiedNames[nameKey] : item.name;
-            const isNameEdited = modifiedNames[nameKey] !== undefined && modifiedNames[nameKey] !== item.name;
+            const codeKey = `${kitName}-code-${index}`;
+            const qtyKey = `${kitName}-qty-${index}`;
+            const noteKey = `${kitName}-note-${index}`;
+
+            const origSource = (allKitsData[kitName] && allKitsData[kitName][index]) ? allKitsData[kitName][index] : { stt: '', name: '', code: '', quantity: 0 };
+            const defQty = origSource.quantity > 0 ? origSource.quantity : (origSource.quantity === 0 ? '0' : '-');
 
             row.innerHTML = `
-                <td>${sttDisplay}</td>
-                <td contenteditable="${!item.bold}" 
-                    class="name-cell ${isNameEdited ? 'note-edited' : ''}" 
-                    data-key="${nameKey}"
-                    data-original="${item.name}">${currentName}</td>
-                <td>${item.code || ''}</td>
-                <td>${item.quantity > 0 ? item.quantity : (item.quantity === 0 ? '0' : '-')}</td>
-                <td contenteditable="${!item.bold}" 
-                    class="note-cell ${isNoteEdited ? 'note-edited' : ''}" 
-                    data-key="${noteKey}"
-                    data-original="${item.note || ''}">${currentNote}</td>
+                <td contenteditable="${!item.bold}" class="edit-cell ${modifiedSTTs[sttKey] ? 'note-edited' : ''}" data-key="${sttKey}" data-type="stt" data-original="${origSource.stt || ''}">${item.stt}</td>
+                <td contenteditable="${!item.bold}" class="edit-cell ${modifiedNames[nameKey] ? 'note-edited' : ''}" data-key="${nameKey}" data-type="name" data-original="${origSource.name || ''}">${item.name}</td>
+                <td contenteditable="${!item.bold}" class="edit-cell ${modifiedCodes[codeKey] ? 'note-edited' : ''}" data-key="${codeKey}" data-type="code" data-original="${origSource.code || ''}">${item.code || ''}</td>
+                <td contenteditable="${!item.bold}" class="edit-cell ${modifiedQuantities[qtyKey] ? 'note-edited' : ''}" data-key="${qtyKey}" data-type="qty" data-original="${defQty}">${item.quantity}</td>
+                <td contenteditable="${!item.bold}" class="edit-cell ${modifiedNotes[noteKey] ? 'note-edited' : ''}" data-key="${noteKey}" data-type="note" data-original="${origSource.note || ''}">${item.note || ''}</td>
             `;
             modalItemsList.appendChild(row);
         });
 
-        // Add listeners for the newly created editable cells
-        // Listeners for Notes
-        document.querySelectorAll('.note-cell').forEach(cell => {
-            cell.addEventListener('blur', (e) => {
-                const key = e.target.getAttribute('data-key');
-                const originalValue = e.target.getAttribute('data-original');
-                const newValue = e.target.innerText.trim();
-
-                if (newValue !== originalValue) {
-                    modifiedNotes[key] = newValue;
-                    e.target.classList.add('note-edited');
-                } else {
-                    delete modifiedNotes[key];
-                    e.target.classList.remove('note-edited');
-                }
-                localStorage.setItem('kitModifiedNotes', JSON.stringify(modifiedNotes));
-            });
-
-            cell.addEventListener('keydown', (e) => {
-                if (e.key === 'Enter') {
-                    e.preventDefault();
-                    e.target.blur();
-                }
-            });
-        });
-
-        // Listeners for Names
-        document.querySelectorAll('.name-cell').forEach(cell => {
-            // Highlight on click logic
+        // Add Listeners for all editable cells
+        document.querySelectorAll('.edit-cell').forEach(cell => {
             cell.addEventListener('click', (e) => {
-                // Toggle highlight class
-                if (e.target.classList.contains('highlight-bold')) {
-                    e.target.classList.remove('highlight-bold');
-                } else {
-                    e.target.classList.add('highlight-bold');
-                }
+                if (!e.target.innerText.trim()) e.target.focus();
             });
 
             cell.addEventListener('blur', (e) => {
                 const key = e.target.getAttribute('data-key');
-                const originalValue = e.target.getAttribute('data-original');
+                const type = e.target.getAttribute('data-type');
+                const originalValue = String(e.target.getAttribute('data-original')).trim();
                 const newValue = e.target.innerText.trim();
 
+                let store;
+                let storageKey;
+
+                switch (type) {
+                    case 'stt': store = modifiedSTTs; storageKey = 'kitModifiedSTTs'; break;
+                    case 'name': store = modifiedNames; storageKey = 'kitModifiedNames'; break;
+                    case 'code': store = modifiedCodes; storageKey = 'kitModifiedCodes'; break;
+                    case 'qty': store = modifiedQuantities; storageKey = 'kitModifiedQuantities'; break;
+                    case 'note': store = modifiedNotes; storageKey = 'kitModifiedNotes'; break;
+                }
+
                 if (newValue !== originalValue) {
-                    modifiedNames[key] = newValue;
+                    store[key] = newValue;
                     e.target.classList.add('note-edited');
                 } else {
-                    delete modifiedNames[key];
+                    delete store[key];
                     e.target.classList.remove('note-edited');
                 }
-                localStorage.setItem('kitModifiedNames', JSON.stringify(modifiedNames));
+                localStorage.setItem(storageKey, JSON.stringify(store));
+
+                // Auto-refresh automation if needed
+                if (type === 'qty' || type === 'name' || type === 'stt') {
+                    renderTable(kitName);
+                }
             });
 
             cell.addEventListener('keydown', (e) => {
@@ -631,9 +696,10 @@
         const footerDiv = document.getElementById('modalFooter');
         if (footerDiv) {
             const itemsArray = allKitsData[kitName];
-            const footerText = (itemsArray && itemsArray.footer) ? itemsArray.footer : '';
-            footerDiv.textContent = footerText;
-            footerDiv.style.display = footerText ? 'block' : 'none';
+            const rawFooter = (itemsArray && itemsArray.footer) ? itemsArray.footer : '';
+            const dynamicFooter = getDynamicFooter(rawFooter);
+            footerDiv.textContent = dynamicFooter;
+            footerDiv.style.display = dynamicFooter ? 'block' : 'none';
         }
     }
 
@@ -702,14 +768,21 @@
 
     function updateVersionBadge() {
         const badge = document.getElementById('appVersion');
+        const footerUpdate = document.getElementById('lastUpdateFooter');
+        const versionStr = typeof APP_VERSION !== 'undefined' ? APP_VERSION : "v1.7 PRO";
+
         if (badge) {
-            badge.textContent = typeof APP_VERSION !== 'undefined' ? APP_VERSION : "v1.3 PRO";
+            badge.textContent = versionStr;
             badge.addEventListener('click', () => {
                 const orig = badge.textContent;
-                badge.textContent = "✓ Đã cập nhật";
+                badge.textContent = "✓ Sẵn sàng";
                 badge.style.background = "#22c55e";
                 setTimeout(() => { badge.textContent = orig; badge.style.background = ""; }, 2000);
             });
+        }
+
+        if (footerUpdate) {
+            footerUpdate.textContent = versionStr;
         }
     }
 });
