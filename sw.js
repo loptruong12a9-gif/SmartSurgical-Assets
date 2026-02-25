@@ -1,10 +1,12 @@
-const CACHE_NAME = 'smart-surgical-v2.0';
+const CACHE_NAME = 'smart-surgical-v3.0-prod';
 const ASSETS_TO_CACHE = [
     './',
     './index.html',
     './style.css',
     './script.js',
+    './data.js',
     './github_sync.js',
+    './logo.png',
     './manifest.json',
     'https://cdnjs.cloudflare.com/ajax/libs/exceljs/4.3.0/exceljs.min.js',
     'https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js'
@@ -18,7 +20,6 @@ self.addEventListener('install', (event) => {
 
     event.waitUntil(
         caches.open(CACHE_NAME).then((cache) => {
-            console.log('Opened cache');
             return cache.addAll(ASSETS_TO_CACHE);
         })
     );
@@ -34,7 +35,6 @@ self.addEventListener('activate', (event) => {
             return Promise.all(
                 cacheNames.map((cacheName) => {
                     if (cacheName !== CACHE_NAME) {
-                        console.log('Deleting old cache:', cacheName);
                         return caches.delete(cacheName);
                     }
                 })
