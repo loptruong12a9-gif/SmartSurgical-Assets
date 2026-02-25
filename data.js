@@ -1,4 +1,4 @@
-const APP_VERSION = "v2.0 PRO (FINAL) (15:04:16 25/2/2026)";
+const APP_VERSION = "v2.0 PRO (FINAL) (18:56:06 25/2/2026)";
 const kitDefinitions = [
     {
         "id": 1,
@@ -187,6 +187,38 @@ const kitDefinitions = [
         "count": 1,
         "icon": "fa-lungs",
         "color": "icon-blue"
+    },
+    {
+        "id": 22,
+        "baseName": "BỘ THÁO VIS ĐA NĂNG",
+        "prefix": "BỘ THÁO VIS ĐA NĂNG",
+        "count": 1,
+        "icon": "fa-screwdriver-wrench",
+        "color": "icon-blue"
+    },
+    {
+        "id": 23,
+        "baseName": "BỘ DỤNG CỤ NS DÂY CHẰNG",
+        "prefix": "NS DÂY CHẰNG",
+        "count": 0,
+        "icon": "fa-joint",
+        "color": "icon-teal",
+        "extraSubKits": [
+            "BỘ LẤY GÂN - DÂY CHẰNG",
+            "BỘ NS LẤY GÂN MÁC"
+        ]
+    },
+    {
+        "id": 24,
+        "baseName": "DỤNG CỤ LẺ",
+        "prefix": "DỤNG CỤ LẺ",
+        "count": 0,
+        "icon": "fa-toolbox",
+        "color": "icon-orange",
+        "extraSubKits": [
+            "DỤNG CỤ MỔ HỞ LẺ",
+            "DỤNG CỤ NỘI SOI LẺ"
+        ]
     }
 ];
 let allKitsData = {};
@@ -221,7 +253,7 @@ allKitsData["BẮT CON 1"] = [
   {
     "stt": 2,
     "name": "FIXANG",
-    "code": "BF432R+431R<br>+436R",
+    "code": "BF432R+431R +436R",
     "quantity": 4
   },
   {
@@ -292,7 +324,7 @@ allKitsData["BẮT CON 1"] = [
   },
   {
     "stt": 13,
-    "name": "PARAPOP TRUNG",
+    "name": "PARAPOP",
     "code": "BT021R",
     "quantity": 2
   },
@@ -317,7 +349,7 @@ allKitsData["BẮT CON 2"] = [
     "stt": 1,
     "name": "KELLY TRUNG",
     "code": "BH165R",
-    "quantity": 6,
+    "quantity": 4,
     "note": "6"
   },
   {
@@ -400,7 +432,7 @@ allKitsData["BẮT CON 2"] = [
   },
   {
     "stt": 15,
-    "name": "PARAPOP TRUNG",
+    "name": "PARAPOP",
     "code": "BT021R",
     "quantity": 2
   },
@@ -414,7 +446,7 @@ allKitsData["BẮT CON 2"] = [
     "stt": "",
     "name": "TỔNG CỘNG",
     "code": "",
-    "quantity": 28,
+    "quantity": 26,
     "bold": true
   }
 ];
@@ -909,6 +941,149 @@ allKitsData["BỘ LẤY DÂY CHẰNG"] = [
   }
 ];
 allKitsData["BỘ LẤY DÂY CHẰNG"].footer = "ĐÃ KIỂM";
+// Data for BỘ LẤY GÂN - DÂY CHẰNG
+allKitsData["BỘ LẤY GÂN - DÂY CHẰNG"] = [
+  {
+    "stt": 1,
+    "name": "MÓC CHỈ CÁN VÀNG",
+    "code": "C6105",
+    "quantity": 1
+  },
+  {
+    "stt": 2,
+    "name": "MŨI KHOAN 3 CẠNH",
+    "code": "128",
+    "quantity": 1
+  },
+  {
+    "stt": 3,
+    "name": "MŨI KHOAN 4 CẠNH 7MM",
+    "code": "",
+    "quantity": 1
+  },
+  {
+    "stt": 4,
+    "name": "MŨI KHOAN 4 CẠNH 8MM",
+    "code": "",
+    "quantity": 1
+  },
+  {
+    "stt": 5,
+    "name": "MŨI KHOAN 4 CẠNH 9MM",
+    "code": "",
+    "quantity": 1
+  },
+  {
+    "stt": 6,
+    "name": "MÀI SỤN 9MM",
+    "code": "120374",
+    "quantity": 1
+  },
+  {
+    "stt": 7,
+    "name": "MÓC LẤY GÂN NHỎ",
+    "code": "",
+    "quantity": 6
+  },
+  {
+    "stt": 8,
+    "name": "TAY CẦM MÓC",
+    "code": "",
+    "quantity": 1
+  },
+  {
+    "stt": 9,
+    "name": "MÓC LẤY GÂN TRUNG CÁN XANH",
+    "code": "",
+    "quantity": 1
+  },
+  {
+    "stt": 10,
+    "name": "MÓC LẤY GÂN LỚN",
+    "code": "",
+    "quantity": 1
+  },
+  {
+    "stt": 11,
+    "name": "CÒ THẲNG",
+    "code": "",
+    "quantity": 1
+  },
+  {
+    "stt": 12,
+    "name": "GẮP THẲNG",
+    "code": "",
+    "quantity": 1
+  },
+  {
+    "stt": 13,
+    "name": "GẮP TRÁI",
+    "code": "",
+    "quantity": 1
+  },
+  {
+    "stt": 14,
+    "name": "GẮP PHẢI",
+    "code": "",
+    "quantity": 1
+  },
+  {
+    "stt": 15,
+    "name": "THƯỚC ĐO",
+    "code": "20256",
+    "quantity": 1
+  },
+  {
+    "stt": 16,
+    "name": "ĐẦU VIS BẮT NEO",
+    "code": "",
+    "quantity": 1
+  },
+  {
+    "stt": 17,
+    "name": "CÁN VIS BẮT NEO",
+    "code": "",
+    "quantity": 1
+  },
+  {
+    "stt": 18,
+    "name": "CÂY DẪN ĐƯỜNG",
+    "code": "1112",
+    "quantity": 1
+  },
+  {
+    "stt": 19,
+    "name": "CÂY THĂM DÒ",
+    "code": "20856",
+    "quantity": 1
+  },
+  {
+    "stt": 20,
+    "name": "KHUNG NHẮM NỘI SOI",
+    "code": "8731",
+    "quantity": 1
+  },
+  {
+    "stt": 21,
+    "name": "ỐNG DẪN ĐƯỜNG ĐẾ VÀNG",
+    "code": "8719",
+    "quantity": 1
+  },
+  {
+    "stt": 22,
+    "name": "ỐNG DẪN ĐƯỜNG ĐẾ TRẮNG",
+    "code": "8728",
+    "quantity": 1
+  },
+  {
+    "stt": "",
+    "name": "TỔNG CỘNG",
+    "code": "",
+    "quantity": 27,
+    "bold": true
+  }
+];
+allKitsData["BỘ LẤY GÂN - DÂY CHẰNG"].footer = "ĐÃ KIỂM 02/2026";
 // Data for BỘ NẠO VA
 allKitsData["BỘ NẠO VA"] = [
   {
@@ -1051,6 +1226,41 @@ allKitsData["BỘ NONG NIỆU ĐẠO"] = [
   }
 ];
 allKitsData["BỘ NONG NIỆU ĐẠO"].footer = "ĐÃ KIỂM";
+// Data for BỘ NS LẤY GÂN MÁC
+allKitsData["BỘ NS LẤY GÂN MÁC"] = [
+  {
+    "stt": 1,
+    "name": "CÂY DẪN ĐƯỜNG LẤY GÂN",
+    "code": "L.166460",
+    "quantity": 1
+  },
+  {
+    "stt": 2,
+    "name": "CÂY TẠO KHOANG",
+    "code": "TS8850",
+    "quantity": 1
+  },
+  {
+    "stt": 3,
+    "name": "MŨI KHOAN 1 RĂNG",
+    "code": "C8675",
+    "quantity": 1
+  },
+  {
+    "stt": 4,
+    "name": "MŨI KHOAN CÓ RĂNG",
+    "code": "Không mã",
+    "quantity": 1
+  },
+  {
+    "stt": "",
+    "name": "TỔNG CỘNG",
+    "code": "",
+    "quantity": 4,
+    "bold": true
+  }
+];
+allKitsData["BỘ NS LẤY GÂN MÁC"].footer = "ĐÃ KIỂM 02/2026";
 // Data for BỘ TAI
 allKitsData["BỘ TAI"] = [
   {
@@ -1122,6 +1332,318 @@ allKitsData["BỘ TAI"] = [
   }
 ];
 allKitsData["BỘ TAI"].footer = "ĐÃ KIỂM";
+// Data for BỘ THÁO VIS ĐA NĂNG
+allKitsData["BỘ THÁO VIS ĐA NĂNG"] = [
+  {
+    "stt": 1,
+    "name": "Mũi đầu vuông 1.1mm",
+    "code": "",
+    "quantity": 1
+  },
+  {
+    "stt": 2,
+    "name": "Mũi đầu vuông 1.2mm",
+    "code": "",
+    "quantity": 1
+  },
+  {
+    "stt": 3,
+    "name": "Mũi khoan rỗng 1.7mm",
+    "code": "",
+    "quantity": 1
+  },
+  {
+    "stt": 4,
+    "name": "Mũi khoan rỗng 2.0mm",
+    "code": "",
+    "quantity": 1
+  },
+  {
+    "stt": 5,
+    "name": "Mũi khoan rỗng 2.7mm",
+    "code": "",
+    "quantity": 1
+  },
+  {
+    "stt": 6,
+    "name": "Mũi khoan rỗng 4.0mm",
+    "code": "",
+    "quantity": 1
+  },
+  {
+    "stt": 7,
+    "name": "Mũi khoan rỗng 5.5mm",
+    "code": "",
+    "quantity": 1,
+    "note": "Gãy đầu"
+  },
+  {
+    "stt": 8,
+    "name": "Mũi khoan rỗng 6.5mm",
+    "code": "",
+    "quantity": 1
+  },
+  {
+    "stt": 9,
+    "name": "Mũi khoan rỗng 8.5mm",
+    "code": "",
+    "quantity": 1
+  },
+  {
+    "stt": 10,
+    "name": "Mũi hoa mai T7",
+    "code": "",
+    "quantity": 1
+  },
+  {
+    "stt": 11,
+    "name": "Mũi hoa mai T8",
+    "code": "",
+    "quantity": 1
+  },
+  {
+    "stt": 12,
+    "name": "Mũi hoa mai T10",
+    "code": "",
+    "quantity": 1
+  },
+  {
+    "stt": 13,
+    "name": "Mũi hoa mai T15",
+    "code": "",
+    "quantity": 1
+  },
+  {
+    "stt": 14,
+    "name": "Mũi hoa mai T18",
+    "code": "",
+    "quantity": 1
+  },
+  {
+    "stt": 15,
+    "name": "Mũi hoa mai T20",
+    "code": "",
+    "quantity": 1
+  },
+  {
+    "stt": 16,
+    "name": "Mũi hoa mai T27",
+    "code": "",
+    "quantity": 1
+  },
+  {
+    "stt": 17,
+    "name": "Mũi hoa mai T30",
+    "code": "",
+    "quantity": 1
+  },
+  {
+    "stt": 18,
+    "name": "Mũi tam giác",
+    "code": "",
+    "quantity": 1
+  },
+  {
+    "stt": 19,
+    "name": "Mũi lục giác SW1.5",
+    "code": "",
+    "quantity": 2
+  },
+  {
+    "stt": 20,
+    "name": "Mũi lục giác SW2.0",
+    "code": "",
+    "quantity": 1
+  },
+  {
+    "stt": 21,
+    "name": "Mũi lục giác SW2.5",
+    "code": "",
+    "quantity": 1
+  },
+  {
+    "stt": 22,
+    "name": "Mũi lục giác SW3.0",
+    "code": "",
+    "quantity": 1
+  },
+  {
+    "stt": 23,
+    "name": "Mũi lục giác SW3.5",
+    "code": "",
+    "quantity": 1
+  },
+  {
+    "stt": 24,
+    "name": "Mũi lục giác SW4.0",
+    "code": "",
+    "quantity": 1
+  },
+  {
+    "stt": 25,
+    "name": "Mũi lục giác SW4.5",
+    "code": "",
+    "quantity": 1
+  },
+  {
+    "stt": 26,
+    "name": "Mũi lục giác SW5.0",
+    "code": "",
+    "quantity": 1
+  },
+  {
+    "stt": 27,
+    "name": "Mũi lục giác SW5.5",
+    "code": "",
+    "quantity": 1
+  },
+  {
+    "stt": 28,
+    "name": "Mũi khoét lấy vít",
+    "code": "",
+    "quantity": 1
+  },
+  {
+    "stt": 29,
+    "name": "Mũi khoét lấy vít 2.5*0.5",
+    "code": "",
+    "quantity": 1
+  },
+  {
+    "stt": 30,
+    "name": "Mũi khoét lấy vít 2.5",
+    "code": "",
+    "quantity": 1
+  },
+  {
+    "stt": 31,
+    "name": "Mũi khoét lấy vít 3.5",
+    "code": "",
+    "quantity": 1
+  },
+  {
+    "stt": 32,
+    "name": "Mũi khoét lấy vít 4.0",
+    "code": "",
+    "quantity": 1
+  },
+  {
+    "stt": 33,
+    "name": "Mũi khoét lấy vít 4.5",
+    "code": "",
+    "quantity": 1
+  },
+  {
+    "stt": 34,
+    "name": "Đầu ren trong Ø 3.5",
+    "code": "",
+    "quantity": 1
+  },
+  {
+    "stt": 35,
+    "name": "Đầu ren trong Ø 4.5",
+    "code": "",
+    "quantity": 1
+  },
+  {
+    "stt": 36,
+    "name": "Đầu ren trong Ø 6.5",
+    "code": "",
+    "quantity": 1
+  },
+  {
+    "stt": 37,
+    "name": "Đầu vít dẹp 3.0",
+    "code": "",
+    "quantity": 1
+  },
+  {
+    "stt": 38,
+    "name": "Đầu vít dẹp 6.0",
+    "code": "",
+    "quantity": 1
+  },
+  {
+    "stt": 39,
+    "name": "Đầu chữ thập nhỏ",
+    "code": "",
+    "quantity": 1
+  },
+  {
+    "stt": 40,
+    "name": "Đầu chữ thập lớn",
+    "code": "",
+    "quantity": 1
+  },
+  {
+    "stt": 41,
+    "name": "Mũi khoan dẫn",
+    "code": "",
+    "quantity": 3
+  },
+  {
+    "stt": 42,
+    "name": "Đục thẳng",
+    "code": "",
+    "quantity": 1
+  },
+  {
+    "stt": 43,
+    "name": "Kìm gắp đinh",
+    "code": "",
+    "quantity": 1
+  },
+  {
+    "stt": 44,
+    "name": "Cây kéo vít cố định",
+    "code": "",
+    "quantity": 1
+  },
+  {
+    "stt": 45,
+    "name": "Dụng cụ giữ vít gãy",
+    "code": "",
+    "quantity": 2
+  },
+  {
+    "stt": 46,
+    "name": "Tay chữ T",
+    "code": "",
+    "quantity": 1
+  },
+  {
+    "stt": 47,
+    "name": "Tay thẳng",
+    "code": "",
+    "quantity": 1
+  },
+  {
+    "stt": 48,
+    "name": "Móc nhọn",
+    "code": "",
+    "quantity": 1
+  },
+  {
+    "stt": 49,
+    "name": "Dùi lòng tủy",
+    "code": "",
+    "quantity": 1
+  },
+  {
+    "stt": 50,
+    "name": "Hộp đựng",
+    "code": "",
+    "quantity": 1
+  },
+  {
+    "stt": "",
+    "name": "TỔNG CỘNG",
+    "code": "",
+    "quantity": 54,
+    "bold": true
+  }
+];
+allKitsData["BỘ THÁO VIS ĐA NĂNG"].footer = "ĐÃ KIỂM";
 // Data for CAPPA 1
 allKitsData["CAPPA 1"] = [
   {
@@ -1274,10 +1796,9 @@ allKitsData["CTC 1"] = [
   },
   {
     "stt": 2,
-    "name": "VAN SẢN( Bỏ ra lẻ)",
+    "name": "VAN SẢN",
     "code": "EL638",
-    "quantity": 1,
-    "note": "HẤP LẺ"
+    "quantity": 1
   },
   {
     "stt": 3,
@@ -1335,7 +1856,7 @@ allKitsData["CTC 1"] = [
   },
   {
     "stt": 12,
-    "name": "PARAPOP TRUNG",
+    "name": "PARAPOP",
     "code": "BT021R",
     "quantity": 2
   },
@@ -1666,8 +2187,8 @@ allKitsData["CTC 2"] = [
   },
   {
     "stt": 26,
-    "name": "PARAPOP TRUNG",
-    "code": "BT021R",
+    "name": "PARAPOP LỚN",
+    "code": "BT021",
     "quantity": 2
   },
   {
@@ -1949,6 +2470,702 @@ allKitsData["CTC 3"] = [
   }
 ];
 allKitsData["CTC 3"].footer = "ĐÃ KIỂM";
+// Data for DỤNG CỤ MỔ HỞ LẺ
+allKitsData["DỤNG CỤ MỔ HỞ LẺ"] = [
+  {
+    "stt": 1,
+    "name": "Banh da",
+    "code": "",
+    "quantity": 7
+  },
+  {
+    "stt": 2,
+    "name": "Banh miệng",
+    "code": "",
+    "quantity": 3
+  },
+  {
+    "stt": 3,
+    "name": "Banh tự động",
+    "code": "",
+    "quantity": 1
+  },
+  {
+    "stt": 4,
+    "name": "Bắt cóc",
+    "code": "",
+    "quantity": 2
+  },
+  {
+    "stt": 5,
+    "name": "Ben net xương",
+    "code": "",
+    "quantity": 1
+  },
+  {
+    "stt": 6,
+    "name": "Búa lớn",
+    "code": "FE060R",
+    "quantity": 1
+  },
+  {
+    "stt": 7,
+    "name": "Búa nhỏ",
+    "code": "",
+    "quantity": 2
+  },
+  {
+    "stt": 8,
+    "name": "Cán dao số 3",
+    "code": "",
+    "quantity": 2
+  },
+  {
+    "stt": 9,
+    "name": "Cán dao số 4",
+    "code": "",
+    "quantity": 2
+  },
+  {
+    "stt": 10,
+    "name": "Cán dao số 7",
+    "code": "",
+    "quantity": 5
+  },
+  {
+    "stt": 11,
+    "name": "Cây nọng hậu môn",
+    "code": "",
+    "quantity": 1
+  },
+  {
+    "stt": 12,
+    "name": "Cây thông tiểu khó",
+    "code": "",
+    "quantity": 1
+  },
+  {
+    "stt": 13,
+    "name": "CLAMP CONG",
+    "code": "",
+    "quantity": 4
+  },
+  {
+    "stt": 14,
+    "name": "CLAMP CONG",
+    "code": "",
+    "quantity": 4
+  },
+  {
+    "stt": 15,
+    "name": "CLAMP THẲNG",
+    "code": "",
+    "quantity": 4
+  },
+  {
+    "stt": 16,
+    "name": "Cờ lê",
+    "code": "",
+    "quantity": 1
+  },
+  {
+    "stt": 17,
+    "name": "Curet",
+    "code": "",
+    "quantity": 4
+  },
+  {
+    "stt": 18,
+    "name": "Chén chum",
+    "code": "",
+    "quantity": 26
+  },
+  {
+    "stt": 19,
+    "name": "Dao bào da",
+    "code": "",
+    "quantity": 1
+  },
+  {
+    "stt": 20,
+    "name": "Davier",
+    "code": "",
+    "quantity": 4
+  },
+  {
+    "stt": 21,
+    "name": "Diver nhỏ",
+    "code": "BT611R",
+    "quantity": 3
+  },
+  {
+    "stt": 22,
+    "name": "Dụng cụ móc chỉ thép",
+    "code": "",
+    "quantity": 1
+  },
+  {
+    "stt": 23,
+    "name": "Đục lòng máng",
+    "code": "",
+    "quantity": 1
+  },
+  {
+    "stt": 24,
+    "name": "Ercartor ven",
+    "code": "",
+    "quantity": 6
+  },
+  {
+    "stt": 25,
+    "name": "Gu lớn",
+    "code": "",
+    "quantity": 1
+  },
+  {
+    "stt": 26,
+    "name": "Gu nhỏ",
+    "code": "",
+    "quantity": 1
+  },
+  {
+    "stt": 27,
+    "name": "Giỏ gà",
+    "code": "",
+    "quantity": 2
+  },
+  {
+    "stt": 28,
+    "name": "Kelly lớn",
+    "code": "",
+    "quantity": 12
+  },
+  {
+    "stt": 29,
+    "name": "Kéo cắt chỉ",
+    "code": "",
+    "quantity": 3
+  },
+  {
+    "stt": 30,
+    "name": "Kéo mét",
+    "code": "BC271R",
+    "quantity": 1
+  },
+  {
+    "stt": 31,
+    "name": "Kẹp săng AO",
+    "code": "",
+    "quantity": 1
+  },
+  {
+    "stt": 32,
+    "name": "Kẹp tăm bông",
+    "code": "",
+    "quantity": 7
+  },
+  {
+    "stt": 33,
+    "name": "Kềm cắt chỉ thép",
+    "code": "",
+    "quantity": 2,
+    "note": "HƯ 1"
+  },
+  {
+    "stt": 34,
+    "name": "Kềm cắt chỉ thép",
+    "code": "",
+    "quantity": 1
+  },
+  {
+    "stt": 35,
+    "name": "Kềm cắt đinh",
+    "code": "LX157R",
+    "quantity": 1
+  },
+  {
+    "stt": 36,
+    "name": "Kềm cắt xương, móng",
+    "code": "",
+    "quantity": 3
+  },
+  {
+    "stt": 37,
+    "name": "Kềm cộng lực cắt đinh",
+    "code": "",
+    "quantity": 1
+  },
+  {
+    "stt": 38,
+    "name": "Kềm giữ xương thẳng",
+    "code": "",
+    "quantity": 1
+  },
+  {
+    "stt": 39,
+    "name": "Kềm kẹp kim",
+    "code": "BM236R",
+    "quantity": 1
+  },
+  {
+    "stt": 40,
+    "name": "Kềm khóa",
+    "code": "",
+    "quantity": 1
+  },
+  {
+    "stt": 41,
+    "name": "Kềm may chỉ thép",
+    "code": "",
+    "quantity": 1
+  },
+  {
+    "stt": 42,
+    "name": "Kềm rút đinh",
+    "code": "",
+    "quantity": 1
+  },
+  {
+    "stt": 43,
+    "name": "Kềm xoắn chỉ",
+    "code": "",
+    "quantity": 1
+  },
+  {
+    "stt": 44,
+    "name": "Khoan tay",
+    "code": "",
+    "quantity": 1
+  },
+  {
+    "stt": 45,
+    "name": "Maleap",
+    "code": "",
+    "quantity": 4
+  },
+  {
+    "stt": 46,
+    "name": "Mỏ vịt",
+    "code": "",
+    "quantity": 1
+  },
+  {
+    "stt": 47,
+    "name": "Nội soi dây thanh",
+    "code": "",
+    "quantity": 1
+  },
+  {
+    "stt": 48,
+    "name": "Nội soi xoang bướm",
+    "code": "",
+    "quantity": 2
+  },
+  {
+    "stt": 49,
+    "name": "Nhíp có mấu lớn",
+    "code": "",
+    "quantity": 4
+  },
+  {
+    "stt": 50,
+    "name": "Nhíp có mấu nhỏ",
+    "code": "",
+    "quantity": 6
+  },
+  {
+    "stt": 51,
+    "name": "Nhíp không mấu nhỏ",
+    "code": "",
+    "quantity": 5
+  },
+  {
+    "stt": 52,
+    "name": "Nhíp không mấu lớn",
+    "code": "",
+    "quantity": 3
+  },
+  {
+    "stt": 53,
+    "name": "Nhíp mạch máu",
+    "code": "",
+    "quantity": 7
+  },
+  {
+    "stt": 54,
+    "name": "Ống hút bụng",
+    "code": "",
+    "quantity": 1
+  },
+  {
+    "stt": 55,
+    "name": "Ống hút dài",
+    "code": "GF944R",
+    "quantity": 1
+  },
+  {
+    "stt": 56,
+    "name": "Ống hút Tai mũi họng",
+    "code": "",
+    "quantity": 8
+  },
+  {
+    "stt": 57,
+    "name": "PARAPOP LỚN",
+    "code": "Không mã",
+    "quantity": 8
+  },
+  {
+    "stt": 58,
+    "name": "PARAPOP NHỎ",
+    "code": "Không mã",
+    "quantity": 4
+  },
+  {
+    "stt": 59,
+    "name": "Puzzi",
+    "code": "",
+    "quantity": 4
+  },
+  {
+    "stt": 60,
+    "name": "Que thăm dò hậu môn",
+    "code": "",
+    "quantity": 3
+  },
+  {
+    "stt": 61,
+    "name": "Randal gắp sỏi",
+    "code": "",
+    "quantity": 3
+  },
+  {
+    "stt": 62,
+    "name": "Richecson nhỏ",
+    "code": "",
+    "quantity": 1
+  },
+  {
+    "stt": 63,
+    "name": "Richeson",
+    "code": "BT472R",
+    "quantity": 1
+  },
+  {
+    "stt": 64,
+    "name": "Ruzin",
+    "code": "",
+    "quantity": 1
+  },
+  {
+    "stt": 65,
+    "name": "Ruzin lớn",
+    "code": "",
+    "quantity": 1
+  },
+  {
+    "stt": 66,
+    "name": "Ruzin nhỏ",
+    "code": "",
+    "quantity": 2
+  },
+  {
+    "stt": 67,
+    "name": "Tay đèn",
+    "code": "",
+    "quantity": 32
+  },
+  {
+    "stt": 68,
+    "name": "Tua vít xương",
+    "code": "",
+    "quantity": 1
+  },
+  {
+    "stt": 69,
+    "name": "Thước đo tử cung",
+    "code": "",
+    "quantity": 1
+  },
+  {
+    "stt": 70,
+    "name": "Thước đo tử cung",
+    "code": "",
+    "quantity": 1
+  },
+  {
+    "stt": 71,
+    "name": "Van âm đạo",
+    "code": "",
+    "quantity": 1
+  },
+  {
+    "stt": 72,
+    "name": "Van vệ sản",
+    "code": "",
+    "quantity": 4
+  },
+  {
+    "stt": "",
+    "name": "TỔNG CỘNG",
+    "code": "",
+    "quantity": 241,
+    "bold": true
+  }
+];
+allKitsData["DỤNG CỤ MỔ HỞ LẺ"].footer = "ĐANG CHỜ DỮ LIỆU";
+// Data for DỤNG CỤ NỘI SOI LẺ
+allKitsData["DỤNG CỤ NỘI SOI LẺ"] = [
+  {
+    "stt": 1,
+    "name": "Clip nội soi",
+    "code": "",
+    "quantity": 3
+  },
+  {
+    "stt": 2,
+    "name": "Hemolock 10mm",
+    "code": "",
+    "quantity": 1
+  },
+  {
+    "stt": 3,
+    "name": "Hemolock 5mm",
+    "code": "",
+    "quantity": 1
+  },
+  {
+    "stt": 4,
+    "name": "Puzzi",
+    "code": "",
+    "quantity": 3
+  },
+  {
+    "stt": 5,
+    "name": "Kiềm kẹp Kim nội soi",
+    "code": "",
+    "quantity": 1
+  },
+  {
+    "stt": 6,
+    "name": "Kim vê sản",
+    "code": "",
+    "quantity": 1
+  },
+  {
+    "stt": 7,
+    "name": "Dây dẫn sáng",
+    "code": "",
+    "quantity": 1
+  },
+  {
+    "stt": 8,
+    "name": "Optic nội soi 0° MGB",
+    "code": "",
+    "quantity": 1
+  },
+  {
+    "stt": 9,
+    "name": "Optic nội soi 0° Karlstorz",
+    "code": "",
+    "quantity": 1
+  },
+  {
+    "stt": 10,
+    "name": "Optic nội soi 45° Karlstorz",
+    "code": "",
+    "quantity": 2
+  },
+  {
+    "stt": 11,
+    "name": "Optic nội soi 70° Karlstorz",
+    "code": "",
+    "quantity": 1
+  },
+  {
+    "stt": 12,
+    "name": "Optic nội soi 30° Karlstorz",
+    "code": "",
+    "quantity": 2
+  },
+  {
+    "stt": 13,
+    "name": "Optic nội soi 0° 5mm Karlstorz",
+    "code": "",
+    "quantity": 1
+  },
+  {
+    "stt": 14,
+    "name": "Optic nội soi 30° MGB Karlstorz",
+    "code": "",
+    "quantity": 1
+  },
+  {
+    "stt": 15,
+    "name": "Oftic nịu",
+    "code": "",
+    "quantity": 2,
+    "note": "HƯ 1"
+  },
+  {
+    "stt": 16,
+    "name": "Bộ xay tử cung",
+    "code": "",
+    "quantity": 1
+  },
+  {
+    "stt": 17,
+    "name": "Bơm rửa bàng quang thủy tinh",
+    "code": "",
+    "quantity": 1
+  },
+  {
+    "stt": 18,
+    "name": "Dụng cụ nội soi bàng quang (Bộ Trocal)",
+    "code": "",
+    "quantity": 4
+  },
+  {
+    "stt": 19,
+    "name": "Cây vén gan",
+    "code": "",
+    "quantity": 2
+  },
+  {
+    "stt": 20,
+    "name": "Lưỡi dao nội soi",
+    "code": "",
+    "quantity": 1
+  },
+  {
+    "stt": 21,
+    "name": "Troca 5 xoắn",
+    "code": "",
+    "quantity": 1
+  },
+  {
+    "stt": 22,
+    "name": "Cây nạy sỏi",
+    "code": "",
+    "quantity": 2
+  },
+  {
+    "stt": 23,
+    "name": "Bộ dụng cụ đốt hạch giao cảm",
+    "code": "",
+    "quantity": 1
+  },
+  {
+    "stt": 24,
+    "name": "Bộ dụng cụ đốt tuyền liệt tuyến",
+    "code": "",
+    "quantity": 1
+  },
+  {
+    "stt": 25,
+    "name": "Vỏ nội soi",
+    "code": "",
+    "quantity": 4
+  },
+  {
+    "stt": 26,
+    "name": "Ống hút",
+    "code": "",
+    "quantity": 1
+  },
+  {
+    "stt": 27,
+    "name": "Móc đốt nội soi",
+    "code": "",
+    "quantity": 2
+  },
+  {
+    "stt": 28,
+    "name": "Tay cầm Biboler",
+    "code": "",
+    "quantity": 1
+  },
+  {
+    "stt": 29,
+    "name": "Biboler nhi",
+    "code": "",
+    "quantity": 1
+  },
+  {
+    "stt": 30,
+    "name": "Nội soi bàng quang mới",
+    "code": "",
+    "quantity": 1
+  },
+  {
+    "stt": 31,
+    "name": "Kéo mesk nội soi nhi",
+    "code": "",
+    "quantity": 3
+  },
+  {
+    "stt": 32,
+    "name": "Graper nội soi nhi",
+    "code": "",
+    "quantity": 3
+  },
+  {
+    "stt": 33,
+    "name": "Ruột Bibolec nội soi nhi",
+    "code": "",
+    "quantity": 1
+  },
+  {
+    "stt": 34,
+    "name": "Kéo Mesk nội soi",
+    "code": "",
+    "quantity": 2
+  },
+  {
+    "stt": 35,
+    "name": "Bộ Bibolec",
+    "code": "",
+    "quantity": 1
+  },
+  {
+    "stt": 36,
+    "name": "Bộ Robi",
+    "code": "",
+    "quantity": 1
+  },
+  {
+    "stt": 37,
+    "name": "Que bơm từ cung",
+    "code": "",
+    "quantity": 1
+  },
+  {
+    "stt": 38,
+    "name": "Dây Bibolec nội soi",
+    "code": "",
+    "quantity": 2
+  },
+  {
+    "stt": 39,
+    "name": "Dây đốt nội soi",
+    "code": "",
+    "quantity": 2
+  },
+  {
+    "stt": 40,
+    "name": "Dây bơm CO2",
+    "code": "",
+    "quantity": 2
+  },
+  {
+    "stt": "",
+    "name": "TỔNG CỘNG",
+    "code": "",
+    "quantity": 64,
+    "bold": true
+  }
+];
+allKitsData["DỤNG CỤ NỘI SOI LẺ"].footer = "ĐÃ KIỂM 02/2026";
 // Data for ĐẠI PHẪU
 allKitsData["ĐẠI PHẪU"] = [
   {
@@ -1971,7 +3188,7 @@ allKitsData["ĐẠI PHẪU"] = [
   },
   {
     "stt": 4,
-    "name": "PARAPOP NHỎ",
+    "name": "PARAPOP",
     "code": "BT020R",
     "quantity": 2
   },
@@ -2230,8 +3447,8 @@ allKitsData["HC Ố CỔ TAY"] = [
   },
   {
     "stt": 15,
-    "name": "PARAPOP NHỎ",
-    "code": "BT020R",
+    "name": "PARAPOP NHỌ",
+    "code": "BT020",
     "quantity": 2,
     "note": ""
   },
@@ -2327,8 +3544,7 @@ allKitsData["LÕM NGỰC"] = [
     "stt": 7,
     "name": "NHÍP",
     "code": "",
-    "quantity": 2,
-    "note": "1 AKTION"
+    "quantity": 2
   },
   {
     "stt": 8,
@@ -2350,7 +3566,7 @@ allKitsData["LÕM NGỰC"] = [
   },
   {
     "stt": 11,
-    "name": "PARAPOP NHỎ",
+    "name": "PARAPOP LỚN",
     "code": "",
     "quantity": 2
   },
@@ -2690,7 +3906,7 @@ allKitsData["NIỆU 2"] = [
   },
   {
     "stt": 15,
-    "name": "PARAPOP TRUNG",
+    "name": "PARAPOP LỚN",
     "code": "BT021R",
     "quantity": 2
   },
@@ -2740,7 +3956,7 @@ allKitsData["NIỆU 2"] = [
     "stt": 23,
     "name": "KELLY CONG NHỎ",
     "code": "BH165R",
-    "quantity": 9
+    "quantity": 10
   },
   {
     "stt": 24,
@@ -2798,10 +4014,9 @@ allKitsData["NIỆU 2"] = [
   },
   {
     "stt": 33,
-    "name": "CLAMP CONG (qua niệu cũ 3)",
+    "name": "CLAMP CONG",
     "code": "FB465R",
-    "quantity": 1,
-    "note": "BỎ VÔ NIỆU 3"
+    "quantity": 1
   },
   {
     "stt": 34,
@@ -2855,7 +4070,7 @@ allKitsData["NIỆU 2"] = [
     "stt": "",
     "name": "TỔNG CỘNG",
     "code": "",
-    "quantity": 70,
+    "quantity": 71,
     "bold": true
   }
 ];
@@ -2865,7 +4080,7 @@ allKitsData["NIỆU 3"] = [
   {
     "stt": 1,
     "name": "KELLY CONG TRÒN",
-    "code": "NIỆU CŨ",
+    "code": "",
     "quantity": 3
   },
   {
@@ -2938,7 +4153,7 @@ allKitsData["NIỆU 3"] = [
     "stt": 13,
     "name": "BABCOCK NGẮN",
     "code": "",
-    "quantity": 2
+    "quantity": 1
   },
   {
     "stt": 14,
@@ -3014,17 +4229,15 @@ allKitsData["NIỆU 3"] = [
   },
   {
     "stt": 26,
-    "name": "CLAMP RUỘT+ 1 cây từ niệu 2",
-    "code": "FB465R",
-    "quantity": 2,
-    "note": "3"
+    "name": "CLAMP RUỘT",
+    "code": "",
+    "quantity": 2
   },
   {
     "stt": 27,
     "name": "ỐNG HÚT",
     "code": "",
-    "quantity": 1,
-    "note": "HẤP LẺ."
+    "quantity": 1
   },
   {
     "stt": 28,
@@ -3036,7 +4249,7 @@ allKitsData["NIỆU 3"] = [
     "stt": "",
     "name": "TỔNG CỘNG",
     "code": "",
-    "quantity": 78,
+    "quantity": 77,
     "bold": true
   }
 ];
@@ -4404,7 +5617,7 @@ allKitsData["THẦN KINH 4"] = [
     "name": "KÉO CẮT CHỈ",
     "code": "",
     "quantity": 1,
-    "note": "CÙN-MẺ"
+    "note": "cùn, mẻ đầu"
   },
   {
     "stt": 14,
@@ -4503,17 +5716,15 @@ allKitsData["THẦN KINH 5"] = [
   },
   {
     "stt": 12,
-    "name": "KÉO MESK",
+    "name": "KÉO MESK (CÙN)",
     "code": "CÁN VÀNG",
-    "quantity": 1,
-    "note": "(CÙN)"
+    "quantity": 1
   },
   {
     "stt": 13,
-    "name": "KÉO CẮT CHỈ",
+    "name": "KÉO CẮT CHỈ (CÙN)",
     "code": "LAWTON",
-    "quantity": 1,
-    "note": "(CÙN)"
+    "quantity": 1
   },
   {
     "stt": 14,
@@ -4555,7 +5766,7 @@ allKitsData["THẦN KINH 6"] = [
     "name": "KELLY TRUNG",
     "code": "",
     "quantity": 14,
-    "note": "GÃY 1"
+    "note": "Gãy 1"
   },
   {
     "stt": 3,
@@ -4577,10 +5788,9 @@ allKitsData["THẦN KINH 6"] = [
   },
   {
     "stt": 6,
-    "name": "KỀM KẸP KIM",
+    "name": "KỀM KẸP KIM ( mòn răng )",
     "code": "",
-    "quantity": 1,
-    "note": "MÒN"
+    "quantity": 1
   },
   {
     "stt": 7,
@@ -4596,17 +5806,15 @@ allKitsData["THẦN KINH 6"] = [
   },
   {
     "stt": 9,
-    "name": "KÉO MESK",
+    "name": "KÉO MESK (cùn)",
     "code": "",
-    "quantity": 1,
-    "note": "CÙN"
+    "quantity": 1
   },
   {
     "stt": 10,
-    "name": "KÉO CẮT CHỈ",
+    "name": "KÉO CẮT CHỈ (cùn)",
     "code": "",
-    "quantity": 1,
-    "note": "CÙN"
+    "quantity": 1
   },
   {
     "stt": 11,
@@ -4616,7 +5824,7 @@ allKitsData["THẦN KINH 6"] = [
   },
   {
     "stt": 12,
-    "name": "PARABOP TRUNG",
+    "name": "PARABOP LỚN",
     "code": "",
     "quantity": 2
   },
@@ -4726,7 +5934,7 @@ allKitsData["THẦN KINH 7"] = [
     "name": "KÉO CẮT CHỈ",
     "code": "05-121",
     "quantity": 1,
-    "note": "(CÙN)"
+    "note": "cùn, mẻ đầu"
   },
   {
     "stt": 16,
@@ -4893,8 +6101,7 @@ allKitsData["THẦN KINH 8"] = [
     "stt": 22,
     "name": "NHÍP VI PHẪU",
     "code": "PAKISTAN",
-    "quantity": 1,
-    "note": "AKTION"
+    "quantity": 1
   },
   {
     "stt": "",
@@ -4958,17 +6165,15 @@ allKitsData["THẦN KINH 9"] = [
   },
   {
     "stt": 9,
-    "name": "KÉO MESK",
+    "name": "KÉO MESK ( Cùn )",
     "code": "B0271R",
-    "quantity": 1,
-    "note": "(CÙN)"
+    "quantity": 1
   },
   {
     "stt": 10,
-    "name": "KÉO CẮT CHỈ",
+    "name": "KÉO CẮT CHỈ ( Cùn )",
     "code": "ROLAN 04113016",
-    "quantity": 1,
-    "note": "(CÙN)"
+    "quantity": 1
   },
   {
     "stt": 11,
@@ -5177,10 +6382,9 @@ allKitsData["THẦN KINH 11"] = [
   },
   {
     "stt": 10,
-    "name": "KÉO MESK",
+    "name": "KÉO MESK (cùn)",
     "code": "HB2285",
-    "quantity": 1,
-    "note": "CÙN"
+    "quantity": 1
   },
   {
     "stt": 11,
@@ -5196,7 +6400,7 @@ allKitsData["THẦN KINH 11"] = [
   },
   {
     "stt": 13,
-    "name": "PARABOP TRUNG",
+    "name": "PARABOP LỚN",
     "code": "HB3161",
     "quantity": 2
   },
@@ -5251,7 +6455,7 @@ allKitsData["THẦN KINH 12"] = [
     "stt": 5,
     "name": "NHÍP KHÔNG MẤU",
     "code": "HB0223",
-    "quantity": 1,
+    "quantity": 2,
     "note": "1"
   },
   {
@@ -5318,7 +6522,7 @@ allKitsData["THẦN KINH 12"] = [
     "stt": "",
     "name": "TỔNG CỘNG",
     "code": "",
-    "quantity": 45,
+    "quantity": 46,
     "bold": true
   }
 ];
@@ -5399,7 +6603,7 @@ allKitsData["THẦN KINH 13"] = [
   },
   {
     "stt": 13,
-    "name": "PARABOP TRUNG",
+    "name": "PARABOP LỚN",
     "code": "HB3161",
     "quantity": 2
   },
@@ -5488,10 +6692,10 @@ allKitsData["THẦN KINH 14"] = [
   },
   {
     "stt": 11,
-    "name": "KÉO CẮT CHỈ",
+    "name": "KÉO CẮT CHỈ (GÃY)",
     "code": "HB1706",
     "quantity": 1,
-    "note": "GÃY"
+    "note": "Gãy"
   },
   {
     "stt": 12,
@@ -5501,7 +6705,7 @@ allKitsData["THẦN KINH 14"] = [
   },
   {
     "stt": 13,
-    "name": "PARABOP TRUNG",
+    "name": "PARABOP LỚN",
     "code": "HB3161",
     "quantity": 2
   },
@@ -5513,10 +6717,10 @@ allKitsData["THẦN KINH 14"] = [
   },
   {
     "stt": 15,
-    "name": "KÉO MAYO",
+    "name": "KÉO MAYO (GÃY)",
     "code": "HB1798",
     "quantity": 1,
-    "note": "GÃY"
+    "note": "Gãy"
   },
   {
     "stt": "",
@@ -5593,8 +6797,8 @@ allKitsData["THẦN KINH 15"] = [
     "stt": 11,
     "name": "KÉO CẮT CHỈ",
     "code": "HB1706",
-    "quantity": 2,
-    "note": ""
+    "quantity": 1,
+    "note": "2 CÁI"
   },
   {
     "stt": 12,
@@ -5604,7 +6808,7 @@ allKitsData["THẦN KINH 15"] = [
   },
   {
     "stt": 13,
-    "name": "PARABOP TRUNG",
+    "name": "PARABOP LỚN",
     "code": "HB3161",
     "quantity": 2
   },
@@ -5624,7 +6828,7 @@ allKitsData["THẦN KINH 15"] = [
     "stt": "",
     "name": "TỔNG CỘNG",
     "code": "",
-    "quantity": 46,
+    "quantity": 45,
     "bold": true
   }
 ];
@@ -6150,7 +7354,7 @@ allKitsData["TRUNG PHẪU 1"] = [
   {
     "stt": 18,
     "name": "PARAPOP NHỎ",
-    "code": "BT020R",
+    "code": "BT020",
     "quantity": 2
   },
   {
