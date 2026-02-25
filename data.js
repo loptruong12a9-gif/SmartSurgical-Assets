@@ -1,4 +1,4 @@
-const APP_VERSION = "v2.0 PRO (FINAL) (10:42:01 25/2/2026)";
+const APP_VERSION = "v2.0 PRO (FINAL) (10:55:57 25/2/2026)";
 const kitDefinitions = [
     {
         "id": 1,
