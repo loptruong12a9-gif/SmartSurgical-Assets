@@ -1,4 +1,4 @@
-const APP_VERSION = "v2.0 PRO (FINAL) (14:25:03 25/2/2026)";
+const APP_VERSION = "v2.0 PRO (FINAL) (15:02:41 25/2/2026)";
 const kitDefinitions = [
     {
         "id": 1,
@@ -2327,7 +2327,8 @@ allKitsData["LÕM NGỰC"] = [
     "stt": 7,
     "name": "NHÍP",
     "code": "",
-    "quantity": 2
+    "quantity": 2,
+    "note": "1 AKTION"
   },
   {
     "stt": 8,
@@ -4892,7 +4893,8 @@ allKitsData["THẦN KINH 8"] = [
     "stt": 22,
     "name": "NHÍP VI PHẪU",
     "code": "PAKISTAN",
-    "quantity": 1
+    "quantity": 1,
+    "note": "AKTION"
   },
   {
     "stt": "",
