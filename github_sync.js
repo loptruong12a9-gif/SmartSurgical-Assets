@@ -307,9 +307,12 @@ async function saveDataToGitHub() {
     }
 
     if (confirm('Lưu thành công! Dữ liệu đã được cập nhật trên GitHub.\nBạn có muốn tải lại trang để xóa các chỉnh sửa tạm thời?')) {
-        // Clear temp storage because we saved it permanently
+        // Clear ALL temp storage because we saved it permanently
         localStorage.removeItem('kitModifiedNotes');
         localStorage.removeItem('kitModifiedNames');
+        localStorage.removeItem('kitModifiedSTTs');
+        localStorage.removeItem('kitModifiedCodes');
+        localStorage.removeItem('kitModifiedQuantities');
         location.reload();
     }
 }
