@@ -1,4 +1,4 @@
-const APP_VERSION = "v2.0 PRO (FINAL) (15:02:41 25/2/2026)";
+const APP_VERSION = "v2.0 PRO (FINAL) (15:04:16 25/2/2026)";
 const kitDefinitions = [
     {
         "id": 1,
@@ -3024,7 +3024,7 @@ allKitsData["NIỆU 3"] = [
     "name": "ỐNG HÚT",
     "code": "",
     "quantity": 1,
-    "note": "HẤP LẺ"
+    "note": "HẤP LẺ."
   },
   {
     "stt": 28,
