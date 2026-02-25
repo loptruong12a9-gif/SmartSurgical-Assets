@@ -854,6 +854,9 @@
             })
             .catch((err) => {
                 console.warn("GitHub fetch failed:", err);
+                if (err.message && err.message.includes('fetch')) {
+                    alert('Lỗi kết nối GitHub (Failed to fetch). Vui lòng kiểm tra mạng hoặc VPN/Adblock.');
+                }
                 loadLocal();
             });
     } else {
