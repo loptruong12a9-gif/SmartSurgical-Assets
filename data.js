@@ -1,4 +1,4 @@
-const APP_VERSION = "v2.0 PRO (FINAL) (10:55:57 25/2/2026)";
+const APP_VERSION = "v2.0 PRO (FINAL) (14:25:03 25/2/2026)";
 const kitDefinitions = [
     {
         "id": 1,
@@ -2739,7 +2739,7 @@ allKitsData["NIỆU 2"] = [
     "stt": 23,
     "name": "KELLY CONG NHỎ",
     "code": "BH165R",
-    "quantity": 10
+    "quantity": 9
   },
   {
     "stt": 24,
@@ -2799,7 +2799,8 @@ allKitsData["NIỆU 2"] = [
     "stt": 33,
     "name": "CLAMP CONG (qua niệu cũ 3)",
     "code": "FB465R",
-    "quantity": 1
+    "quantity": 1,
+    "note": "BỎ VÔ NIỆU 3"
   },
   {
     "stt": 34,
@@ -2853,7 +2854,7 @@ allKitsData["NIỆU 2"] = [
     "stt": "",
     "name": "TỔNG CỘNG",
     "code": "",
-    "quantity": 71,
+    "quantity": 70,
     "bold": true
   }
 ];
@@ -2936,7 +2937,7 @@ allKitsData["NIỆU 3"] = [
     "stt": 13,
     "name": "BABCOCK NGẮN",
     "code": "",
-    "quantity": 1
+    "quantity": 2
   },
   {
     "stt": 14,
@@ -3021,7 +3022,8 @@ allKitsData["NIỆU 3"] = [
     "stt": 27,
     "name": "ỐNG HÚT",
     "code": "",
-    "quantity": 1
+    "quantity": 1,
+    "note": "HẤP LẺ"
   },
   {
     "stt": 28,
@@ -3033,7 +3035,7 @@ allKitsData["NIỆU 3"] = [
     "stt": "",
     "name": "TỔNG CỘNG",
     "code": "",
-    "quantity": 77,
+    "quantity": 78,
     "bold": true
   }
 ];
