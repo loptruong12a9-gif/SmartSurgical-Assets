@@ -1,4 +1,4 @@
-const CACHE_NAME = 'smart-surgical-v2.1-final';
+const CACHE_NAME = 'smart-surgical-v2.1.1-fix';
 const ASSETS_TO_CACHE = [
     './',
     './index.html',
@@ -44,11 +44,12 @@ self.addEventListener('activate', (event) => {
 
 // Fetch Event
 self.addEventListener('fetch', (event) => {
-    // Network-first strategy for data.js to always get fresh data
-    if (event.request.url.includes('data.js')) {
+    // Network-first strategy FOR LOCAL data.js ONLY
+    // We check if it's our own origin to avoid intercepting GitHub API calls
+    const url = new URL(event.request.url);
+    if (url.pathname.endsWith('/data.js') && url.origin === self.location.origin) {
         event.respondWith(
             fetch(event.request).catch(() => {
-                // If network fails, try cache as fallback
                 return caches.match(event.request);
             })
         );
