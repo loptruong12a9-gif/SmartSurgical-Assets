@@ -5,8 +5,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <title>SmartSurgical Pro Assets</title>
-    <meta name="description" content="Ứng dụng quản lý dụng cụ phẫu thuật chuyên nghiệp">
-    <meta name="theme-color" content="#0c4a6e">
     <!-- Web App & Home Screen Icon Support -->
     <link rel="apple-touch-icon" href="logo.png">
     <link rel="icon" type="image/png" href="logo.png">
@@ -226,6 +224,8 @@
         if ('serviceWorker' in navigator) {
             window.addEventListener('load', () => {
                 navigator.serviceWorker.register('sw.js').then((registration) => {
+                    // Success
+
                     // Listen for updates
                     registration.onupdatefound = () => {
                         const installingWorker = registration.installing;
@@ -243,8 +243,8 @@
                             }
                         };
                     };
-                }).catch(() => {
-                    // Silently fail - app works offline via cache
+                }, (err) => {
+                    // Failed
                 });
 
                 // Reload when controller changes
