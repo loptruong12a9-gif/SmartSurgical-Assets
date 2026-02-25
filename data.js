@@ -1,5 +1,5 @@
-const APP_VERSION = "v2.1 PRO (FINAL) (00:19:12 26/2/2026)";
-const kitDefinitions = [
+var APP_VERSION = "v2.1 PRO (FINAL) (00:34:18 26/2/2026)";
+var kitDefinitions = [
     {
         "id": 1,
         "baseName": "BỘ CẮT TỬ CUNG",
@@ -221,7 +221,7 @@ const kitDefinitions = [
         ]
     }
 ];
-let allKitsData = {};
+var allKitsData = allKitsData || {};
 
 function initializeData() {
     kitDefinitions.forEach(def => {
@@ -2499,7 +2499,7 @@ allKitsData["DỤNG CỤ MỔ HỞ LẺ"] = [
     "quantity": 3
   },
   {
-    "stt": 3,
+    "stt": "3",
     "name": "Banh tự động",
     "code": "",
     "quantity": 1
