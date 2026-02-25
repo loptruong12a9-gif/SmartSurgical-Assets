@@ -35,18 +35,13 @@ body {
         radial-gradient(at 50% 100%, hsla(202, 80%, 20%, 0.05) 0, transparent 50%);
     background-attachment: fixed;
     min-height: 100vh;
-    /* Safe Area for Dynamic Island / Notch */
-    padding-top: env(safe-area-inset-top);
-    padding-bottom: env(safe-area-inset-bottom);
-    padding-left: env(safe-area-inset-left);
-    padding-right: env(safe-area-inset-right);
 }
 
 
 .app-container {
     max-width: 1280px;
     margin: 0 auto;
-    padding: clamp(10px, 4vw, 30px);
+    padding: env(safe-area-inset-top, 10px) env(safe-area-inset-right, clamp(10px, 4vw, 30px)) env(safe-area-inset-bottom, 20px) env(safe-area-inset-left, clamp(10px, 4vw, 30px));
 }
 
 /* Header Styles */
@@ -408,6 +403,7 @@ h1 {
     background-color: #fff;
     margin: 3% auto;
     padding: 0;
+    padding-bottom: env(safe-area-inset-bottom, 0);
     border-radius: var(--radius-lg);
     box-shadow: var(--shadow-lg);
     width: 92%;
