@@ -40,7 +40,11 @@ function initializeGitHubSync() {
                     }
 
                     // Load new data
+                    const oldScript = document.getElementById('dataScript');
+                    if (oldScript) oldScript.remove();
+
                     const script = document.createElement('script');
+                    script.id = 'dataScript';
                     script.textContent = decodeURIComponent(escape(atob(data.content)));
                     document.body.appendChild(script);
 
@@ -179,7 +183,7 @@ async function saveDataToGitHub() {
 
     // Optimization: Use an array and join for faster large string building
     const contentLines = [
-        `const APP_VERSION = "v2.0 PRO (FINAL) (${dateStr})";`,
+        `const APP_VERSION = "v2.1 PRO (FINAL) (${dateStr})";`,
         `const kitDefinitions = ${JSON.stringify(kitDefinitions, null, 4)};`,
         `let allKitsData = {};`,
         '',
@@ -307,12 +311,10 @@ async function saveDataToGitHub() {
     }
 
     if (confirm('Lưu thành công! Dữ liệu đã được cập nhật trên GitHub.\nBạn có muốn tải lại trang để xóa các chỉnh sửa tạm thời?')) {
-        // Clear ALL temp storage because we saved it permanently
-        localStorage.removeItem('kitModifiedNotes');
-        localStorage.removeItem('kitModifiedNames');
-        localStorage.removeItem('kitModifiedSTTs');
-        localStorage.removeItem('kitModifiedCodes');
-        localStorage.removeItem('kitModifiedQuantities');
+        // Clear ALL temp storage keys because we saved them permanently
+        ['kitModifiedNotes', 'kitModifiedNames', 'kitModifiedSTTs', 'kitModifiedCodes', 'kitModifiedQuantities'].forEach(key => {
+            localStorage.removeItem(key);
+        });
         location.reload();
     }
 }
