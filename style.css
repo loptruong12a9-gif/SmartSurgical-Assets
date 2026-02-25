@@ -35,6 +35,11 @@ body {
         radial-gradient(at 50% 100%, hsla(202, 80%, 20%, 0.05) 0, transparent 50%);
     background-attachment: fixed;
     min-height: 100vh;
+    /* Safe Area for Dynamic Island / Notch */
+    padding-top: env(safe-area-inset-top);
+    padding-bottom: env(safe-area-inset-bottom);
+    padding-left: env(safe-area-inset-left);
+    padding-right: env(safe-area-inset-right);
 }
 
 
@@ -122,18 +127,114 @@ h1 {
     background: var(--primary-dark);
 }
 
+/* Action Capsule Design - Compact Version */
+.header-actions {
+    display: flex;
+    background: white;
+    padding: 4px;
+    border-radius: 50px;
+    box-shadow: var(--shadow-md);
+    border: 1px solid rgba(0, 0, 0, 0.05);
+    width: fit-content;
+    min-width: 320px;
+    max-width: 480px;
+    margin-top: 15px;
+    gap: 4px;
+    justify-content: center;
+    align-self: center;
+}
+
+.action-btn-pill {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    height: 34px;
+    /* Reduced from 48px */
+    border: none;
+    border-radius: 40px;
+    font-weight: 700;
+    font-size: 0.8rem;
+    /* Reduced from 0.9rem */
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    color: white;
+    padding: 0 12px;
+    white-space: nowrap;
+}
+
+.action-btn-pill i {
+    font-size: 0.95rem;
+    /* Reduced from 1.1rem */
+}
+
+.config-btn {
+    flex: 0 0 45px;
+    /* Circle for config - Reduced from 60px */
+    background: #f1f5f9;
+    color: #475569;
+}
+
+.sync-btn {
+    background: #3b82f6;
+}
+
+.save-btn {
+    background: #10b981;
+    animation: softPulse 2s infinite;
+}
+
+.export-btn {
+    background: #f43f5e;
+}
+
+.action-btn-pill:hover {
+    transform: translateY(-2px);
+    filter: brightness(1.1);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.action-btn-pill:active {
+    transform: scale(0.95);
+}
+
+@keyframes softPulse {
+    0% {
+        box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.4);
+    }
+
+    70% {
+        box-shadow: 0 0 0 10px rgba(16, 185, 129, 0);
+    }
+
+    100% {
+        box-shadow: 0 0 0 0 rgba(16, 185, 129, 0);
+    }
+}
+
 .search-bar {
     position: relative;
     width: 100%;
-    max-width: 500px;
+    max-width: 800px;
+    /* Increased to accommodate buttons */
+    display: flex;
+    align-items: center;
+    gap: 15px;
 }
 
-.search-bar i {
+.search-container {
+    position: relative;
+    width: 100%;
+}
+
+.search-container .search-icon {
     position: absolute;
     left: 15px;
     top: 50%;
     transform: translateY(-50%);
     color: var(--text-secondary);
+    pointer-events: none;
 }
 
 .search-bar input {
@@ -611,27 +712,50 @@ h1 {
         font-size: 2rem;
     }
 
-    .modal-content {
-        margin: 0;
-        width: 100%;
-        height: 100%;
-        max-height: 100vh;
-        border-radius: 0;
-        padding-top: 50px;
-        /* Compacted from 60px */
+    .header-actions {
+        padding: 4px;
+        gap: 4px;
+    }
+
+    .action-btn-pill {
+        height: 42px;
+        font-size: 0.75rem;
+        padding: 0 8px;
+        gap: 5px;
+    }
+
+    .action-btn-pill span {
+        display: none;
+        /* Hide text on very small screens if needed, or keep it */
+    }
+
+    /* On typical mobile, let's show text but smaller */
+    @media (min-width: 400px) {
+        .action-btn-pill span {
+            display: inline;
+        }
+    }
+
+    .action-btn-pill i {
+        font-size: 0.9rem;
+    }
+
+    .config-btn {
+        flex: 0 0 42px;
     }
 
     /* Professional Touch Targets */
     .edit-cell {
-        min-height: 48px;
+        min-height: 36px;
+        /* Reduced from 48px */
         display: table-cell;
         vertical-align: middle;
     }
 
     .item-table th,
     .item-table td {
-        padding: 4px 4px;
-        /* Extreme high density for mobile */
+        padding: 3px 4px;
+        /* Tighter */
         font-size: 0.75rem;
         white-space: nowrap;
         border: 1px solid #cbd5e1;
@@ -640,8 +764,8 @@ h1 {
     .table-container {
         overflow-x: auto;
         -webkit-overflow-scrolling: touch;
-        /* Smooth momentum scrolling for iOS */
-        margin-bottom: 25px;
+        margin-bottom: 5px;
+        /* Reduced from 25px */
         border: 1px solid #cbd5e1;
         border-radius: 8px;
         box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.02);
@@ -650,7 +774,63 @@ h1 {
     /* Prominence adjustment for mobile Total */
     .total-row td {
         font-size: 0.9rem !important;
-        padding: 10px 6px !important;
+        padding: 6px 4px !important;
+        /* Reduced from 10px */
+    }
+
+    /* ===== MAXIMIZE DISPLAY AREA ON MOBILE ===== */
+    .modal-content {
+        margin: 0;
+        width: 100%;
+        height: 100%;
+        max-height: 100vh;
+        border-radius: 0;
+        padding-top: 10px;
+        /* Drastically reduced from 50px */
+    }
+
+    #modalTitle {
+        padding: 8px 15px;
+        /* Reduced from 24px 30px */
+        font-size: 1rem;
+        /* Reduced from 1.15rem */
+        margin: 5px 10px 0;
+        /* Tighter margins */
+    }
+
+    .modal-body {
+        padding: 5px 10px;
+        /* Reduced from 10px 20px */
+    }
+
+    .close-btn {
+        font-size: 22px;
+        /* Reduced from 28px */
+        right: 12px;
+        top: 8px;
+        /* Reduced from 20px */
+    }
+
+    .back-btn {
+        margin-bottom: 5px;
+        /* Reduced from 10px */
+        padding: 6px 12px;
+        /* Reduced from 10px 18px */
+        font-size: 0.8rem;
+    }
+
+    .modal-footer {
+        padding: 3px 10px;
+        /* Reduced from 5px 20px */
+        font-size: 0.8rem;
+    }
+
+    .search-in-modal input {
+        padding: 6px !important;
+        /* Reduced from 10px */
+        margin-bottom: 5px !important;
+        /* Reduced from 15px */
+        font-size: 0.85rem;
     }
 }
 
@@ -1376,8 +1556,90 @@ h1 {
 }
 
 @media (max-width: 768px) {
+    .header-actions {
+        padding: 3px;
+        gap: 3px;
+        margin-top: 10px;
+        min-width: auto;
+    }
+
+    .action-btn-pill {
+        height: 30px;
+        /* Reduced from 42px */
+        font-size: 0.7rem;
+        padding: 0 6px;
+        gap: 4px;
+    }
+
+    .action-btn-pill span {
+        display: none;
+    }
+
+    /* On typical mobile, let's show text but smaller */
+    @media (min-width: 400px) {
+        .action-btn-pill span {
+            display: inline;
+        }
+    }
+
+    .action-btn-pill i {
+        font-size: 0.85rem;
+    }
+
+    .config-btn {
+        flex: 0 0 35px;
+        /* Reduced from 42px */
+    }
+
     .export-all-btn {
         padding: 10px 15px !important;
         font-size: 0.9rem !important;
+    }
+}
+
+/* Floating Action Button (FAB) */
+.fab-container {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    z-index: 9999;
+}
+
+.fab-btn {
+    width: 65px;
+    height: 65px;
+    background: linear-gradient(135deg, #22c55e, #16a34a);
+    color: white;
+    border-radius: 50%;
+    border: none;
+    box-shadow: 0 10px 25px rgba(34, 197, 94, 0.4);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    animation: pulse 2s infinite;
+}
+
+.fab-btn:hover {
+    transform: scale(1.15) rotate(10deg);
+    box-shadow: 0 15px 30px rgba(34, 197, 94, 0.6);
+}
+
+.fab-btn:active {
+    transform: scale(0.9);
+}
+
+@media (max-width: 768px) {
+    .fab-container {
+        bottom: 20px;
+        right: 20px;
+    }
+
+    .fab-btn {
+        width: 55px;
+        height: 55px;
+        font-size: 1.3rem;
     }
 }
