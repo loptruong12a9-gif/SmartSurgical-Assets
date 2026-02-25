@@ -1,244 +1,244 @@
-const APP_VERSION = "v2.1.1 PRO (FINAL) (23:18:56 25/2/2026)";
+const APP_VERSION = "v2.1 PRO (FINAL) (23:26:23 25/2/2026)";
 const kitDefinitions = [
-    {
-        "id": 1,
-        "baseName": "BỘ CẮT TỬ CUNG",
-        "prefix": "CTC",
-        "count": 3,
-        "icon": "fa-scissors",
-        "color": "icon-pink"
-    },
-    {
-        "id": 2,
-        "baseName": "KHỚP GỐI",
-        "prefix": "KHỚP GỐI",
-        "count": 0,
-        "icon": "fa-bone",
-        "color": "icon-blue",
-        "extraSubKits": [
-            "BỘ LẤY DÂY CHẰNG"
-        ]
-    },
-    {
-        "id": 3,
-        "baseName": "HC Ố CỔ TAY",
-        "prefix": "HC Ố CỔ TAY",
-        "count": 1,
-        "icon": "fa-hand-paper",
-        "color": "icon-teal"
-    },
-    {
-        "id": 4,
-        "baseName": "NIỆU",
-        "prefix": "NIỆU",
-        "count": 3,
-        "icon": "fa-filter",
-        "color": "icon-orange",
-        "extraSubKits": [
-            "BỘ NONG NIỆU ĐẠO"
-        ]
-    },
-    {
-        "id": 5,
-        "baseName": "NỘI SOI SẢN",
-        "prefix": "NS SẢN",
-        "count": 1,
-        "icon": "fa-baby",
-        "color": "icon-pink"
-    },
-    {
-        "id": 6,
-        "baseName": "NỘI SOI TỔNG QUÁT",
-        "prefix": "NS TỔNG QUÁT",
-        "count": 2,
-        "icon": "fa-microscope",
-        "color": "icon-indigo"
-    },
-    {
-        "id": 7,
-        "baseName": "SỌ NÃO",
-        "prefix": "SỌ NÃO",
-        "count": 1,
-        "icon": "fa-brain",
-        "color": "icon-purple"
-    },
-    {
-        "id": 8,
-        "baseName": "TAI MŨI HỌNG",
-        "prefix": "TAI MŨI HỌNG",
-        "count": 0,
-        "icon": "fa-head-side-virus",
-        "color": "icon-pink",
-        "extraSubKits": [
-            "NS TAI MŨI HỌNG",
-            "SOI TREO TMH",
-            "BỘ NẠO VA",
-            "BỘ CẮT AMIDAN CŨ",
-            "BỘ CẮT AMIDAN MỚI 1",
-            "BỘ CẮT A MỚI 2",
-            "BỘ TAI"
-        ]
-    },
-    {
-        "id": 9,
-        "baseName": "VI PHẪU",
-        "prefix": "VI PHẪU",
-        "count": 0,
-        "icon": "fa-microscope",
-        "color": "icon-teal",
-        "extraSubKits": [
-            "VI PHẪU BS PHƯỚC",
-            "VP CỘT SỐNG",
-            "VI PHẪU CŨ (MỔ HỞ)"
-        ]
-    },
-    {
-        "id": 10,
-        "baseName": "BỘ THẦN KINH MẠCH MÁU",
-        "prefix": "THẦN KINH",
-        "count": 15,
-        "icon": "fa-heart-pulse",
-        "color": "icon-red"
-    },
-    {
-        "id": 11,
-        "baseName": "BỘ TIỂU PHẪU",
-        "prefix": "TIỂU PHẪU",
-        "count": 4,
-        "icon": "fa-syringe",
-        "color": "icon-green"
-    },
-    {
-        "id": 12,
-        "baseName": "ĐẠI PHẪU",
-        "prefix": "ĐẠI PHẪU",
-        "count": 1,
-        "icon": "fa-user-nurse",
-        "color": "icon-red"
-    },
-    {
-        "id": 13,
-        "baseName": "TRUNG PHẪU",
-        "prefix": "TRUNG PHẪU",
-        "count": 2,
-        "icon": "fa-user-md",
-        "color": "icon-blue"
-    },
-    {
-        "id": 14,
-        "baseName": "XƯƠNG CHI TRÊN",
-        "prefix": "XƯƠNG CHI TRÊN",
-        "count": 1,
-        "icon": "fa-hand-holding-medical",
-        "color": "icon-orange"
-    },
-    {
-        "id": 15,
-        "baseName": "XƯƠNG CHI DƯỚI",
-        "prefix": "XƯƠNG CHI DƯỚI",
-        "count": 1,
-        "icon": "fa-wheelchair",
-        "color": "icon-purple"
-    },
-    {
-        "id": 16,
-        "baseName": "CAPPA",
-        "prefix": "CAPPA",
-        "count": 2,
-        "icon": "fa-notes-medical",
-        "color": "icon-indigo"
-    },
-    {
-        "id": 17,
-        "baseName": "THOÁT VỊ LƯNG",
-        "prefix": "TV LƯNG",
-        "count": 2,
-        "icon": "fa-crutch",
-        "color": "icon-blue"
-    },
-    {
-        "id": 18,
-        "baseName": "THOÁT VỊ CỔ",
-        "prefix": "TV CỔ",
-        "count": 1,
-        "icon": "fa-head-side-mask",
-        "color": "icon-green"
-    },
-    {
-        "id": 19,
-        "baseName": "BỘ KHOAN PIN",
-        "prefix": "KHOAN PIN",
-        "count": 1,
-        "icon": "fa-screwdriver",
-        "color": "icon-blue"
-    },
-    {
-        "id": 20,
-        "baseName": "BỘ BẮT CON",
-        "prefix": "BẮT CON",
-        "count": 3,
-        "icon": "fa-child",
-        "color": "icon-green"
-    },
-    {
-        "id": 21,
-        "baseName": "BỘ LÕM NGỰC",
-        "prefix": "LÕM NGỰC",
-        "count": 1,
-        "icon": "fa-lungs",
-        "color": "icon-blue"
-    },
-    {
-        "id": 22,
-        "baseName": "BỘ THÁO VIS ĐA NĂNG",
-        "prefix": "BỘ THÁO VIS ĐA NĂNG",
-        "count": 1,
-        "icon": "fa-screwdriver-wrench",
-        "color": "icon-blue"
-    },
-    {
-        "id": 23,
-        "baseName": "BỘ DỤNG CỤ NS DÂY CHẰNG",
-        "prefix": "NS DÂY CHẰNG",
-        "count": 0,
-        "icon": "fa-joint",
-        "color": "icon-teal",
-        "extraSubKits": [
-            "BỘ LẤY GÂN - DÂY CHẰNG",
-            "BỘ NS LẤY GÂN MÁC"
-        ]
-    },
-    {
-        "id": 24,
-        "baseName": "DỤNG CỤ LẺ",
-        "prefix": "DỤNG CỤ LẺ",
-        "count": 0,
-        "icon": "fa-toolbox",
-        "color": "icon-orange",
-        "extraSubKits": [
-            "DỤNG CỤ MỔ HỞ LẺ",
-            "DỤNG CỤ NỘI SOI LẺ"
-        ]
-    }
+  {
+    "id": 1,
+    "baseName": "BỘ CẮT TỬ CUNG",
+    "prefix": "CTC",
+    "count": 3,
+    "icon": "fa-scissors",
+    "color": "icon-pink"
+  },
+  {
+    "id": 2,
+    "baseName": "KHỚP GỐI",
+    "prefix": "KHỚP GỐI",
+    "count": 0,
+    "icon": "fa-bone",
+    "color": "icon-blue",
+    "extraSubKits": [
+      "BỘ LẤY DÂY CHẰNG"
+    ]
+  },
+  {
+    "id": 3,
+    "baseName": "HC Ố CỔ TAY",
+    "prefix": "HC Ố CỔ TAY",
+    "count": 1,
+    "icon": "fa-hand-paper",
+    "color": "icon-teal"
+  },
+  {
+    "id": 4,
+    "baseName": "NIỆU",
+    "prefix": "NIỆU",
+    "count": 3,
+    "icon": "fa-filter",
+    "color": "icon-orange",
+    "extraSubKits": [
+      "BỘ NONG NIỆU ĐẠO"
+    ]
+  },
+  {
+    "id": 5,
+    "baseName": "NỘI SOI SẢN",
+    "prefix": "NS SẢN",
+    "count": 1,
+    "icon": "fa-baby",
+    "color": "icon-pink"
+  },
+  {
+    "id": 6,
+    "baseName": "NỘI SOI TỔNG QUÁT",
+    "prefix": "NS TỔNG QUÁT",
+    "count": 2,
+    "icon": "fa-microscope",
+    "color": "icon-indigo"
+  },
+  {
+    "id": 7,
+    "baseName": "SỌ NÃO",
+    "prefix": "SỌ NÃO",
+    "count": 1,
+    "icon": "fa-brain",
+    "color": "icon-purple"
+  },
+  {
+    "id": 8,
+    "baseName": "TAI MŨI HỌNG",
+    "prefix": "TAI MŨI HỌNG",
+    "count": 0,
+    "icon": "fa-head-side-virus",
+    "color": "icon-pink",
+    "extraSubKits": [
+      "NS TAI MŨI HỌNG",
+      "SOI TREO TMH",
+      "BỘ NẠO VA",
+      "BỘ CẮT AMIDAN CŨ",
+      "BỘ CẮT AMIDAN MỚI 1",
+      "BỘ CẮT A MỚI 2",
+      "BỘ TAI"
+    ]
+  },
+  {
+    "id": 9,
+    "baseName": "VI PHẪU",
+    "prefix": "VI PHẪU",
+    "count": 0,
+    "icon": "fa-microscope",
+    "color": "icon-teal",
+    "extraSubKits": [
+      "VI PHẪU BS PHƯỚC",
+      "VP CỘT SỐNG",
+      "VI PHẪU CŨ (MỔ HỞ)"
+    ]
+  },
+  {
+    "id": 10,
+    "baseName": "BỘ THẦN KINH MẠCH MÁU",
+    "prefix": "THẦN KINH",
+    "count": 15,
+    "icon": "fa-heart-pulse",
+    "color": "icon-red"
+  },
+  {
+    "id": 11,
+    "baseName": "BỘ TIỂU PHẪU",
+    "prefix": "TIỂU PHẪU",
+    "count": 4,
+    "icon": "fa-syringe",
+    "color": "icon-green"
+  },
+  {
+    "id": 12,
+    "baseName": "ĐẠI PHẪU",
+    "prefix": "ĐẠI PHẪU",
+    "count": 1,
+    "icon": "fa-user-nurse",
+    "color": "icon-red"
+  },
+  {
+    "id": 13,
+    "baseName": "TRUNG PHẪU",
+    "prefix": "TRUNG PHẪU",
+    "count": 2,
+    "icon": "fa-user-md",
+    "color": "icon-blue"
+  },
+  {
+    "id": 14,
+    "baseName": "XƯƠNG CHI TRÊN",
+    "prefix": "XƯƠNG CHI TRÊN",
+    "count": 1,
+    "icon": "fa-hand-holding-medical",
+    "color": "icon-orange"
+  },
+  {
+    "id": 15,
+    "baseName": "XƯƠNG CHI DƯỚI",
+    "prefix": "XƯƠNG CHI DƯỚI",
+    "count": 1,
+    "icon": "fa-wheelchair",
+    "color": "icon-purple"
+  },
+  {
+    "id": 16,
+    "baseName": "CAPPA",
+    "prefix": "CAPPA",
+    "count": 2,
+    "icon": "fa-notes-medical",
+    "color": "icon-indigo"
+  },
+  {
+    "id": 17,
+    "baseName": "THOÁT VỊ LƯNG",
+    "prefix": "TV LƯNG",
+    "count": 2,
+    "icon": "fa-crutch",
+    "color": "icon-blue"
+  },
+  {
+    "id": 18,
+    "baseName": "THOÁT VỊ CỔ",
+    "prefix": "TV CỔ",
+    "count": 1,
+    "icon": "fa-head-side-mask",
+    "color": "icon-green"
+  },
+  {
+    "id": 19,
+    "baseName": "BỘ KHOAN PIN",
+    "prefix": "KHOAN PIN",
+    "count": 1,
+    "icon": "fa-screwdriver",
+    "color": "icon-blue"
+  },
+  {
+    "id": 20,
+    "baseName": "BỘ BẮT CON",
+    "prefix": "BẮT CON",
+    "count": 3,
+    "icon": "fa-child",
+    "color": "icon-green"
+  },
+  {
+    "id": 21,
+    "baseName": "BỘ LÕM NGỰC",
+    "prefix": "LÕM NGỰC",
+    "count": 1,
+    "icon": "fa-lungs",
+    "color": "icon-blue"
+  },
+  {
+    "id": 22,
+    "baseName": "BỘ THÁO VIS ĐA NĂNG",
+    "prefix": "BỘ THÁO VIS ĐA NĂNG",
+    "count": 1,
+    "icon": "fa-screwdriver-wrench",
+    "color": "icon-blue"
+  },
+  {
+    "id": 23,
+    "baseName": "BỘ DỤNG CỤ NS DÂY CHẰNG",
+    "prefix": "NS DÂY CHẰNG",
+    "count": 0,
+    "icon": "fa-joint",
+    "color": "icon-teal",
+    "extraSubKits": [
+      "BỘ LẤY GÂN - DÂY CHẰNG",
+      "BỘ NS LẤY GÂN MÁC"
+    ]
+  },
+  {
+    "id": 24,
+    "baseName": "DỤNG CỤ LẺ",
+    "prefix": "DỤNG CỤ LẺ",
+    "count": 0,
+    "icon": "fa-toolbox",
+    "color": "icon-orange",
+    "extraSubKits": [
+      "DỤNG CỤ MỔ HỞ LẺ",
+      "DỤNG CỤ NỘI SOI LẺ"
+    ]
+  }
 ];
 let allKitsData = {};
 
 function initializeData() {
-    kitDefinitions.forEach(def => {
-        if (def.count === 1) {
-            if (!allKitsData[def.prefix]) allKitsData[def.prefix] = [];
-        } else if (def.count > 1) {
-            for (let i = 1; i <= def.count; i++) {
-                const key = `${def.prefix} ${i}`;
-                if (!allKitsData[key]) allKitsData[key] = [];
-            }
-        }
-        if (def.extraSubKits) {
-            def.extraSubKits.forEach(subName => {
-                if (!allKitsData[subName]) allKitsData[subName] = [];
-            });
-        }
-    });
+  kitDefinitions.forEach(def => {
+    if (def.count === 1) {
+      if (!allKitsData[def.prefix]) allKitsData[def.prefix] = [];
+    } else if (def.count > 1) {
+      for (let i = 1; i <= def.count; i++) {
+        const key = `${def.prefix} ${i}`;
+        if (!allKitsData[key]) allKitsData[key] = [];
+      }
+    }
+    if (def.extraSubKits) {
+      def.extraSubKits.forEach(subName => {
+        if (!allKitsData[subName]) allKitsData[subName] = [];
+      });
+    }
+  });
 }
 initializeData();
 
@@ -253,7 +253,7 @@ allKitsData["BẮT CON 1"] = [
   {
     "stt": 2,
     "name": "FIXANG",
-    "code": "BF432R+431R<br>+436R",
+    "code": "BF432R+431R +436R",
     "quantity": 4
   },
   {
@@ -374,13 +374,15 @@ allKitsData["BẮT CON 2"] = [
     "stt": 5,
     "name": "KÉO CẮT CHỈ",
     "code": "50121",
-    "quantity": 1
+    "quantity": 1,
+    "note": "CÙN"
   },
   {
     "stt": 6,
     "name": "KÉO MAYO",
     "code": "BC557R",
-    "quantity": 1
+    "quantity": 1,
+    "note": "CÙN"
   },
   {
     "stt": 7,
@@ -468,17 +470,17 @@ allKitsData["BẮT CON 3"] = [
   },
   {
     "stt": 3,
-    "name": "KÉO CẮT CHỈ (CÙN)",
+    "name": "KÉO CẮT CHỈ",
     "code": "54-4034",
     "quantity": 1,
     "note": "CÙN"
   },
   {
     "stt": 4,
-    "name": "KÉO MAYO (CÙN)",
+    "name": "KÉO MAYO",
     "code": "BC557R",
     "quantity": 1,
-    "note": "Cùn"
+    "note": "CÙN"
   },
   {
     "stt": 5,
@@ -680,19 +682,22 @@ allKitsData["BỘ CẮT AMIDAN CŨ"] = [
     "stt": 10,
     "name": "ALISS",
     "code": "",
-    "quantity": 1
+    "quantity": 1,
+    "note": "HƯ"
   },
   {
     "stt": 11,
     "name": "KÉO MAYO",
     "code": "BC557R",
-    "quantity": 1
+    "quantity": 1,
+    "note": "HƯ"
   },
   {
     "stt": 12,
     "name": "KÉO MESK",
     "code": "",
-    "quantity": 1
+    "quantity": 1,
+    "note": "HƯ"
   },
   {
     "stt": 13,
@@ -739,13 +744,15 @@ allKitsData["BỘ CẮT AMIDAN MỚI 1"] = [
     "stt": 5,
     "name": "KÉO MESK",
     "code": "",
-    "quantity": 1
+    "quantity": 1,
+    "note": "CÙN"
   },
   {
     "stt": 6,
     "name": "KÉO CẮT CHỈ",
     "code": "BC346R",
-    "quantity": 1
+    "quantity": 1,
+    "note": "CÙN, MẺ"
   },
   {
     "stt": 7,
@@ -781,7 +788,8 @@ allKitsData["BỘ CẮT AMIDAN MỚI 1"] = [
     "stt": 12,
     "name": "KELLY",
     "code": "",
-    "quantity": 1
+    "quantity": 1,
+    "note": "CỨNG, RỈ SÉT"
   },
   {
     "stt": 13,
@@ -1297,7 +1305,8 @@ allKitsData["BỘ TAI"] = [
     "stt": 6,
     "name": "CÂY ĐỊNH VỊ",
     "code": "",
-    "quantity": 1
+    "quantity": 1,
+    "note": "GÃY ĐẦU"
   },
   {
     "stt": 7,
@@ -1374,7 +1383,8 @@ allKitsData["BỘ THÁO VIS ĐA NĂNG"] = [
     "stt": 7,
     "name": "Mũi khoan rỗng 5.5mm",
     "code": "",
-    "quantity": 1
+    "quantity": 1,
+    "note": "Gãy đầu"
   },
   {
     "stt": 8,
@@ -1600,7 +1610,7 @@ allKitsData["BỘ THÁO VIS ĐA NĂNG"] = [
   },
   {
     "stt": 45,
-    "name": "Dụng cụ giữ vít gãy",
+    "name": "Dụng cụ giữ vít g ã y.",
     "code": "",
     "quantity": 2
   },
@@ -1941,7 +1951,8 @@ allKitsData["CTC 1"] = [
     "stt": 26,
     "name": "KELLY TRUNG",
     "code": "BH165R",
-    "quantity": 8
+    "quantity": 8,
+    "note": "LỆCH HÀM 1"
   },
   {
     "stt": 27,
@@ -1983,19 +1994,22 @@ allKitsData["CTC 1"] = [
     "stt": 33,
     "name": "KÉO MESS",
     "code": "BC277R",
-    "quantity": 1
+    "quantity": 1,
+    "note": "CÙN"
   },
   {
     "stt": 34,
     "name": "KÉO CẮT CHỈ",
     "code": "120031170",
-    "quantity": 1
+    "quantity": 1,
+    "note": "CÙN"
   },
   {
     "stt": 35,
     "name": "NHÍP DÀI KHÔNG MẤU",
     "code": "BVHD",
-    "quantity": 1
+    "quantity": 1,
+    "note": "HƯ"
   },
   {
     "stt": 36,
@@ -2060,13 +2074,15 @@ allKitsData["CTC 2"] = [
     "stt": 5,
     "name": "ALISS NGẮN",
     "code": "EA016",
-    "quantity": 2
+    "quantity": 2,
+    "note": "LỆCH HÀM 1"
   },
   {
     "stt": 6,
     "name": "FIXANG",
     "code": "BF431",
-    "quantity": 5
+    "quantity": 5,
+    "note": "HƯ 1"
   },
   {
     "stt": 7,
@@ -2145,14 +2161,14 @@ allKitsData["CTC 2"] = [
     "name": "KÉO CẮT CHỈ",
     "code": "LAWTON",
     "quantity": 1,
-    "note": "Cùn"
+    "note": "CÙN"
   },
   {
     "stt": 20,
     "name": "KÉO MESK (CÙN)",
     "code": "BC277",
     "quantity": 1,
-    "note": "Cùn"
+    "note": "CÙN"
   },
   {
     "stt": 21,
@@ -2353,9 +2369,10 @@ allKitsData["CTC 3"] = [
   },
   {
     "stt": 17,
-    "name": "FIX SANG",
+    "name": "FIXXANG",
     "code": "BF431R",
-    "quantity": 5
+    "quantity": 5,
+    "note": "HƯ 4"
   },
   {
     "stt": 18,
@@ -2373,7 +2390,8 @@ allKitsData["CTC 3"] = [
     "stt": 20,
     "name": "ALISS NGẮN",
     "code": "EA016R",
-    "quantity": 2
+    "quantity": 2,
+    "note": "HƯ 2"
   },
   {
     "stt": 21,
@@ -2421,14 +2439,15 @@ allKitsData["CTC 3"] = [
     "stt": 28,
     "name": "KÉO MESK",
     "code": "BC277R",
-    "quantity": 1
+    "quantity": 1,
+    "note": "CÙN"
   },
   {
     "stt": 29,
     "name": "KÉO CẮT CHỈ",
     "code": "LAWTON",
     "quantity": 1,
-    "note": "Cùn"
+    "note": "CÙN"
   },
   {
     "stt": 30,
@@ -2667,7 +2686,8 @@ allKitsData["DỤNG CỤ MỔ HỞ LẺ"] = [
     "stt": 33,
     "name": "Kềm cắt chỉ thép",
     "code": "",
-    "quantity": 2
+    "quantity": 2,
+    "note": "HƯ 1"
   },
   {
     "stt": 34,
@@ -3002,7 +3022,8 @@ allKitsData["DỤNG CỤ NỘI SOI LẺ"] = [
     "stt": 15,
     "name": "Oftic nịu",
     "code": "",
-    "quantity": 2
+    "quantity": 2,
+    "note": "HƯ 1"
   },
   {
     "stt": 16,
@@ -3012,19 +3033,19 @@ allKitsData["DỤNG CỤ NỘI SOI LẺ"] = [
   },
   {
     "stt": 17,
-    "name": "Bình nửa bàng quang",
+    "name": "Bơm rửa bàng quang thủy tinh",
     "code": "",
     "quantity": 1
   },
   {
     "stt": 18,
-    "name": "Dụng cụ nội soi bàng quang",
+    "name": "Dụng cụ nội soi bàng quang (Bộ Trocal)",
     "code": "",
     "quantity": 4
   },
   {
     "stt": 19,
-    "name": "Cây xén gan",
+    "name": "Cây vén gan",
     "code": "",
     "quantity": 2
   },
@@ -3048,7 +3069,7 @@ allKitsData["DỤNG CỤ NỘI SOI LẺ"] = [
   },
   {
     "stt": 23,
-    "name": "Bộ dụng cụ đốt thạch giao cảm",
+    "name": "Bộ dụng cụ đốt hạch giao cảm",
     "code": "",
     "quantity": 1
   },
@@ -3078,13 +3099,13 @@ allKitsData["DỤNG CỤ NỘI SOI LẺ"] = [
   },
   {
     "stt": 28,
-    "name": "Tay cầm Bibolec",
+    "name": "Tay cầm Biboler",
     "code": "",
     "quantity": 1
   },
   {
     "stt": 29,
-    "name": "Bibolec nhi",
+    "name": "Biboler nhi",
     "code": "",
     "quantity": 1
   },
@@ -3102,7 +3123,7 @@ allKitsData["DỤNG CỤ NỘI SOI LẺ"] = [
   },
   {
     "stt": 32,
-    "name": "Grapee nội soi nhi",
+    "name": "Graper nội soi nhi",
     "code": "",
     "quantity": 3
   },
@@ -3271,7 +3292,8 @@ allKitsData["ĐẠI PHẪU"] = [
     "stt": 18,
     "name": "ALISS NGẮN",
     "code": "EA016R",
-    "quantity": 4
+    "quantity": 4,
+    "note": "HƯ 3"
   },
   {
     "stt": 19,
@@ -3283,13 +3305,15 @@ allKitsData["ĐẠI PHẪU"] = [
     "stt": 20,
     "name": "KỀM KẸP KIM",
     "code": "BM236R",
-    "quantity": 1
+    "quantity": 1,
+    "note": "HƯ"
   },
   {
     "stt": 21,
     "name": "KÉO CẮT CHỈ",
     "code": "",
-    "quantity": 1
+    "quantity": 1,
+    "note": "CÙN"
   },
   {
     "stt": 22,
@@ -3331,7 +3355,8 @@ allKitsData["ĐẠI PHẪU"] = [
     "stt": 28,
     "name": "KÉO MESK",
     "code": "SNOW",
-    "quantity": 1
+    "quantity": 1,
+    "note": "CÙN"
   },
   {
     "stt": "",
@@ -3539,9 +3564,10 @@ allKitsData["LÕM NGỰC"] = [
   },
   {
     "stt": 7,
-    "name": "NHÍP",
+    "name": "NHÍP CÓ MẤU - NHÍP KHÔNG MẤU",
     "code": "",
-    "quantity": 2
+    "quantity": 2,
+    "note": "1-1 ADSON"
   },
   {
     "stt": 8,
@@ -3965,7 +3991,8 @@ allKitsData["NIỆU 2"] = [
     "stt": 25,
     "name": "ALISS",
     "code": "EA014R + EA016R",
-    "quantity": 2
+    "quantity": 2,
+    "note": "HƯ CẢ 2"
   },
   {
     "stt": 26,
@@ -3983,7 +4010,8 @@ allKitsData["NIỆU 2"] = [
     "stt": 28,
     "name": "NHÍP KHÔNG MẤU",
     "code": "BVHD",
-    "quantity": 1
+    "quantity": 1,
+    "note": "HƯ"
   },
   {
     "stt": 29,
@@ -3995,7 +4023,8 @@ allKitsData["NIỆU 2"] = [
     "stt": 30,
     "name": "NHÍP CÓ MẤU",
     "code": "BD537R",
-    "quantity": 1
+    "quantity": 1,
+    "note": "HƯ"
   },
   {
     "stt": 31,
@@ -4011,9 +4040,10 @@ allKitsData["NIỆU 2"] = [
   },
   {
     "stt": 33,
-    "name": "CLAMP CONG",
+    "name": "CLAMP CONG ( BỎ QUA NIỆU 3)",
     "code": "FB465R",
-    "quantity": 1
+    "quantity": 1,
+    "note": "BỎ QUA NIỆU 3"
   },
   {
     "stt": 34,
@@ -4025,25 +4055,29 @@ allKitsData["NIỆU 2"] = [
     "stt": 35,
     "name": "KỀM KẸP KIM",
     "code": "BM275R",
-    "quantity": 1
+    "quantity": 1,
+    "note": "HƯ"
   },
   {
     "stt": 36,
     "name": "KÈM KẸP KIM",
     "code": "BM236R",
-    "quantity": 1
+    "quantity": 1,
+    "note": "HƯ"
   },
   {
     "stt": 37,
     "name": "KÉO CẮT CHỈ",
     "code": "BVHD",
-    "quantity": 1
+    "quantity": 1,
+    "note": "HƯ"
   },
   {
     "stt": 38,
     "name": "KÉO MESK",
     "code": "GERMANY",
-    "quantity": 1
+    "quantity": 1,
+    "note": "HƯ"
   },
   {
     "stt": 39,
@@ -4449,25 +4483,29 @@ allKitsData["NS TAI MŨI HỌNG"] = [
     "stt": 13,
     "name": "KÉO THẲNG",
     "code": "",
-    "quantity": 1
+    "quantity": 1,
+    "note": "CÙN"
   },
   {
     "stt": 14,
     "name": "KÉO CONG",
     "code": "",
-    "quantity": 1
+    "quantity": 1,
+    "note": "CÙN"
   },
   {
     "stt": 15,
     "name": "KELLY CONG",
     "code": "SU2723",
-    "quantity": 1
+    "quantity": 1,
+    "note": "MÒN,HƯ"
   },
   {
     "stt": 16,
     "name": "KỀM KẸP KIM",
     "code": "BM237R",
-    "quantity": 1
+    "quantity": 1,
+    "note": "MÒN,HƯ"
   },
   {
     "stt": 17,
@@ -4770,7 +4808,7 @@ allKitsData["NS TỔNG QUÁT 2"] = [
   },
   {
     "stt": 18,
-    "name": "móc đốt",
+    "name": "Móc đốt",
     "code": "26775UF",
     "quantity": 1,
     "note": "KARL-STORZ"
@@ -5280,13 +5318,15 @@ allKitsData["THẦN KINH 1"] = [
     "stt": 9,
     "name": "KÉO MESK",
     "code": "ROLAN",
-    "quantity": 1
+    "quantity": 1,
+    "note": "CÙN"
   },
   {
     "stt": 10,
     "name": "KÉO CẮT CHỈ",
     "code": "GERMANY",
-    "quantity": 1
+    "quantity": 1,
+    "note": "CÙN"
   },
   {
     "stt": 11,
@@ -5339,7 +5379,8 @@ allKitsData["THẦN KINH 2"] = [
     "stt": 4,
     "name": "KELLY TRUNG",
     "code": "HB0602 (HEBU)",
-    "quantity": 1
+    "quantity": 1,
+    "note": "HEBU"
   },
   {
     "stt": 5,
@@ -5351,7 +5392,8 @@ allKitsData["THẦN KINH 2"] = [
     "stt": 6,
     "name": "NHÍP KHÔNG MẤU",
     "code": "BD029R",
-    "quantity": 1
+    "quantity": 1,
+    "note": "HƯ"
   },
   {
     "stt": 7,
@@ -5363,7 +5405,8 @@ allKitsData["THẦN KINH 2"] = [
     "stt": 8,
     "name": "ALISS",
     "code": "4.HB4302, 2.EA016R (HEBU)",
-    "quantity": 6
+    "quantity": 6,
+    "note": "2.EA016R  (HƯ)"
   },
   {
     "stt": 9,
@@ -5393,7 +5436,8 @@ allKitsData["THẦN KINH 2"] = [
     "stt": 13,
     "name": "KÉO MESK",
     "code": "BC271R",
-    "quantity": 1
+    "quantity": 1,
+    "note": "HƯ"
   },
   {
     "stt": 14,
@@ -5470,7 +5514,8 @@ allKitsData["THẦN KINH 3"] = [
     "stt": 7,
     "name": "NHÍP KHÔNG MẤU",
     "code": "BD031R",
-    "quantity": 1
+    "quantity": 1,
+    "note": "MÒN"
   },
   {
     "stt": 8,
@@ -5506,13 +5551,15 @@ allKitsData["THẦN KINH 3"] = [
     "stt": 13,
     "name": "KÉO MESK",
     "code": "BC265R",
-    "quantity": 1
+    "quantity": 1,
+    "note": "CÙN"
   },
   {
     "stt": 14,
     "name": "KÉO CẮT CHỈ",
     "code": "LAWTON",
-    "quantity": 1
+    "quantity": 1,
+    "note": "CÙN"
   },
   {
     "stt": 15,
@@ -5571,13 +5618,15 @@ allKitsData["THẦN KINH 4"] = [
     "stt": 6,
     "name": "NHÍP KHÔNG MẤU",
     "code": "BD029R",
-    "quantity": 1
+    "quantity": 1,
+    "note": "HƯ, MÒN"
   },
   {
     "stt": 7,
     "name": "ALISS",
     "code": "EA016R",
-    "quantity": 4
+    "quantity": 4,
+    "note": "HƯ 4"
   },
   {
     "stt": 8,
@@ -5589,7 +5638,8 @@ allKitsData["THẦN KINH 4"] = [
     "stt": 9,
     "name": "KỀM KẸP KIM",
     "code": "BM 066R",
-    "quantity": 1
+    "quantity": 1,
+    "note": "HƯ, MÒN"
   },
   {
     "stt": 10,
@@ -5614,7 +5664,7 @@ allKitsData["THẦN KINH 4"] = [
     "name": "KÉO CẮT CHỈ",
     "code": "",
     "quantity": 1,
-    "note": "cùn, mẻ đầu"
+    "note": "CÙN,MẺ"
   },
   {
     "stt": 14,
@@ -5667,7 +5717,8 @@ allKitsData["THẦN KINH 5"] = [
     "stt": 4,
     "name": "NHÍP CÓ MẤU",
     "code": "BD559R",
-    "quantity": 1
+    "quantity": 1,
+    "note": "HƯ,MÒN"
   },
   {
     "stt": 5,
@@ -5713,15 +5764,17 @@ allKitsData["THẦN KINH 5"] = [
   },
   {
     "stt": 12,
-    "name": "KÉO MESK (CÙN)",
+    "name": "KÉO MESK",
     "code": "CÁN VÀNG",
-    "quantity": 1
+    "quantity": 1,
+    "note": "CÙN,MÒN"
   },
   {
     "stt": 13,
-    "name": "KÉO CẮT CHỈ (CÙN)",
+    "name": "KÉO CẮT CHỈ",
     "code": "LAWTON",
-    "quantity": 1
+    "quantity": 1,
+    "note": "CÙN, MÒN"
   },
   {
     "stt": 14,
@@ -5763,7 +5816,7 @@ allKitsData["THẦN KINH 6"] = [
     "name": "KELLY TRUNG",
     "code": "",
     "quantity": 14,
-    "note": "Gãy 1"
+    "note": "GÃY 1"
   },
   {
     "stt": 3,
@@ -5785,9 +5838,10 @@ allKitsData["THẦN KINH 6"] = [
   },
   {
     "stt": 6,
-    "name": "KỀM KẸP KIM ( mòn răng )",
+    "name": "KỀM KẸP KIM",
     "code": "",
-    "quantity": 1
+    "quantity": 1,
+    "note": "MÒN, HƯ"
   },
   {
     "stt": 7,
@@ -5803,15 +5857,17 @@ allKitsData["THẦN KINH 6"] = [
   },
   {
     "stt": 9,
-    "name": "KÉO MESK (cùn)",
+    "name": "KÉO MESK",
     "code": "",
-    "quantity": 1
+    "quantity": 1,
+    "note": "CÙN"
   },
   {
     "stt": 10,
-    "name": "KÉO CẮT CHỈ (cùn)",
+    "name": "KÉO CẮT CHỈ",
     "code": "",
-    "quantity": 1
+    "quantity": 1,
+    "note": "CÙN"
   },
   {
     "stt": 11,
@@ -5888,7 +5944,8 @@ allKitsData["THẦN KINH 7"] = [
     "stt": 8,
     "name": "ALISS",
     "code": "EA016R",
-    "quantity": 6
+    "quantity": 6,
+    "note": "HƯ 3"
   },
   {
     "stt": 9,
@@ -5924,14 +5981,15 @@ allKitsData["THẦN KINH 7"] = [
     "stt": 14,
     "name": "KÉO MESK",
     "code": "BC606R",
-    "quantity": 1
+    "quantity": 1,
+    "note": "CÙN,HƯ"
   },
   {
     "stt": 15,
     "name": "KÉO CẮT CHỈ",
     "code": "05-121",
     "quantity": 1,
-    "note": "cùn, mẻ đầu"
+    "note": "CÙN, MẺ"
   },
   {
     "stt": 16,
@@ -6019,7 +6077,7 @@ allKitsData["THẦN KINH 8"] = [
     "name": "ALISS",
     "code": "EA016R",
     "quantity": 4,
-    "note": "HEBU"
+    "note": "HƯ 1"
   },
   {
     "stt": 10,
@@ -6062,13 +6120,15 @@ allKitsData["THẦN KINH 8"] = [
     "stt": 16,
     "name": "KÉO MESK",
     "code": "HB2258",
-    "quantity": 1
+    "quantity": 1,
+    "note": "CÙN, MÒN,MẺ"
   },
   {
     "stt": 17,
     "name": "KÉO CẮT CHỈ",
     "code": "BC346R",
-    "quantity": 1
+    "quantity": 1,
+    "note": "CÙN, MÒN"
   },
   {
     "stt": 18,
@@ -6122,7 +6182,8 @@ allKitsData["THẦN KINH 9"] = [
     "stt": 2,
     "name": "KELLY TRUNG",
     "code": "BH135R, BH141R, BH135R",
-    "quantity": 15
+    "quantity": 15,
+    "note": "3 LỆCH HÀM"
   },
   {
     "stt": 3,
@@ -6134,13 +6195,15 @@ allKitsData["THẦN KINH 9"] = [
     "stt": 4,
     "name": "NHÍP KHÔNG MẤU",
     "code": "BD031R, BD047R",
-    "quantity": 2
+    "quantity": 2,
+    "note": "HƯ 1, MÒN"
   },
   {
     "stt": 5,
     "name": "ALISS",
     "code": "EA016R, HB4302",
-    "quantity": 6
+    "quantity": 6,
+    "note": "HƯ 2, HỞ HÀM"
   },
   {
     "stt": 6,
@@ -6162,15 +6225,17 @@ allKitsData["THẦN KINH 9"] = [
   },
   {
     "stt": 9,
-    "name": "KÉO MESK ( Cùn )",
+    "name": "KÉO MESK",
     "code": "B0271R",
-    "quantity": 1
+    "quantity": 1,
+    "note": "CÙN,, MẺ"
   },
   {
     "stt": 10,
-    "name": "KÉO CẮT CHỈ ( Cùn )",
+    "name": "KÉO CẮT CHỈ",
     "code": "ROLAN 04113016",
-    "quantity": 1
+    "quantity": 1,
+    "note": "CÙN, MẺ"
   },
   {
     "stt": 11,
@@ -6217,13 +6282,15 @@ allKitsData["THẦN KINH 10"] = [
     "stt": 3,
     "name": "NHÍP CÓ MẤU",
     "code": "BD559R",
-    "quantity": 1
+    "quantity": 1,
+    "note": "MÒN,HƯ"
   },
   {
     "stt": 4,
     "name": "NHÍP KHÔNG MẤU",
     "code": "BD029R",
-    "quantity": 1
+    "quantity": 1,
+    "note": "MÒN,HƯ"
   },
   {
     "stt": 5,
@@ -6248,7 +6315,7 @@ allKitsData["THẦN KINH 10"] = [
     "name": "KỀM KẸP KIM",
     "code": "HB2202 (HEBU)",
     "quantity": 1,
-    "note": "Hư thay tạm pakistan"
+    "note": "HƯ thay tạm pakistan"
   },
   {
     "stt": 9,
@@ -6285,14 +6352,14 @@ allKitsData["THẦN KINH 10"] = [
     "name": "KÉO MESK",
     "code": "05-0620",
     "quantity": 1,
-    "note": "Cùn"
+    "note": "CÙN"
   },
   {
     "stt": 15,
-    "name": "KÉO CẮT CHỈ ( cùn, mẻ đầu )",
+    "name": "KÉO CẮT CHỈ",
     "code": "HB1706 (HEBU)",
     "quantity": 1,
-    "note": "Cùn"
+    "note": "CÙN, MẺ"
   },
   {
     "stt": 16,
@@ -6363,7 +6430,8 @@ allKitsData["THẦN KINH 11"] = [
     "stt": 7,
     "name": "KỀM KẸP KIM",
     "code": "HB2202",
-    "quantity": 1
+    "quantity": 1,
+    "note": "HƯ"
   },
   {
     "stt": 8,
@@ -6379,15 +6447,17 @@ allKitsData["THẦN KINH 11"] = [
   },
   {
     "stt": 10,
-    "name": "KÉO MESK (cùn)",
+    "name": "KÉO MESK",
     "code": "HB2285",
-    "quantity": 1
+    "quantity": 1,
+    "note": "CÙN"
   },
   {
     "stt": 11,
     "name": "KÉO CẮT CHỈ",
     "code": "HB1706",
-    "quantity": 1
+    "quantity": 1,
+    "note": "CÙN"
   },
   {
     "stt": 12,
@@ -6578,19 +6648,22 @@ allKitsData["THẦN KINH 13"] = [
     "stt": 9,
     "name": "FIX XĂNG",
     "code": "HB0772",
-    "quantity": 6
+    "quantity": 6,
+    "note": "HƯ 1"
   },
   {
     "stt": 10,
     "name": "KÉO MESK",
     "code": "HB2285",
-    "quantity": 1
+    "quantity": 1,
+    "note": "CÙN"
   },
   {
     "stt": 11,
     "name": "KÉO CẮT CHỈ",
     "code": "HB1706",
-    "quantity": 1
+    "quantity": 1,
+    "note": "CÙN"
   },
   {
     "stt": 12,
@@ -6614,7 +6687,8 @@ allKitsData["THẦN KINH 13"] = [
     "stt": 15,
     "name": "KÉO MAYO",
     "code": "HB1798",
-    "quantity": 1
+    "quantity": 1,
+    "note": "CÙN"
   },
   {
     "stt": "",
@@ -6661,7 +6735,8 @@ allKitsData["THẦN KINH 14"] = [
     "stt": 6,
     "name": "ALISS",
     "code": "HB4302",
-    "quantity": 6
+    "quantity": 6,
+    "note": "HƯ 1"
   },
   {
     "stt": 7,
@@ -6685,14 +6760,15 @@ allKitsData["THẦN KINH 14"] = [
     "stt": 10,
     "name": "KÉO MESK",
     "code": "HB2285",
-    "quantity": 1
+    "quantity": 1,
+    "note": "CÙN"
   },
   {
     "stt": 11,
     "name": "KÉO CẮT CHỈ (GÃY)",
     "code": "HB1706",
     "quantity": 1,
-    "note": "Gãy"
+    "note": "GÃY 1"
   },
   {
     "stt": 12,
@@ -6717,7 +6793,7 @@ allKitsData["THẦN KINH 14"] = [
     "name": "KÉO MAYO (GÃY)",
     "code": "HB1798",
     "quantity": 1,
-    "note": "Gãy"
+    "note": "GÃY"
   },
   {
     "stt": "",
@@ -6795,7 +6871,7 @@ allKitsData["THẦN KINH 15"] = [
     "name": "KÉO CẮT CHỈ",
     "code": "HB1706",
     "quantity": 1,
-    "note": "2 CÁI"
+    "note": ""
   },
   {
     "stt": 12,
@@ -6819,7 +6895,8 @@ allKitsData["THẦN KINH 15"] = [
     "stt": 15,
     "name": "KÉO MAYO",
     "code": "HB1798",
-    "quantity": 1
+    "quantity": 1,
+    "note": "HƯ, LỆCH"
   },
   {
     "stt": "",
@@ -6976,25 +7053,29 @@ allKitsData["TIỂU PHẪU 2"] = [
     "stt": 7,
     "name": "FIX XĂNG",
     "code": "BF437R",
-    "quantity": 4
+    "quantity": 4,
+    "note": "HƯ 1"
   },
   {
     "stt": 8,
     "name": "KÉO MESK NHỌN",
     "code": "BC161R",
-    "quantity": 1
+    "quantity": 1,
+    "note": "CÙN"
   },
   {
     "stt": 9,
     "name": "KÉO MESK DÀI",
     "code": "BC217R",
-    "quantity": 1
+    "quantity": 1,
+    "note": "CÙN"
   },
   {
     "stt": 10,
     "name": "KÉO CẮT CHỈ",
     "code": "",
-    "quantity": 1
+    "quantity": 1,
+    "note": "CÙN"
   },
   {
     "stt": 11,
@@ -7190,19 +7271,22 @@ allKitsData["TIỂU PHẪU 4"] = [
     "stt": 8,
     "name": "KÉO MESK NHỌN",
     "code": "BC157R",
-    "quantity": 0
+    "quantity": 0,
+    "note": "MÒN,HƯ"
   },
   {
     "stt": 9,
     "name": "KÉO MESK DÀI",
     "code": "BC271R",
-    "quantity": 1
+    "quantity": 1,
+    "note": "MÒN,HƯ"
   },
   {
     "stt": 10,
     "name": "KÉO CẮT CHỈ",
     "code": "50114",
-    "quantity": 1
+    "quantity": 1,
+    "note": "MÒN,HƯ"
   },
   {
     "stt": 11,
@@ -7286,13 +7370,15 @@ allKitsData["TRUNG PHẪU 1"] = [
     "stt": 7,
     "name": "KÉO MESK",
     "code": "BC271",
-    "quantity": 1
+    "quantity": 1,
+    "note": "MÒN,HƯ, CÙN"
   },
   {
     "stt": 8,
     "name": "XÀ MÂU",
     "code": "",
-    "quantity": 1
+    "quantity": 1,
+    "note": "MÒN,HƯ, CÙN"
   },
   {
     "stt": 9,
@@ -7316,7 +7402,8 @@ allKitsData["TRUNG PHẪU 1"] = [
     "stt": 12,
     "name": "NHÍP KHÔNG MẤU",
     "code": "BD031R",
-    "quantity": 1
+    "quantity": 1,
+    "note": "MÒN,HƯ, CÙN"
   },
   {
     "stt": 13,
@@ -7382,7 +7469,8 @@ allKitsData["TRUNG PHẪU 1"] = [
     "stt": 23,
     "name": "KẸP TĂM BÔNG",
     "code": "",
-    "quantity": 1
+    "quantity": 1,
+    "note": "MÒN,HƯ, CÙN"
   },
   {
     "stt": 24,
@@ -7490,14 +7578,15 @@ allKitsData["TRUNG PHẪU 2"] = [
     "stt": 13,
     "name": "KELLY CONG NHỎ",
     "code": "EA315R",
-    "quantity": 15
+    "quantity": 15,
+    "note": "3 LỆCH ĐẦU"
   },
   {
     "stt": 14,
     "name": "ALISS NHỎ",
     "code": "HB4302",
     "quantity": 4,
-    "note": "HEBU"
+    "note": "1 LỆCH ĐẦU"
   },
   {
     "stt": 15,
@@ -7563,14 +7652,15 @@ allKitsData["TRUNG PHẪU 2"] = [
     "stt": 25,
     "name": "KÉO MESK",
     "code": "BC670R",
-    "quantity": 1
+    "quantity": 1,
+    "note": "CÙN"
   },
   {
     "stt": 26,
     "name": "KÉO MAYO",
     "code": "",
     "quantity": 1,
-    "note": "Lệch"
+    "note": "MÒN,HƯ, CÙN"
   },
   {
     "stt": 27,
@@ -7630,7 +7720,8 @@ allKitsData["TV CỔ"] = [
     "stt": 6,
     "name": "CÒ THẲNG",
     "code": "ROLAND",
-    "quantity": 1
+    "quantity": 1,
+    "note": "ĐÃ THANH LÝ 1"
   },
   {
     "stt": 7,
@@ -7936,13 +8027,15 @@ allKitsData["TV LƯNG 1"] = [
     "stt": 18,
     "name": "KÉO CẮT CHỈ",
     "code": "BC547R",
-    "quantity": 1
+    "quantity": 1,
+    "note": "CÙN"
   },
   {
     "stt": 19,
     "name": "KÉO MESK",
     "code": "BC607R",
-    "quantity": 1
+    "quantity": 1,
+    "note": "CÙN"
   },
   {
     "stt": 20,
@@ -8223,19 +8316,22 @@ allKitsData["TV LƯNG 2"] = [
     "stt": 28,
     "name": "KÉO MESK",
     "code": "BC271",
-    "quantity": 1
+    "quantity": 1,
+    "note": "CÙN"
   },
   {
     "stt": 29,
     "name": "KỀM KẸP KIM",
     "code": "125,45018",
-    "quantity": 1
+    "quantity": 1,
+    "note": "MÒN"
   },
   {
     "stt": 30,
     "name": "KỀM KẸP KIM",
     "code": "SU 16062",
-    "quantity": 1
+    "quantity": 1,
+    "note": "MÒN"
   },
   {
     "stt": 31,
@@ -8359,79 +8455,92 @@ allKitsData["VI PHẪU CŨ (MỔ HỞ)"] = [
     "stt": 1,
     "name": "KELLY CONG",
     "code": "",
-    "quantity": 5
+    "quantity": 5,
+    "note": "Nguyên bộ rỉ sét"
   },
   {
     "stt": 2,
     "name": "PARAPOP MÓC",
     "code": "",
-    "quantity": 1
+    "quantity": 1,
+    "note": "Nguyên bộ rỉ sét"
   },
   {
     "stt": 3,
     "name": "SODE CÁNH BƯỚM",
     "code": "",
-    "quantity": 1
+    "quantity": 1,
+    "note": "Nguyên bộ rỉ sét"
   },
   {
     "stt": 4,
     "name": "MÓC DA 4 RĂNG",
     "code": "",
-    "quantity": 3
+    "quantity": 3,
+    "note": "Nguyên bộ rỉ sét"
   },
   {
     "stt": 5,
     "name": "KÉO MESK",
     "code": "",
-    "quantity": 1
+    "quantity": 1,
+    "note": "Nguyên bộ rỉ sét"
   },
   {
     "stt": 6,
     "name": "KỀM KẸP KIM",
     "code": "",
-    "quantity": 1
+    "quantity": 1,
+    "note": "Nguyên bộ rỉ sét"
   },
   {
     "stt": 7,
     "name": "FIXANG",
     "code": "",
-    "quantity": 5
+    "quantity": 5,
+    "note": "Nguyên bộ rỉ sét"
   },
   {
     "stt": 8,
     "name": "XÀ MÂU",
     "code": "",
-    "quantity": 1
+    "quantity": 1,
+    "note": "Nguyên bộ rỉ sét"
   },
   {
     "stt": 9,
     "name": "ỐNG HÚT SỐ 6",
     "code": "",
-    "quantity": 2
+    "quantity": 2,
+    "note": "Nguyên bộ rỉ sét"
   },
   {
     "stt": 10,
     "name": "CÁN DAO SỐ 3",
     "code": "",
-    "quantity": 1
+    "quantity": 1,
+    "note": "Nguyên bộ rỉ sét"
   },
   {
     "stt": 11,
     "name": "MÓC DA NHỌN 1 RĂNG",
     "code": "",
-    "quantity": 3
+    "quantity": 3,
+    "note": "Nguyên bộ rỉ sét"
   },
   {
     "stt": 12,
     "name": "NHÍP MẤU",
     "code": "proset",
-    "quantity": 1
+    "quantity": 1,
+    "note": "Nguyên bộ rỉ sét"
   },
   {
     "stt": 13,
     "name": "LƯỠI CƯA DỌC",
     "code": "hall (5023-131)",
-    "quantity": 1
+    "quantity": 1,
+    "note": "Nguyên bộ rỉ sét"
   },
   {
     "stt": "",
@@ -8455,7 +8564,7 @@ allKitsData["VP CỘT SỐNG"] = [
     "name": "KÉO CẮT CHỈ",
     "code": "",
     "quantity": 0,
-    "note": "gãy"
+    "note": "Gãy, đã thanh lí"
   },
   {
     "stt": 3,
@@ -8545,14 +8654,14 @@ allKitsData["XƯƠNG CHI DƯỚI"] = [
     "name": "KELLY CONG",
     "code": "BH167",
     "quantity": 6,
-    "note": "GÃY 1"
+    "note": "GÃY 1 (đã thanh lí), Hư 2"
   },
   {
     "stt": 6,
     "name": "FIXANG",
     "code": "BF432",
     "quantity": 6,
-    "note": "GÃY 1"
+    "note": "GÃY 1 (đã thanh lí), Hư 3"
   },
   {
     "stt": 7,
@@ -8570,7 +8679,8 @@ allKitsData["XƯƠNG CHI DƯỚI"] = [
     "stt": 9,
     "name": "ALISS",
     "code": "AE026",
-    "quantity": 4
+    "quantity": 4,
+    "note": "HƯ 4"
   },
   {
     "stt": 10,
@@ -8613,14 +8723,14 @@ allKitsData["XƯƠNG CHI DƯỚI"] = [
     "name": "ĐỤC LÒNG MÁNG",
     "code": "FL574",
     "quantity": 2,
-    "note": "Mẻ"
+    "note": "Mẻ 2"
   },
   {
     "stt": 17,
     "name": "ĐỤC THẲNG",
     "code": "FL524",
     "quantity": 2,
-    "note": "Mẻ"
+    "note": "Mẻ 2"
   },
   {
     "stt": 18,
@@ -8676,14 +8786,14 @@ allKitsData["XƯƠNG CHI DƯỚI"] = [
     "name": "KÉO CẮT CHỈ",
     "code": "5060",
     "quantity": 1,
-    "note": "Cùn"
+    "note": "CÙN"
   },
   {
     "stt": 27,
     "name": "KÉO MESK",
     "code": "",
     "quantity": 1,
-    "note": "Cùn"
+    "note": "CÙN"
   },
   {
     "stt": "",
@@ -8713,7 +8823,7 @@ allKitsData["XƯƠNG CHI TRÊN"] = [
     "name": "KELLY CONG DÀI",
     "code": "BH 183",
     "quantity": 8,
-    "note": "GÃY 1"
+    "note": "GÃY 1 đã gửi thanh lý"
   },
   {
     "stt": 4,
@@ -8752,7 +8862,7 @@ allKitsData["XƯƠNG CHI TRÊN"] = [
     "name": "KỀM KẸP KIM NGẮN",
     "code": "",
     "quantity": 1,
-    "note": "HƯ"
+    "note": "HƯ 1 đã gửi thanh lý"
   },
   {
     "stt": 10,
@@ -8803,7 +8913,7 @@ allKitsData["XƯƠNG CHI TRÊN"] = [
     "name": "ĐỤC THẲNG",
     "code": "FL524",
     "quantity": 2,
-    "note": "Mẻ"
+    "note": "Mẻ 2"
   },
   {
     "stt": 18,
