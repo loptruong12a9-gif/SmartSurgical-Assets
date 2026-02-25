@@ -1,4 +1,4 @@
-const CACHE_NAME = 'smart-surgical-v2.1.1-fix';
+const CACHE_NAME = 'smart-surgical-v2.0';
 const ASSETS_TO_CACHE = [
     './',
     './index.html',
@@ -6,7 +6,6 @@ const ASSETS_TO_CACHE = [
     './script.js',
     './github_sync.js',
     './manifest.json',
-    './data.js',
     'https://cdnjs.cloudflare.com/ajax/libs/exceljs/4.3.0/exceljs.min.js',
     'https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js'
 ];
@@ -19,6 +18,7 @@ self.addEventListener('install', (event) => {
 
     event.waitUntil(
         caches.open(CACHE_NAME).then((cache) => {
+            console.log('Opened cache');
             return cache.addAll(ASSETS_TO_CACHE);
         })
     );
@@ -34,6 +34,7 @@ self.addEventListener('activate', (event) => {
             return Promise.all(
                 cacheNames.map((cacheName) => {
                     if (cacheName !== CACHE_NAME) {
+                        console.log('Deleting old cache:', cacheName);
                         return caches.delete(cacheName);
                     }
                 })
@@ -44,12 +45,11 @@ self.addEventListener('activate', (event) => {
 
 // Fetch Event
 self.addEventListener('fetch', (event) => {
-    // Network-first strategy FOR LOCAL data.js ONLY
-    // We check if it's our own origin to avoid intercepting GitHub API calls
-    const url = new URL(event.request.url);
-    if (url.pathname.endsWith('/data.js') && url.origin === self.location.origin) {
+    // Network-first strategy for data.js to always get fresh data
+    if (event.request.url.includes('data.js')) {
         event.respondWith(
             fetch(event.request).catch(() => {
+                // If network fails, try cache as fallback
                 return caches.match(event.request);
             })
         );
