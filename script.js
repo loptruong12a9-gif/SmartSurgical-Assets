@@ -18,12 +18,6 @@
     const exportStatsBtn = document.getElementById('exportStatsBtn');
     const bulkExportBtn = document.getElementById('bulkExportBtn');
 
-    // Global Error Handling (Basic Crash Reporting)
-    window.onerror = function (msg, url, lineNo, columnNo, error) {
-        // Basic error catching for analytics/debugging in future
-        return false;
-    };
-
     if (exportStatsBtn) {
         exportStatsBtn.addEventListener('click', exportStatisticsToExcel);
     }
@@ -527,6 +521,7 @@
         }
 
         modalStatistics.style.display = 'none';
+        document.body.classList.add('modal-open');
         modal.style.display = "block";
         void modal.offsetWidth;
         modal.classList.add('show');
@@ -810,10 +805,15 @@
 
     function closeModal() {
         modal.classList.remove('show');
+        const ghModal = document.getElementById('githubModal');
+        if (ghModal) ghModal.classList.remove('show');
+
         setTimeout(() => {
             modal.style.display = "none";
+            if (ghModal) ghModal.style.display = 'none';
             modalSelection.style.display = 'none';
             modalDetails.style.display = 'none';
+            document.body.classList.remove('modal-open');
             currentCategory = null;
         }, 300);
     }
@@ -831,32 +831,29 @@
     });
 
     // Smart Data Loading - Fetch from GitHub if configured
-    const token = localStorage.getItem('githubToken');
-    const owner = localStorage.getItem('ghOwner');
-    const repo = localStorage.getItem('ghRepo');
+    const token = (localStorage.getItem('githubToken') || '').trim();
+    const owner = (localStorage.getItem('ghOwner') || '').trim();
+    const repo = (localStorage.getItem('ghRepo') || '').trim();
 
     if (token && owner && repo) {
+        console.log("Fetching from GitHub (Initial)...");
         fetch(`https://api.github.com/repos/${encodeURIComponent(owner)}/${encodeURIComponent(repo)}/contents/data.js`, {
-            headers: { 'Authorization': `token ${token}`, 'Accept': 'application/vnd.github.v3+json' }
+            headers: {
+                'Authorization': `Bearer ${token}`,
+                'Accept': 'application/vnd.github.v3+json'
+            }
         })
-            .then(r => r.ok ? r.json() : Promise.reject(new Error("GitHub response not OK")))
+            .then(r => r.ok ? r.json() : Promise.reject("Fetch failed with status: " + r.status))
             .then(data => {
-                const oldScript = document.getElementById('dataScript');
-                if (oldScript) oldScript.remove();
-
                 const script = document.createElement('script');
-                script.id = 'dataScript';
                 script.textContent = decodeURIComponent(escape(atob(data.content)));
                 document.body.appendChild(script);
-
+                console.log("GitHub data loaded");
                 renderCategoryGrid();
                 updateVersionBadge();
             })
-            .catch((err) => {
-                console.warn("GitHub fetch failed:", err);
-                if (err.message && err.message.includes('fetch')) {
-                    alert('Lỗi kết nối GitHub (Failed to fetch). Vui lòng kiểm tra mạng hoặc VPN/Adblock.');
-                }
+            .catch(() => {
+                console.warn("GitHub failed, loading local");
                 loadLocal();
             });
     } else {
@@ -864,24 +861,17 @@
     }
 
     function loadLocal() {
-        const oldScript = document.getElementById('dataScript');
-        if (oldScript) oldScript.remove();
-
         const s = document.createElement('script');
-        s.id = 'dataScript';
         s.src = 'data.js?v=' + Date.now();
         s.onload = () => { renderCategoryGrid(); updateVersionBadge(); };
-        s.onerror = () => {
-            console.error("Local data load failed");
-            alert("Lỗi tải dữ liệu! Vui lòng kiểm tra file data.js");
-        };
+        s.onerror = () => alert("Lỗi tải dữ liệu!");
         document.body.appendChild(s);
     }
 
     function updateVersionBadge() {
         const badge = document.getElementById('appVersion');
         const footerUpdate = document.getElementById('lastUpdateFooter');
-        const versionStr = typeof APP_VERSION !== 'undefined' ? APP_VERSION : "v2.0 PRO (FINAL)";
+        const versionStr = typeof APP_VERSION !== 'undefined' ? APP_VERSION : "v2.1 PRO (FINAL)";
 
         if (badge) {
             badge.textContent = versionStr;
