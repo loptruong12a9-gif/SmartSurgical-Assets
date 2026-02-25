@@ -1,4 +1,4 @@
-const APP_VERSION = "v2.0 PRO (FINAL) (19:46:12 25/2/2026)";
+const APP_VERSION = "v2.0 PRO (FINAL) (19:55:07 25/2/2026)";
 const kitDefinitions = [
     {
         "id": 1,
@@ -5275,7 +5275,8 @@ allKitsData["THẦN KINH 1"] = [
     "stt": 2,
     "name": "KELLY TRUNG",
     "code": "BH135R, BH141R, BH125R, HB0602 (HEBU)",
-    "quantity": 15
+    "quantity": 15,
+    "note": "LỆCH HÀM 5"
   },
   {
     "stt": 3,
@@ -5367,13 +5368,15 @@ allKitsData["THẦN KINH 2"] = [
     "stt": 2,
     "name": "KELLY TRUNG",
     "code": "BH135R",
-    "quantity": 15
+    "quantity": 15,
+    "note": "LỆCH HÀM, MÒN 5"
   },
   {
     "stt": 3,
     "name": "KELLY TRUNG",
     "code": "BH141R",
-    "quantity": 1
+    "quantity": 1,
+    "note": "LỆCH HÀM, MÒN"
   },
   {
     "stt": 4,
@@ -5484,7 +5487,8 @@ allKitsData["THẦN KINH 3"] = [
     "stt": 2,
     "name": "KELLY TRUNG",
     "code": "BH135R",
-    "quantity": 12
+    "quantity": 12,
+    "note": "LỆCH HÀM, MÒN 5"
   },
   {
     "stt": 3,
@@ -5594,7 +5598,8 @@ allKitsData["THẦN KINH 4"] = [
     "stt": 2,
     "name": "KELLY TRUNG",
     "code": "BH135R",
-    "quantity": 12
+    "quantity": 12,
+    "note": "LỆCH HÀM, MÒN 6"
   },
   {
     "stt": 3,
@@ -5711,7 +5716,8 @@ allKitsData["THẦN KINH 5"] = [
     "stt": 3,
     "name": "KELLY TRUNG",
     "code": "BH135R",
-    "quantity": 14
+    "quantity": 14,
+    "note": "LỆCH HÀM, MÒN 3"
   },
   {
     "stt": 4,
@@ -5816,7 +5822,7 @@ allKitsData["THẦN KINH 6"] = [
     "name": "KELLY TRUNG",
     "code": "",
     "quantity": 14,
-    "note": "GÃY 1"
+    "note": "GÃY 1, LỆCH HÀM 3"
   },
   {
     "stt": 3,
@@ -5908,7 +5914,8 @@ allKitsData["THẦN KINH 7"] = [
     "stt": 2,
     "name": "KELLY TRUNG",
     "code": "BH135R",
-    "quantity": 12
+    "quantity": 12,
+    "note": "LỆCH HÀM, MÒN 3"
   },
   {
     "stt": 3,
@@ -6276,7 +6283,8 @@ allKitsData["THẦN KINH 10"] = [
     "stt": 2,
     "name": "KELLY TRUNG",
     "code": "BH135R",
-    "quantity": 14
+    "quantity": 14,
+    "note": "LỆCH HÀM, MÒN 2"
   },
   {
     "stt": 3,
