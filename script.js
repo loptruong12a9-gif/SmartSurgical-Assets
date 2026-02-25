@@ -276,6 +276,28 @@
             });
 
             damagedItems.forEach(item => {
+                // Advanced logic to extract and SUM specific numbers from note
+                // e.g., "Gãy 1, Hư 3" -> 4
+                const noteStr = (item.note || "").toLowerCase();
+                const damageKeywords = ["hư", "gãy", "cùn", "mẻ", "hỏng", "thiếu", "rỉ", "set", "hư hỏng", "hhư", "mòn", "rỉ sét", "lệch", "mất", "cong"];
+
+                let proposalQty = 0;
+                const pattern = new RegExp(`(?:${damageKeywords.join('|')})\\s*(\\d+)|(\\d+)\\s*(?:${damageKeywords.join('|')})`, 'gi');
+                let match;
+                let foundNumbers = false;
+
+                while ((match = pattern.exec(noteStr)) !== null) {
+                    const num = parseInt(match[1] || match[2]);
+                    if (!isNaN(num)) {
+                        proposalQty += num;
+                        foundNumbers = true;
+                    }
+                }
+
+                if (!foundNumbers) {
+                    proposalQty = item.quantity;
+                }
+
                 const tr = document.createElement('tr');
                 tr.className = 'stats-row-damaged';
                 tr.innerHTML = `
@@ -283,6 +305,7 @@
                     <td>${item.name}</td>
                     <td>${item.quantity}</td>
                     <td><span class="damaged-tag">BÁO CÁO</span> ${item.note || 'Cần kiểm tra'}</td>
+                    <td style="text-align: center; font-weight: bold; color: #2563eb;">${proposalQty}</td>
                 `;
                 damagedItemsList.appendChild(tr);
             });
@@ -366,7 +389,7 @@
         sec2Row.getCell(1).font = { name: 'Times New Roman', size: 14, bold: true, color: { argb: 'FFDC2626' } };
         sec2Row.height = 25;
 
-        const header2Row = worksheet.addRow(['STT', 'BỘ DỤNG CỤ', 'TÊN DỤNG CỤ (SỐ LƯỢNG)', 'GHI CHÚ / TÌNH TRẠNG']);
+        const header2Row = worksheet.addRow(['STT', 'BỘ DỤNG CỤ', 'TÊN DỤNG CỤ (SỐ LƯỢNG)', 'GHI CHÚ / TÌNH TRẠNG', 'ĐỀ XUẤT MUA MỚI']);
         header2Row.eachCell((cell) => {
             cell.font = { name: 'Times New Roman', size: 12, bold: true, color: { argb: 'FFFFFFFF' } };
             cell.fill = { type: 'pattern', pattern: 'solid', fgColor: { argb: 'FFDC2626' } };
@@ -408,8 +431,8 @@
         damagedItems.sort((a, b) => a.kit.localeCompare(b.kit, 'vi', { numeric: true }));
 
         if (damagedItems.length === 0) {
-            const emptyRow = worksheet.addRow(['', 'Không có dụng cụ hư hỏng ghi nhận', '', '']);
-            worksheet.mergeCells(`B${emptyRow.number}:D${emptyRow.number}`);
+            const emptyRow = worksheet.addRow(['', 'Không có dụng cụ hư hỏng ghi nhận', '', '', '']);
+            worksheet.mergeCells(`B${emptyRow.number}:E${emptyRow.number}`);
             emptyRow.getCell(2).alignment = { horizontal: 'center' };
             emptyRow.eachCell(cell => {
                 cell.font = { name: 'Times New Roman', size: 12 };
@@ -417,12 +440,37 @@
             });
         } else {
             damagedItems.forEach((item, idx) => {
-                const row = worksheet.addRow([idx + 1, item.kit, item.name, item.note]);
+                // Advanced logic to extract and SUM specific numbers from note
+                const noteStr = (item.note || "").toLowerCase();
+                const damageKeywords = ["hư", "gãy", "cùn", "mẻ", "hỏng", "thiếu", "rỉ", "set", "hư hỏng", "hhư", "mòn", "rỉ sét", "lệch", "mất", "cong"];
+
+                let proposalQty = 0;
+                const pattern = new RegExp(`(?:${damageKeywords.join('|')})\\s*(\\d+)|(\\d+)\\s*(?:${damageKeywords.join('|')})`, 'gi');
+                let match;
+                let foundNumbers = false;
+
+                while ((match = pattern.exec(noteStr)) !== null) {
+                    const num = parseInt(match[1] || match[2]);
+                    if (!isNaN(num)) {
+                        proposalQty += num;
+                        foundNumbers = true;
+                    }
+                }
+
+                if (!foundNumbers) {
+                    proposalQty = item.quantity;
+                }
+
+                const row = worksheet.addRow([idx + 1, item.kit, item.name, item.note, proposalQty]);
                 row.eachCell((cell, colNumber) => {
                     cell.font = { name: 'Times New Roman', size: 12 };
                     cell.border = { top: { style: 'thin' }, left: { style: 'thin' }, bottom: { style: 'thin' }, right: { style: 'thin' } };
-                    if (colNumber === 1) cell.alignment = { horizontal: 'center' };
+                    if (colNumber === 1 || colNumber === 5) cell.alignment = { horizontal: 'center' };
                     if (colNumber === 4) cell.font.color = { argb: 'FFDC2626' };
+                    if (colNumber === 5) {
+                        cell.font.bold = true;
+                        cell.font.color = { argb: 'FF2563EB' }; // Blue color for proposal
+                    }
                 });
             });
         }
