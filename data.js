@@ -1,4 +1,4 @@
-const APP_VERSION = "v2.0 PRO (FINAL) (00:14:18 25/2/2026)";
+const APP_VERSION = "v2.0 PRO (FINAL) (10:42:01 25/2/2026)";
 const kitDefinitions = [
     {
         "id": 1,
@@ -292,7 +292,7 @@ allKitsData["BẮT CON 1"] = [
   },
   {
     "stt": 13,
-    "name": "PARAPOP",
+    "name": "PARAPOP TRUNG",
     "code": "BT021R",
     "quantity": 2
   },
@@ -317,7 +317,7 @@ allKitsData["BẮT CON 2"] = [
     "stt": 1,
     "name": "KELLY TRUNG",
     "code": "BH165R",
-    "quantity": 4,
+    "quantity": 6,
     "note": "6"
   },
   {
@@ -400,7 +400,7 @@ allKitsData["BẮT CON 2"] = [
   },
   {
     "stt": 15,
-    "name": "PARAPOP",
+    "name": "PARAPOP TRUNG",
     "code": "BT021R",
     "quantity": 2
   },
@@ -414,7 +414,7 @@ allKitsData["BẮT CON 2"] = [
     "stt": "",
     "name": "TỔNG CỘNG",
     "code": "",
-    "quantity": 26,
+    "quantity": 28,
     "bold": true
   }
 ];
@@ -436,17 +436,17 @@ allKitsData["BẮT CON 3"] = [
   },
   {
     "stt": 3,
-    "name": "KÉO CẮT CHỈ (CÙN)",
+    "name": "KÉO CẮT CHỈ",
     "code": "54-4034",
     "quantity": 1,
     "note": "CÙN"
   },
   {
     "stt": 4,
-    "name": "KÉO MAYO (CÙN)",
+    "name": "KÉO MAYO",
     "code": "BC557R",
     "quantity": 1,
-    "note": "Cùn"
+    "note": "CÙN"
   },
   {
     "stt": 5,
@@ -1274,9 +1274,10 @@ allKitsData["CTC 1"] = [
   },
   {
     "stt": 2,
-    "name": "VAN SẢN",
+    "name": "VAN SẢN( Bỏ ra lẻ)",
     "code": "EL638",
-    "quantity": 1
+    "quantity": 1,
+    "note": "HẤP LẺ"
   },
   {
     "stt": 3,
@@ -1334,7 +1335,7 @@ allKitsData["CTC 1"] = [
   },
   {
     "stt": 12,
-    "name": "PARAPOP",
+    "name": "PARAPOP TRUNG",
     "code": "BT021R",
     "quantity": 2
   },
@@ -1665,8 +1666,8 @@ allKitsData["CTC 2"] = [
   },
   {
     "stt": 26,
-    "name": "PARAPOP LỚN",
-    "code": "BT021",
+    "name": "PARAPOP TRUNG",
+    "code": "BT021R",
     "quantity": 2
   },
   {
@@ -1970,7 +1971,7 @@ allKitsData["ĐẠI PHẪU"] = [
   },
   {
     "stt": 4,
-    "name": "PARAPOP",
+    "name": "PARAPOP NHỎ",
     "code": "BT020R",
     "quantity": 2
   },
@@ -2229,8 +2230,8 @@ allKitsData["HC Ố CỔ TAY"] = [
   },
   {
     "stt": 15,
-    "name": "PARAPOP NHỌ",
-    "code": "BT020",
+    "name": "PARAPOP NHỎ",
+    "code": "BT020R",
     "quantity": 2,
     "note": ""
   },
@@ -2348,7 +2349,7 @@ allKitsData["LÕM NGỰC"] = [
   },
   {
     "stt": 11,
-    "name": "PARAPOP LỚN",
+    "name": "PARAPOP NHỎ",
     "code": "",
     "quantity": 2
   },
@@ -2688,7 +2689,7 @@ allKitsData["NIỆU 2"] = [
   },
   {
     "stt": 15,
-    "name": "PARAPOP LỚN",
+    "name": "PARAPOP TRUNG",
     "code": "BT021R",
     "quantity": 2
   },
@@ -2796,7 +2797,7 @@ allKitsData["NIỆU 2"] = [
   },
   {
     "stt": 33,
-    "name": "CLAMP CONG",
+    "name": "CLAMP CONG (qua niệu cũ 3)",
     "code": "FB465R",
     "quantity": 1
   },
@@ -2862,7 +2863,7 @@ allKitsData["NIỆU 3"] = [
   {
     "stt": 1,
     "name": "KELLY CONG TRÒN",
-    "code": "",
+    "code": "NIỆU CŨ",
     "quantity": 3
   },
   {
@@ -3011,9 +3012,10 @@ allKitsData["NIỆU 3"] = [
   },
   {
     "stt": 26,
-    "name": "CLAMP RUỘT",
-    "code": "",
-    "quantity": 2
+    "name": "CLAMP RUỘT+ 1 cây từ niệu 2",
+    "code": "FB465R",
+    "quantity": 2,
+    "note": "3"
   },
   {
     "stt": 27,
@@ -4611,7 +4613,7 @@ allKitsData["THẦN KINH 6"] = [
   },
   {
     "stt": 12,
-    "name": "PARABOP LỚN",
+    "name": "PARABOP TRUNG",
     "code": "",
     "quantity": 2
   },
@@ -5190,7 +5192,7 @@ allKitsData["THẦN KINH 11"] = [
   },
   {
     "stt": 13,
-    "name": "PARABOP LỚN",
+    "name": "PARABOP TRUNG",
     "code": "HB3161",
     "quantity": 2
   },
@@ -5393,7 +5395,7 @@ allKitsData["THẦN KINH 13"] = [
   },
   {
     "stt": 13,
-    "name": "PARABOP LỚN",
+    "name": "PARABOP TRUNG",
     "code": "HB3161",
     "quantity": 2
   },
@@ -5495,7 +5497,7 @@ allKitsData["THẦN KINH 14"] = [
   },
   {
     "stt": 13,
-    "name": "PARABOP LỚN",
+    "name": "PARABOP TRUNG",
     "code": "HB3161",
     "quantity": 2
   },
@@ -5598,7 +5600,7 @@ allKitsData["THẦN KINH 15"] = [
   },
   {
     "stt": 13,
-    "name": "PARABOP LỚN",
+    "name": "PARABOP TRUNG",
     "code": "HB3161",
     "quantity": 2
   },
@@ -6144,7 +6146,7 @@ allKitsData["TRUNG PHẪU 1"] = [
   {
     "stt": 18,
     "name": "PARAPOP NHỎ",
-    "code": "BT020",
+    "code": "BT020R",
     "quantity": 2
   },
   {
