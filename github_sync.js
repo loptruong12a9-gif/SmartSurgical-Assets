@@ -1,146 +1,127 @@
 
-// GitHub Sync Logic
+let saveBtn, refreshBtn;
+
 document.addEventListener('DOMContentLoaded', () => {
+    saveBtn = document.getElementById('saveToGithubBtn');
+    refreshBtn = document.getElementById('refreshFromGithubBtn');
     initializeGitHubSync();
+    setupListeners();
 });
 
-function initializeGitHubSync() {
-    // Check if token exists
-    const token = localStorage.getItem('githubToken');
-    const saveBtn = document.getElementById('saveToGithubBtn');
-    const refreshBtn = document.getElementById('refreshFromGithubBtn');
+function setupListeners() {
+    if (refreshBtn) refreshBtn.addEventListener('click', handleSyncClick);
+    if (saveBtn) saveBtn.addEventListener('click', handleSaveClick);
 
-    // Force reload from GitHub with cache busting
+    const configBtn = document.getElementById('configGithubBtn');
+    if (configBtn) configBtn.addEventListener('click', openGhModal);
+
+    const closeGhBtn = document.getElementById('closeGithubModal');
+    if (closeGhBtn) closeGhBtn.addEventListener('click', closeGhModal);
+
+    const saveConfigBtn = document.getElementById('saveConfigBtn');
+    if (saveConfigBtn) saveConfigBtn.addEventListener('click', handleSaveConfig);
+
+    const checkConnBtn = document.getElementById('checkConnBtn');
+    if (checkConnBtn) checkConnBtn.addEventListener('click', handleCheckConnection);
+}
+
+function b64ToUtf8(str) {
+    try {
+        const binary = atob(str);
+        const bytes = new Uint8Array(binary.length);
+        for (let i = 0; i < binary.length; i++) bytes[i] = binary.charCodeAt(i);
+        return new TextDecoder().decode(bytes);
+    } catch (e) {
+        console.error("Decode error:", e);
+        return "";
+    }
+}
+
+function utf8ToB64(str) {
+    const utf8Bytes = new TextEncoder().encode(str);
+    let binary = "";
+    const len = utf8Bytes.byteLength;
+    for (let i = 0; i < len; i++) {
+        binary += String.fromCharCode(utf8Bytes[i]);
+    }
+    return btoa(binary);
+}
+
+async function initializeGitHubSync() {
+    const token = (localStorage.getItem('githubToken') || '').trim();
+    const owner = (localStorage.getItem('ghOwner') || '').trim();
+    const repo = (localStorage.getItem('ghRepo') || '').trim();
+
+    if (!token || !owner || !repo || /[^\x00-\x7F]/.test(token)) return;
+    if (!window.navigator.onLine) return;
+
+    try {
+        const url = `https://api.github.com/repos/${encodeURIComponent(owner)}/${encodeURIComponent(repo)}/contents/data.js?t=${Date.now()}`;
+        const r = await fetch(url, {
+            headers: { 'Authorization': `Bearer ${token}`, 'Accept': 'application/vnd.github.v3+json' }
+        });
+        if (!r.ok) return;
+
+        const data = await r.json();
+        const scriptText = b64ToUtf8(data.content);
+        if (!scriptText) return;
+
+        const script = document.createElement('script');
+        script.id = 'githubDataScript';
+        script.textContent = scriptText;
+        const old = document.getElementById('githubDataScript');
+        if (old) old.remove();
+        document.body.appendChild(script);
+
+        if (typeof renderCategoryGrid === 'function') renderCategoryGrid();
+        const badge = document.getElementById('appVersion');
+        if (badge && typeof APP_VERSION !== 'undefined') badge.textContent = APP_VERSION;
+    } catch (err) {
+        console.warn("Auto sync failed.");
+    }
+}
+
+async function handleSyncClick() {
+    const token = (localStorage.getItem('githubToken') || '').trim();
     const owner = (localStorage.getItem('ghOwner') || '').trim();
     const repo = (localStorage.getItem('ghRepo') || '').trim();
 
     if (!token || !owner || !repo) {
-        alert('Chưa cấu hình GitHub! Vui lòng kiểm tra lại trong phần Cài đặt.');
-        if (refreshBtn) {
-            refreshBtn.innerHTML = '<i class="fa-solid fa-sync"></i>';
-            refreshBtn.disabled = false;
-        }
+        alert('Chưa cấu hình!');
         return;
     }
 
-    console.log("Fetching fresh data from GitHub...");
-    fetch(`https://api.github.com/repos/${encodeURIComponent(owner)}/${encodeURIComponent(repo)}/contents/data.js?t=${Date.now()}`, {
-        headers: {
-            'Authorization': `Bearer ${token}`,
-            'Accept': 'application/vnd.github.v3+json',
-            'Cache-Control': 'no-cache'
-        }
-    })
-        .then(r => r.ok ? r.json() : Promise.reject('Failed'))
-        .then(data => {
-            // Clear old data
-            if (typeof allKitsData !== 'undefined') {
-                Object.keys(allKitsData).forEach(k => delete allKitsData[k]);
-            }
+    refreshBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i>';
+    refreshBtn.disabled = true;
 
-            // Load new data
-            const script = document.createElement('script');
-            script.textContent = decodeURIComponent(escape(atob(data.content)));
-            document.body.appendChild(script);
-
-            // Re-render
-            if (typeof renderCategoryGrid === 'function') renderCategoryGrid();
-
-            // Update version badge
-            const badge = document.getElementById('appVersion');
-            if (badge && typeof APP_VERSION !== 'undefined') {
-                badge.textContent = APP_VERSION;
-            }
-
-            alert('Đã tải dữ liệu mới từ GitHub!');
-            if (refreshBtn) {
-                refreshBtn.innerHTML = '<i class="fa-solid fa-sync"></i>';
-                refreshBtn.disabled = false;
-            }
-        })
-        .catch(err => {
-            alert('Lỗi tải dữ liệu: ' + err);
-            if (refreshBtn) {
-                refreshBtn.innerHTML = '<i class="fa-solid fa-sync"></i>';
-                refreshBtn.disabled = false;
-            }
+    try {
+        const url = `https://api.github.com/repos/${encodeURIComponent(owner)}/${encodeURIComponent(repo)}/contents/data.js?t=${Date.now()}`;
+        const r = await fetch(url, {
+            headers: { 'Authorization': `Bearer ${token}`, 'Accept': 'application/vnd.github.v3+json' }
         });
-}
 
-const configBtn = document.getElementById('configGithubBtn');
-if (configBtn) {
-    configBtn.addEventListener('click', () => {
-        const modal = document.getElementById('githubModal');
-        if (modal) {
-            modal.style.display = 'block';
-            document.body.classList.add('modal-open');
-            // Force layout reflow for animation if needed, or just display
-            void modal.offsetWidth;
-            modal.classList.add('show');
+        if (!r.ok) throw new Error('HTTP ' + r.status);
+        const data = await r.json();
+        const scriptText = b64ToUtf8(data.content);
 
-            document.getElementById('ghToken').value = localStorage.getItem('githubToken') || '';
-            document.getElementById('ghOwner').value = localStorage.getItem('ghOwner') || '';
-            document.getElementById('ghRepo').value = localStorage.getItem('ghRepo') || '';
-        }
-    });
-}
+        const script = document.createElement('script');
+        script.id = 'githubDataScript';
+        script.textContent = scriptText;
+        const old = document.getElementById('githubDataScript');
+        if (old) old.remove();
+        document.body.appendChild(script);
 
-const closeGhModal = document.getElementById('closeGithubModal');
-if (closeGhModal) {
-    closeGhModal.addEventListener('click', () => {
-        const modal = document.getElementById('githubModal');
-        modal.classList.remove('show');
-        setTimeout(() => {
-            modal.style.display = 'none';
-            document.body.classList.remove('modal-open');
-        }, 300);
-    });
-}
+        if (typeof renderCategoryGrid === 'function') renderCategoryGrid();
+        const badge = document.getElementById('appVersion');
+        if (badge && typeof APP_VERSION !== 'undefined') badge.textContent = APP_VERSION;
 
-const saveConfig = document.getElementById('saveConfigBtn');
-if (saveConfig) {
-    saveConfig.addEventListener('click', () => {
-        const token = document.getElementById('ghToken').value.trim();
-        const owner = document.getElementById('ghOwner').value.trim();
-        const repo = document.getElementById('ghRepo').value.trim();
-
-        if (token && owner && repo) {
-            localStorage.setItem('githubToken', token);
-            localStorage.setItem('ghOwner', owner);
-            localStorage.setItem('ghRepo', repo);
-            alert('Đã lưu cấu hình!');
-            const modal = document.getElementById('githubModal');
-            modal.classList.remove('show');
-            setTimeout(() => {
-                modal.style.display = 'none';
-                document.body.classList.remove('modal-open');
-            }, 300);
-
-            if (saveBtn) saveBtn.style.display = 'inline-flex';
-        } else {
-            alert('Vui lòng điền đủ thông tin!');
-        }
-    });
-}
-
-if (saveBtn) {
-    saveBtn.addEventListener('click', async () => {
-        if (!confirm('Bạn có chắc muốn lưu dữ liệu lên GitHub?')) return;
-
-        const originalHtml = saveBtn.innerHTML;
-        saveBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Đang lưu...';
-        saveBtn.disabled = true;
-
-        try {
-            await saveDataToGitHub();
-        } catch (e) {
-            console.error(e);
-            alert('Lỗi: ' + e.message);
-        } finally {
-            saveBtn.innerHTML = originalHtml;
-            saveBtn.disabled = false;
-        }
-    });
+        alert('✓ Đã đồng bộ thành công!');
+    } catch (err) {
+        alert('❌ Lỗi: ' + err.message);
+    } finally {
+        refreshBtn.innerHTML = '<i class="fa-solid fa-sync"></i> <span>Đồng bộ</span>';
+        refreshBtn.disabled = false;
+    }
 }
 
 async function saveDataToGitHub() {
@@ -149,179 +130,168 @@ async function saveDataToGitHub() {
     const repo = (localStorage.getItem('ghRepo') || '').trim();
     const path = 'data.js';
 
-    if (!token || !owner || !repo) throw new Error("Chưa cấu hình GitHub!");
-
-    // Validate Token (Simple check for non-ASCII)
-    if (/[^\x00-\x7F]/.test(token)) {
-        throw new Error("Token chứa ký tự không hợp lệ (có thể do lỗi copy-paste). Vui lòng nhập lại Token.");
-    }
-
-    // 1. Get current SHA
     const getUrl = `https://api.github.com/repos/${encodeURIComponent(owner)}/${encodeURIComponent(repo)}/contents/${path}`;
-    console.log("Saving to GitHub:", getUrl);
-
     const getResp = await fetch(getUrl, {
-        headers: {
-            'Authorization': `Bearer ${token}`,
-            'Accept': 'application/vnd.github.v3+json'
-        }
+        headers: { 'Authorization': `Bearer ${token}`, 'Accept': 'application/vnd.github.v3+json' }
     });
 
     let sha = null;
     if (getResp.ok) {
         const getData = await getResp.json();
         sha = getData.sha;
-    } else if (getResp.status === 401 || getResp.status === 403) {
-        throw new Error("Lỗi xác thực (401/403). Vui lòng kiểm tra lại GitHub Token.");
-    } else if (getResp.status !== 404) {
-        const errorData = await getResp.json().catch(() => ({}));
-        throw new Error(`Không thể kết nối GitHub (Status: ${getResp.status}): ${errorData.message || 'Lỗi mạng'}`);
     }
 
-    // 2. Construct Content
-    let modifiedNotes = JSON.parse(localStorage.getItem('kitModifiedNotes') || '{}');
-    let modifiedNames = JSON.parse(localStorage.getItem('kitModifiedNames') || '{}');
-    let modifiedSTTs = JSON.parse(localStorage.getItem('kitModifiedSTTs') || '{}');
-    let modifiedCodes = JSON.parse(localStorage.getItem('kitModifiedCodes') || '{}');
-    let modifiedQuantities = JSON.parse(localStorage.getItem('kitModifiedQuantities') || '{}');
+    const mods = {
+        notes: JSON.parse(localStorage.getItem('kitModifiedNotes') || '{}'),
+        names: JSON.parse(localStorage.getItem('kitModifiedNames') || '{}'),
+        stts: JSON.parse(localStorage.getItem('kitModifiedSTTs') || '{}'),
+        codes: JSON.parse(localStorage.getItem('kitModifiedCodes') || '{}'),
+        qtys: JSON.parse(localStorage.getItem('kitModifiedQuantities') || '{}')
+    };
 
-    // Use global kitDefinitions and allKitsData
-    // We assume they are available globally
     const dateStr = new Date().toLocaleString('vi-VN');
-
-    // Optimization: Use an array and join for faster large string building
-    const contentLines = [
-        `const APP_VERSION = "v2.1 PRO (FINAL) (${dateStr})";`,
-        `const kitDefinitions = ${JSON.stringify(kitDefinitions, null, 4)};`,
-        `let allKitsData = {};`,
-        '',
-        `function initializeData() {`,
-        `    kitDefinitions.forEach(def => {`,
-        `        if (def.count === 1) {`,
-        `            if (!allKitsData[def.prefix]) allKitsData[def.prefix] = [];`,
-        `        } else if (def.count > 1) {`,
-        `            for (let i = 1; i <= def.count; i++) {`,
-        `                const key = \`\${def.prefix} \${i}\`;`,
-        `                if (!allKitsData[key]) allKitsData[key] = [];`,
-        `            }`,
-        `        }`,
-        `        if (def.extraSubKits) {`,
-        `            def.extraSubKits.forEach(subName => {`,
-        `                if (!allKitsData[subName]) allKitsData[subName] = [];`,
-        `            });`,
-        `        }`,
-        `    });`,
-        `}`,
-        `initializeData();`,
-        ''
-    ];
+    // USE var INSTEAD OF const TO ALLOW RE-DECLARATION
+    let content = `var APP_VERSION = "v2.1 PRO (FINAL) (${dateStr})";\n`;
+    content += `var kitDefinitions = ${JSON.stringify(kitDefinitions, null, 4)};\n`;
+    content += `var allKitsData = allKitsData || {};\n\nfunction initializeData() {\n    kitDefinitions.forEach(def => {\n        const prefix = def.prefix.normalize('NFC');\n        if (def.count === 1) { if (!allKitsData[prefix]) allKitsData[prefix] = []; }\n        else if (def.count > 1) {\n            for (let i = 1; i <= def.count; i++) {\n                const key = \`\${prefix} \${i}\`;\n                if (!allKitsData[key]) allKitsData[key] = [];\n            }\n        }\n        if (def.extraSubKits) { def.extraSubKits.forEach(name => { const sub = name.normalize('NFC'); if (!allKitsData[sub]) allKitsData[sub] = []; }); }\n    });\n}\ninitializeData();\n\n`;
 
     const keys = Object.keys(allKitsData).sort((a, b) => a.localeCompare(b, 'vi', { numeric: true }));
 
-    for (const key of keys) {
-        const rawItems = allKitsData[key];
+    for (let keyRaw of keys) {
+        const key = keyRaw.normalize('NFC');
+        const raw = allKitsData[keyRaw];
+        const processed = [];
+        let total = 0;
         let sttCounter = 1;
-        let totalQty = 0;
-        let hasTotalRow = false;
 
-        // 1. First pass: Apply modifications and find/calculate total
-        const mergedItems = rawItems.map((item, index) => {
-            const newItem = { ...item };
-            const nameKey = `${key}-name-${index}`;
-            const codeKey = `${key}-code-${index}`;
-            const qtyKey = `${key}-qty-${index}`;
-            const noteKey = `${key}-note-${index}`;
+        for (let i = 0; i < raw.length; i++) {
+            const item = { ...raw[i] };
+            const kName = `${key}-name-${i}`;
+            const kCode = `${key}-code-${i}`;
+            const kQty = `${key}-qty-${i}`;
+            const kNote = `${key}-note-${i}`;
+            const kStt = `${key}-stt-${i}`;
 
-            if (modifiedNames[nameKey] !== undefined) newItem.name = modifiedNames[nameKey];
-            if (modifiedCodes[codeKey] !== undefined) newItem.code = modifiedCodes[codeKey];
-            if (modifiedNotes[noteKey] !== undefined) newItem.note = modifiedNotes[noteKey];
-            if (modifiedQuantities[qtyKey] !== undefined) {
-                const q = modifiedQuantities[qtyKey];
-                newItem.quantity = (q === '-' || q === '' || isNaN(parseInt(q))) ? 0 : parseInt(q);
+            if (mods.names[kName] !== undefined) item.name = mods.names[kName] === "undefined" ? "" : mods.names[kName];
+            if (mods.codes[kCode] !== undefined) item.code = mods.codes[kCode] === "undefined" ? "" : mods.codes[kCode];
+            if (mods.notes[kNote] !== undefined) item.note = mods.notes[kNote] === "undefined" ? "" : mods.notes[kNote];
+            if (mods.qtys[kQty] !== undefined) {
+                const q = mods.qtys[kQty];
+                item.quantity = (q === '-' || q === '' || isNaN(q) || q === "undefined") ? 0 : parseInt(q);
             }
 
-            const isTotalRow = (newItem.name && newItem.name.toLowerCase().includes("tông cộng")) || newItem.bold;
-            if (isTotalRow) {
-                hasTotalRow = true;
-                newItem.name = "TỔNG CỘNG";
-                newItem.bold = true;
+            const isTotal = (item.name && item.name.toLowerCase().includes("tổng cộng")) || item.bold;
+            if (isTotal) {
+                item.name = "TỔNG CỘNG";
+                item.bold = true;
+                item.stt = mods.stts[kStt] !== undefined ? mods.stts[kStt] : "";
             } else {
-                totalQty += (newItem.quantity || 0);
-            }
-            return newItem;
-        });
-
-        // 2. Second pass: Set STT and finalize Totals
-        const finalItems = mergedItems.map((item, index) => {
-            const sttKey = `${key}-stt-${index}`;
-            const isTotalRow = item.bold || (item.name && item.name.toUpperCase().includes("TỔNG CỘNG"));
-
-            if (isTotalRow) {
-                item.stt = modifiedSTTs[sttKey] !== undefined ? modifiedSTTs[sttKey] : "";
-                item.quantity = totalQty;
-            } else {
-                if (modifiedSTTs[sttKey] !== undefined && modifiedSTTs[sttKey] !== "") {
-                    item.stt = modifiedSTTs[sttKey];
-                    if (!isNaN(parseInt(item.stt))) sttCounter = parseInt(item.stt) + 1;
+                total += (item.quantity || 0);
+                if (mods.stts[kStt] !== undefined && mods.stts[kStt] !== "") {
+                    item.stt = mods.stts[kStt];
+                    if (!isNaN(item.stt)) sttCounter = parseInt(item.stt) + 1;
                 } else {
                     item.stt = sttCounter++;
                 }
             }
-            return item;
-        });
-
-        // 3. Add Total row if missing
-        if (!hasTotalRow && rawItems.length > 0) {
-            finalItems.push({
-                stt: "",
-                name: "TỔNG CỘNG",
-                code: "",
-                quantity: totalQty,
-                bold: true
-            });
+            processed.push(item);
         }
 
-        contentLines.push(`// Data for ${key}`);
-        contentLines.push(`allKitsData["${key}"] = ${JSON.stringify(finalItems, null, 2)};`);
+        let totalExist = false;
+        for (let p of processed) {
+            if (p.bold && p.name === "TỔNG CỘNG") {
+                p.quantity = total;
+                totalExist = true;
+                break;
+            }
+        }
+        if (!totalExist && raw.length > 0) {
+            processed.push({ stt: "", name: "TỔNG CỘNG", code: "", quantity: total, bold: true });
+        }
 
-        if (rawItems.footer) {
-            contentLines.push(`allKitsData["${key}"].footer = ${JSON.stringify(rawItems.footer)};`);
+        content += `// Data for ${key}\nallKitsData["${key}"] = ${JSON.stringify(processed, null, 2)};\n`;
+        let footerText = raw.footer || "";
+        if (key === "DỤNG CỤ MỔ HỞ LẺ" && (footerText === "" || footerText.includes("ĐANG CHỜ"))) {
+            footerText = "ĐÃ KIỂM";
+        }
+        if (footerText) {
+            content += `allKitsData["${key}"].footer = ${JSON.stringify(footerText)};\n`;
         }
     }
 
-    const fileContent = contentLines.join('\n');
-
-    // Encode
-    // handling utf8 strings for base64
-    const contentEncoded = btoa(unescape(encodeURIComponent(fileContent)));
-
-    // 3. PUT
-    const putBody = {
-        message: `Cập nhật dữ liệu từ App (${dateStr})`,
-        content: contentEncoded
-    };
-    if (sha) putBody.sha = sha;
+    const b64 = utf8ToB64(content);
 
     const putResp = await fetch(getUrl, {
         method: 'PUT',
         headers: {
             'Authorization': `Bearer ${token}`,
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
+            'Accept': 'application/vnd.github.v3+json'
         },
-        body: JSON.stringify(putBody)
+        body: JSON.stringify({ message: `Update Assets (${dateStr})`, content: b64, sha })
     });
 
-    if (!putResp.ok) {
-        const err = await putResp.json().catch(() => ({ message: putResp.statusText }));
-        const errorMsg = `Lỗi GitHub (${putResp.status}): ${err.message}\nURL: ${getUrl}`;
-        console.error("GitHub Sync Error:", putResp, err);
-        throw new Error(errorMsg);
-    }
+    if (!putResp.ok) throw new Error('Status: ' + putResp.status);
 
-    if (confirm('Lưu thành công! Dữ liệu đã được cập nhật trên GitHub.\nBạn có muốn tải lại trang để xóa các chỉnh sửa tạm thời?')) {
-        // Clear temp storage because we saved it permanently
-        localStorage.removeItem('kitModifiedNotes');
-        localStorage.removeItem('kitModifiedNames');
-        location.reload();
+    localStorage.removeItem('kitModifiedNotes');
+    localStorage.removeItem('kitModifiedNames');
+    localStorage.removeItem('kitModifiedSTTs');
+    localStorage.removeItem('kitModifiedCodes');
+    localStorage.removeItem('kitModifiedQuantities');
+    alert('✓ Đã sao lưu thành công!');
+    location.reload();
+}
+
+async function handleSaveClick() {
+    if (!confirm('Lưu dữ liệu?')) return;
+    const oldHtml = saveBtn.innerHTML;
+    saveBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i>';
+    saveBtn.disabled = true;
+    try { await saveDataToGitHub(); }
+    catch (e) { alert('Lỗi: ' + e.message); }
+    finally {
+        saveBtn.innerHTML = oldHtml;
+        saveBtn.disabled = false;
     }
+}
+
+function openGhModal() {
+    const m = document.getElementById('githubModal');
+    if (m) {
+        m.style.display = 'block'; m.classList.add('show');
+        document.getElementById('ghToken').value = localStorage.getItem('githubToken') || '';
+        document.getElementById('ghOwner').value = localStorage.getItem('ghOwner') || '';
+        document.getElementById('ghRepo').value = localStorage.getItem('ghRepo') || '';
+    }
+}
+
+function closeGhModal() {
+    const m = document.getElementById('githubModal');
+    if (m) { m.classList.remove('show'); setTimeout(() => m.style.display = 'none', 300); }
+}
+
+function handleSaveConfig() {
+    const t = document.getElementById('ghToken').value.trim();
+    const o = document.getElementById('ghOwner').value.trim();
+    const r = document.getElementById('ghRepo').value.trim();
+    if (t && o && r) {
+        localStorage.setItem('githubToken', t); localStorage.setItem('ghOwner', o); localStorage.setItem('ghRepo', r);
+        alert('Đã lưu!'); closeGhModal();
+    } else alert('Điền đủ thông tin!');
+}
+
+async function handleCheckConnection() {
+    const t = document.getElementById('ghToken').value.trim();
+    const o = document.getElementById('ghOwner').value.trim();
+    const r = document.getElementById('ghRepo').value.trim();
+    const btn = document.getElementById('checkConnBtn');
+    if (!btn) return;
+    btn.disabled = true;
+    try {
+        const res = await fetch(`https://api.github.com/repos/${encodeURIComponent(o)}/${encodeURIComponent(r)}/contents/data.js`, {
+            headers: { 'Authorization': `Bearer ${t}`, 'Accept': 'application/vnd.github.v3+json' }
+        });
+        alert(res.ok ? '✓ OK' : '❌ ' + res.status);
+    } catch (e) { alert('❌ ' + e.message); }
+    finally { btn.disabled = false; }
 }
