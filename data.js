@@ -1,4 +1,4 @@
-var APP_VERSION = "v2.1 PRO (FINAL) (00:44:45 26/2/2026)";
+var APP_VERSION = "v2.1 PRO (FINAL) (00:51:11 26/2/2026)";
 var kitDefinitions = [
     {
         "id": 1,
