@@ -10,137 +10,137 @@ function initializeGitHubSync() {
     const saveBtn = document.getElementById('saveToGithubBtn');
     const refreshBtn = document.getElementById('refreshFromGithubBtn');
 
-    if (token) {
-        if (saveBtn) saveBtn.style.display = 'inline-flex';
-        if (refreshBtn) refreshBtn.style.display = 'inline-flex';
+    // Force reload from GitHub with cache busting
+    const owner = (localStorage.getItem('ghOwner') || '').trim();
+    const repo = (localStorage.getItem('ghRepo') || '').trim();
+
+    if (!token || !owner || !repo) {
+        alert('Chưa cấu hình GitHub! Vui lòng kiểm tra lại trong phần Cài đặt.');
+        if (refreshBtn) {
+            refreshBtn.innerHTML = '<i class="fa-solid fa-sync"></i>';
+            refreshBtn.disabled = false;
+        }
+        return;
     }
 
-    // Refresh button handler
-    if (refreshBtn) {
-        refreshBtn.addEventListener('click', () => {
-            refreshBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i>';
-            refreshBtn.disabled = true;
+    console.log("Fetching fresh data from GitHub...");
+    fetch(`https://api.github.com/repos/${encodeURIComponent(owner)}/${encodeURIComponent(repo)}/contents/data.js?t=${Date.now()}`, {
+        headers: {
+            'Authorization': `Bearer ${token}`,
+            'Accept': 'application/vnd.github.v3+json',
+            'Cache-Control': 'no-cache'
+        }
+    })
+        .then(r => r.ok ? r.json() : Promise.reject('Failed'))
+        .then(data => {
+            // Clear old data
+            if (typeof allKitsData !== 'undefined') {
+                Object.keys(allKitsData).forEach(k => delete allKitsData[k]);
+            }
 
-            // Force reload from GitHub with cache busting
-            const owner = localStorage.getItem('ghOwner');
-            const repo = localStorage.getItem('ghRepo');
+            // Load new data
+            const script = document.createElement('script');
+            script.textContent = decodeURIComponent(escape(atob(data.content)));
+            document.body.appendChild(script);
 
-            fetch(`https://api.github.com/repos/${encodeURIComponent(owner)}/${encodeURIComponent(repo)}/contents/data.js?t=${Date.now()}`, {
-                headers: {
-                    'Authorization': `token ${token}`,
-                    'Accept': 'application/vnd.github.v3+json',
-                    'Cache-Control': 'no-cache'
-                }
-            })
-                .then(r => r.ok ? r.json() : Promise.reject('Failed'))
-                .then(data => {
-                    // Clear old data
-                    if (typeof allKitsData !== 'undefined') {
-                        Object.keys(allKitsData).forEach(k => delete allKitsData[k]);
-                    }
+            // Re-render
+            if (typeof renderCategoryGrid === 'function') renderCategoryGrid();
 
-                    // Load new data
-                    const oldScript = document.getElementById('dataScript');
-                    if (oldScript) oldScript.remove();
+            // Update version badge
+            const badge = document.getElementById('appVersion');
+            if (badge && typeof APP_VERSION !== 'undefined') {
+                badge.textContent = APP_VERSION;
+            }
 
-                    const script = document.createElement('script');
-                    script.id = 'dataScript';
-                    script.textContent = decodeURIComponent(escape(atob(data.content)));
-                    document.body.appendChild(script);
-
-                    // Re-render
-                    renderCategoryGrid();
-
-                    // Update version badge
-                    const badge = document.getElementById('appVersion');
-                    if (badge && typeof APP_VERSION !== 'undefined') {
-                        badge.textContent = APP_VERSION;
-                    }
-
-                    alert('Đã tải dữ liệu mới từ GitHub!');
-                    refreshBtn.innerHTML = '<i class="fa-solid fa-sync"></i>';
-                    refreshBtn.disabled = false;
-                })
-                .catch(err => {
-                    let msg = err.toString();
-                    if (msg.includes('Failed to fetch')) {
-                        msg = "Lỗi kết nối mạng hoặc GitHub bị chặn (Failed to fetch).";
-                    }
-                    alert('Lỗi tải dữ liệu: ' + msg);
-                    refreshBtn.innerHTML = '<i class="fa-solid fa-sync"></i>';
-                    refreshBtn.disabled = false;
-                });
-        });
-    }
-
-    const configBtn = document.getElementById('configGithubBtn');
-    if (configBtn) {
-        configBtn.addEventListener('click', () => {
-            const modal = document.getElementById('githubModal');
-            if (modal) {
-                modal.style.display = 'block';
-                // Force layout reflow for animation if needed, or just display
-                void modal.offsetWidth;
-                modal.classList.add('show');
-
-                document.getElementById('ghToken').value = localStorage.getItem('githubToken') || '';
-                document.getElementById('ghOwner').value = localStorage.getItem('ghOwner') || '';
-                document.getElementById('ghRepo').value = localStorage.getItem('ghRepo') || '';
+            alert('Đã tải dữ liệu mới từ GitHub!');
+            if (refreshBtn) {
+                refreshBtn.innerHTML = '<i class="fa-solid fa-sync"></i>';
+                refreshBtn.disabled = false;
+            }
+        })
+        .catch(err => {
+            alert('Lỗi tải dữ liệu: ' + err);
+            if (refreshBtn) {
+                refreshBtn.innerHTML = '<i class="fa-solid fa-sync"></i>';
+                refreshBtn.disabled = false;
             }
         });
-    }
+}
 
-    const closeGhModal = document.getElementById('closeGithubModal');
-    if (closeGhModal) {
-        closeGhModal.addEventListener('click', () => {
+const configBtn = document.getElementById('configGithubBtn');
+if (configBtn) {
+    configBtn.addEventListener('click', () => {
+        const modal = document.getElementById('githubModal');
+        if (modal) {
+            modal.style.display = 'block';
+            document.body.classList.add('modal-open');
+            // Force layout reflow for animation if needed, or just display
+            void modal.offsetWidth;
+            modal.classList.add('show');
+
+            document.getElementById('ghToken').value = localStorage.getItem('githubToken') || '';
+            document.getElementById('ghOwner').value = localStorage.getItem('ghOwner') || '';
+            document.getElementById('ghRepo').value = localStorage.getItem('ghRepo') || '';
+        }
+    });
+}
+
+const closeGhModal = document.getElementById('closeGithubModal');
+if (closeGhModal) {
+    closeGhModal.addEventListener('click', () => {
+        const modal = document.getElementById('githubModal');
+        modal.classList.remove('show');
+        setTimeout(() => {
+            modal.style.display = 'none';
+            document.body.classList.remove('modal-open');
+        }, 300);
+    });
+}
+
+const saveConfig = document.getElementById('saveConfigBtn');
+if (saveConfig) {
+    saveConfig.addEventListener('click', () => {
+        const token = document.getElementById('ghToken').value.trim();
+        const owner = document.getElementById('ghOwner').value.trim();
+        const repo = document.getElementById('ghRepo').value.trim();
+
+        if (token && owner && repo) {
+            localStorage.setItem('githubToken', token);
+            localStorage.setItem('ghOwner', owner);
+            localStorage.setItem('ghRepo', repo);
+            alert('Đã lưu cấu hình!');
             const modal = document.getElementById('githubModal');
             modal.classList.remove('show');
-            setTimeout(() => { modal.style.display = 'none'; }, 300);
-        });
-    }
+            setTimeout(() => {
+                modal.style.display = 'none';
+                document.body.classList.remove('modal-open');
+            }, 300);
 
-    const saveConfig = document.getElementById('saveConfigBtn');
-    if (saveConfig) {
-        saveConfig.addEventListener('click', () => {
-            const token = document.getElementById('ghToken').value.trim();
-            const owner = document.getElementById('ghOwner').value.trim();
-            const repo = document.getElementById('ghRepo').value.trim();
+            if (saveBtn) saveBtn.style.display = 'inline-flex';
+        } else {
+            alert('Vui lòng điền đủ thông tin!');
+        }
+    });
+}
 
-            if (token && owner && repo) {
-                localStorage.setItem('githubToken', token);
-                localStorage.setItem('ghOwner', owner);
-                localStorage.setItem('ghRepo', repo);
-                alert('Đã lưu cấu hình!');
-                const modal = document.getElementById('githubModal');
-                modal.classList.remove('show');
-                setTimeout(() => { modal.style.display = 'none'; }, 300);
+if (saveBtn) {
+    saveBtn.addEventListener('click', async () => {
+        if (!confirm('Bạn có chắc muốn lưu dữ liệu lên GitHub?')) return;
 
-                if (saveBtn) saveBtn.style.display = 'inline-flex';
-            } else {
-                alert('Vui lòng điền đủ thông tin!');
-            }
-        });
-    }
+        const originalHtml = saveBtn.innerHTML;
+        saveBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Đang lưu...';
+        saveBtn.disabled = true;
 
-    if (saveBtn) {
-        saveBtn.addEventListener('click', async () => {
-            if (!confirm('Bạn có chắc muốn lưu dữ liệu lên GitHub?')) return;
-
-            const originalHtml = saveBtn.innerHTML;
-            saveBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Đang lưu...';
-            saveBtn.disabled = true;
-
-            try {
-                await saveDataToGitHub();
-            } catch (e) {
-                console.error(e);
-                alert('Lỗi: ' + e.message);
-            } finally {
-                saveBtn.innerHTML = originalHtml;
-                saveBtn.disabled = false;
-            }
-        });
-    }
+        try {
+            await saveDataToGitHub();
+        } catch (e) {
+            console.error(e);
+            alert('Lỗi: ' + e.message);
+        } finally {
+            saveBtn.innerHTML = originalHtml;
+            saveBtn.disabled = false;
+        }
+    });
 }
 
 async function saveDataToGitHub() {
@@ -157,11 +157,12 @@ async function saveDataToGitHub() {
     }
 
     // 1. Get current SHA
-    // Encode components to ensure valid URL
     const getUrl = `https://api.github.com/repos/${encodeURIComponent(owner)}/${encodeURIComponent(repo)}/contents/${path}`;
+    console.log("Saving to GitHub:", getUrl);
+
     const getResp = await fetch(getUrl, {
         headers: {
-            'Authorization': `token ${token}`,
+            'Authorization': `Bearer ${token}`,
             'Accept': 'application/vnd.github.v3+json'
         }
     });
@@ -170,8 +171,11 @@ async function saveDataToGitHub() {
     if (getResp.ok) {
         const getData = await getResp.json();
         sha = getData.sha;
+    } else if (getResp.status === 401 || getResp.status === 403) {
+        throw new Error("Lỗi xác thực (401/403). Vui lòng kiểm tra lại GitHub Token.");
     } else if (getResp.status !== 404) {
-        throw new Error("Không thể kết nối GitHub (Get SHA) - Kiểm tra Token/Mạng");
+        const errorData = await getResp.json().catch(() => ({}));
+        throw new Error(`Không thể kết nối GitHub (Status: ${getResp.status}): ${errorData.message || 'Lỗi mạng'}`);
     }
 
     // 2. Construct Content
@@ -187,7 +191,7 @@ async function saveDataToGitHub() {
 
     // Optimization: Use an array and join for faster large string building
     const contentLines = [
-        `const APP_VERSION = "v2.1.1 PRO (FINAL) (${dateStr})";`,
+        `const APP_VERSION = "v2.1 PRO (FINAL) (${dateStr})";`,
         `const kitDefinitions = ${JSON.stringify(kitDefinitions, null, 4)};`,
         `let allKitsData = {};`,
         '',
@@ -301,7 +305,7 @@ async function saveDataToGitHub() {
     const putResp = await fetch(getUrl, {
         method: 'PUT',
         headers: {
-            'Authorization': `token ${token}`,
+            'Authorization': `Bearer ${token}`,
             'Content-Type': 'application/json'
         },
         body: JSON.stringify(putBody)
@@ -315,10 +319,9 @@ async function saveDataToGitHub() {
     }
 
     if (confirm('Lưu thành công! Dữ liệu đã được cập nhật trên GitHub.\nBạn có muốn tải lại trang để xóa các chỉnh sửa tạm thời?')) {
-        // Clear ALL temp storage keys because we saved them permanently
-        ['kitModifiedNotes', 'kitModifiedNames', 'kitModifiedSTTs', 'kitModifiedCodes', 'kitModifiedQuantities'].forEach(key => {
-            localStorage.removeItem(key);
-        });
+        // Clear temp storage because we saved it permanently
+        localStorage.removeItem('kitModifiedNotes');
+        localStorage.removeItem('kitModifiedNames');
         location.reload();
     }
 }
