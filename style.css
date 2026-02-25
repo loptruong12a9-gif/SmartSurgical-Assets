@@ -37,11 +37,17 @@ body {
     min-height: 100vh;
 }
 
+body.modal-open {
+    overflow: hidden;
+    height: 100vh;
+}
+
+
 
 .app-container {
     max-width: 1280px;
     margin: 0 auto;
-    padding: env(safe-area-inset-top, 10px) env(safe-area-inset-right, clamp(10px, 4vw, 30px)) env(safe-area-inset-bottom, 20px) env(safe-area-inset-left, clamp(10px, 4vw, 30px));
+    padding: clamp(10px, 4vw, 30px);
 }
 
 /* Header Styles */
@@ -383,16 +389,18 @@ h1 {
 .modal {
     display: none;
     position: fixed;
-    z-index: 1000;
+    z-index: 10000;
+    /* Tăng z-index để luôn ở trên cùng */
     left: 0;
     top: 0;
-    width: 100vw;
-    height: 100vh;
+    width: 100%;
+    height: 100%;
     background-color: rgba(15, 23, 42, 0.4);
     backdrop-filter: blur(8px);
     -webkit-backdrop-filter: blur(8px);
     opacity: 0;
     transition: opacity 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    overflow: hidden;
 }
 
 .modal.show {
@@ -403,7 +411,6 @@ h1 {
     background-color: #fff;
     margin: 3% auto;
     padding: 0;
-    padding-bottom: env(safe-area-inset-bottom, 0);
     border-radius: var(--radius-lg);
     box-shadow: var(--shadow-lg);
     width: 92%;
@@ -418,6 +425,7 @@ h1 {
     overflow: hidden;
 }
 
+
 .modal.show .modal-content {
     transform: scale(1) translateY(0);
 }
@@ -428,16 +436,25 @@ h1 {
     font-size: 28px;
     font-weight: bold;
     position: absolute;
-    right: 25px;
-    top: 20px;
+    right: 20px;
+    top: 15px;
     cursor: pointer;
-    z-index: 10;
-    transition: color 0.2s;
+    z-index: 100;
+    transition: all 0.2s;
+    width: 44px;
+    height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background: rgba(0, 0, 0, 0.02);
 }
 
 .close-btn:hover {
     color: var(--accent-color);
+    background: rgba(244, 63, 94, 0.1);
 }
+
 
 #modalTitle {
     padding: 24px 30px;
@@ -708,6 +725,30 @@ h1 {
         font-size: 2rem;
     }
 
+    /* Modal Mobile Adjustments */
+    .modal-content {
+        margin: 5% auto;
+        width: 96%;
+        max-height: 95vh;
+        border-radius: var(--radius-md);
+    }
+
+    #modalTitle {
+        padding: 15px 20px;
+        margin: 10px 15px 0;
+        font-size: 1rem;
+    }
+
+    .modal-body {
+        padding: 10px 15px;
+    }
+
+    .close-btn {
+        right: 15px;
+        top: 10px;
+        font-size: 24px;
+    }
+
     .header-actions {
         padding: 4px;
         gap: 4px;
@@ -742,16 +783,15 @@ h1 {
 
     /* Professional Touch Targets */
     .edit-cell {
-        min-height: 36px;
-        /* Reduced from 48px */
+        min-height: 48px;
         display: table-cell;
         vertical-align: middle;
     }
 
     .item-table th,
     .item-table td {
-        padding: 3px 4px;
-        /* Tighter */
+        padding: 4px 4px;
+        /* Extreme high density for mobile */
         font-size: 0.75rem;
         white-space: nowrap;
         border: 1px solid #cbd5e1;
@@ -760,8 +800,8 @@ h1 {
     .table-container {
         overflow-x: auto;
         -webkit-overflow-scrolling: touch;
-        margin-bottom: 5px;
-        /* Reduced from 25px */
+        /* Smooth momentum scrolling for iOS */
+        margin-bottom: 25px;
         border: 1px solid #cbd5e1;
         border-radius: 8px;
         box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.02);
@@ -770,63 +810,7 @@ h1 {
     /* Prominence adjustment for mobile Total */
     .total-row td {
         font-size: 0.9rem !important;
-        padding: 6px 4px !important;
-        /* Reduced from 10px */
-    }
-
-    /* ===== MAXIMIZE DISPLAY AREA ON MOBILE ===== */
-    .modal-content {
-        margin: 0;
-        width: 100%;
-        height: 100%;
-        max-height: 100vh;
-        border-radius: 0;
-        padding-top: 10px;
-        /* Drastically reduced from 50px */
-    }
-
-    #modalTitle {
-        padding: 8px 15px;
-        /* Reduced from 24px 30px */
-        font-size: 1rem;
-        /* Reduced from 1.15rem */
-        margin: 5px 10px 0;
-        /* Tighter margins */
-    }
-
-    .modal-body {
-        padding: 5px 10px;
-        /* Reduced from 10px 20px */
-    }
-
-    .close-btn {
-        font-size: 22px;
-        /* Reduced from 28px */
-        right: 12px;
-        top: 8px;
-        /* Reduced from 20px */
-    }
-
-    .back-btn {
-        margin-bottom: 5px;
-        /* Reduced from 10px */
-        padding: 6px 12px;
-        /* Reduced from 10px 18px */
-        font-size: 0.8rem;
-    }
-
-    .modal-footer {
-        padding: 3px 10px;
-        /* Reduced from 5px 20px */
-        font-size: 0.8rem;
-    }
-
-    .search-in-modal input {
-        padding: 6px !important;
-        /* Reduced from 10px */
-        margin-bottom: 5px !important;
-        /* Reduced from 15px */
-        font-size: 0.85rem;
+        padding: 10px 6px !important;
     }
 }
 
