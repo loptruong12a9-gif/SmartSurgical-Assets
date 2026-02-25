@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SmartSurgical Pro Assets</title>
     <!-- Web App & Home Screen Icon Support -->
     <link rel="apple-touch-icon" href="logo.png">
@@ -67,7 +67,7 @@
                     <span class="footer-dev"><strong>Tân Nguyễn</strong> • <a
                             href="tel:0367287102">036.728.7102</a></span>
                     <span class="footer-divider">|</span>
-                    <span class="footer-version" id="lastUpdateFooter">v2.0 PRO (FINAL)</span>
+                    <span class="footer-version" id="lastUpdateFooter">v2.1 PRO (FINAL)</span>
                 </div>
                 <div class="footer-sub">"Code một lần - Dùng một đời"</div>
             </footer>
@@ -224,7 +224,7 @@
         if ('serviceWorker' in navigator) {
             window.addEventListener('load', () => {
                 navigator.serviceWorker.register('sw.js').then((registration) => {
-                    // Success
+                    console.log('ServiceWorker registration successful with scope: ', registration.scope);
 
                     // Listen for updates
                     registration.onupdatefound = () => {
@@ -244,7 +244,7 @@
                         };
                     };
                 }, (err) => {
-                    // Failed
+                    console.log('ServiceWorker registration failed: ', err);
                 });
 
                 // Reload when controller changes
