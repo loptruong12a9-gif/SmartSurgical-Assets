@@ -520,6 +520,6 @@ document.addEventListener('DOMContentLoaded', () => {
         // --- Start initial render ---
         renderCategoryGrid();
         const bBadge = document.getElementById('appVersion');
-        if (bBadge) bBadge.textContent = typeof APP_VERSION !== 'undefined' ? APP_VERSION : "v2.2 PRO (STABLE) (26/02/2026)";
+        if (bBadge) bBadge.textContent = typeof APP_VERSION !== 'undefined' ? APP_VERSION : "v3.0 GOLD (PREMIUM) (26/02/2026)";
     }
 });
