@@ -18,6 +18,12 @@
     const exportStatsBtn = document.getElementById('exportStatsBtn');
     const bulkExportBtn = document.getElementById('bulkExportBtn');
 
+    // Global Error Handling (Basic Crash Reporting)
+    window.onerror = function (msg, url, lineNo, columnNo, error) {
+        // Basic error catching for analytics/debugging in future
+        return false;
+    };
+
     if (exportStatsBtn) {
         exportStatsBtn.addEventListener('click', exportStatisticsToExcel);
     }
@@ -830,21 +836,24 @@
     const repo = localStorage.getItem('ghRepo');
 
     if (token && owner && repo) {
-        console.log("Fetching from GitHub...");
         fetch(`https://api.github.com/repos/${encodeURIComponent(owner)}/${encodeURIComponent(repo)}/contents/data.js`, {
             headers: { 'Authorization': `token ${token}`, 'Accept': 'application/vnd.github.v3+json' }
         })
-            .then(r => r.ok ? r.json() : Promise.reject())
+            .then(r => r.ok ? r.json() : Promise.reject(new Error("GitHub response not OK")))
             .then(data => {
+                const oldScript = document.getElementById('dataScript');
+                if (oldScript) oldScript.remove();
+
                 const script = document.createElement('script');
+                script.id = 'dataScript';
                 script.textContent = decodeURIComponent(escape(atob(data.content)));
                 document.body.appendChild(script);
-                console.log("GitHub data loaded");
+
                 renderCategoryGrid();
                 updateVersionBadge();
             })
-            .catch(() => {
-                console.warn("GitHub failed, loading local");
+            .catch((err) => {
+                console.warn("GitHub fetch failed:", err);
                 loadLocal();
             });
     } else {
@@ -852,10 +861,17 @@
     }
 
     function loadLocal() {
+        const oldScript = document.getElementById('dataScript');
+        if (oldScript) oldScript.remove();
+
         const s = document.createElement('script');
+        s.id = 'dataScript';
         s.src = 'data.js?v=' + Date.now();
         s.onload = () => { renderCategoryGrid(); updateVersionBadge(); };
-        s.onerror = () => alert("Lỗi tải dữ liệu!");
+        s.onerror = () => {
+            console.error("Local data load failed");
+            alert("Lỗi tải dữ liệu! Vui lòng kiểm tra file data.js");
+        };
         document.body.appendChild(s);
     }
 
