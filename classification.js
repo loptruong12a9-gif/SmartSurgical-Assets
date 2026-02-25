@@ -197,7 +197,7 @@ function processExcelData(rows) {
             // If column F contains procedure keywords, force select it
             if (colFStr.includes("phẩu thuật") || colFStr.includes("phẫu thuật") || colFStr.includes("thủ thuật") || colFStr.includes("chẩn đoán")) {
                 nameColIndex = 5; // Force column F
-                // Column F manually verified by user as procedure column
+                console.log("🎯 Đã chọn cột F (index 5) theo chỉ định của người dùng");
             }
         }
     }
@@ -217,7 +217,16 @@ function processExcelData(rows) {
     // Final Fallback
     if (nameColIndex === -1) nameColIndex = 1;
 
-    // Finalizing classification result
+    // DEBUG: Show which column was selected
+    console.log("=== PHÂN LOẠI DEBUG ===");
+    console.log("Header Row Index:", headerRowIndex);
+    console.log("Cột được chọn:", nameColIndex, "- Tên cột:", headerRow[nameColIndex]);
+    console.log("Điểm các cột:", columnScores);
+    console.log("Dữ liệu mẫu (5 dòng đầu):");
+    for (let i = headerRowIndex + 1; i < Math.min(rows.length, headerRowIndex + 6); i++) {
+        console.log(`  Dòng ${i}:`, rows[i][nameColIndex]);
+    }
+    console.log("======================");
 
     // Add Column if missing for export
     if (classColIndex === -1) {
