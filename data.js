@@ -1,4 +1,4 @@
-var APP_VERSION = "v2.1 PRO (FINAL) (00:34:18 26/2/2026)";
+var APP_VERSION = "v2.1 PRO (FINAL) (00:44:45 26/2/2026)";
 var kitDefinitions = [
     {
         "id": 1,
@@ -2499,7 +2499,7 @@ allKitsData["DỤNG CỤ MỔ HỞ LẺ"] = [
     "quantity": 3
   },
   {
-    "stt": "3",
+    "stt": 3,
     "name": "Banh tự động",
     "code": "",
     "quantity": 1
