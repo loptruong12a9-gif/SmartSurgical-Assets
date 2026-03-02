@@ -1,4 +1,4 @@
-var APP_VERSION = "v2.1 PRO (FINAL) (13:07:09 2/3/2026)";
+var APP_VERSION = "v2.1 PRO (FINAL) (13:11:28 2/3/2026)";
 var kitDefinitions = [
     {
         "id": 20,
@@ -2556,7 +2556,8 @@ allKitsData["DỤNG CỤ MỔ HỞ LẺ"] = [
     "stt": 12,
     "name": "Cây thông tiểu khó",
     "code": "",
-    "quantity": 1
+    "quantity": 1,
+    "note": "Rỉ"
   },
   {
     "stt": 13,
@@ -2634,19 +2635,22 @@ allKitsData["DỤNG CỤ MỔ HỞ LẺ"] = [
     "stt": 25,
     "name": "Gu lớn",
     "code": "",
-    "quantity": 1
+    "quantity": 1,
+    "note": "Mẻ"
   },
   {
     "stt": 26,
     "name": "Gu nhỏ",
     "code": "",
-    "quantity": 1
+    "quantity": 1,
+    "note": "Mẻ"
   },
   {
     "stt": 27,
     "name": "Giỏ gà",
     "code": "",
-    "quantity": 2
+    "quantity": 2,
+    "note": ""
   },
   {
     "stt": 28,
@@ -2702,7 +2706,8 @@ allKitsData["DỤNG CỤ MỔ HỞ LẺ"] = [
     "stt": 36,
     "name": "Kềm cắt xương, móng",
     "code": "",
-    "quantity": 3
+    "quantity": 3,
+    "note": "Mẻ"
   },
   {
     "stt": 37,
@@ -2846,7 +2851,8 @@ allKitsData["DỤNG CỤ MỔ HỞ LẺ"] = [
     "stt": 60,
     "name": "Que thăm dò hậu môn",
     "code": "",
-    "quantity": 3
+    "quantity": 3,
+    "note": "Rỉ sét"
   },
   {
     "stt": 61,
@@ -2965,7 +2971,8 @@ allKitsData["DỤNG CỤ NỘI SOI LẺ"] = [
     "stt": 6,
     "name": "Kim vê sản",
     "code": "",
-    "quantity": 1
+    "quantity": 1,
+    "note": "Mẻ đầu"
   },
   {
     "stt": 7,
@@ -3164,7 +3171,8 @@ allKitsData["DỤNG CỤ NỘI SOI LẺ"] = [
     "stt": 39,
     "name": "Dây đốt nội soi",
     "code": "",
-    "quantity": 2
+    "quantity": 2,
+    "note": "Hư 1"
   },
   {
     "stt": 40,
