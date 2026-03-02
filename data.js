@@ -1,4 +1,4 @@
-var APP_VERSION = "v2.1 PRO (FINAL) (00:59:29 26/2/2026)";
+var APP_VERSION = "v2.1 PRO (FINAL) (13:07:09 2/3/2026)";
 var kitDefinitions = [
     {
         "id": 20,
@@ -2566,9 +2566,9 @@ allKitsData["DỤNG CỤ MỔ HỞ LẺ"] = [
   },
   {
     "stt": 14,
-    "name": "CLAMP CONG",
+    "name": "",
     "code": "",
-    "quantity": 4
+    "quantity": 0
   },
   {
     "stt": 15,
@@ -2695,7 +2695,8 @@ allKitsData["DỤNG CỤ MỔ HỞ LẺ"] = [
     "stt": 35,
     "name": "Kềm cắt đinh",
     "code": "LX157R",
-    "quantity": 1
+    "quantity": 1,
+    "note": ""
   },
   {
     "stt": 36,
@@ -2923,7 +2924,7 @@ allKitsData["DỤNG CỤ MỔ HỞ LẺ"] = [
     "stt": "",
     "name": "TỔNG CỘNG",
     "code": "",
-    "quantity": 241,
+    "quantity": 237,
     "bold": true
   }
 ];
@@ -5271,7 +5272,8 @@ allKitsData["THẦN KINH 1"] = [
     "stt": 2,
     "name": "KELLY TRUNG",
     "code": "BH135R, BH141R, BH125R, HB0602 (HEBU)",
-    "quantity": 15
+    "quantity": 15,
+    "note": "6 Mòn, lệch hàm"
   },
   {
     "stt": 3,
@@ -5363,7 +5365,8 @@ allKitsData["THẦN KINH 2"] = [
     "stt": 2,
     "name": "KELLY TRUNG",
     "code": "BH135R",
-    "quantity": 15
+    "quantity": 15,
+    "note": "6 Mòn, lệch hàm"
   },
   {
     "stt": 3,
@@ -5480,7 +5483,8 @@ allKitsData["THẦN KINH 3"] = [
     "stt": 2,
     "name": "KELLY TRUNG",
     "code": "BH135R",
-    "quantity": 12
+    "quantity": 12,
+    "note": "5 Mòn, lệch hàm"
   },
   {
     "stt": 3,
@@ -5590,7 +5594,8 @@ allKitsData["THẦN KINH 4"] = [
     "stt": 2,
     "name": "KELLY TRUNG",
     "code": "BH135R",
-    "quantity": 12
+    "quantity": 12,
+    "note": "5 Mòn, lệch hàm"
   },
   {
     "stt": 3,
@@ -5707,7 +5712,8 @@ allKitsData["THẦN KINH 5"] = [
     "stt": 3,
     "name": "KELLY TRUNG",
     "code": "BH135R",
-    "quantity": 14
+    "quantity": 14,
+    "note": "6 Mòn, lệch hàm"
   },
   {
     "stt": 4,
@@ -5904,7 +5910,8 @@ allKitsData["THẦN KINH 7"] = [
     "stt": 2,
     "name": "KELLY TRUNG",
     "code": "BH135R",
-    "quantity": 12
+    "quantity": 12,
+    "note": "5 Mòn, lệch"
   },
   {
     "stt": 3,
@@ -6034,7 +6041,8 @@ allKitsData["THẦN KINH 8"] = [
     "stt": 3,
     "name": "KELLY TRUNG",
     "code": "BH135R",
-    "quantity": 11
+    "quantity": 11,
+    "note": "5 Mòn, lệch hàm"
   },
   {
     "stt": 4,
@@ -6272,7 +6280,8 @@ allKitsData["THẦN KINH 10"] = [
     "stt": 2,
     "name": "KELLY TRUNG",
     "code": "BH135R",
-    "quantity": 14
+    "quantity": 14,
+    "note": "6 Mòn, lệch hàm"
   },
   {
     "stt": 3,
