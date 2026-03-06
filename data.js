@@ -1,4 +1,4 @@
-var APP_VERSION = "v2.1 PRO (FINAL) (13:11:28 2/3/2026)";
+var APP_VERSION = "v2.1 PRO (FINAL) (07:27:22 6/3/2026)";
 var kitDefinitions = [
     {
         "id": 20,
@@ -2939,141 +2939,141 @@ allKitsData["DỤNG CỤ MỔ HỞ LẺ"].footer = "ĐÃ KIỂM";
 allKitsData["DỤNG CỤ NỘI SOI LẺ"] = [
   {
     "stt": 1,
-    "name": "Clip nội soi",
+    "name": "Clip nội soi.",
     "code": "",
     "quantity": 3
   },
   {
     "stt": 2,
-    "name": "Hemolock 10mm",
+    "name": "Hemolock 10mm.",
     "code": "",
     "quantity": 1
   },
   {
     "stt": 3,
-    "name": "Hemolock 5mm",
+    "name": "Hemolock 5mm.",
     "code": "",
     "quantity": 1
   },
   {
     "stt": 4,
-    "name": "Puzzi",
+    "name": "Puzzi.",
     "code": "",
     "quantity": 3
   },
   {
     "stt": 5,
-    "name": "Kiềm kẹp Kim nội soi",
+    "name": "Kiềm kẹp Kim nội soi.",
     "code": "",
     "quantity": 1
   },
   {
     "stt": 6,
-    "name": "Kim vê sản",
+    "name": "Kim vê sản.",
     "code": "",
     "quantity": 1,
     "note": "Mẻ đầu"
   },
   {
     "stt": 7,
-    "name": "Dây dẫn sáng",
+    "name": "Dây dẫn sáng.",
     "code": "",
     "quantity": 1
   },
   {
     "stt": 8,
-    "name": "Optic nội soi 0° MGB",
+    "name": "Optic nội soi 0° MGB.",
     "code": "",
     "quantity": 1
   },
   {
     "stt": 9,
-    "name": "Optic nội soi 0° Karlstorz",
+    "name": "Optic nội soi 0° Karlstorz.",
     "code": "",
     "quantity": 1
   },
   {
     "stt": 10,
-    "name": "Optic nội soi 45° Karlstorz",
+    "name": "Optic nội soi 45° Karlstorz.",
     "code": "",
     "quantity": 2
   },
   {
     "stt": 11,
-    "name": "Optic nội soi 70° Karlstorz",
+    "name": "Optic nội soi 70° Karlstorz.",
     "code": "",
     "quantity": 1
   },
   {
     "stt": 12,
-    "name": "Optic nội soi 30° Karlstorz",
+    "name": "Optic nội soi 30° Karlstorz.",
     "code": "",
     "quantity": 2
   },
   {
     "stt": 13,
-    "name": "Optic nội soi 0° 5mm Karlstorz",
+    "name": "Optic nội soi 0° 5mm Karlstorz.",
     "code": "",
     "quantity": 1
   },
   {
     "stt": 14,
-    "name": "Optic nội soi 30° MGB Karlstorz",
+    "name": "Optic nội soi 30° MGB Karlstorz.",
     "code": "",
     "quantity": 1
   },
   {
     "stt": 15,
-    "name": "Oftic nịu",
+    "name": "Oftic niệu.",
     "code": "",
     "quantity": 2,
     "note": "HƯ 1"
   },
   {
     "stt": 16,
-    "name": "Bộ xay tử cung",
+    "name": "Bộ xay tử cung.",
     "code": "",
     "quantity": 1
   },
   {
     "stt": 17,
-    "name": "Bơm rửa bàng quang thủy tinh",
+    "name": "Bơm rửa bàng quang thủy tinh.",
     "code": "",
     "quantity": 1
   },
   {
     "stt": 18,
-    "name": "Dụng cụ nội soi bàng quang (Bộ Trocal)",
+    "name": "Dụng cụ NS bàng quang (Bộ Trocal)",
     "code": "",
     "quantity": 4
   },
   {
     "stt": 19,
-    "name": "Cây vén gan",
+    "name": "Cây vén gan.",
     "code": "",
     "quantity": 2
   },
   {
     "stt": 20,
-    "name": "Lưỡi dao nội soi",
+    "name": "Lưỡi dao nội soi.",
     "code": "",
     "quantity": 1
   },
   {
     "stt": 21,
-    "name": "Troca 5 xoắn",
+    "name": "Troca 5 xoắn (Nòng)",
     "code": "",
     "quantity": 1
   },
   {
     "stt": 22,
-    "name": "Cây nạy sỏi",
+    "name": "Cây nạy sỏi.",
     "code": "",
     "quantity": 2
   },
   {
     "stt": 23,
-    "name": "Bộ dụng cụ đốt hạch giao cảm",
+    "name": "Bộ dụng cụ đốt hạch giao cảm.",
     "code": "",
     "quantity": 1
   },
@@ -3091,7 +3091,7 @@ allKitsData["DỤNG CỤ NỘI SOI LẺ"] = [
   },
   {
     "stt": 26,
-    "name": "Ống hút",
+    "name": "Ống hút.",
     "code": "",
     "quantity": 1
   },
@@ -3099,17 +3099,18 @@ allKitsData["DỤNG CỤ NỘI SOI LẺ"] = [
     "stt": 27,
     "name": "Móc đốt nội soi",
     "code": "",
-    "quantity": 2
+    "quantity": 2,
+    "note": "Hư 1"
   },
   {
     "stt": 28,
-    "name": "Tay cầm Biboler",
+    "name": "Tay cầm Biboler.",
     "code": "",
     "quantity": 1
   },
   {
     "stt": 29,
-    "name": "Biboler nhi",
+    "name": "Biboler nhi.",
     "code": "",
     "quantity": 1
   },
@@ -3121,31 +3122,31 @@ allKitsData["DỤNG CỤ NỘI SOI LẺ"] = [
   },
   {
     "stt": 31,
-    "name": "Kéo mesk nội soi nhi",
+    "name": "Kéo mesk nội soi nhi.",
     "code": "",
     "quantity": 3
   },
   {
     "stt": 32,
-    "name": "Graper nội soi nhi",
+    "name": "Graper nội soi nhi.",
     "code": "",
     "quantity": 3
   },
   {
     "stt": 33,
-    "name": "Ruột Bibolec nội soi nhi",
+    "name": "Ruột Bibolec nội soi nhi.",
     "code": "",
     "quantity": 1
   },
   {
     "stt": 34,
-    "name": "Kéo Mesk nội soi",
+    "name": "Kéo Mesk nội soi.",
     "code": "",
     "quantity": 2
   },
   {
     "stt": 35,
-    "name": "Bộ Bibolec",
+    "name": "Bộ Biboler.",
     "code": "",
     "quantity": 1
   },
@@ -3153,30 +3154,31 @@ allKitsData["DỤNG CỤ NỘI SOI LẺ"] = [
     "stt": 36,
     "name": "Bộ Robi",
     "code": "",
-    "quantity": 1
+    "quantity": 1,
+    "note": "Hư"
   },
   {
     "stt": 37,
-    "name": "Que bơm từ cung",
+    "name": "Que bơm từ cung.",
     "code": "",
     "quantity": 1
   },
   {
     "stt": 38,
-    "name": "Dây Bibolec nội soi",
+    "name": "Dây Bibolec nội soi.",
     "code": "",
     "quantity": 2
   },
   {
     "stt": 39,
-    "name": "Dây đốt nội soi",
+    "name": "Dây đốt nội soi mono.",
     "code": "",
     "quantity": 2,
     "note": "Hư 1"
   },
   {
     "stt": 40,
-    "name": "Dây bơm CO2",
+    "name": "Dây bơm CO2.",
     "code": "",
     "quantity": 2
   },
@@ -4595,7 +4597,8 @@ allKitsData["NS TỔNG QUÁT 1"] = [
     "stt": 4,
     "name": "LAM KẸP RUỘT",
     "code": "",
-    "quantity": 1
+    "quantity": 1,
+    "note": "GÃY 6/3"
   },
   {
     "stt": 5,
