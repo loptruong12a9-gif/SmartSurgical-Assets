@@ -1,13 +1,17 @@
-const CACHE_NAME = 'smart-surgical-v2.0';
+const CACHE_NAME = 'smart-surgical-v3.5';
 const ASSETS_TO_CACHE = [
     './',
     './index.html',
     './style.css',
     './script.js',
+    './data.js',
+    './classification.js',
     './github_sync.js',
     './manifest.json',
+    './logo.png',
     'https://cdnjs.cloudflare.com/ajax/libs/exceljs/4.3.0/exceljs.min.js',
-    'https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js'
+    'https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js',
+    'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css'
 ];
 
 // Install Event
