@@ -1,13 +1,5 @@
-var APP_VERSION = "v2.1 PRO (FINAL) (07:27:22 6/3/2026)";
+var APP_VERSION = "v2.1 PRO (FINAL) (22:17:52 6/3/2026)";
 var kitDefinitions = [
-    {
-        "id": 20,
-        "baseName": "BỘ BẮT CON",
-        "prefix": "BẮT CON",
-        "count": 3,
-        "icon": "fa-child",
-        "color": "icon-green"
-    },
     {
         "id": 1,
         "baseName": "BỘ CẮT TỬ CUNG",
@@ -15,94 +7,6 @@ var kitDefinitions = [
         "count": 3,
         "icon": "fa-scissors",
         "color": "icon-pink"
-    },
-    {
-        "id": 23,
-        "baseName": "BỘ DỤNG CỤ NS DÂY CHẰNG",
-        "prefix": "NS DÂY CHẰNG",
-        "count": 0,
-        "icon": "fa-joint",
-        "color": "icon-teal",
-        "extraSubKits": [
-            "BỘ LẤY GÂN - DÂY CHẰNG",
-            "BỘ NS LẤY GÂN MÁC"
-        ]
-    },
-    {
-        "id": 19,
-        "baseName": "BỘ KHOAN PIN",
-        "prefix": "KHOAN PIN",
-        "count": 1,
-        "icon": "fa-screwdriver",
-        "color": "icon-blue"
-    },
-    {
-        "id": 21,
-        "baseName": "BỘ LÕM NGỰC",
-        "prefix": "LÕM NGỰC",
-        "count": 1,
-        "icon": "fa-lungs",
-        "color": "icon-blue"
-    },
-    {
-        "id": 22,
-        "baseName": "BỘ THÁO VIS ĐA NĂNG",
-        "prefix": "BỘ THÁO VIS ĐA NĂNG",
-        "count": 1,
-        "icon": "fa-screwdriver-wrench",
-        "color": "icon-blue"
-    },
-    {
-        "id": 10,
-        "baseName": "BỘ THẦN KINH MẠCH MÁU",
-        "prefix": "THẦN KINH",
-        "count": 15,
-        "icon": "fa-heart-pulse",
-        "color": "icon-red"
-    },
-    {
-        "id": 11,
-        "baseName": "BỘ TIỂU PHẪU",
-        "prefix": "TIỂU PHẪU",
-        "count": 4,
-        "icon": "fa-syringe",
-        "color": "icon-green"
-    },
-    {
-        "id": 16,
-        "baseName": "CAPPA",
-        "prefix": "CAPPA",
-        "count": 2,
-        "icon": "fa-notes-medical",
-        "color": "icon-indigo"
-    },
-    {
-        "id": 24,
-        "baseName": "DỤNG CỤ LẺ",
-        "prefix": "DỤNG CỤ LẺ",
-        "count": 0,
-        "icon": "fa-toolbox",
-        "color": "icon-orange",
-        "extraSubKits": [
-            "DỤNG CỤ MỔ HỞ LẺ",
-            "DỤNG CỤ NỘI SOI LẺ"
-        ]
-    },
-    {
-        "id": 12,
-        "baseName": "ĐẠI PHẪU",
-        "prefix": "ĐẠI PHẪU",
-        "count": 1,
-        "icon": "fa-user-nurse",
-        "color": "icon-red"
-    },
-    {
-        "id": 3,
-        "baseName": "HC Ố CỔ TAY",
-        "prefix": "HC Ố CỔ TAY",
-        "count": 1,
-        "icon": "fa-hand-paper",
-        "color": "icon-teal"
     },
     {
         "id": 2,
@@ -114,6 +18,14 @@ var kitDefinitions = [
         "extraSubKits": [
             "BỘ LẤY DÂY CHẰNG"
         ]
+    },
+    {
+        "id": 3,
+        "baseName": "HC Ố CỔ TAY",
+        "prefix": "HC Ố CỔ TAY",
+        "count": 1,
+        "icon": "fa-hand-paper",
+        "color": "icon-teal"
     },
     {
         "id": 4,
@@ -168,30 +80,6 @@ var kitDefinitions = [
         ]
     },
     {
-        "id": 18,
-        "baseName": "THOÁT VỊ CỔ",
-        "prefix": "TV CỔ",
-        "count": 1,
-        "icon": "fa-head-side-mask",
-        "color": "icon-green"
-    },
-    {
-        "id": 17,
-        "baseName": "THOÁT VỊ LƯNG",
-        "prefix": "TV LƯNG",
-        "count": 2,
-        "icon": "fa-crutch",
-        "color": "icon-blue"
-    },
-    {
-        "id": 13,
-        "baseName": "TRUNG PHẪU",
-        "prefix": "TRUNG PHẪU",
-        "count": 2,
-        "icon": "fa-user-md",
-        "color": "icon-blue"
-    },
-    {
         "id": 9,
         "baseName": "VI PHẪU",
         "prefix": "VI PHẪU",
@@ -205,12 +93,36 @@ var kitDefinitions = [
         ]
     },
     {
-        "id": 15,
-        "baseName": "XƯƠNG CHI DƯỚI",
-        "prefix": "XƯƠNG CHI DƯỚI",
+        "id": 10,
+        "baseName": "BỘ THẦN KINH MẠCH MÁU",
+        "prefix": "THẦN KINH",
+        "count": 15,
+        "icon": "fa-heart-pulse",
+        "color": "icon-red"
+    },
+    {
+        "id": 11,
+        "baseName": "BỘ TIỂU PHẪU",
+        "prefix": "TIỂU PHẪU",
+        "count": 4,
+        "icon": "fa-syringe",
+        "color": "icon-green"
+    },
+    {
+        "id": 12,
+        "baseName": "ĐẠI PHẪU",
+        "prefix": "ĐẠI PHẪU",
         "count": 1,
-        "icon": "fa-wheelchair",
-        "color": "icon-purple"
+        "icon": "fa-user-nurse",
+        "color": "icon-red"
+    },
+    {
+        "id": 13,
+        "baseName": "TRUNG PHẪU",
+        "prefix": "TRUNG PHẪU",
+        "count": 2,
+        "icon": "fa-user-md",
+        "color": "icon-blue"
     },
     {
         "id": 14,
@@ -219,6 +131,94 @@ var kitDefinitions = [
         "count": 1,
         "icon": "fa-hand-holding-medical",
         "color": "icon-orange"
+    },
+    {
+        "id": 15,
+        "baseName": "XƯƠNG CHI DƯỚI",
+        "prefix": "XƯƠNG CHI DƯỚI",
+        "count": 1,
+        "icon": "fa-wheelchair",
+        "color": "icon-purple"
+    },
+    {
+        "id": 16,
+        "baseName": "CAPPA",
+        "prefix": "CAPPA",
+        "count": 2,
+        "icon": "fa-notes-medical",
+        "color": "icon-indigo"
+    },
+    {
+        "id": 17,
+        "baseName": "THOÁT VỊ LƯNG",
+        "prefix": "TV LƯNG",
+        "count": 2,
+        "icon": "fa-crutch",
+        "color": "icon-blue"
+    },
+    {
+        "id": 18,
+        "baseName": "THOÁT VỊ CỔ",
+        "prefix": "TV CỔ",
+        "count": 1,
+        "icon": "fa-head-side-mask",
+        "color": "icon-green"
+    },
+    {
+        "id": 19,
+        "baseName": "BỘ KHOAN PIN",
+        "prefix": "KHOAN PIN",
+        "count": 1,
+        "icon": "fa-screwdriver",
+        "color": "icon-blue"
+    },
+    {
+        "id": 20,
+        "baseName": "BỘ BẮT CON",
+        "prefix": "BẮT CON",
+        "count": 3,
+        "icon": "fa-child",
+        "color": "icon-green"
+    },
+    {
+        "id": 21,
+        "baseName": "BỘ LÕM NGỰC",
+        "prefix": "LÕM NGỰC",
+        "count": 1,
+        "icon": "fa-lungs",
+        "color": "icon-blue"
+    },
+    {
+        "id": 22,
+        "baseName": "BỘ THÁO VIS ĐA NĂNG",
+        "prefix": "BỘ THÁO VIS ĐA NĂNG",
+        "count": 1,
+        "icon": "fa-screwdriver-wrench",
+        "color": "icon-blue"
+    },
+    {
+        "id": 23,
+        "baseName": "BỘ DỤNG CỤ NS DÂY CHẰNG",
+        "prefix": "NS DÂY CHẰNG",
+        "count": 0,
+        "icon": "fa-joint",
+        "color": "icon-teal",
+        "extraSubKits": [
+            "BỘ LẤY GÂN - DÂY CHẰNG",
+            "BỘ NS LẤY GÂN MÁC"
+        ]
+    },
+    {
+        "id": 24,
+        "baseName": "DỤNG CỤ LẺ",
+        "prefix": "DỤNG CỤ LẺ",
+        "count": 0,
+        "icon": "fa-toolbox",
+        "color": "icon-orange",
+        "extraSubKits": [
+            "DỤNG CỤ MỔ HỞ LẺ",
+            "DỤNG CỤ NỘI SOI LẺ"
+        ]
     }
 ];
 var allKitsData = allKitsData || {};
@@ -2556,8 +2556,7 @@ allKitsData["DỤNG CỤ MỔ HỞ LẺ"] = [
     "stt": 12,
     "name": "Cây thông tiểu khó",
     "code": "",
-    "quantity": 1,
-    "note": "Rỉ"
+    "quantity": 1
   },
   {
     "stt": 13,
@@ -2567,9 +2566,9 @@ allKitsData["DỤNG CỤ MỔ HỞ LẺ"] = [
   },
   {
     "stt": 14,
-    "name": "",
+    "name": "CLAMP CONG",
     "code": "",
-    "quantity": 0
+    "quantity": 4
   },
   {
     "stt": 15,
@@ -2635,22 +2634,19 @@ allKitsData["DỤNG CỤ MỔ HỞ LẺ"] = [
     "stt": 25,
     "name": "Gu lớn",
     "code": "",
-    "quantity": 1,
-    "note": "Mẻ"
+    "quantity": 1
   },
   {
     "stt": 26,
     "name": "Gu nhỏ",
     "code": "",
-    "quantity": 1,
-    "note": "Mẻ"
+    "quantity": 1
   },
   {
     "stt": 27,
     "name": "Giỏ gà",
     "code": "",
-    "quantity": 2,
-    "note": ""
+    "quantity": 2
   },
   {
     "stt": 28,
@@ -2699,15 +2695,13 @@ allKitsData["DỤNG CỤ MỔ HỞ LẺ"] = [
     "stt": 35,
     "name": "Kềm cắt đinh",
     "code": "LX157R",
-    "quantity": 1,
-    "note": ""
+    "quantity": 1
   },
   {
     "stt": 36,
     "name": "Kềm cắt xương, móng",
     "code": "",
-    "quantity": 3,
-    "note": "Mẻ"
+    "quantity": 3
   },
   {
     "stt": 37,
@@ -2851,8 +2845,7 @@ allKitsData["DỤNG CỤ MỔ HỞ LẺ"] = [
     "stt": 60,
     "name": "Que thăm dò hậu môn",
     "code": "",
-    "quantity": 3,
-    "note": "Rỉ sét"
+    "quantity": 3
   },
   {
     "stt": 61,
@@ -2930,7 +2923,7 @@ allKitsData["DỤNG CỤ MỔ HỞ LẺ"] = [
     "stt": "",
     "name": "TỔNG CỘNG",
     "code": "",
-    "quantity": 237,
+    "quantity": 241,
     "bold": true
   }
 ];
@@ -2939,141 +2932,140 @@ allKitsData["DỤNG CỤ MỔ HỞ LẺ"].footer = "ĐÃ KIỂM";
 allKitsData["DỤNG CỤ NỘI SOI LẺ"] = [
   {
     "stt": 1,
-    "name": "Clip nội soi.",
+    "name": "Clip nội soi",
     "code": "",
     "quantity": 3
   },
   {
     "stt": 2,
-    "name": "Hemolock 10mm.",
+    "name": "Hemolock 10mm",
     "code": "",
     "quantity": 1
   },
   {
     "stt": 3,
-    "name": "Hemolock 5mm.",
+    "name": "Hemolock 5mm",
     "code": "",
     "quantity": 1
   },
   {
     "stt": 4,
-    "name": "Puzzi.",
+    "name": "Puzzi",
     "code": "",
     "quantity": 3
   },
   {
     "stt": 5,
-    "name": "Kiềm kẹp Kim nội soi.",
+    "name": "Kiềm kẹp Kim nội soi",
     "code": "",
     "quantity": 1
   },
   {
     "stt": 6,
-    "name": "Kim vê sản.",
+    "name": "Kim vê sản",
     "code": "",
-    "quantity": 1,
-    "note": "Mẻ đầu"
+    "quantity": 1
   },
   {
     "stt": 7,
-    "name": "Dây dẫn sáng.",
+    "name": "Dây dẫn sáng",
     "code": "",
     "quantity": 1
   },
   {
     "stt": 8,
-    "name": "Optic nội soi 0° MGB.",
+    "name": "Optic nội soi 0° MGB",
     "code": "",
     "quantity": 1
   },
   {
     "stt": 9,
-    "name": "Optic nội soi 0° Karlstorz.",
+    "name": "Optic nội soi 0° Karlstorz",
     "code": "",
     "quantity": 1
   },
   {
     "stt": 10,
-    "name": "Optic nội soi 45° Karlstorz.",
+    "name": "Optic nội soi 45° Karlstorz",
     "code": "",
     "quantity": 2
   },
   {
     "stt": 11,
-    "name": "Optic nội soi 70° Karlstorz.",
+    "name": "Optic nội soi 70° Karlstorz",
     "code": "",
     "quantity": 1
   },
   {
     "stt": 12,
-    "name": "Optic nội soi 30° Karlstorz.",
+    "name": "Optic nội soi 30° Karlstorz",
     "code": "",
     "quantity": 2
   },
   {
     "stt": 13,
-    "name": "Optic nội soi 0° 5mm Karlstorz.",
+    "name": "Optic nội soi 0° 5mm Karlstorz",
     "code": "",
     "quantity": 1
   },
   {
     "stt": 14,
-    "name": "Optic nội soi 30° MGB Karlstorz.",
+    "name": "Optic nội soi 30° MGB Karlstorz",
     "code": "",
     "quantity": 1
   },
   {
     "stt": 15,
-    "name": "Oftic niệu.",
+    "name": "Oftic nịu",
     "code": "",
     "quantity": 2,
     "note": "HƯ 1"
   },
   {
     "stt": 16,
-    "name": "Bộ xay tử cung.",
+    "name": "Bộ xay tử cung",
     "code": "",
     "quantity": 1
   },
   {
     "stt": 17,
-    "name": "Bơm rửa bàng quang thủy tinh.",
+    "name": "Bơm rửa bàng quang thủy tinh",
     "code": "",
     "quantity": 1
   },
   {
     "stt": 18,
-    "name": "Dụng cụ NS bàng quang (Bộ Trocal)",
+    "name": "Dụng cụ nội soi bàng quang (Bộ Trocal)",
     "code": "",
     "quantity": 4
   },
   {
     "stt": 19,
-    "name": "Cây vén gan.",
+    "name": "Cây vén gan",
     "code": "",
     "quantity": 2
   },
   {
     "stt": 20,
-    "name": "Lưỡi dao nội soi.",
+    "name": "Lưỡi dao nội soi",
     "code": "",
     "quantity": 1
   },
   {
     "stt": 21,
-    "name": "Troca 5 xoắn (Nòng)",
+    "name": "Troca 5 xoắn",
     "code": "",
     "quantity": 1
   },
   {
     "stt": 22,
-    "name": "Cây nạy sỏi.",
+    "name": "Cây nạy sỏi",
     "code": "",
     "quantity": 2
   },
   {
     "stt": 23,
-    "name": "Bộ dụng cụ đốt hạch giao cảm.",
+    "name": "Bộ dụng cụ đốt hạch giao cảm",
     "code": "",
     "quantity": 1
   },
@@ -3091,7 +3083,7 @@ allKitsData["DỤNG CỤ NỘI SOI LẺ"] = [
   },
   {
     "stt": 26,
-    "name": "Ống hút.",
+    "name": "Ống hút",
     "code": "",
     "quantity": 1
   },
@@ -3099,18 +3091,17 @@ allKitsData["DỤNG CỤ NỘI SOI LẺ"] = [
     "stt": 27,
     "name": "Móc đốt nội soi",
     "code": "",
-    "quantity": 2,
-    "note": "Hư 1"
+    "quantity": 2
   },
   {
     "stt": 28,
-    "name": "Tay cầm Biboler.",
+    "name": "Tay cầm Biboler",
     "code": "",
     "quantity": 1
   },
   {
     "stt": 29,
-    "name": "Biboler nhi.",
+    "name": "Biboler nhi",
     "code": "",
     "quantity": 1
   },
@@ -3122,31 +3113,31 @@ allKitsData["DỤNG CỤ NỘI SOI LẺ"] = [
   },
   {
     "stt": 31,
-    "name": "Kéo mesk nội soi nhi.",
+    "name": "Kéo mesk nội soi nhi",
     "code": "",
     "quantity": 3
   },
   {
     "stt": 32,
-    "name": "Graper nội soi nhi.",
+    "name": "Graper nội soi nhi",
     "code": "",
     "quantity": 3
   },
   {
     "stt": 33,
-    "name": "Ruột Bibolec nội soi nhi.",
+    "name": "Ruột Bibolec nội soi nhi",
     "code": "",
     "quantity": 1
   },
   {
     "stt": 34,
-    "name": "Kéo Mesk nội soi.",
+    "name": "Kéo Mesk nội soi",
     "code": "",
     "quantity": 2
   },
   {
     "stt": 35,
-    "name": "Bộ Biboler.",
+    "name": "Bộ Bibolec",
     "code": "",
     "quantity": 1
   },
@@ -3154,31 +3145,29 @@ allKitsData["DỤNG CỤ NỘI SOI LẺ"] = [
     "stt": 36,
     "name": "Bộ Robi",
     "code": "",
-    "quantity": 1,
-    "note": "Hư"
+    "quantity": 1
   },
   {
     "stt": 37,
-    "name": "Que bơm từ cung.",
+    "name": "Que bơm từ cung",
     "code": "",
     "quantity": 1
   },
   {
     "stt": 38,
-    "name": "Dây Bibolec nội soi.",
+    "name": "Dây Bibolec nội soi",
     "code": "",
     "quantity": 2
   },
   {
     "stt": 39,
-    "name": "Dây đốt nội soi mono.",
+    "name": "Dây đốt nội soi",
     "code": "",
-    "quantity": 2,
-    "note": "Hư 1"
+    "quantity": 2
   },
   {
     "stt": 40,
-    "name": "Dây bơm CO2.",
+    "name": "Dây bơm CO2",
     "code": "",
     "quantity": 2
   },
@@ -4597,8 +4586,7 @@ allKitsData["NS TỔNG QUÁT 1"] = [
     "stt": 4,
     "name": "LAM KẸP RUỘT",
     "code": "",
-    "quantity": 1,
-    "note": "GÃY 6/3"
+    "quantity": 1
   },
   {
     "stt": 5,
@@ -5283,8 +5271,7 @@ allKitsData["THẦN KINH 1"] = [
     "stt": 2,
     "name": "KELLY TRUNG",
     "code": "BH135R, BH141R, BH125R, HB0602 (HEBU)",
-    "quantity": 15,
-    "note": "6 Mòn, lệch hàm"
+    "quantity": 15
   },
   {
     "stt": 3,
@@ -5376,8 +5363,7 @@ allKitsData["THẦN KINH 2"] = [
     "stt": 2,
     "name": "KELLY TRUNG",
     "code": "BH135R",
-    "quantity": 15,
-    "note": "6 Mòn, lệch hàm"
+    "quantity": 15
   },
   {
     "stt": 3,
@@ -5494,8 +5480,7 @@ allKitsData["THẦN KINH 3"] = [
     "stt": 2,
     "name": "KELLY TRUNG",
     "code": "BH135R",
-    "quantity": 12,
-    "note": "5 Mòn, lệch hàm"
+    "quantity": 12
   },
   {
     "stt": 3,
@@ -5605,8 +5590,7 @@ allKitsData["THẦN KINH 4"] = [
     "stt": 2,
     "name": "KELLY TRUNG",
     "code": "BH135R",
-    "quantity": 12,
-    "note": "5 Mòn, lệch hàm"
+    "quantity": 12
   },
   {
     "stt": 3,
@@ -5723,8 +5707,7 @@ allKitsData["THẦN KINH 5"] = [
     "stt": 3,
     "name": "KELLY TRUNG",
     "code": "BH135R",
-    "quantity": 14,
-    "note": "6 Mòn, lệch hàm"
+    "quantity": 14
   },
   {
     "stt": 4,
@@ -5921,8 +5904,7 @@ allKitsData["THẦN KINH 7"] = [
     "stt": 2,
     "name": "KELLY TRUNG",
     "code": "BH135R",
-    "quantity": 12,
-    "note": "5 Mòn, lệch"
+    "quantity": 12
   },
   {
     "stt": 3,
@@ -6052,8 +6034,7 @@ allKitsData["THẦN KINH 8"] = [
     "stt": 3,
     "name": "KELLY TRUNG",
     "code": "BH135R",
-    "quantity": 11,
-    "note": "5 Mòn, lệch hàm"
+    "quantity": 11
   },
   {
     "stt": 4,
@@ -6291,8 +6272,7 @@ allKitsData["THẦN KINH 10"] = [
     "stt": 2,
     "name": "KELLY TRUNG",
     "code": "BH135R",
-    "quantity": 14,
-    "note": "6 Mòn, lệch hàm"
+    "quantity": 14
   },
   {
     "stt": 3,
