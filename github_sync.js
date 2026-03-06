@@ -157,11 +157,17 @@ async function saveDataToGitHub() {
     content += `var kitDefinitions = ${JSON.stringify(kitDefinitions, null, 4)};\n`;
     content += `var allKitsData = allKitsData || {};\n\nfunction initializeData() {\n    kitDefinitions.forEach(def => {\n        const prefix = def.prefix.normalize('NFC');\n        if (def.count === 1) { if (!allKitsData[prefix]) allKitsData[prefix] = []; }\n        else if (def.count > 1) {\n            for (let i = 1; i <= def.count; i++) {\n                const key = \`\${prefix} \${i}\`;\n                if (!allKitsData[key]) allKitsData[key] = [];\n            }\n        }\n        if (def.extraSubKits) { def.extraSubKits.forEach(name => { const sub = name.normalize('NFC'); if (!allKitsData[sub]) allKitsData[sub] = []; }); }\n    });\n}\ninitializeData();\n\n`;
 
-    const keys = Object.keys(allKitsData).sort((a, b) => a.localeCompare(b, 'vi', { numeric: true }));
+    const normalizedKits = {};
+    for (let k in allKitsData) {
+        const nk = k.normalize('NFC');
+        if (!normalizedKits[nk] || (Array.isArray(allKitsData[k]) && allKitsData[k].length > 0)) {
+            normalizedKits[nk] = allKitsData[k];
+        }
+    }
+    const keys = Object.keys(normalizedKits).sort((a, b) => a.localeCompare(b, 'vi', { numeric: true }));
 
-    for (let keyRaw of keys) {
-        const key = keyRaw.normalize('NFC');
-        const raw = allKitsData[keyRaw];
+    for (let key of keys) {
+        const raw = normalizedKits[key];
         const processed = [];
         let total = 0;
         let sttCounter = 1;
