@@ -49,16 +49,32 @@ document.addEventListener('DOMContentLoaded', () => {
         const mobileSaveBtn = document.getElementById('mobileSaveBtn');
 
         // --- State ---
-        let currentCategory = null;
+        const norm = (s) => s ? s.normalize('NFC') : s;
+
         let modifiedSTTs = JSON.parse(localStorage.getItem('kitModifiedSTTs') || '{}');
         let modifiedNames = JSON.parse(localStorage.getItem('kitModifiedNames') || '{}');
         let modifiedCodes = JSON.parse(localStorage.getItem('kitModifiedCodes') || '{}');
         let modifiedQuantities = JSON.parse(localStorage.getItem('kitModifiedQuantities') || '{}');
         let modifiedNotes = JSON.parse(localStorage.getItem('kitModifiedNotes') || '{}');
         let returnHistory = JSON.parse(localStorage.getItem('kitReturnHistory') || '[]');
+
+        // Normalize keys in localStorage data
+        const normalizeKeys = (obj) => {
+            const newObj = {};
+            for (let k in obj) newObj[norm(k)] = obj[k];
+            return newObj;
+        };
+        modifiedSTTs = normalizeKeys(modifiedSTTs);
+        modifiedNames = normalizeKeys(modifiedNames);
+        modifiedCodes = normalizeKeys(modifiedCodes);
+        modifiedQuantities = normalizeKeys(modifiedQuantities);
+        modifiedNotes = normalizeKeys(modifiedNotes);
+
         let sterilizationDates = JSON.parse(localStorage.getItem('kitSterilizationDates') || 'null');
-        if (!sterilizationDates) {
-            sterilizationDates = (typeof window.sterilizationDates !== 'undefined') ? { ...window.sterilizationDates } : {};
+        if (sterilizationDates) {
+            sterilizationDates = normalizeKeys(sterilizationDates);
+        } else {
+            sterilizationDates = (typeof window.sterilizationDates !== 'undefined') ? normalizeKeys(window.sterilizationDates) : {};
         }
 
         const defaultItems = [
@@ -97,7 +113,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const refreshSterilBtn = document.getElementById('refreshSterilBtn');
         if (refreshSterilBtn) {
             refreshSterilBtn.onclick = () => {
-                const kitName = modalTitle.textContent.trim();
+                const kitName = norm(modalTitle.textContent.trim());
                 const now = new Date().toISOString();
                 sterilizationDates[kitName] = now;
                 localStorage.setItem('kitSterilizationDates', JSON.stringify(sterilizationDates));
@@ -534,9 +550,9 @@ document.addEventListener('DOMContentLoaded', () => {
             let goodS = 0, warnS = 0, expS = 0;
             const allKitNames = [];
             kitDefinitions.forEach(def => {
-                const prefix = def.prefix.normalize('NFC');
-                if (def.count > 0) { for (let i = 1; i <= def.count; i++) allKitNames.push(`${prefix} ${i}`); }
-                if (def.extraSubKits) def.extraSubKits.forEach(sk => allKitNames.push(sk.normalize('NFC')));
+                const prefix = norm(def.prefix);
+                if (def.count > 0) { for (let i = 1; i <= def.count; i++) allKitNames.push(norm(`${prefix} ${i}`)); }
+                if (def.extraSubKits) def.extraSubKits.forEach(sk => allKitNames.push(norm(sk)));
                 if (def.count === 0 && (!def.extraSubKits || def.extraSubKits.length === 0)) allKitNames.push(prefix);
             });
 
@@ -546,7 +562,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 const last = new Date(sDate);
                 let limit = 7;
                 const up = kn.toUpperCase();
-                if (up.includes("NỘI SOI SẢN") || up.includes("NỘI SOI TỔNG QUÁT") || up.includes("SOI TREO TMH")) limit = 30;
+                if (up.includes("NỘI SOI SẢN") || up.includes("NỘI SOI TỔNG QUÁT") || up.includes("NS SẢN") || up.includes("NS TỔNG QUÁT") || up.includes("SOI TREO TMH")) limit = 30;
 
                 const diffDays = Math.floor(Math.abs(new Date() - last) / (1000 * 60 * 60 * 24));
                 if (diffDays >= limit) expS++;
@@ -682,7 +698,7 @@ document.addEventListener('DOMContentLoaded', () => {
             // Rules
             let limitDays = 7;
             const upperName = kitName.toUpperCase();
-            if (upperName.includes("NỘI SOI SẢN") || upperName.includes("NỘI SOI TỔNG QUÁT") || upperName.includes("SOI TREO TMH")) {
+            if (upperName.includes("NỘI SOI SẢN") || upperName.includes("NỘI SOI TỔNG QUÁT") || upperName.includes("NS SẢN") || upperName.includes("NS TỔNG QUÁT") || upperName.includes("SOI TREO TMH")) {
                 limitDays = 30;
             }
 
@@ -979,9 +995,9 @@ document.addEventListener('DOMContentLoaded', () => {
             sterilAllKitsList.innerHTML = '';
             const allKitNames = [];
             kitDefinitions.sort((a, b) => a.baseName.localeCompare(b.baseName, 'vi', { numeric: true })).forEach(def => {
-                const prefix = def.prefix.normalize('NFC');
-                if (def.count > 0) { for (let i = 1; i <= def.count; i++) allKitNames.push(`${prefix} ${i}`); }
-                if (def.extraSubKits) def.extraSubKits.forEach(sk => allKitNames.push(sk.normalize('NFC')));
+                const prefix = norm(def.prefix);
+                if (def.count > 0) { for (let i = 1; i <= def.count; i++) allKitNames.push(norm(`${prefix} ${i}`)); }
+                if (def.extraSubKits) def.extraSubKits.forEach(sk => allKitNames.push(norm(sk)));
                 if (def.count === 0 && (!def.extraSubKits || def.extraSubKits.length === 0)) allKitNames.push(prefix);
             });
 
@@ -992,7 +1008,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 let dateDisplay = "---";
                 let limit = 7;
                 const up = kn.toUpperCase();
-                if (up.includes("NỘI SOI SẢN") || up.includes("NỘI SOI TỔNG QUÁT") || up.includes("SOI TREO TMH")) limit = 30;
+                if (up.includes("NỘI SOI SẢN") || up.includes("NỘI SOI TỔNG QUÁT") || up.includes("NS SẢN") || up.includes("NS TỔNG QUÁT") || up.includes("SOI TREO TMH")) limit = 30;
 
                 if (sDate) {
                     const last = new Date(sDate);
@@ -1023,8 +1039,9 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         function refreshSterilForKit(kn) {
+            const kitKey = norm(kn);
             const now = new Date().toISOString();
-            sterilizationDates[kn] = now;
+            sterilizationDates[kitKey] = now;
             localStorage.setItem('kitSterilizationDates', JSON.stringify(sterilizationDates));
             renderSterilMgmtData();
             if (window.navigator && window.navigator.vibrate) window.navigator.vibrate(30);
@@ -1035,9 +1052,9 @@ document.addEventListener('DOMContentLoaded', () => {
             if (!confirm("Bạn có chắc chắn muốn xác nhận hấp lại cho TẤT CẢ các bộ đã hết hạn?")) return;
             const allKitNames = [];
             kitDefinitions.forEach(def => {
-                const prefix = def.prefix.normalize('NFC');
-                if (def.count > 0) { for (let i = 1; i <= def.count; i++) allKitNames.push(`${prefix} ${i}`); }
-                if (def.extraSubKits) def.extraSubKits.forEach(sk => allKitNames.push(sk.normalize('NFC')));
+                const prefix = norm(def.prefix);
+                if (def.count > 0) { for (let i = 1; i <= def.count; i++) allKitNames.push(norm(`${prefix} ${i}`)); }
+                if (def.extraSubKits) def.extraSubKits.forEach(sk => allKitNames.push(norm(sk)));
                 if (def.count === 0 && (!def.extraSubKits || def.extraSubKits.length === 0)) allKitNames.push(prefix);
             });
 
@@ -1047,7 +1064,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 const sDate = sterilizationDates[kn] || (allKitsData[kn] && allKitsData[kn].sterilDate);
                 let limit = 7;
                 const up = kn.toUpperCase();
-                if (up.includes("NỘI SOI SẢN") || up.includes("NỘI SOI TỔNG QUÁT") || up.includes("SOI TREO TMH")) limit = 30;
+                if (up.includes("NỘI SOI SẢN") || up.includes("NỘI SOI TỔNG QUÁT") || up.includes("NS SẢN") || up.includes("NS TỔNG QUÁT") || up.includes("SOI TREO TMH")) limit = 30;
 
                 let isExpired = true;
                 if (sDate) {
