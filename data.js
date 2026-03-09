@@ -1,4 +1,4 @@
-var APP_VERSION = "v3.5 GOLD (FINAL) (17:48:15 9/3/2026)";
+var APP_VERSION = "v3.5 GOLD (FINAL) (17:55:12 9/3/2026)";
 var kitDefinitions = [
     {
         "id": 1,
@@ -339,7 +339,6 @@ allKitsData["BẮT CON 1"] = [
   }
 ];
 allKitsData["BẮT CON 1"].footer = "ĐÃ KIỂM 01/2026";
-allKitsData["BẮT CON 1"].sterilDate = "2026-03-09T10:47:00.893Z";
 // Data for BẮT CON 2
 allKitsData["BẮT CON 2"] = [
   {
@@ -450,7 +449,6 @@ allKitsData["BẮT CON 2"] = [
   }
 ];
 allKitsData["BẮT CON 2"].footer = "ĐÃ KIỂM";
-allKitsData["BẮT CON 2"].sterilDate = "2026-03-09T10:47:00.893Z";
 // Data for BẮT CON 3
 allKitsData["BẮT CON 3"] = [
   {
@@ -543,7 +541,6 @@ allKitsData["BẮT CON 3"] = [
   }
 ];
 allKitsData["BẮT CON 3"].footer = "ĐÃ KIỂM";
-allKitsData["BẮT CON 3"].sterilDate = "2026-03-09T10:47:00.893Z";
 // Data for BỘ CẮT A MỚI 2
 allKitsData["BỘ CẮT A MỚI 2"] = [
   {
@@ -621,7 +618,6 @@ allKitsData["BỘ CẮT A MỚI 2"] = [
   }
 ];
 allKitsData["BỘ CẮT A MỚI 2"].footer = "ĐÃ KIỂM";
-allKitsData["BỘ CẮT A MỚI 2"].sterilDate = "2026-03-09T10:47:00.893Z";
 // Data for BỘ CẮT AMIDAN CŨ
 allKitsData["BỘ CẮT AMIDAN CŨ"] = [
   {
@@ -714,7 +710,6 @@ allKitsData["BỘ CẮT AMIDAN CŨ"] = [
   }
 ];
 allKitsData["BỘ CẮT AMIDAN CŨ"].footer = "ĐÃ KIỂM";
-allKitsData["BỘ CẮT AMIDAN CŨ"].sterilDate = "2026-03-09T10:47:00.893Z";
 // Data for BỘ CẮT AMIDAN MỚI 1
 allKitsData["BỘ CẮT AMIDAN MỚI 1"] = [
   {
@@ -807,7 +802,6 @@ allKitsData["BỘ CẮT AMIDAN MỚI 1"] = [
   }
 ];
 allKitsData["BỘ CẮT AMIDAN MỚI 1"].footer = "ĐÃ KIỂM";
-allKitsData["BỘ CẮT AMIDAN MỚI 1"].sterilDate = "2026-03-09T10:47:00.893Z";
 // Data for BỘ LẤY DÂY CHẰNG
 allKitsData["BỘ LẤY DÂY CHẰNG"] = [
   {
@@ -951,7 +945,6 @@ allKitsData["BỘ LẤY DÂY CHẰNG"] = [
   }
 ];
 allKitsData["BỘ LẤY DÂY CHẰNG"].footer = "ĐÃ KIỂM";
-allKitsData["BỘ LẤY DÂY CHẰNG"].sterilDate = "2026-03-09T10:47:00.893Z";
 // Data for BỘ LẤY GÂN - DÂY CHẰNG
 allKitsData["BỘ LẤY GÂN - DÂY CHẰNG"] = [
   {
@@ -1095,7 +1088,6 @@ allKitsData["BỘ LẤY GÂN - DÂY CHẰNG"] = [
   }
 ];
 allKitsData["BỘ LẤY GÂN - DÂY CHẰNG"].footer = "ĐÃ KIỂM 02/2026";
-allKitsData["BỘ LẤY GÂN - DÂY CHẰNG"].sterilDate = "2026-03-09T10:47:00.893Z";
 // Data for BỘ NẠO VA
 allKitsData["BỘ NẠO VA"] = [
   {
@@ -1131,7 +1123,6 @@ allKitsData["BỘ NẠO VA"] = [
   }
 ];
 allKitsData["BỘ NẠO VA"].footer = "ĐÃ KIỂM";
-allKitsData["BỘ NẠO VA"].sterilDate = "2026-03-09T10:47:00.893Z";
 // Data for BỘ NONG NIỆU ĐẠO
 allKitsData["BỘ NONG NIỆU ĐẠO"] = [
   {
@@ -1239,7 +1230,6 @@ allKitsData["BỘ NONG NIỆU ĐẠO"] = [
   }
 ];
 allKitsData["BỘ NONG NIỆU ĐẠO"].footer = "ĐÃ KIỂM";
-allKitsData["BỘ NONG NIỆU ĐẠO"].sterilDate = "2026-03-09T10:47:00.893Z";
 // Data for BỘ NS LẤY GÂN MÁC
 allKitsData["BỘ NS LẤY GÂN MÁC"] = [
   {
@@ -1275,7 +1265,6 @@ allKitsData["BỘ NS LẤY GÂN MÁC"] = [
   }
 ];
 allKitsData["BỘ NS LẤY GÂN MÁC"].footer = "ĐÃ KIỂM 02/2026";
-allKitsData["BỘ NS LẤY GÂN MÁC"].sterilDate = "2026-03-09T10:47:00.893Z";
 // Data for BỘ TAI
 allKitsData["BỘ TAI"] = [
   {
@@ -1348,7 +1337,6 @@ allKitsData["BỘ TAI"] = [
   }
 ];
 allKitsData["BỘ TAI"].footer = "ĐÃ KIỂM";
-allKitsData["BỘ TAI"].sterilDate = "2026-03-09T10:47:00.893Z";
 // Data for BỘ THÁO VIS ĐA NĂNG
 allKitsData["BỘ THÁO VIS ĐA NĂNG"] = [
   {
@@ -1732,7 +1720,6 @@ allKitsData["CAPPA 1"] = [
   }
 ];
 allKitsData["CAPPA 1"].footer = "ĐÃ KIỂM";
-allKitsData["CAPPA 1"].sterilDate = "2026-03-09T10:47:00.893Z";
 // Data for CAPPA 2
 allKitsData["CAPPA 2"] = [
   {
@@ -1804,7 +1791,6 @@ allKitsData["CAPPA 2"] = [
   }
 ];
 allKitsData["CAPPA 2"].footer = "ĐÃ KIỂM";
-allKitsData["CAPPA 2"].sterilDate = "2026-03-09T10:47:00.893Z";
 // Data for CTC 1
 allKitsData["CTC 1"] = [
   {
@@ -2054,7 +2040,6 @@ allKitsData["CTC 1"] = [
   }
 ];
 allKitsData["CTC 1"].footer = "ĐÃ KIỂM";
-allKitsData["CTC 1"].sterilDate = "2026-03-09T10:47:00.893Z";
 // Data for CTC 2
 allKitsData["CTC 2"] = [
   {
@@ -2280,7 +2265,6 @@ allKitsData["CTC 2"] = [
   }
 ];
 allKitsData["CTC 2"].footer = "ĐÃ KIỂM";
-allKitsData["CTC 2"].sterilDate = "2026-03-09T10:47:00.893Z";
 // Data for CTC 3
 allKitsData["CTC 3"] = [
   {
@@ -2500,7 +2484,6 @@ allKitsData["CTC 3"] = [
   }
 ];
 allKitsData["CTC 3"].footer = "ĐÃ KIỂM";
-allKitsData["CTC 3"].sterilDate = "2026-03-09T10:47:00.893Z";
 // Data for DỤNG CỤ MỔ HỞ LẺ
 allKitsData["DỤNG CỤ MỔ HỞ LẺ"] = [
   {
@@ -2945,7 +2928,6 @@ allKitsData["DỤNG CỤ MỔ HỞ LẺ"] = [
   }
 ];
 allKitsData["DỤNG CỤ MỔ HỞ LẺ"].footer = "ĐÃ KIỂM";
-allKitsData["DỤNG CỤ MỔ HỞ LẺ"].sterilDate = "2026-03-09T10:47:00.893Z";
 // Data for DỤNG CỤ NỘI SOI LẺ
 allKitsData["DỤNG CỤ NỘI SOI LẺ"] = [
   {
@@ -3198,7 +3180,6 @@ allKitsData["DỤNG CỤ NỘI SOI LẺ"] = [
   }
 ];
 allKitsData["DỤNG CỤ NỘI SOI LẺ"].footer = "ĐÃ KIỂM 02/2026";
-allKitsData["DỤNG CỤ NỘI SOI LẺ"].sterilDate = "2026-03-09T10:47:00.893Z";
 // Data for ĐẠI PHẪU
 allKitsData["ĐẠI PHẪU"] = [
   {
@@ -3856,7 +3837,6 @@ allKitsData["NIỆU 1"] = [
   }
 ];
 allKitsData["NIỆU 1"].footer = "ĐÃ KIỂM";
-allKitsData["NIỆU 1"].sterilDate = "2026-03-09T10:47:00.893Z";
 // Data for NIỆU 2
 allKitsData["NIỆU 2"] = [
   {
@@ -4122,7 +4102,6 @@ allKitsData["NIỆU 2"] = [
   }
 ];
 allKitsData["NIỆU 2"].footer = "ĐÃ KIỂM";
-allKitsData["NIỆU 2"].sterilDate = "2026-03-09T10:47:00.893Z";
 // Data for NIỆU 3
 allKitsData["NIỆU 3"] = [
   {
@@ -4302,7 +4281,6 @@ allKitsData["NIỆU 3"] = [
   }
 ];
 allKitsData["NIỆU 3"].footer = "ĐÃ KIỂM";
-allKitsData["NIỆU 3"].sterilDate = "2026-03-09T10:47:00.893Z";
 // Data for NS SẢN
 allKitsData["NS SẢN"] = [
   {
@@ -4582,7 +4560,6 @@ allKitsData["NS TAI MŨI HỌNG"] = [
   }
 ];
 allKitsData["NS TAI MŨI HỌNG"].footer = "ĐÃ KIỂM";
-allKitsData["NS TAI MŨI HỌNG"].sterilDate = "2026-03-09T10:47:00.893Z";
 // Data for NS TỔNG QUÁT 1
 allKitsData["NS TỔNG QUÁT 1"] = [
   {
@@ -4609,7 +4586,8 @@ allKitsData["NS TỔNG QUÁT 1"] = [
     "stt": 4,
     "name": "LAM KẸP RUỘT",
     "code": "",
-    "quantity": 1
+    "quantity": 1,
+    "note": "GÃY"
   },
   {
     "stt": 5,
@@ -4704,7 +4682,7 @@ allKitsData["NS TỔNG QUÁT 1"] = [
   }
 ];
 allKitsData["NS TỔNG QUÁT 1"].footer = "ĐÃ KIỂM";
-allKitsData["NS TỔNG QUÁT 1"].sterilDate = "2026-03-09T10:47:00.893Z";
+allKitsData["NS TỔNG QUÁT 1"].sterilDate = "2026-03-09T10:54:59.879Z";
 // Data for NS TỔNG QUÁT 2
 allKitsData["NS TỔNG QUÁT 2"] = [
   {
@@ -4912,7 +4890,6 @@ allKitsData["NS TỔNG QUÁT 2"] = [
   }
 ];
 allKitsData["NS TỔNG QUÁT 2"].footer = "ĐÃ KIỂM 01/2026";
-allKitsData["NS TỔNG QUÁT 2"].sterilDate = "2026-03-09T10:47:00.893Z";
 // Data for SỌ NÃO
 allKitsData["SỌ NÃO"] = [
   {
@@ -5284,7 +5261,6 @@ allKitsData["SOI TREO TMH"] = [
   }
 ];
 allKitsData["SOI TREO TMH"].footer = "ĐÃ KIỂM";
-allKitsData["SOI TREO TMH"].sterilDate = "2026-03-09T10:47:00.893Z";
 // Data for THẦN KINH 1
 allKitsData["THẦN KINH 1"] = [
   {
@@ -5377,7 +5353,6 @@ allKitsData["THẦN KINH 1"] = [
   }
 ];
 allKitsData["THẦN KINH 1"].footer = "ĐÃ KIỂM";
-allKitsData["THẦN KINH 1"].sterilDate = "2026-03-09T10:47:00.893Z";
 // Data for THẦN KINH 2
 allKitsData["THẦN KINH 2"] = [
   {
@@ -5495,7 +5470,6 @@ allKitsData["THẦN KINH 2"] = [
   }
 ];
 allKitsData["THẦN KINH 2"].footer = "ĐÃ KIỂM";
-allKitsData["THẦN KINH 2"].sterilDate = "2026-03-09T10:47:00.893Z";
 // Data for THẦN KINH 3
 allKitsData["THẦN KINH 3"] = [
   {
@@ -5606,7 +5580,6 @@ allKitsData["THẦN KINH 3"] = [
   }
 ];
 allKitsData["THẦN KINH 3"].footer = "ĐÃ KIỂM";
-allKitsData["THẦN KINH 3"].sterilDate = "2026-03-09T10:47:00.893Z";
 // Data for THẦN KINH 4
 allKitsData["THẦN KINH 4"] = [
   {
@@ -5718,7 +5691,6 @@ allKitsData["THẦN KINH 4"] = [
   }
 ];
 allKitsData["THẦN KINH 4"].footer = "ĐÃ KIỂM";
-allKitsData["THẦN KINH 4"].sterilDate = "2026-03-09T10:47:00.893Z";
 // Data for THẦN KINH 5
 allKitsData["THẦN KINH 5"] = [
   {
@@ -5829,7 +5801,6 @@ allKitsData["THẦN KINH 5"] = [
   }
 ];
 allKitsData["THẦN KINH 5"].footer = "ĐÃ KIỂM";
-allKitsData["THẦN KINH 5"].sterilDate = "2026-03-09T10:47:00.893Z";
 // Data for THẦN KINH 6
 allKitsData["THẦN KINH 6"] = [
   {
@@ -5923,7 +5894,6 @@ allKitsData["THẦN KINH 6"] = [
   }
 ];
 allKitsData["THẦN KINH 6"].footer = "ĐÃ KIỂM";
-allKitsData["THẦN KINH 6"].sterilDate = "2026-03-09T10:47:00.893Z";
 // Data for THẦN KINH 7
 allKitsData["THẦN KINH 7"] = [
   {
@@ -6046,7 +6016,6 @@ allKitsData["THẦN KINH 7"] = [
   }
 ];
 allKitsData["THẦN KINH 7"].footer = "ĐÃ KIỂM";
-allKitsData["THẦN KINH 7"].sterilDate = "2026-03-09T10:47:00.893Z";
 // Data for THẦN KINH 8
 allKitsData["THẦN KINH 8"] = [
   {
@@ -6198,7 +6167,6 @@ allKitsData["THẦN KINH 8"] = [
   }
 ];
 allKitsData["THẦN KINH 8"].footer = "ĐÃ KIỂM";
-allKitsData["THẦN KINH 8"].sterilDate = "2026-03-09T10:47:00.893Z";
 // Data for THẦN KINH 9
 allKitsData["THẦN KINH 9"] = [
   {
@@ -6294,7 +6262,6 @@ allKitsData["THẦN KINH 9"] = [
   }
 ];
 allKitsData["THẦN KINH 9"].footer = "ĐÃ KIỂM";
-allKitsData["THẦN KINH 9"].sterilDate = "2026-03-09T10:47:00.893Z";
 // Data for THẦN KINH 10
 allKitsData["THẦN KINH 10"] = [
   {
@@ -6419,7 +6386,6 @@ allKitsData["THẦN KINH 10"] = [
   }
 ];
 allKitsData["THẦN KINH 10"].footer = "ĐÃ KIỂM";
-allKitsData["THẦN KINH 10"].sterilDate = "2026-03-09T10:47:00.893Z";
 // Data for THẦN KINH 11
 allKitsData["THẦN KINH 11"] = [
   {
@@ -6524,7 +6490,6 @@ allKitsData["THẦN KINH 11"] = [
   }
 ];
 allKitsData["THẦN KINH 11"].footer = "ĐÃ KIỂM";
-allKitsData["THẦN KINH 11"].sterilDate = "2026-03-09T10:47:00.893Z";
 // Data for THẦN KINH 12
 allKitsData["THẦN KINH 12"] = [
   {
@@ -6627,7 +6592,6 @@ allKitsData["THẦN KINH 12"] = [
   }
 ];
 allKitsData["THẦN KINH 12"].footer = "ĐÃ KIỂM";
-allKitsData["THẦN KINH 12"].sterilDate = "2026-03-09T10:47:00.893Z";
 // Data for THẦN KINH 13
 allKitsData["THẦN KINH 13"] = [
   {
@@ -6733,7 +6697,6 @@ allKitsData["THẦN KINH 13"] = [
   }
 ];
 allKitsData["THẦN KINH 13"].footer = "ĐÃ KIỂM";
-allKitsData["THẦN KINH 13"].sterilDate = "2026-03-09T10:47:00.893Z";
 // Data for THẦN KINH 14
 allKitsData["THẦN KINH 14"] = [
   {
@@ -6839,7 +6802,6 @@ allKitsData["THẦN KINH 14"] = [
   }
 ];
 allKitsData["THẦN KINH 14"].footer = "ĐÃ KIỂM";
-allKitsData["THẦN KINH 14"].sterilDate = "2026-03-09T10:47:00.893Z";
 // Data for THẦN KINH 15
 allKitsData["THẦN KINH 15"] = [
   {
@@ -6943,7 +6905,6 @@ allKitsData["THẦN KINH 15"] = [
   }
 ];
 allKitsData["THẦN KINH 15"].footer = "ĐÃ KIỂM";
-allKitsData["THẦN KINH 15"].sterilDate = "2026-03-09T10:47:00.893Z";
 // Data for TIỂU PHẪU 1
 allKitsData["TIỂU PHẪU 1"] = [
   {
@@ -7046,7 +7007,6 @@ allKitsData["TIỂU PHẪU 1"] = [
   }
 ];
 allKitsData["TIỂU PHẪU 1"].footer = "ĐÃ KIỂM";
-allKitsData["TIỂU PHẪU 1"].sterilDate = "2026-03-09T10:47:00.893Z";
 // Data for TIỂU PHẪU 2
 allKitsData["TIỂU PHẪU 2"] = [
   {
@@ -7161,7 +7121,6 @@ allKitsData["TIỂU PHẪU 2"] = [
   }
 ];
 allKitsData["TIỂU PHẪU 2"].footer = "ĐÃ KIỂM";
-allKitsData["TIỂU PHẪU 2"].sterilDate = "2026-03-09T10:47:00.893Z";
 // Data for TIỂU PHẪU 3
 allKitsData["TIỂU PHẪU 3"] = [
   {
@@ -7259,7 +7218,6 @@ allKitsData["TIỂU PHẪU 3"] = [
   }
 ];
 allKitsData["TIỂU PHẪU 3"].footer = "ĐÃ KIỂM 01/2026";
-allKitsData["TIỂU PHẪU 3"].sterilDate = "2026-03-09T10:47:00.893Z";
 // Data for TIỂU PHẪU 4
 allKitsData["TIỂU PHẪU 4"] = [
   {
@@ -7367,7 +7325,6 @@ allKitsData["TIỂU PHẪU 4"] = [
   }
 ];
 allKitsData["TIỂU PHẪU 4"].footer = "ĐÃ KIỂM";
-allKitsData["TIỂU PHẪU 4"].sterilDate = "2026-03-09T10:47:00.893Z";
 // Data for TRUNG PHẪU 1
 allKitsData["TRUNG PHẪU 1"] = [
   {
@@ -7540,7 +7497,6 @@ allKitsData["TRUNG PHẪU 1"] = [
   }
 ];
 allKitsData["TRUNG PHẪU 1"].footer = "ĐÃ KIỂM";
-allKitsData["TRUNG PHẪU 1"].sterilDate = "2026-03-09T10:47:00.893Z";
 // Data for TRUNG PHẪU 2
 allKitsData["TRUNG PHẪU 2"] = [
   {
@@ -7726,7 +7682,6 @@ allKitsData["TRUNG PHẪU 2"] = [
   }
 ];
 allKitsData["TRUNG PHẪU 2"].footer = "ĐÃ KIỂM";
-allKitsData["TRUNG PHẪU 2"].sterilDate = "2026-03-09T10:47:00.893Z";
 // Data for TV CỔ
 allKitsData["TV CỔ"] = [
   {
@@ -8191,7 +8146,6 @@ allKitsData["TV LƯNG 1"] = [
   }
 ];
 allKitsData["TV LƯNG 1"].footer = "ĐÃ KIỂM";
-allKitsData["TV LƯNG 1"].sterilDate = "2026-03-09T10:47:00.893Z";
 // Data for TV LƯNG 2
 allKitsData["TV LƯNG 2"] = [
   {
@@ -8416,7 +8370,6 @@ allKitsData["TV LƯNG 2"] = [
   }
 ];
 allKitsData["TV LƯNG 2"].footer = "ĐÃ KIỂM";
-allKitsData["TV LƯNG 2"].sterilDate = "2026-03-09T10:47:00.893Z";
 // Data for VI PHẪU BS PHƯỚC
 allKitsData["VI PHẪU BS PHƯỚC"] = [
   {
@@ -8494,7 +8447,6 @@ allKitsData["VI PHẪU BS PHƯỚC"] = [
   }
 ];
 allKitsData["VI PHẪU BS PHƯỚC"].footer = "ĐÃ KIỂM";
-allKitsData["VI PHẪU BS PHƯỚC"].sterilDate = "2026-03-09T10:47:00.893Z";
 // Data for VI PHẪU CŨ (MỔ HỞ)
 allKitsData["VI PHẪU CŨ (MỔ HỞ)"] = [
   {
@@ -8597,7 +8549,6 @@ allKitsData["VI PHẪU CŨ (MỔ HỞ)"] = [
   }
 ];
 allKitsData["VI PHẪU CŨ (MỔ HỞ)"].footer = "ĐÃ KIỂM";
-allKitsData["VI PHẪU CŨ (MỔ HỞ)"].sterilDate = "2026-03-09T10:47:00.893Z";
 // Data for VP CỘT SỐNG
 allKitsData["VP CỘT SỐNG"] = [
   {
@@ -8670,7 +8621,6 @@ allKitsData["VP CỘT SỐNG"] = [
   }
 ];
 allKitsData["VP CỘT SỐNG"].footer = "ĐÃ KIỂM";
-allKitsData["VP CỘT SỐNG"].sterilDate = "2026-03-09T10:47:00.893Z";
 // Data for XƯƠNG CHI DƯỚI
 allKitsData["XƯƠNG CHI DƯỚI"] = [
   {
