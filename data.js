@@ -1,4 +1,4 @@
-var APP_VERSION = "v3.5 GOLD (FINAL) (17:55:12 9/3/2026)";
+var APP_VERSION = "v3.5 GOLD (FINAL) (08:09:47 14/3/2026)";
 var kitDefinitions = [
     {
         "id": 1,
@@ -4682,7 +4682,6 @@ allKitsData["NS TỔNG QUÁT 1"] = [
   }
 ];
 allKitsData["NS TỔNG QUÁT 1"].footer = "ĐÃ KIỂM";
-allKitsData["NS TỔNG QUÁT 1"].sterilDate = "2026-03-09T10:54:59.879Z";
 // Data for NS TỔNG QUÁT 2
 allKitsData["NS TỔNG QUÁT 2"] = [
   {
