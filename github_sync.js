@@ -147,13 +147,15 @@ async function saveDataToGitHub() {
         stts: JSON.parse(localStorage.getItem('kitModifiedSTTs') || '{}'),
         codes: JSON.parse(localStorage.getItem('kitModifiedCodes') || '{}'),
         qtys: JSON.parse(localStorage.getItem('kitModifiedQuantities') || '{}'),
-        sterils: JSON.parse(localStorage.getItem('kitSterilizationDates') || '{}')
+        sterils: JSON.parse(localStorage.getItem('kitSterilizationDates') || '{}'),
+        reports: JSON.parse(localStorage.getItem('kitReportDataStore') || '{}')
     };
 
     const dateStr = new Date().toLocaleString('vi-VN');
     const vMatch = typeof APP_VERSION !== 'undefined' ? APP_VERSION.match(/v\d+\.\d+(\s+\w+)?(\s+\(\w+\))?/) : null;
     const currentV = vMatch ? vMatch[0] : "v3.5 GOLD (FINAL)";
     let content = `var APP_VERSION = "${currentV} (${dateStr})";\n`;
+    content += `var kitReportDataStore = ${JSON.stringify(mods.reports, null, 4)};\n`;
     content += `var kitDefinitions = ${JSON.stringify(kitDefinitions, null, 4)};\n`;
     content += `var allKitsData = allKitsData || {};\n\nfunction initializeData() {\n    kitDefinitions.forEach(def => {\n        const prefix = def.prefix.normalize('NFC');\n        if (def.count === 1) { if (!allKitsData[prefix]) allKitsData[prefix] = []; }\n        else if (def.count > 1) {\n            for (let i = 1; i <= def.count; i++) {\n                const key = \`\${prefix} \${i}\`;\n                if (!allKitsData[key]) allKitsData[key] = [];\n            }\n        }\n        if (def.extraSubKits) { def.extraSubKits.forEach(name => { const sub = name.normalize('NFC'); if (!allKitsData[sub]) allKitsData[sub] = []; }); }\n    });\n}\ninitializeData();\n\n`;
 
@@ -252,6 +254,7 @@ async function saveDataToGitHub() {
     localStorage.removeItem('kitModifiedCodes');
     localStorage.removeItem('kitModifiedQuantities');
     localStorage.removeItem('kitSterilizationDates');
+    localStorage.removeItem('kitReportDataStore');
     alert('✓ Đã sao lưu thành công!');
     location.reload();
 }
