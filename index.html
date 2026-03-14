@@ -353,6 +353,38 @@
                             </table>
                         </div>
                     </div>
+
+                    <!-- Periodic Report View (Phun Phòng & Steranios) -->
+                    <div id="periodicReportView" style="display: none;">
+                        <div class="stats-header-actions"
+                            style="margin-bottom: 15px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px;">
+                            <div style="display: flex; align-items: center; gap: 10px;">
+                                <button id="backToReportSelectionBtn" class="back-btn" style="margin: 0;"><i
+                                        class="fa-solid fa-arrow-left"></i></button>
+                                <div class="month-selector"
+                                    style="display: flex; align-items: center; gap: 8px; background: #f1f5f9; padding: 5px 12px; border-radius: 20px; border: 1px solid #e2e8f0;">
+                                    <label for="reportMonth"
+                                        style="font-weight: 600; font-size: 0.85rem;">Tháng:</label>
+                                    <input type="month" id="reportMonth"
+                                        style="border: none; background: transparent; font-family: inherit; font-weight: 700; color: var(--primary-color); outline: none; cursor: pointer;">
+                                </div>
+                            </div>
+                            <button id="exportReportExcelBtn" class="action-btn-pill export-btn"
+                                style="font-size: 0.85rem; padding: 8px 15px;">
+                                <i class="fa-solid fa-file-excel"></i> Xuất Báo cáo Excel
+                            </button>
+                        </div>
+                        <div class="table-container" style="max-height: 65vh; overflow-y: auto;">
+                            <table class="item-table report-table">
+                                <thead id="reportTableHeader" style="position: sticky; top: 0; z-index: 10;">
+                                    <!-- Dynamic header -->
+                                </thead>
+                                <tbody id="reportTableBody">
+                                    <!-- Dynamic rows -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div> <!-- End detailModal -->
