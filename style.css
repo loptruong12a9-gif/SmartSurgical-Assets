@@ -761,6 +761,30 @@ h1 {
     font-style: italic;
 }
 
+/* Report Table Specifics */
+.report-table th,
+.report-table td {
+    padding: 8px 6px;
+    border: 1px solid #94a3b8;
+}
+
+.edit-report {
+    background: #ffffff;
+    cursor: text;
+    min-height: 24px;
+}
+
+.edit-report:focus {
+    background: #fffbeb !important;
+    outline: 2px solid var(--warning-orange);
+    z-index: 5;
+    position: relative;
+}
+
+.edit-report:hover {
+    background: #f1f5f9;
+}
+
 @keyframes float {
     0% {
         transform: translateY(0px);
