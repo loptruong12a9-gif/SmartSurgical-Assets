@@ -48,6 +48,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
         const mobileSaveBtn = document.getElementById('mobileSaveBtn');
 
+        // Periodic Report Elements
+        const periodicReportView = document.getElementById('periodicReportView');
+        const reportTableHeader = document.getElementById('reportTableHeader');
+        const reportTableBody = document.getElementById('reportTableBody');
+        const reportMonthInput = document.getElementById('reportMonth');
+        const exportReportExcelBtn = document.getElementById('exportReportExcelBtn');
+        const backToReportSelectionBtn = document.getElementById('backToReportSelectionBtn');
+
         // --- State ---
         const norm = (s) => s ? s.normalize('NFC') : s;
 
@@ -57,6 +65,12 @@ document.addEventListener('DOMContentLoaded', () => {
         let modifiedQuantities = JSON.parse(localStorage.getItem('kitModifiedQuantities') || '{}');
         let modifiedNotes = JSON.parse(localStorage.getItem('kitModifiedNotes') || '{}');
         let returnHistory = JSON.parse(localStorage.getItem('kitReturnHistory') || '[]');
+        let reportDataStore = JSON.parse(localStorage.getItem('kitReportDataStore') || 'null');
+        if (!reportDataStore) {
+            reportDataStore = (typeof window.kitReportDataStore !== 'undefined') ? window.kitReportDataStore : {};
+        }
+
+        let currentReportType = null; // 'phun_phong' or 'steranios'
 
         // Normalize keys in localStorage data
         const normalizeKeys = (obj) => {
@@ -80,6 +94,10 @@ document.addEventListener('DOMContentLoaded', () => {
         const defaultItems = [
             { name: "Chưa cập nhật", code: "---", quantity: 0, note: "Đang chờ dữ liệu" }
         ];
+        // Set default month to current month
+        const now = new Date();
+        const monthVal = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, '0')}`;
+        if (reportMonthInput) reportMonthInput.value = monthVal;
 
         // --- Event Listeners ---
         if (exportStatsBtn) exportStatsBtn.addEventListener('click', exportStatisticsToExcel);
@@ -90,6 +108,10 @@ document.addEventListener('DOMContentLoaded', () => {
         if (searchInput) searchInput.addEventListener('input', (e) => renderCategoryGrid(e.target.value));
         if (closeBtn) closeBtn.addEventListener('click', () => window.closeModal());
         if (backBtn) backBtn.addEventListener('click', () => { if (currentCategory) showSelectionView(currentCategory); });
+
+        if (reportMonthInput) reportMonthInput.addEventListener('change', () => renderReportTable());
+        if (exportReportExcelBtn) exportReportExcelBtn.addEventListener('click', exportReportToExcel);
+        if (backToReportSelectionBtn) backToReportSelectionBtn.addEventListener('click', showReportSelectionView);
 
         if (createNewReturnBtn) createNewReturnBtn.addEventListener('click', showNewReturnForm);
         if (backToReturnMainBtn) backToReturnMainBtn.addEventListener('click', showReturnHistoryView);
@@ -433,6 +455,10 @@ document.addEventListener('DOMContentLoaded', () => {
                 const returnCard = document.createElement('div'); returnCard.className = 'kit-card';
                 returnCard.innerHTML = `<div class="icon-wrapper icon-teal" style="background: linear-gradient(135deg, #0f766e, #14b8a6);"><i class="fa-solid fa-truck-ramp-box kit-icon"></i></div><div class="kit-name">Quản lý Đợt Trả</div>`;
                 returnCard.addEventListener('click', showReturnManagementView); kitGrid.appendChild(returnCard);
+
+                const periodicReportCard = document.createElement('div'); periodicReportCard.className = 'kit-card';
+                periodicReportCard.innerHTML = `<div class="icon-wrapper icon-orange" style="background: linear-gradient(135deg, #f59e0b, #fbbf24);"><i class="fa-solid fa-calendar-check kit-icon"></i></div><div class="kit-name">Sổ Kiểm Tra Định Kỳ</div>`;
+                periodicReportCard.addEventListener('click', showReportSelectionView); kitGrid.appendChild(periodicReportCard);
             }
         }
 
@@ -1081,6 +1107,383 @@ document.addEventListener('DOMContentLoaded', () => {
             localStorage.setItem('kitSterilizationDates', JSON.stringify(sterilizationDates));
             renderSterilMgmtData();
             alert(`Đã cập nhật ngày hấp cho ${count} bộ dụng cụ.`);
+        }
+
+        // --- EXCEL DATA PROCESSING ---
+        const excelImportInput = document.createElement('input');
+        excelImportInput.type = 'file'; excelImportInput.style.display = 'none'; excelImportInput.accept = '.xlsx, .xls';
+        document.body.appendChild(excelImportInput);
+
+        excelImportInput.onchange = async (e) => {
+            const file = e.target.files[0];
+            if (!file) return;
+            const originalFileName = file.name;
+            const reader = new FileReader();
+            reader.onload = async (event) => {
+                const data = new Uint8Array(event.target.result);
+                const workbook = new ExcelJS.Workbook();
+                await workbook.xlsx.load(data);
+                const worksheet = workbook.worksheets[0];
+
+                let targetDateKey = "";
+                // Robust date detection in first 10 rows
+                for (let r = 1; r <= 10; r++) {
+                    const row = worksheet.getRow(r);
+                    for (let c = 1; c <= 10; c++) {
+                        const cellVal = row.getCell(c).value ? String(row.getCell(c).value) : "";
+                        if (cellVal.includes("Ngày") && cellVal.includes("tháng")) {
+                            const dateMatch = cellVal.match(/[\d]+/g);
+                            if (dateMatch && dateMatch.length >= 3) {
+                                targetDateKey = `${dateMatch[2]}-${dateMatch[1].padStart(2, '0')}-${dateMatch[0].padStart(2, '0')}`;
+                                break;
+                            }
+                        }
+                    }
+                    if (targetDateKey) break;
+                }
+
+                let counts = { total: 0, db: 0, t1: 0, t23: 0 };
+                const isDB = (t) => ["K GIÁP", "K VÚ", "U Ổ BỤNG", "ĐẠI TRÀNG", "MỔ LẤY THAI", "SẢN", "THAY KHỚP", "TIM"].some(kw => t.toUpperCase().includes(kw));
+                const isT1 = (t) => ["BƯỚU VÚ", "GIÁP", "MŨI", "CÒN SONDE", "U DƯỚI NIÊM", "AMIDAN", "RUỘT THỪA"].some(kw => t.toUpperCase().includes(kw));
+
+                // Process rows and fill Classification into Column 6 (F)
+                worksheet.eachRow((row, rowNumber) => {
+                    if (rowNumber < 6) return; // Header rows
+                    const surgeryNameCell = row.getCell(5); // Column E
+                    const classificationCell = row.getCell(6); // Column F
+
+                    const surgeryName = surgeryNameCell.value;
+                    if (surgeryName && String(surgeryName).trim()) {
+                        counts.total++;
+                        const s = String(surgeryName).toUpperCase();
+                        let typeLabel = "";
+
+                        if (isDB(s)) {
+                            typeLabel = "ĐB";
+                            counts.db++;
+                        } else if (isT1(s)) {
+                            typeLabel = "I";
+                            counts.t1++;
+                        } else {
+                            typeLabel = "II";
+                            counts.t23++;
+                        }
+
+                        // Fill into the worksheet
+                        classificationCell.value = typeLabel;
+                        classificationCell.alignment = { horizontal: 'center', vertical: 'middle' };
+                        classificationCell.font = { name: 'Times New Roman', size: 11, bold: true };
+                    }
+                });
+
+                if (counts.total > 0) {
+                    // Update internal data store for monthly summary
+                    if (targetDateKey) {
+                        reportDataStore[`classification_${targetDateKey}`] = {
+                            total_cases: counts.total,
+                            type_db: counts.db,
+                            type_1: counts.t1,
+                            type_23: counts.t23
+                        };
+                        localStorage.setItem('kitReportDataStore', JSON.stringify(reportDataStore));
+                        if (targetDateKey.startsWith(reportMonthInput.value)) renderReportTable();
+                    }
+
+                    // Export the modified file
+                    const buffer = await workbook.xlsx.writeBuffer();
+                    const blob = new Blob([buffer], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' });
+                    saveAs(blob, `DA_DIEN_${originalFileName}`);
+
+                    alert(`Đã xử lý xong!\n- Nhận diện ngày: ${targetDateKey || "Không tìm thấy"}\n- Tổng: ${counts.total} ca\n- File mới "DA_DIEN_..." đã được tải về.`);
+                } else {
+                    alert("Không tìm thấy dữ liệu phẫu thuật hợp lệ trong file (bắt đầu từ dòng 6)!");
+                }
+                e.target.value = ''; // Clear to allow re-upload
+            };
+            reader.readAsArrayBuffer(file);
+        };
+
+        // --- PERIODIC REPORTS LOGIC ---
+        function showReportSelectionView() {
+            modalTitle.textContent = "SỔ KIỂM TRA ĐỊNH KỲ";
+            modalSelection.innerHTML = '';
+            modalSelection.style.display = 'grid';
+            modalDetails.style.display = 'none';
+            modalStatistics.style.display = 'none';
+            modalReturnManagement.style.display = 'none';
+            dashboardView.style.display = 'none';
+            sterilizationMgmtView.style.display = 'none';
+            periodicReportView.style.display = 'none';
+
+            const reports = [
+                { id: 'phun_phong', name: 'QUẢN LÍ PHUN PHÒNG', icon: 'fa-spray-can-sparkles' },
+                { id: 'steranios', name: 'DD NGÂM STERANIOS 2%', icon: 'fa-flask-vial' },
+                { id: 'classification', name: 'PHÂN LOẠI PHẪU THUẬT', icon: 'fa-list-check' }
+            ];
+
+            reports.forEach(r => {
+                const btn = document.createElement('button');
+                btn.className = 'sub-kit-btn';
+                btn.style.display = 'flex';
+                btn.style.flexDirection = 'column';
+                btn.style.alignItems = 'center';
+                btn.style.justifyContent = 'center';
+                btn.style.gap = '10px';
+                btn.style.padding = '30px 20px';
+                btn.style.height = 'auto';
+
+                btn.innerHTML = `<i class="fa-solid ${r.icon}" style="font-size: 2rem; color: var(--primary-color);"></i><span style="font-weight:700; font-size: 0.95rem;">${r.name}</span>`;
+                btn.onclick = () => showMonthlyReport(r.id);
+                modalSelection.appendChild(btn);
+            });
+
+            modal.style.display = "block";
+            modal.classList.add('show');
+            document.body.classList.add('modal-open');
+        }
+        window.showReportSelectionView = showReportSelectionView;
+
+        function showMonthlyReport(type) {
+            currentReportType = type;
+            modalSelection.style.display = 'none';
+            periodicReportView.style.display = 'block';
+
+            // Custom import button for surgery classification
+            const controls = periodicReportView.querySelector('.stats-header-actions');
+            let importBtn = document.getElementById('importExcelDataBtn');
+            if (type === 'classification') {
+                if (!importBtn) {
+                    importBtn = document.createElement('button');
+                    importBtn.id = 'importExcelDataBtn';
+                    importBtn.className = 'action-btn-pill save-btn';
+                    importBtn.style.height = '40px';
+                    importBtn.style.padding = '0 15px';
+                    importBtn.innerHTML = '<i class="fa-solid fa-file-import"></i> <span>Tải báo cáo PT</span>';
+                    importBtn.onclick = () => excelImportInput.click();
+                    controls.insertBefore(importBtn, exportReportExcelBtn);
+                }
+                importBtn.style.display = 'flex';
+            } else {
+                if (importBtn) importBtn.style.display = 'none';
+            }
+
+            let title = '';
+            if (type === 'phun_phong') title = 'QUẢN LÍ PHUN PHÒNG';
+            else if (type === 'steranios') title = 'DD NGÂM STERANIOS 2%';
+            else title = 'PHÂN LOẠI PHẪU THUẬT';
+            modalTitle.textContent = title;
+            renderReportTable();
+        }
+
+        function renderReportTable() {
+            if (!currentReportType) return;
+            const monthStr = reportMonthInput.value;
+            if (!monthStr) return;
+            const [year, month] = monthStr.split('-').map(Number);
+            const daysInMonth = new Date(year, month, 0).getDate();
+
+            const ktvList = [
+                "NGUYỄN VĂN TÂN",
+                "NGUYỄN VĂN THANH",
+                "PHẠM NGỌC ĐÀI",
+                "ĐẶNG THỊ MỸ LỆ",
+                "ĐỖ THỊ HẰNG NGA",
+                "HOÀNG SỸ HUY"
+            ];
+
+            reportTableHeader.innerHTML = '';
+            reportTableBody.innerHTML = '';
+
+            const headers = currentReportType === 'phun_phong'
+                ? ['NGÀY', 'DANH SÁCH CÁC PHÒNG PHUN', 'GIỜ PHUN', 'XÁC NHẬN KTV', 'KTV DỤNG CỤ THỰC HIỆN']
+                : (currentReportType === 'steranios'
+                    ? ['NGÀY', 'DUNG DỊCH', 'KẾT QUẢ ĐẠT (+)/ KHÔNG (-)', 'XÁC NHẬN', 'KTV THỰC HIỆN']
+                    : ['NGÀY', 'TỔNG SỐ CA', 'LOẠI ĐẶC BIỆT', 'LOẠI 1', 'LOẠI 2 & 3']);
+
+            const trH = document.createElement('tr');
+            headers.forEach(h => {
+                const th = document.createElement('th');
+                th.textContent = h;
+                th.style.fontSize = '0.75rem';
+                th.style.padding = '10px 5px';
+                trH.appendChild(th);
+            });
+            reportTableHeader.appendChild(trH);
+
+            for (let d = 1; d <= daysInMonth; d++) {
+                const dateKey = `${monthStr}-${String(d).padStart(2, '0')}`;
+                const displayDate = `${String(d).padStart(2, '0')}-Thg${month}`;
+                const rowData = reportDataStore[`${currentReportType}_${dateKey}`] || {};
+
+                const autoStaff = ktvList[(d - 1) % ktvList.length];
+
+                const tr = document.createElement('tr');
+
+                if (currentReportType === 'phun_phong') {
+                    const defaultRoom = "PHÒNG MỔ SỐ 1,2,3,5,6,7 VÀ KHOA SẠCH";
+                    const defaultTime = "19h hằng ngày";
+                    tr.innerHTML = `
+                        <td style="font-size:0.8rem; font-weight:600; white-space:nowrap;">${displayDate}</td>
+                        <td contenteditable="true" class="edit-report" data-date="${dateKey}" data-field="room" style="font-size:0.8rem; min-width:150px;">${rowData.room || defaultRoom}</td>
+                        <td contenteditable="true" class="edit-report" data-date="${dateKey}" data-field="time" style="font-size:0.8rem;">${rowData.time || defaultTime}</td>
+                        <td contenteditable="true" class="edit-report" data-date="${dateKey}" data-field="confirm" style="font-size:0.8rem;">${rowData.confirm || ''}</td>
+                        <td contenteditable="true" class="edit-report" data-date="${dateKey}" data-field="staff" style="font-size:0.8rem; min-width:120px;">${rowData.staff || `KTV ${autoStaff}`}</td>
+                    `;
+                } else if (currentReportType === 'steranios') {
+                    const defaultSol = "STERANIOS 2%";
+                    tr.innerHTML = `
+                        <td style="font-size:0.8rem; font-weight:600; white-space:nowrap;">${displayDate}</td>
+                        <td contenteditable="true" class="edit-report" data-date="${dateKey}" data-field="solution" style="font-size:0.8rem;">${rowData.solution || defaultSol}</td>
+                        <td contenteditable="true" class="edit-report" data-date="${dateKey}" data-field="result" style="font-size:0.8rem;">${rowData.result || ''}</td>
+                        <td contenteditable="true" class="edit-report" data-date="${dateKey}" data-field="confirm" style="font-size:0.8rem;">${rowData.confirm || ''}</td>
+                        <td contenteditable="true" class="edit-report" data-date="${dateKey}" data-field="staff" style="font-size:0.8rem; min-width:120px;">${rowData.staff || autoStaff}</td>
+                    `;
+                } else {
+                    tr.innerHTML = `
+                        <td style="font-size:0.8rem; font-weight:600; white-space:nowrap;">${displayDate}</td>
+                        <td contenteditable="true" class="edit-report" data-date="${dateKey}" data-field="total_cases" style="font-size:0.8rem;">${rowData.total_cases || ''}</td>
+                        <td contenteditable="true" class="edit-report" data-date="${dateKey}" data-field="type_db" style="font-size:0.8rem;">${rowData.type_db || ''}</td>
+                        <td contenteditable="true" class="edit-report" data-date="${dateKey}" data-field="type_1" style="font-size:0.8rem;">${rowData.type_1 || ''}</td>
+                        <td contenteditable="true" class="edit-report" data-date="${dateKey}" data-field="type_23" style="font-size:0.8rem;">${rowData.type_23 || ''}</td>
+                    `;
+                }
+                reportTableBody.appendChild(tr);
+            }
+
+            document.querySelectorAll('.edit-report').forEach(cell => {
+                cell.onblur = (e) => {
+                    const d = e.target.dataset.date;
+                    const f = e.target.dataset.field;
+                    const v = e.target.innerText.trim();
+                    const key = `${currentReportType}_${d}`;
+                    if (!reportDataStore[key]) reportDataStore[key] = {};
+                    reportDataStore[key][f] = v;
+                    localStorage.setItem('kitReportDataStore', JSON.stringify(reportDataStore));
+                };
+            });
+        }
+
+        function exportReportToExcel() {
+            if (!currentReportType) return;
+            const workbook = new ExcelJS.Workbook();
+            const monthStr = reportMonthInput.value;
+            if (!monthStr) return;
+            const [year, month] = monthStr.split('-').map(Number);
+            const daysInMonth = new Date(year, month, 0).getDate();
+
+            let title = '';
+            if (currentReportType === 'phun_phong') title = 'BẢNG THEO DÕI PHUN KHỬ KHUẨN PHÒNG MỔ HẰNG NGÀY';
+            else if (currentReportType === 'steranios') title = 'BẢNG THEO DÕI KIỂM TRA DUNG DỊCH NGÂM NỘI SOI STERANIOS 2%';
+            else title = 'BẢNG THEO DÕI PHÂN LOẠI PHẪU THUẬT HẰNG NGÀY';
+
+            const worksheet = workbook.addWorksheet('Báo cáo tháng');
+            applyProfessionalStyle(worksheet);
+
+            // Title
+            const titleRow = worksheet.addRow([title]);
+            worksheet.mergeCells('A1:E1');
+            titleRow.getCell(1).font = { name: 'Times New Roman', size: 16, bold: true };
+            titleRow.getCell(1).alignment = { horizontal: 'center', vertical: 'middle' };
+            titleRow.height = 30;
+
+            // Department
+            const deptRow = worksheet.addRow(['KHOA: Khoa Phẫu Thuật']);
+            worksheet.mergeCells('A2:E2');
+            deptRow.getCell(1).font = { name: 'Times New Roman', size: 14, bold: true };
+            deptRow.getCell(1).alignment = { horizontal: 'center', vertical: 'middle' };
+            deptRow.height = 25;
+
+            // Month
+            const monthRow = worksheet.addRow([`THÁNG ${month} / ${year}`]);
+            worksheet.mergeCells('A3:E3');
+            monthRow.getCell(1).font = { name: 'Times New Roman', size: 12, bold: true };
+            monthRow.getCell(1).alignment = { horizontal: 'center', vertical: 'middle' };
+            monthRow.height = 20;
+
+            worksheet.addRow([]); // Gap
+
+            // Headers
+            const headers = currentReportType === 'phun_phong'
+                ? ['NGÀY', 'DANH SÁCH CÁC PHÒNG PHUN', 'GIỜ PHUN', 'XÁC NHẬN KTV', 'KTV DỤNG CỤ THỰC HIỆN']
+                : (currentReportType === 'steranios'
+                    ? ['NGÀY', 'DUNG DỊCH', 'KẾT QUẢ ĐẠT (+)/ KHÔNG (-)', 'XÁC NHẬN', 'KTV THỰC HIỆN']
+                    : ['NGÀY', 'TỔNG SỐ CA', 'LOẠI ĐẶC BIỆT', 'LOẠI 1', 'LOẠI 2 & 3']);
+
+            const hRow = worksheet.addRow(headers);
+            hRow.height = 30;
+            for (let i = 1; i <= 5; i++) {
+                const cell = hRow.getCell(i);
+                cell.font = { name: 'Times New Roman', size: 11, bold: true };
+                cell.alignment = { horizontal: 'center', vertical: 'middle', wrapText: true };
+                cell.fill = { type: 'pattern', pattern: 'solid', fgColor: { argb: 'FFE2E8F0' } };
+                setBorder(cell);
+            }
+
+            // Data
+            const ktvList = [
+                "NGUYỄN VĂN TÂN",
+                "NGUYỄN VĂN THANH",
+                "PHẠM NGỌC ĐÀI",
+                "ĐẶNG THỊ MỸ LỆ",
+                "ĐỖ THỊ HẰNG NGA",
+                "HOÀNG SỸ HUY"
+            ];
+
+            for (let d = 1; d <= daysInMonth; d++) {
+                const dateKey = `${monthStr}-${String(d).padStart(2, '0')}`;
+                const displayDate = `${String(d).padStart(2, '0')}-Thg${month}`;
+                const rowData = reportDataStore[`${currentReportType}_${dateKey}`] || {};
+
+                const autoStaff = ktvList[(d - 1) % ktvList.length];
+
+                let rowValues;
+                if (currentReportType === 'phun_phong') {
+                    rowValues = [
+                        displayDate,
+                        rowData.room || "PHÒNG MỔ SỐ 1,2,3,5,6,7 VÀ KHOA SẠCH",
+                        rowData.time || "19h hằng ngày",
+                        rowData.confirm || '',
+                        rowData.staff || `KTV ${autoStaff}`
+                    ];
+                } else if (currentReportType === 'steranios') {
+                    rowValues = [
+                        displayDate,
+                        rowData.solution || "STERANIOS 2%",
+                        rowData.result || '',
+                        rowData.confirm || '',
+                        rowData.staff || autoStaff
+                    ];
+                } else {
+                    rowValues = [
+                        displayDate,
+                        rowData.total_cases || '',
+                        rowData.type_db || '',
+                        rowData.type_1 || '',
+                        rowData.type_23 || ''
+                    ];
+                }
+                const row = worksheet.addRow(rowValues);
+                row.height = 25;
+                for (let i = 1; i <= 5; i++) {
+                    const cell = row.getCell(i);
+                    cell.font = { name: 'Times New Roman', size: 10 };
+                    cell.alignment = { vertical: 'middle', wrapText: true };
+                    setBorder(cell);
+                    if (i === 1 || i === 3 || i === 4) cell.alignment.horizontal = 'center';
+                }
+            }
+
+            // Columns width
+            worksheet.getColumn(1).width = 10;
+            worksheet.getColumn(2).width = 35;
+            worksheet.getColumn(3).width = 20;
+            worksheet.getColumn(4).width = 12;
+            worksheet.getColumn(5).width = 25;
+
+            workbook.xlsx.writeBuffer().then(buf => {
+                const d = new Date().getTime();
+                saveAs(new Blob([buf]), `Bao_Cao_${currentReportType.toUpperCase()}_${monthStr}_${d}.xlsx`);
+            });
         }
     }
 });
