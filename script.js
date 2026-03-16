@@ -54,6 +54,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const reportTableBody = document.getElementById('reportTableBody');
         const reportMonthInput = document.getElementById('reportMonth');
         const exportReportExcelBtn = document.getElementById('exportReportExcelBtn');
+        const exportFullYearReportExcelBtn = document.getElementById('exportFullYearReportExcelBtn');
         const backToReportSelectionBtn = document.getElementById('backToReportSelectionBtn');
 
         // --- State ---
@@ -110,7 +111,8 @@ document.addEventListener('DOMContentLoaded', () => {
         if (backBtn) backBtn.addEventListener('click', () => { if (currentCategory) showSelectionView(currentCategory); });
 
         if (reportMonthInput) reportMonthInput.addEventListener('change', () => renderReportTable());
-        if (exportReportExcelBtn) exportReportExcelBtn.addEventListener('click', exportReportToExcel);
+        if (exportReportExcelBtn) exportReportExcelBtn.addEventListener('click', () => exportReportToExcel(false));
+        if (exportFullYearReportExcelBtn) exportFullYearReportExcelBtn.addEventListener('click', () => exportReportToExcel(true));
         if (backToReportSelectionBtn) backToReportSelectionBtn.addEventListener('click', showReportSelectionView);
 
         if (createNewReturnBtn) createNewReturnBtn.addEventListener('click', showNewReturnForm);
@@ -906,9 +908,11 @@ document.addEventListener('DOMContentLoaded', () => {
                         }),
                         new Paragraph({ alignment: AlignmentType.CENTER, spacing: { before: 400, after: 200 }, children: [new TextRun({ text: "BIÊN BẢN THANH LÝ THU HỒI TÀI SẢN", bold: true, size: 32 })] }),
                         new Paragraph({ alignment: AlignmentType.RIGHT, children: [new TextRun({ text: dLine, italic: true, size: 24 })] }),
-                        new Paragraph({ spacing: { before: 200 }, children: [new TextRun({ text: "BÊN NHẬN: BỆNH VIỆN ĐA KHOA HỒNG ĐỨC III", bold: true, size: 24 })] }),
-                        new Paragraph({ children: [new TextRun({ text: "1. TRẦN NHẬT ANH\tChức vụ: Nhân viên T.TBYT", size: 24 })] }),
-                        new Paragraph({ children: [new TextRun({ text: "2. LÊ NGỌC TIỀN\tChức vụ: Kế toán tài sản", size: 24 })] }),
+                        new Paragraph({ spacing: { before: 200 }, children: [new TextRun({ text: "BÊN NHẬN: BỆNH VIỆN ĐA KHOA HỒNG ĐỨC III GỒM NHỮNG THÀNH VIÊN CÓ TÊN SAU", bold: true, size: 24 })] }),
+                        new Paragraph({ children: [new TextRun({ text: "1. PHẠM VĂN DŨNG\tChức vụ: Giám đốc", size: 24 })] }),
+                        new Paragraph({ children: [new TextRun({ text: "2. LÊ QUANG DANH\tChức vụ: P. Hành chính quản trị", size: 24 })] }),
+                        new Paragraph({ children: [new TextRun({ text: "3. LÊ NGỌC TIỀN\tChức vụ: Kế toán tài sản", size: 24 })] }),
+                        new Paragraph({ children: [new TextRun({ text: "4. TRẦN NHẬT ANH\tChức vụ: Nhân viên T.TBYT", size: 24 })] }),
                         new Paragraph({ spacing: { before: 200 }, children: [new TextRun({ text: "BÊN GIAO: KHOA PHẪU THUẬT GÂY MÊ HỒI SỨC- BỆNH VIỆN ĐA KHOA HỒNG ĐỨC III", bold: true, size: 24 })] }),
                         new Paragraph({ children: [new TextRun({ text: "1. PHẠM TRUNG NGHĨA\tChức vụ: Trưởng khoa", size: 24 })] }),
                         new Paragraph({ children: [new TextRun({ text: "2. LÊ THỊ TUYỀN\tChức vụ: Điều Dưỡng trưởng", size: 24 })] }),
@@ -929,10 +933,10 @@ document.addEventListener('DOMContentLoaded', () => {
                                 ...batch.items.map((it, i) => new TableRow({
                                     children: [
                                         new TableCell({ children: [new Paragraph({ alignment: AlignmentType.CENTER, children: [new TextRun({ text: (i + 1).toString(), size: 22 })] })] }),
-                                        new TableCell({ children: [new Paragraph({ children: [new TextRun({ text: it.name, size: 22 })] })] }),
-                                        new TableCell({ children: [new Paragraph({ alignment: AlignmentType.CENTER, children: [new TextRun({ text: `${it.kit}/${it.code}`, size: 18 })] })] }),
-                                        new TableCell({ children: [new Paragraph({ alignment: AlignmentType.CENTER, children: [new TextRun({ text: it.quantity.toString(), size: 22 })] })] }),
-                                        new TableCell({ children: [new Paragraph({ children: [new TextRun({ text: it.note, size: 18 })] })] }),
+                                        new TableCell({ children: [new Paragraph({ children: [new TextRun({ text: it.name || "", size: 22 })] })] }),
+                                        new TableCell({ children: [new Paragraph({ alignment: AlignmentType.CENTER, children: [new TextRun({ text: `${it.kit || ""}/${it.code || ""}`, size: 18 })] })] }),
+                                        new TableCell({ children: [new Paragraph({ alignment: AlignmentType.CENTER, children: [new TextRun({ text: (it.quantity || 0).toString(), size: 22 })] })] }),
+                                        new TableCell({ children: [new Paragraph({ children: [new TextRun({ text: it.note || "", size: 18 })] })] }),
                                     ]
                                 }))
                             ]
@@ -942,7 +946,6 @@ document.addEventListener('DOMContentLoaded', () => {
                         new Table({
                             width: { size: 100, type: WidthType.PERCENTAGE },
                             borders: docx.TableBorders.NONE,
-                            spacing: { before: 400 },
                             rows: [
                                 new TableRow({
                                     children: [
@@ -957,27 +960,34 @@ document.addEventListener('DOMContentLoaded', () => {
                                 new TableRow({
                                     children: [
                                         new TableCell({ children: [new Paragraph({ alignment: AlignmentType.CENTER, children: [new TextRun({ text: "PHẠM TRUNG NGHĨA", bold: true, size: 22 })] })] }),
-                                        new TableCell({ children: [new Paragraph({ alignment: AlignmentType.CENTER, children: [new TextRun({ text: "TRẦN NHẬT ANH", bold: true, size: 22 })] })] }),
+                                        new TableCell({ children: [new Paragraph({ alignment: AlignmentType.CENTER, children: [new TextRun({ text: "PHẠM VĂN DŨNG", bold: true, size: 22 })] })] }),
                                     ]
                                 }),
-                                // Spacer for signatures 2
-                                new TableRow({ children: [new TableCell({ children: [new Paragraph({ children: [new TextRun({ text: "" })] })] }), new TableCell({ children: [new Paragraph({ children: [new TextRun({ text: "" })] })] })] }),
+                                // Spacer 2
                                 new TableRow({ children: [new TableCell({ children: [new Paragraph({ children: [new TextRun({ text: "" })] })] }), new TableCell({ children: [new Paragraph({ children: [new TextRun({ text: "" })] })] })] }),
                                 // Name Row 2
                                 new TableRow({
                                     children: [
                                         new TableCell({ children: [new Paragraph({ alignment: AlignmentType.CENTER, children: [new TextRun({ text: "LÊ THỊ TUYỀN", bold: true, size: 22 })] })] }),
-                                        new TableCell({ children: [new Paragraph({ alignment: AlignmentType.CENTER, children: [new TextRun({ text: "LÊ NGỌC TIỀN", bold: true, size: 22 })] })] }),
+                                        new TableCell({ children: [new Paragraph({ alignment: AlignmentType.CENTER, children: [new TextRun({ text: "LÊ QUANG DANH", bold: true, size: 22 })] })] }),
                                     ]
                                 }),
-                                // Spacer for signatures 3
-                                new TableRow({ children: [new TableCell({ children: [new Paragraph({ children: [new TextRun({ text: "" })] })] }), new TableCell({ children: [new Paragraph({ children: [new TextRun({ text: "" })] })] })] }),
+                                // Spacer 3
                                 new TableRow({ children: [new TableCell({ children: [new Paragraph({ children: [new TextRun({ text: "" })] })] }), new TableCell({ children: [new Paragraph({ children: [new TextRun({ text: "" })] })] })] }),
                                 // Name Row 3
                                 new TableRow({
                                     children: [
                                         new TableCell({ children: [new Paragraph({ alignment: AlignmentType.CENTER, children: [new TextRun({ text: "NGUYỄN VĂN TÂN", bold: true, size: 22 })] })] }),
+                                        new TableCell({ children: [new Paragraph({ alignment: AlignmentType.CENTER, children: [new TextRun({ text: "LÊ NGỌC TIỀN", bold: true, size: 22 })] })] }),
+                                    ]
+                                }),
+                                // Spacer 4
+                                new TableRow({ children: [new TableCell({ children: [new Paragraph({ children: [new TextRun({ text: "" })] })] }), new TableCell({ children: [new Paragraph({ children: [new TextRun({ text: "" })] })] })] }),
+                                // Name Row 4
+                                new TableRow({
+                                    children: [
                                         new TableCell({ children: [new Paragraph({ children: [new TextRun({ text: "" })] })] }),
+                                        new TableCell({ children: [new Paragraph({ alignment: AlignmentType.CENTER, children: [new TextRun({ text: "TRẦN NHẬT ANH", bold: true, size: 22 })] })] }),
                                     ]
                                 }),
                                 // Final Row: BAN GIAM DOC
@@ -998,7 +1008,7 @@ document.addEventListener('DOMContentLoaded', () => {
         // --- Initial Render ---
         renderCategoryGrid();
         const bB = document.getElementById('appVersion');
-        if (bB) bB.textContent = typeof APP_VERSION !== 'undefined' ? APP_VERSION : "v3.5 GOLD (FINAL) (23:13:14 06/03/2026)";
+        if (bB) bB.textContent = typeof APP_VERSION !== 'undefined' ? APP_VERSION : "v3.7 GOLD (FINAL) (22:46:30 16/03/2026)";
 
         function showSterilMgmt(show) {
             if (show) {
@@ -1320,7 +1330,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 const tr = document.createElement('tr');
 
                 if (currentReportType === 'phun_phong') {
-                    const defaultRoom = "PHÒNG MỔ SỐ 1,2,3,5,6,7 VÀ KHOA SẠCH";
+                    const defaultRoom = "PHÒNG MỔ SỐ 1,2,3,5,6,7 VÀ KHO SẠCH";
                     const defaultTime = "19h hằng ngày";
                     tr.innerHTML = `
                         <td style="font-size:0.8rem; font-weight:600; white-space:nowrap;">${displayDate}</td>
@@ -1363,126 +1373,140 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         }
 
-        function exportReportToExcel() {
+        function exportReportToExcel(isFullYear = false) {
             if (!currentReportType) return;
             const workbook = new ExcelJS.Workbook();
             const monthStr = reportMonthInput.value;
             if (!monthStr) return;
-            const [year, month] = monthStr.split('-').map(Number);
-            const daysInMonth = new Date(year, month, 0).getDate();
+            const [year, currentMonthSelected] = monthStr.split('-').map(Number);
 
-            let title = '';
-            if (currentReportType === 'phun_phong') title = 'BẢNG THEO DÕI PHUN KHỬ KHUẨN PHÒNG MỔ HẰNG NGÀY';
-            else if (currentReportType === 'steranios') title = 'BẢNG THEO DÕI KIỂM TRA DUNG DỊCH NGÂM NỘI SOI STERANIOS 2%';
-            else title = 'BẢNG THEO DÕI PHÂN LOẠI PHẪU THUẬT HẰNG NGÀY';
+            const monthsToExport = isFullYear ? [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12] : [currentMonthSelected];
 
-            const worksheet = workbook.addWorksheet('Báo cáo tháng');
-            applyProfessionalStyle(worksheet);
+            monthsToExport.forEach(m => {
+                const targetMonthStr = `${year}-${String(m).padStart(2, '0')}`;
+                const daysInMonth = new Date(year, m, 0).getDate();
 
-            // Title
-            const titleRow = worksheet.addRow([title]);
-            worksheet.mergeCells('A1:E1');
-            titleRow.getCell(1).font = { name: 'Times New Roman', size: 16, bold: true };
-            titleRow.getCell(1).alignment = { horizontal: 'center', vertical: 'middle' };
-            titleRow.height = 30;
+                let title = '';
+                if (currentReportType === 'phun_phong') title = 'BẢNG THEO DÕI PHUN KHỬ KHUẨN PHÒNG MỔ HẰNG NGÀY';
+                else if (currentReportType === 'steranios') title = 'BẢNG THEO DÕI KIỂM TRA DUNG DỊCH NGÂM NỘI SOI STERANIOS 2%';
+                else title = 'BẢNG THEO DÕI PHÂN LOẠI PHẪU THUẬT HẰNG NGÀY';
 
-            // Department
-            const deptRow = worksheet.addRow(['KHOA: Khoa Phẫu Thuật']);
-            worksheet.mergeCells('A2:E2');
-            deptRow.getCell(1).font = { name: 'Times New Roman', size: 14, bold: true };
-            deptRow.getCell(1).alignment = { horizontal: 'center', vertical: 'middle' };
-            deptRow.height = 25;
+                const worksheet = workbook.addWorksheet(`Tháng ${m}`);
+                applyProfessionalStyle(worksheet);
 
-            // Month
-            const monthRow = worksheet.addRow([`THÁNG ${month} / ${year}`]);
-            worksheet.mergeCells('A3:E3');
-            monthRow.getCell(1).font = { name: 'Times New Roman', size: 12, bold: true };
-            monthRow.getCell(1).alignment = { horizontal: 'center', vertical: 'middle' };
-            monthRow.height = 20;
+                // Title
+                const titleRow = worksheet.addRow([title]);
+                worksheet.mergeCells('A1:E1');
+                titleRow.getCell(1).font = { name: 'Times New Roman', size: 16, bold: true };
+                titleRow.getCell(1).alignment = { horizontal: 'center', vertical: 'middle' };
+                titleRow.height = 30;
 
-            worksheet.addRow([]); // Gap
+                // Department
+                const deptRow = worksheet.addRow(['KHOA: Khoa Phẫu Thuật']);
+                worksheet.mergeCells('A2:E2');
+                deptRow.getCell(1).font = { name: 'Times New Roman', size: 14, bold: true };
+                deptRow.getCell(1).alignment = { horizontal: 'center', vertical: 'middle' };
+                deptRow.height = 25;
 
-            // Headers
-            const headers = currentReportType === 'phun_phong'
-                ? ['NGÀY', 'DANH SÁCH CÁC PHÒNG PHUN', 'GIỜ PHUN', 'XÁC NHẬN KTV', 'KTV DỤNG CỤ THỰC HIỆN']
-                : (currentReportType === 'steranios'
-                    ? ['NGÀY', 'DUNG DỊCH', 'KẾT QUẢ ĐẠT (+)/ KHÔNG (-)', 'XÁC NHẬN', 'KTV THỰC HIỆN']
-                    : ['NGÀY', 'TỔNG SỐ CA', 'LOẠI ĐẶC BIỆT', 'LOẠI 1', 'LOẠI 2 & 3']);
+                // Month
+                const monthRow = worksheet.addRow([`THÁNG ${m} / ${year}`]);
+                worksheet.mergeCells('A3:E3');
+                monthRow.getCell(1).font = { name: 'Times New Roman', size: 12, bold: true };
+                monthRow.getCell(1).alignment = { horizontal: 'center', vertical: 'middle' };
+                monthRow.height = 20;
 
-            const hRow = worksheet.addRow(headers);
-            hRow.height = 30;
-            for (let i = 1; i <= 5; i++) {
-                const cell = hRow.getCell(i);
-                cell.font = { name: 'Times New Roman', size: 11, bold: true };
-                cell.alignment = { horizontal: 'center', vertical: 'middle', wrapText: true };
-                cell.fill = { type: 'pattern', pattern: 'solid', fgColor: { argb: 'FFE2E8F0' } };
-                setBorder(cell);
-            }
+                worksheet.addRow([]); // Gap
 
-            // Data
-            const ktvList = [
-                "NGUYỄN VĂN TÂN",
-                "NGUYỄN VĂN THANH",
-                "PHẠM NGỌC ĐÀI",
-                "ĐẶNG THỊ MỸ LỆ",
-                "ĐỖ THỊ HẰNG NGA",
-                "HOÀNG SỸ HUY"
-            ];
+                // Headers
+                const headers = currentReportType === 'phun_phong'
+                    ? ['NGÀY', 'DANH SÁCH CÁC PHÒNG PHUN', 'GIỜ PHUN', 'XÁC NHẬN KTV', 'KTV DỤNG CỤ THỰC HIỆN']
+                    : (currentReportType === 'steranios'
+                        ? ['NGÀY', 'DUNG DỊCH', 'KẾT QUẢ ĐẠT (+)/ KHÔNG (-)', 'XÁC NHẬN', 'KTV THỰC HIỆN']
+                        : ['NGÀY', 'TỔNG SỐ CA', 'LOẠI ĐẶC BIỆT', 'LOẠI 1', 'LOẠI 2 & 3']);
 
-            for (let d = 1; d <= daysInMonth; d++) {
-                const dateKey = `${monthStr}-${String(d).padStart(2, '0')}`;
-                const displayDate = `${String(d).padStart(2, '0')}-Thg${month}`;
-                const rowData = reportDataStore[`${currentReportType}_${dateKey}`] || {};
-
-                const autoStaff = ktvList[(d - 1) % ktvList.length];
-
-                let rowValues;
-                if (currentReportType === 'phun_phong') {
-                    rowValues = [
-                        displayDate,
-                        rowData.room || "PHÒNG MỔ SỐ 1,2,3,5,6,7 VÀ KHOA SẠCH",
-                        rowData.time || "19h hằng ngày",
-                        rowData.confirm || '',
-                        rowData.staff || `KTV ${autoStaff}`
-                    ];
-                } else if (currentReportType === 'steranios') {
-                    rowValues = [
-                        displayDate,
-                        rowData.solution || "STERANIOS 2%",
-                        rowData.result || '',
-                        rowData.confirm || '',
-                        rowData.staff || autoStaff
-                    ];
-                } else {
-                    rowValues = [
-                        displayDate,
-                        rowData.total_cases || '',
-                        rowData.type_db || '',
-                        rowData.type_1 || '',
-                        rowData.type_23 || ''
-                    ];
-                }
-                const row = worksheet.addRow(rowValues);
-                row.height = 25;
+                const hRow = worksheet.addRow(headers);
+                hRow.height = 30;
                 for (let i = 1; i <= 5; i++) {
-                    const cell = row.getCell(i);
-                    cell.font = { name: 'Times New Roman', size: 10 };
-                    cell.alignment = { vertical: 'middle', wrapText: true };
+                    const cell = hRow.getCell(i);
+                    cell.font = { name: 'Times New Roman', size: 11, bold: true };
+                    cell.alignment = { horizontal: 'center', vertical: 'middle', wrapText: true };
+                    cell.fill = { type: 'pattern', pattern: 'solid', fgColor: { argb: 'FFE2E8F0' } };
                     setBorder(cell);
-                    if (i === 1 || i === 3 || i === 4) cell.alignment.horizontal = 'center';
                 }
-            }
 
-            // Columns width
-            worksheet.getColumn(1).width = 10;
-            worksheet.getColumn(2).width = 35;
-            worksheet.getColumn(3).width = 20;
-            worksheet.getColumn(4).width = 12;
-            worksheet.getColumn(5).width = 25;
+                // Data
+                const ktvList = [
+                    "NGUYỄN VĂN TÂN",
+                    "NGUYỄN VĂN THANH",
+                    "PHẠM NGỌC ĐÀI",
+                    "ĐẶNG THỊ MỸ LỆ",
+                    "ĐỖ THỊ HẰNG NGA",
+                    "HOÀNG SỸ HUY"
+                ];
+
+                for (let d = 1; d <= daysInMonth; d++) {
+                    const dateKey = `${targetMonthStr}-${String(d).padStart(2, '0')}`;
+                    const displayDate = `${String(d).padStart(2, '0')}-Thg${m}`;
+                    const rowData = reportDataStore[`${currentReportType}_${dateKey}`] || {};
+
+                    const autoStaff = ktvList[(d - 1) % ktvList.length];
+
+                    let rowValues;
+                    if (currentReportType === 'phun_phong') {
+                        rowValues = [
+                            displayDate,
+                            rowData.room || "PHÒNG MỔ SỐ 1,2,3,5,6,7 VÀ KHO SẠCH",
+                            rowData.time || "19h hằng ngày",
+                            rowData.confirm || '',
+                            rowData.staff || `KTV ${autoStaff}`
+                        ];
+                    } else if (currentReportType === 'steranios') {
+                        rowValues = [
+                            displayDate,
+                            rowData.solution || "STERANIOS 2%",
+                            rowData.result || '',
+                            rowData.confirm || '',
+                            rowData.staff || autoStaff
+                        ];
+                    } else {
+                        rowValues = [
+                            displayDate,
+                            rowData.total_cases || '',
+                            rowData.type_db || '',
+                            rowData.type_1 || '',
+                            rowData.type_23 || ''
+                        ];
+                    }
+                    const row = worksheet.addRow(rowValues);
+                    row.height = 25;
+                    for (let i = 1; i <= 5; i++) {
+                        const cell = row.getCell(i);
+                        cell.font = { name: 'Times New Roman', size: 10 };
+                        cell.alignment = { vertical: 'middle', wrapText: true };
+                        setBorder(cell);
+                        if (i === 1 || i === 3 || i === 4) cell.alignment.horizontal = 'center';
+                    }
+                }
+
+                // Columns width
+                worksheet.getColumn(1).width = 10;
+                worksheet.getColumn(2).width = 35;
+                worksheet.getColumn(3).width = 20;
+                worksheet.getColumn(4).width = 12;
+                worksheet.getColumn(5).width = 25;
+            });
 
             workbook.xlsx.writeBuffer().then(buf => {
-                const d = new Date().getTime();
-                saveAs(new Blob([buf]), `Bao_Cao_${currentReportType.toUpperCase()}_${monthStr}_${d}.xlsx`);
+                let fileName = `Bao_Cao_${currentReportType.toUpperCase()}_NAM_${year}.xlsx`;
+                const [yearPart, monthPart] = monthStr.split('-');
+
+                if (currentReportType === 'phun_phong') {
+                    fileName = isFullYear ? `PHUN PHÒNG CẢ NĂM ${year}.xlsx` : `PHUN PHÒNG ${monthPart}.${yearPart}.xlsx`;
+                } else if (currentReportType === 'steranios') {
+                    fileName = isFullYear ? `DD NGÂM STERANIOS CẢ NĂM ${year}.xlsx` : `DD NGÂM STERANIOS - ${monthPart}.${yearPart}.xlsx`;
+                }
+
+                saveAs(new Blob([buf]), fileName);
             });
         }
     }
