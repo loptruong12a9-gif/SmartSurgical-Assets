@@ -1,4 +1,5 @@
-var APP_VERSION = "v3.7 GOLD (FINAL) (14:38:51 22/3/2026)";
+var APP_VERSION = "v3.7 GOLD (FINAL) (14:32:10 2/5/2026)";
+var kitReportDataStore = {};
 var kitDefinitions = [
     {
         "id": 1,
@@ -3382,6 +3383,7 @@ allKitsData["ĐẠI PHẪU"] = [
   }
 ];
 allKitsData["ĐẠI PHẪU"].footer = "ĐÃ KIỂM";
+allKitsData["ĐẠI PHẪU"].sterilDate = "2026-04-03T06:48:23.351Z";
 // Data for HC Ố CỔ TAY
 allKitsData["HC Ố CỔ TAY"] = [
   {
@@ -5726,7 +5728,8 @@ allKitsData["THẦN KINH 5"] = [
     "stt": 1,
     "name": "KELLY NHỎ",
     "code": "BH111R",
-    "quantity": 5
+    "quantity": 5,
+    "note": "Gãy 1"
   },
   {
     "stt": 2,
@@ -5830,7 +5833,7 @@ allKitsData["THẦN KINH 5"] = [
   }
 ];
 allKitsData["THẦN KINH 5"].footer = "ĐÃ KIỂM";
-allKitsData["THẦN KINH 5"].sterilDate = "2026-03-21T04:55:19.014Z";
+allKitsData["THẦN KINH 5"].sterilDate = "2026-05-02T07:32:02.281Z";
 // Data for THẦN KINH 6
 allKitsData["THẦN KINH 6"] = [
   {
@@ -7388,7 +7391,8 @@ allKitsData["TRUNG PHẪU 1"] = [
     "stt": 3,
     "name": "KỀM KẸP KIM",
     "code": "BM066R",
-    "quantity": 1
+    "quantity": 1,
+    "note": "GÃY 20/4"
   },
   {
     "stt": 4,
@@ -7541,7 +7545,7 @@ allKitsData["TRUNG PHẪU 1"] = [
   }
 ];
 allKitsData["TRUNG PHẪU 1"].footer = "ĐÃ KIỂM";
-allKitsData["TRUNG PHẪU 1"].sterilDate = "2026-03-21T04:55:19.014Z";
+allKitsData["TRUNG PHẪU 1"].sterilDate = "2026-04-22T00:39:36.219Z";
 // Data for TRUNG PHẪU 2
 allKitsData["TRUNG PHẪU 2"] = [
   {
