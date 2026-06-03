@@ -1,4 +1,4 @@
-var APP_VERSION = "v3.7 GOLD (FINAL) (14:32:31 2/5/2026)";
+var APP_VERSION = "v3.7 GOLD (FINAL) (07:51:36 3/6/2026)";
 var kitReportDataStore = {};
 var kitDefinitions = [
     {
@@ -2946,7 +2946,7 @@ allKitsData["DỤNG CỤ MỔ HỞ LẺ"] = [
   }
 ];
 allKitsData["DỤNG CỤ MỔ HỞ LẺ"].footer = "ĐÃ KIỂM";
-allKitsData["DỤNG CỤ MỔ HỞ LẺ"].sterilDate = "2026-03-21T04:55:19.014Z";
+allKitsData["DỤNG CỤ MỔ HỞ LẺ"].sterilDate = "2026-05-22T08:05:40.555Z";
 // Data for DỤNG CỤ NỘI SOI LẺ
 allKitsData["DỤNG CỤ NỘI SOI LẺ"] = [
   {
@@ -7626,7 +7626,7 @@ allKitsData["TRUNG PHẪU 2"] = [
     "name": "KELLY CONG NHỎ",
     "code": "EA315R",
     "quantity": 15,
-    "note": "3 LỆCH ĐẦU"
+    "note": "3 LỆCH ĐẦU\nBỏ 2 cây qua bộ bắt con số 3"
   },
   {
     "stt": 14,
