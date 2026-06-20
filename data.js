@@ -1,4 +1,4 @@
-var APP_VERSION = "v3.7 GOLD (FINAL) (07:51:36 3/6/2026)";
+var APP_VERSION = "v3.7 GOLD (FINAL) (09:54:26 20/6/2026)";
 var kitReportDataStore = {};
 var kitDefinitions = [
     {
@@ -4599,19 +4599,21 @@ allKitsData["NS TỔNG QUÁT 1"] = [
     "name": "TAY CẦM KHÔNG KHÓA",
     "code": "",
     "quantity": 4,
-    "note": "1 HƯ"
+    "note": "2HƯ"
   },
   {
     "stt": 3,
     "name": "VỎ LẮP DỤNG CỤ",
     "code": "",
-    "quantity": 8
+    "quantity": 8,
+    "note": "Hư1"
   },
   {
     "stt": 4,
     "name": "LAM KẸP RUỘT",
     "code": "",
-    "quantity": 1
+    "quantity": 1,
+    "note": "Gãy"
   },
   {
     "stt": 5,
