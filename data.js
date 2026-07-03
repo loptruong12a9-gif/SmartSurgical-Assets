@@ -1,4 +1,4 @@
-var APP_VERSION = "v3.7 GOLD (FINAL) (09:54:26 20/6/2026)";
+var APP_VERSION = "v3.7 GOLD (FINAL) (16:48:46 3/7/2026)";
 var kitReportDataStore = {};
 var kitDefinitions = [
     {
@@ -5513,7 +5513,8 @@ allKitsData["THẦN KINH 3"] = [
     "stt": 2,
     "name": "KELLY TRUNG",
     "code": "BH135R",
-    "quantity": 12
+    "quantity": 12,
+    "note": "Gãy 2"
   },
   {
     "stt": 3,
