@@ -1,4 +1,4 @@
-var APP_VERSION = "v3.7 GOLD (FINAL) (08:06:05 7/7/2026)";
+var APP_VERSION = "v3.7 GOLD (FINAL) (08:07:38 7/7/2026)";
 var kitReportDataStore = {};
 var kitDefinitions = [
     {
@@ -4384,7 +4384,7 @@ allKitsData["NS SẢN"] = [
     "name": "BẮT CÓC",
     "code": "LOTMA31 02R",
     "quantity": 1,
-    "note": "1 GÃY"
+    "note": ""
   },
   {
     "stt": 14,
