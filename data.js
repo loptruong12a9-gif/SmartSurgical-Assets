@@ -1,4 +1,4 @@
-var APP_VERSION = "v3.7 GOLD (FINAL) (16:48:46 3/7/2026)";
+var APP_VERSION = "v3.7 GOLD (FINAL) (08:06:05 7/7/2026)";
 var kitReportDataStore = {};
 var kitDefinitions = [
     {
@@ -7318,7 +7318,7 @@ allKitsData["TIỂU PHẪU 4"] = [
     "stt": 8,
     "name": "KÉO MESK NHỌN",
     "code": "BC157R",
-    "quantity": 0,
+    "quantity": 1,
     "note": "MÒN,HƯ"
   },
   {
@@ -7369,7 +7369,7 @@ allKitsData["TIỂU PHẪU 4"] = [
     "stt": "",
     "name": "TỔNG CỘNG",
     "code": "",
-    "quantity": 23,
+    "quantity": 24,
     "bold": true
   }
 ];
