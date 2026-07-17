@@ -1,4 +1,4 @@
-var APP_VERSION = "v3.7 GOLD (FINAL) (08:08:05 7/7/2026)";
+var APP_VERSION = "v3.7 GOLD (FINAL) (17:21:54 17/7/2026)";
 var kitReportDataStore = {};
 var kitDefinitions = [
     {
@@ -6074,7 +6074,7 @@ allKitsData["THẦN KINH 8"] = [
     "stt": 3,
     "name": "KELLY TRUNG",
     "code": "BH135R",
-    "quantity": 11
+    "quantity": 12
   },
   {
     "stt": 4,
@@ -6200,7 +6200,7 @@ allKitsData["THẦN KINH 8"] = [
     "stt": "",
     "name": "TỔNG CỘNG",
     "code": "",
-    "quantity": 44,
+    "quantity": 45,
     "bold": true
   }
 ];
