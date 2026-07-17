@@ -1,4 +1,4 @@
-var APP_VERSION = "v3.7 GOLD (FINAL) (17:21:54 17/7/2026)";
+var APP_VERSION = "v3.7 GOLD (FINAL) (02:55:13 18/7/2026)";
 var kitReportDataStore = {};
 var kitDefinitions = [
     {
@@ -5346,14 +5346,14 @@ allKitsData["THẦN KINH 1"] = [
     "name": "KÉO MESK",
     "code": "ROLAN",
     "quantity": 1,
-    "note": "CÙN"
+    "note": ""
   },
   {
     "stt": 10,
     "name": "KÉO CẮT CHỈ",
     "code": "GERMANY",
     "quantity": 1,
-    "note": "CÙN"
+    "note": ""
   },
   {
     "stt": 11,
@@ -5382,7 +5382,7 @@ allKitsData["THẦN KINH 1"] = [
   }
 ];
 allKitsData["THẦN KINH 1"].footer = "ĐÃ KIỂM";
-allKitsData["THẦN KINH 1"].sterilDate = "2026-03-21T04:55:19.014Z";
+allKitsData["THẦN KINH 1"].sterilDate = "2026-07-17T19:45:24.216Z";
 // Data for THẦN KINH 2
 allKitsData["THẦN KINH 2"] = [
   {
@@ -5395,7 +5395,7 @@ allKitsData["THẦN KINH 2"] = [
     "stt": 2,
     "name": "KELLY TRUNG",
     "code": "BH135R",
-    "quantity": 15
+    "quantity": 13
   },
   {
     "stt": 3,
@@ -5421,7 +5421,7 @@ allKitsData["THẦN KINH 2"] = [
     "name": "NHÍP KHÔNG MẤU",
     "code": "BD029R",
     "quantity": 1,
-    "note": "HƯ"
+    "note": ""
   },
   {
     "stt": 7,
@@ -5434,7 +5434,7 @@ allKitsData["THẦN KINH 2"] = [
     "name": "ALISS",
     "code": "4.HB4302, 2.EA016R (HEBU)",
     "quantity": 6,
-    "note": "2.EA016R  (HƯ)"
+    "note": ""
   },
   {
     "stt": 9,
@@ -5465,12 +5465,12 @@ allKitsData["THẦN KINH 2"] = [
     "name": "KÉO MESK",
     "code": "BC271R",
     "quantity": 1,
-    "note": "HƯ"
+    "note": ""
   },
   {
     "stt": 14,
     "name": "KÉO CẮT CHỈ",
-    "code": "BV HỒNG ĐỨC",
+    "code": "BC236R",
     "quantity": 1
   },
   {
@@ -5495,12 +5495,12 @@ allKitsData["THẦN KINH 2"] = [
     "stt": "",
     "name": "TỔNG CỘNG",
     "code": "",
-    "quantity": 46,
+    "quantity": 44,
     "bold": true
   }
 ];
 allKitsData["THẦN KINH 2"].footer = "ĐÃ KIỂM";
-allKitsData["THẦN KINH 2"].sterilDate = "2026-03-21T04:55:19.014Z";
+allKitsData["THẦN KINH 2"].sterilDate = "2026-07-17T19:45:54.241Z";
 // Data for THẦN KINH 3
 allKitsData["THẦN KINH 3"] = [
   {
@@ -5514,7 +5514,7 @@ allKitsData["THẦN KINH 3"] = [
     "name": "KELLY TRUNG",
     "code": "BH135R",
     "quantity": 12,
-    "note": "Gãy 2"
+    "note": ""
   },
   {
     "stt": 3,
@@ -5545,7 +5545,7 @@ allKitsData["THẦN KINH 3"] = [
     "name": "NHÍP KHÔNG MẤU",
     "code": "BD031R",
     "quantity": 1,
-    "note": "MÒN"
+    "note": ""
   },
   {
     "stt": 8,
@@ -5582,14 +5582,14 @@ allKitsData["THẦN KINH 3"] = [
     "name": "KÉO MESK",
     "code": "BC265R",
     "quantity": 1,
-    "note": "CÙN"
+    "note": ""
   },
   {
     "stt": 14,
     "name": "KÉO CẮT CHỈ",
-    "code": "LAWTON",
+    "code": "BC236R",
     "quantity": 1,
-    "note": "CÙN"
+    "note": ""
   },
   {
     "stt": 15,
@@ -5612,7 +5612,7 @@ allKitsData["THẦN KINH 3"] = [
   }
 ];
 allKitsData["THẦN KINH 3"].footer = "ĐÃ KIỂM";
-allKitsData["THẦN KINH 3"].sterilDate = "2026-03-21T04:55:19.014Z";
+allKitsData["THẦN KINH 3"].sterilDate = "2026-07-17T19:39:07.588Z";
 // Data for THẦN KINH 4
 allKitsData["THẦN KINH 4"] = [
   {
@@ -5625,7 +5625,7 @@ allKitsData["THẦN KINH 4"] = [
     "stt": 2,
     "name": "KELLY TRUNG",
     "code": "BH135R",
-    "quantity": 12
+    "quantity": 13
   },
   {
     "stt": 3,
@@ -5650,14 +5650,14 @@ allKitsData["THẦN KINH 4"] = [
     "name": "NHÍP KHÔNG MẤU",
     "code": "BD029R",
     "quantity": 1,
-    "note": "HƯ, MÒN"
+    "note": ""
   },
   {
     "stt": 7,
     "name": "ALISS",
     "code": "EA016R",
     "quantity": 4,
-    "note": "HƯ 4"
+    "note": ""
   },
   {
     "stt": 8,
@@ -5670,7 +5670,7 @@ allKitsData["THẦN KINH 4"] = [
     "name": "KỀM KẸP KIM",
     "code": "BM 066R",
     "quantity": 1,
-    "note": "HƯ, MÒN"
+    "note": ""
   },
   {
     "stt": 10,
@@ -5695,7 +5695,7 @@ allKitsData["THẦN KINH 4"] = [
     "name": "KÉO CẮT CHỈ",
     "code": "",
     "quantity": 1,
-    "note": "CÙN,MẺ"
+    "note": ""
   },
   {
     "stt": 14,
@@ -5719,12 +5719,12 @@ allKitsData["THẦN KINH 4"] = [
     "stt": "",
     "name": "TỔNG CỘNG",
     "code": "",
-    "quantity": 44,
+    "quantity": 45,
     "bold": true
   }
 ];
 allKitsData["THẦN KINH 4"].footer = "ĐÃ KIỂM";
-allKitsData["THẦN KINH 4"].sterilDate = "2026-03-21T04:55:19.014Z";
+allKitsData["THẦN KINH 4"].sterilDate = "2026-07-17T19:40:13.253Z";
 // Data for THẦN KINH 5
 allKitsData["THẦN KINH 5"] = [
   {
@@ -5751,7 +5751,7 @@ allKitsData["THẦN KINH 5"] = [
     "name": "NHÍP CÓ MẤU",
     "code": "BD559R",
     "quantity": 1,
-    "note": "HƯ,MÒN"
+    "note": ""
   },
   {
     "stt": 5,
@@ -5800,14 +5800,14 @@ allKitsData["THẦN KINH 5"] = [
     "name": "KÉO MESK",
     "code": "CÁN VÀNG",
     "quantity": 1,
-    "note": "CÙN,MÒN"
+    "note": ""
   },
   {
     "stt": 13,
     "name": "KÉO CẮT CHỈ",
-    "code": "LAWTON",
+    "code": "BC236R",
     "quantity": 1,
-    "note": "CÙN, MÒN"
+    "note": ""
   },
   {
     "stt": 14,
@@ -5836,21 +5836,21 @@ allKitsData["THẦN KINH 5"] = [
   }
 ];
 allKitsData["THẦN KINH 5"].footer = "ĐÃ KIỂM";
-allKitsData["THẦN KINH 5"].sterilDate = "2026-05-02T07:32:02.281Z";
+allKitsData["THẦN KINH 5"].sterilDate = "2026-07-17T19:40:48.225Z";
 // Data for THẦN KINH 6
 allKitsData["THẦN KINH 6"] = [
   {
     "stt": 1,
     "name": "KELLY NHỎ 111R",
-    "code": "",
+    "code": "BH111R",
     "quantity": 5
   },
   {
     "stt": 2,
     "name": "KELLY TRUNG",
-    "code": "",
-    "quantity": 14,
-    "note": "GÃY 1"
+    "code": "BH135R",
+    "quantity": 15,
+    "note": ""
   },
   {
     "stt": 3,
@@ -5873,9 +5873,9 @@ allKitsData["THẦN KINH 6"] = [
   {
     "stt": 6,
     "name": "KỀM KẸP KIM",
-    "code": "",
+    "code": "BM066R",
     "quantity": 1,
-    "note": "MÒN, HƯ"
+    "note": ""
   },
   {
     "stt": 7,
@@ -5892,16 +5892,16 @@ allKitsData["THẦN KINH 6"] = [
   {
     "stt": 9,
     "name": "KÉO MESK",
-    "code": "",
+    "code": "BC271R",
     "quantity": 1,
-    "note": "CÙN"
+    "note": ""
   },
   {
     "stt": 10,
     "name": "KÉO CẮT CHỈ",
-    "code": "",
+    "code": "BC236R",
     "quantity": 1,
-    "note": "CÙN"
+    "note": ""
   },
   {
     "stt": 11,
@@ -5925,12 +5925,12 @@ allKitsData["THẦN KINH 6"] = [
     "stt": "",
     "name": "TỔNG CỘNG",
     "code": "",
-    "quantity": 43,
+    "quantity": 44,
     "bold": true
   }
 ];
 allKitsData["THẦN KINH 6"].footer = "ĐÃ KIỂM";
-allKitsData["THẦN KINH 6"].sterilDate = "2026-03-21T04:55:19.014Z";
+allKitsData["THẦN KINH 6"].sterilDate = "2026-07-17T19:41:25.067Z";
 // Data for THẦN KINH 7
 allKitsData["THẦN KINH 7"] = [
   {
@@ -5943,7 +5943,7 @@ allKitsData["THẦN KINH 7"] = [
     "stt": 2,
     "name": "KELLY TRUNG",
     "code": "BH135R",
-    "quantity": 12
+    "quantity": 13
   },
   {
     "stt": 3,
@@ -5980,7 +5980,7 @@ allKitsData["THẦN KINH 7"] = [
     "name": "ALISS",
     "code": "EA016R",
     "quantity": 6,
-    "note": "HƯ 3"
+    "note": ""
   },
   {
     "stt": 9,
@@ -6015,16 +6015,16 @@ allKitsData["THẦN KINH 7"] = [
   {
     "stt": 14,
     "name": "KÉO MESK",
-    "code": "BC606R",
+    "code": "BC271R",
     "quantity": 1,
-    "note": "CÙN,HƯ"
+    "note": ""
   },
   {
     "stt": 15,
     "name": "KÉO CẮT CHỈ",
-    "code": "05-121",
+    "code": "BC236R",
     "quantity": 1,
-    "note": "CÙN, MẺ"
+    "note": ""
   },
   {
     "stt": 16,
@@ -6048,12 +6048,12 @@ allKitsData["THẦN KINH 7"] = [
     "stt": "",
     "name": "TỔNG CỘNG",
     "code": "",
-    "quantity": 43,
+    "quantity": 44,
     "bold": true
   }
 ];
 allKitsData["THẦN KINH 7"].footer = "ĐÃ KIỂM";
-allKitsData["THẦN KINH 7"].sterilDate = "2026-03-21T04:55:19.014Z";
+allKitsData["THẦN KINH 7"].sterilDate = "2026-07-17T19:49:44.508Z";
 // Data for THẦN KINH 8
 allKitsData["THẦN KINH 8"] = [
   {
@@ -6113,14 +6113,14 @@ allKitsData["THẦN KINH 8"] = [
     "name": "ALISS",
     "code": "EA016R",
     "quantity": 4,
-    "note": "HƯ 1"
+    "note": ""
   },
   {
     "stt": 10,
     "name": "ALISS",
     "code": "HB4302",
     "quantity": 2,
-    "note": "HEBU"
+    "note": ""
   },
   {
     "stt": 11,
@@ -6157,14 +6157,14 @@ allKitsData["THẦN KINH 8"] = [
     "name": "KÉO MESK",
     "code": "HB2258",
     "quantity": 1,
-    "note": "CÙN, MÒN,MẺ"
+    "note": ""
   },
   {
     "stt": 17,
     "name": "KÉO CẮT CHỈ",
     "code": "BC346R",
     "quantity": 1,
-    "note": "CÙN, MÒN"
+    "note": ""
   },
   {
     "stt": 18,
@@ -6192,7 +6192,7 @@ allKitsData["THẦN KINH 8"] = [
   },
   {
     "stt": 22,
-    "name": "NHÍP VI PHẪU",
+    "name": "NHÍP ADSON",
     "code": "PAKISTAN",
     "quantity": 1
   },
@@ -6205,7 +6205,7 @@ allKitsData["THẦN KINH 8"] = [
   }
 ];
 allKitsData["THẦN KINH 8"].footer = "ĐÃ KIỂM";
-allKitsData["THẦN KINH 8"].sterilDate = "2026-03-21T04:55:19.014Z";
+allKitsData["THẦN KINH 8"].sterilDate = "2026-07-17T19:42:49.285Z";
 // Data for THẦN KINH 9
 allKitsData["THẦN KINH 9"] = [
   {
@@ -6220,7 +6220,7 @@ allKitsData["THẦN KINH 9"] = [
     "name": "KELLY TRUNG",
     "code": "BH135R, BH141R, BH135R",
     "quantity": 15,
-    "note": "3 LỆCH HÀM"
+    "note": ""
   },
   {
     "stt": 3,
@@ -6233,14 +6233,14 @@ allKitsData["THẦN KINH 9"] = [
     "name": "NHÍP KHÔNG MẤU",
     "code": "BD031R, BD047R",
     "quantity": 2,
-    "note": "HƯ 1, MÒN"
+    "note": ""
   },
   {
     "stt": 5,
     "name": "ALISS",
     "code": "EA016R, HB4302",
     "quantity": 6,
-    "note": "HƯ 2, HỞ HÀM"
+    "note": ""
   },
   {
     "stt": 6,
@@ -6263,16 +6263,16 @@ allKitsData["THẦN KINH 9"] = [
   {
     "stt": 9,
     "name": "KÉO MESK",
-    "code": "B0271R",
+    "code": "BC271R",
     "quantity": 1,
-    "note": "CÙN,, MẺ"
+    "note": ""
   },
   {
     "stt": 10,
     "name": "KÉO CẮT CHỈ",
-    "code": "ROLAN 04113016",
+    "code": "BC236R",
     "quantity": 1,
-    "note": "CÙN, MẺ"
+    "note": ""
   },
   {
     "stt": 11,
@@ -6301,34 +6301,35 @@ allKitsData["THẦN KINH 9"] = [
   }
 ];
 allKitsData["THẦN KINH 9"].footer = "ĐÃ KIỂM";
-allKitsData["THẦN KINH 9"].sterilDate = "2026-03-21T04:55:19.014Z";
+allKitsData["THẦN KINH 9"].sterilDate = "2026-07-17T19:43:27.275Z";
 // Data for THẦN KINH 10
 allKitsData["THẦN KINH 10"] = [
   {
     "stt": 1,
     "name": "KELLY NHỎ 111R",
     "code": "BH111R",
-    "quantity": 5
+    "quantity": 5,
+    "note": "Gãy 1"
   },
   {
     "stt": 2,
     "name": "KELLY TRUNG",
     "code": "BH135R",
-    "quantity": 14
+    "quantity": 15
   },
   {
     "stt": 3,
     "name": "NHÍP CÓ MẤU",
     "code": "BD559R",
     "quantity": 1,
-    "note": "MÒN,HƯ"
+    "note": ""
   },
   {
     "stt": 4,
     "name": "NHÍP KHÔNG MẤU",
     "code": "BD029R",
     "quantity": 1,
-    "note": "MÒN,HƯ"
+    "note": ""
   },
   {
     "stt": 5,
@@ -6351,9 +6352,9 @@ allKitsData["THẦN KINH 10"] = [
   {
     "stt": 8,
     "name": "KỀM KẸP KIM",
-    "code": "HB2202 (HEBU)",
+    "code": "BM066R",
     "quantity": 1,
-    "note": "HƯ thay tạm pakistan"
+    "note": ""
   },
   {
     "stt": 9,
@@ -6388,16 +6389,16 @@ allKitsData["THẦN KINH 10"] = [
   {
     "stt": 14,
     "name": "KÉO MESK",
-    "code": "05-0620",
+    "code": "BC271R",
     "quantity": 1,
-    "note": "CÙN"
+    "note": ""
   },
   {
     "stt": 15,
     "name": "KÉO CẮT CHỈ",
-    "code": "HB1706 (HEBU)",
+    "code": "BC236R",
     "quantity": 1,
-    "note": "CÙN, MẺ"
+    "note": ""
   },
   {
     "stt": 16,
@@ -6421,12 +6422,12 @@ allKitsData["THẦN KINH 10"] = [
     "stt": "",
     "name": "TỔNG CỘNG",
     "code": "",
-    "quantity": 43,
+    "quantity": 44,
     "bold": true
   }
 ];
 allKitsData["THẦN KINH 10"].footer = "ĐÃ KIỂM";
-allKitsData["THẦN KINH 10"].sterilDate = "2026-03-21T04:55:19.014Z";
+allKitsData["THẦN KINH 10"].sterilDate = "2026-07-17T19:44:51.661Z";
 // Data for THẦN KINH 11
 allKitsData["THẦN KINH 11"] = [
   {
@@ -6562,8 +6563,8 @@ allKitsData["THẦN KINH 12"] = [
     "stt": 5,
     "name": "NHÍP KHÔNG MẤU",
     "code": "HB0223",
-    "quantity": 2,
-    "note": "1"
+    "quantity": 1,
+    "note": ""
   },
   {
     "stt": 6,
@@ -6629,12 +6630,12 @@ allKitsData["THẦN KINH 12"] = [
     "stt": "",
     "name": "TỔNG CỘNG",
     "code": "",
-    "quantity": 47,
+    "quantity": 46,
     "bold": true
   }
 ];
 allKitsData["THẦN KINH 12"].footer = "ĐÃ KIỂM";
-allKitsData["THẦN KINH 12"].sterilDate = "2026-03-21T04:55:19.014Z";
+allKitsData["THẦN KINH 12"].sterilDate = "2026-07-17T19:55:04.562Z";
 // Data for THẦN KINH 13
 allKitsData["THẦN KINH 13"] = [
   {
@@ -6690,21 +6691,21 @@ allKitsData["THẦN KINH 13"] = [
     "name": "FIX XĂNG",
     "code": "HB0772",
     "quantity": 6,
-    "note": "HƯ 1"
+    "note": ""
   },
   {
     "stt": 10,
     "name": "KÉO MESK",
     "code": "HB2285",
     "quantity": 1,
-    "note": "CÙN"
+    "note": ""
   },
   {
     "stt": 11,
     "name": "KÉO CẮT CHỈ",
     "code": "HB1706",
     "quantity": 1,
-    "note": "CÙN"
+    "note": ""
   },
   {
     "stt": 12,
@@ -6729,7 +6730,7 @@ allKitsData["THẦN KINH 13"] = [
     "name": "KÉO MAYO",
     "code": "HB1798",
     "quantity": 1,
-    "note": "CÙN"
+    "note": ""
   },
   {
     "stt": "",
@@ -6740,7 +6741,7 @@ allKitsData["THẦN KINH 13"] = [
   }
 ];
 allKitsData["THẦN KINH 13"].footer = "ĐÃ KIỂM";
-allKitsData["THẦN KINH 13"].sterilDate = "2026-03-21T04:55:19.014Z";
+allKitsData["THẦN KINH 13"].sterilDate = "2026-07-17T19:54:34.356Z";
 // Data for THẦN KINH 14
 allKitsData["THẦN KINH 14"] = [
   {
@@ -6778,7 +6779,7 @@ allKitsData["THẦN KINH 14"] = [
     "name": "ALISS",
     "code": "HB4302",
     "quantity": 6,
-    "note": "HƯ 1"
+    "note": ""
   },
   {
     "stt": 7,
