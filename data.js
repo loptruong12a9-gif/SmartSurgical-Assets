@@ -1,4 +1,4 @@
-var APP_VERSION = "v3.7 GOLD (FINAL) (02:55:13 18/7/2026)";
+var APP_VERSION = "v3.7 GOLD (FINAL) (02:58:28 18/7/2026)";
 var kitReportDataStore = {};
 var kitDefinitions = [
     {
@@ -2385,7 +2385,7 @@ allKitsData["CTC 3"] = [
     "name": "FIXXANG",
     "code": "BF431R",
     "quantity": 5,
-    "note": "HƯ 4"
+    "note": ""
   },
   {
     "stt": 18,
@@ -2404,7 +2404,7 @@ allKitsData["CTC 3"] = [
     "name": "ALISS NGẮN",
     "code": "EA016R",
     "quantity": 2,
-    "note": "HƯ 2"
+    "note": ""
   },
   {
     "stt": 21,
@@ -2453,14 +2453,14 @@ allKitsData["CTC 3"] = [
     "name": "KÉO MESK",
     "code": "BC277R",
     "quantity": 1,
-    "note": "CÙN"
+    "note": ""
   },
   {
     "stt": 29,
     "name": "KÉO CẮT CHỈ",
-    "code": "LAWTON",
+    "code": "BC236R",
     "quantity": 1,
-    "note": "CÙN"
+    "note": ""
   },
   {
     "stt": 30,
@@ -2501,7 +2501,7 @@ allKitsData["CTC 3"] = [
   }
 ];
 allKitsData["CTC 3"].footer = "ĐÃ KIỂM";
-allKitsData["CTC 3"].sterilDate = "2026-03-21T04:55:19.014Z";
+allKitsData["CTC 3"].sterilDate = "2026-07-17T19:57:00.819Z";
 // Data for DỤNG CỤ MỔ HỞ LẺ
 allKitsData["DỤNG CỤ MỔ HỞ LẺ"] = [
   {
@@ -7320,21 +7320,21 @@ allKitsData["TIỂU PHẪU 4"] = [
     "name": "KÉO MESK NHỌN",
     "code": "BC157R",
     "quantity": 1,
-    "note": "MÒN,HƯ"
+    "note": ""
   },
   {
     "stt": 9,
     "name": "KÉO MESK DÀI",
     "code": "BC271R",
     "quantity": 1,
-    "note": "MÒN,HƯ"
+    "note": ""
   },
   {
     "stt": 10,
     "name": "KÉO CẮT CHỈ",
     "code": "50114",
     "quantity": 1,
-    "note": "MÒN,HƯ"
+    "note": ""
   },
   {
     "stt": 11,
@@ -7375,7 +7375,7 @@ allKitsData["TIỂU PHẪU 4"] = [
   }
 ];
 allKitsData["TIỂU PHẪU 4"].footer = "ĐÃ KIỂM";
-allKitsData["TIỂU PHẪU 4"].sterilDate = "2026-03-21T04:55:19.014Z";
+allKitsData["TIỂU PHẪU 4"].sterilDate = "2026-07-17T19:58:21.116Z";
 // Data for TRUNG PHẪU 1
 allKitsData["TRUNG PHẪU 1"] = [
   {
