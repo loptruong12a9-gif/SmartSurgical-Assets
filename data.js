@@ -1,4 +1,4 @@
-var APP_VERSION = "v3.7 GOLD (FINAL) (02:58:28 18/7/2026)";
+var APP_VERSION = "v3.7 GOLD (FINAL) (01:36:00 5/8/2026)";
 var kitReportDataStore = {};
 var kitDefinitions = [
     {
@@ -7395,14 +7395,15 @@ allKitsData["TRUNG PHẪU 1"] = [
     "stt": 3,
     "name": "KỀM KẸP KIM",
     "code": "BM066R",
-    "quantity": 1,
-    "note": "GÃY 20/4"
+    "quantity": 2,
+    "note": ""
   },
   {
     "stt": 4,
     "name": "KỀM KẸP KIM",
     "code": "HB2202",
-    "quantity": 1
+    "quantity": 1,
+    "note": "Gãy"
   },
   {
     "stt": 5,
@@ -7544,7 +7545,7 @@ allKitsData["TRUNG PHẪU 1"] = [
     "stt": "",
     "name": "TỔNG CỘNG",
     "code": "",
-    "quantity": 51,
+    "quantity": 52,
     "bold": true
   }
 ];
@@ -7586,14 +7587,15 @@ allKitsData["TRUNG PHẪU 2"] = [
     "stt": 6,
     "name": "KỀM KẸP KIM",
     "code": "BM240R",
-    "quantity": 1
+    "quantity": 0,
+    "note": "Gãy"
   },
   {
     "stt": 7,
     "name": "KỀM KẸP KIM",
     "code": "BM066R",
-    "quantity": 1,
-    "note": "Mẻ đầu"
+    "quantity": 2,
+    "note": ""
   },
   {
     "stt": 8,
@@ -7630,14 +7632,14 @@ allKitsData["TRUNG PHẪU 2"] = [
     "name": "KELLY CONG NHỎ",
     "code": "EA315R",
     "quantity": 15,
-    "note": "3 LỆCH ĐẦU\nBỏ 2 cây qua bộ bắt con số 3"
+    "note": ""
   },
   {
     "stt": 14,
     "name": "ALISS NHỎ",
     "code": "HB4302",
     "quantity": 4,
-    "note": "1 LỆCH ĐẦU"
+    "note": ""
   },
   {
     "stt": 15,
@@ -7704,14 +7706,14 @@ allKitsData["TRUNG PHẪU 2"] = [
     "name": "KÉO MESK",
     "code": "BC670R",
     "quantity": 1,
-    "note": "CÙN"
+    "note": ""
   },
   {
     "stt": 26,
     "name": "KÉO MAYO",
     "code": "",
     "quantity": 1,
-    "note": "MÒN,HƯ, CÙN"
+    "note": ""
   },
   {
     "stt": 27,
