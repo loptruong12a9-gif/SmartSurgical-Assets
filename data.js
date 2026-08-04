@@ -1,4 +1,4 @@
-var APP_VERSION = "v3.7 GOLD (FINAL) (01:36:00 5/8/2026)";
+var APP_VERSION = "v3.7 GOLD (FINAL) (01:36:18 5/8/2026)";
 var kitReportDataStore = {};
 var kitDefinitions = [
     {
