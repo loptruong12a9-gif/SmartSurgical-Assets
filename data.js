@@ -1,4 +1,4 @@
-var APP_VERSION = "v3.7 GOLD (FINAL) (14:56:19 21/9/2026)";
+var APP_VERSION = "v3.7 GOLD (FINAL) (14:58:35 21/9/2026)";
 var kitReportDataStore = {};
 var kitDefinitions = [
     {
@@ -2177,10 +2177,10 @@ allKitsData["CTC 2"] = [
   },
   {
     "stt": 20,
-    "name": "KÉO MESK (CÙN)",
+    "name": "KÉO MESK",
     "code": "BC277",
     "quantity": 1,
-    "note": "CÙN"
+    "note": ""
   },
   {
     "stt": 21,
