@@ -1,4 +1,4 @@
-var APP_VERSION = "v3.7 GOLD (FINAL) (01:36:18 5/8/2026)";
+var APP_VERSION = "v3.7 GOLD (FINAL) (14:49:00 21/9/2026)";
 var kitReportDataStore = {};
 var kitDefinitions = [
     {
@@ -2946,7 +2946,7 @@ allKitsData["DỤNG CỤ MỔ HỞ LẺ"] = [
   }
 ];
 allKitsData["DỤNG CỤ MỔ HỞ LẺ"].footer = "ĐÃ KIỂM";
-allKitsData["DỤNG CỤ MỔ HỞ LẺ"].sterilDate = "2026-05-22T08:05:40.555Z";
+allKitsData["DỤNG CỤ MỔ HỞ LẺ"].sterilDate = "2026-08-20T13:41:23.693Z";
 // Data for DỤNG CỤ NỘI SOI LẺ
 allKitsData["DỤNG CỤ NỘI SOI LẺ"] = [
   {
@@ -3199,7 +3199,7 @@ allKitsData["DỤNG CỤ NỘI SOI LẺ"] = [
   }
 ];
 allKitsData["DỤNG CỤ NỘI SOI LẺ"].footer = "ĐÃ KIỂM 02/2026";
-allKitsData["DỤNG CỤ NỘI SOI LẺ"].sterilDate = "2026-03-21T04:55:19.014Z";
+allKitsData["DỤNG CỤ NỘI SOI LẺ"].sterilDate = "2026-08-20T13:43:02.591Z";
 // Data for ĐẠI PHẪU
 allKitsData["ĐẠI PHẪU"] = [
   {
@@ -3383,7 +3383,7 @@ allKitsData["ĐẠI PHẪU"] = [
   }
 ];
 allKitsData["ĐẠI PHẪU"].footer = "ĐÃ KIỂM";
-allKitsData["ĐẠI PHẪU"].sterilDate = "2026-04-03T06:48:23.351Z";
+allKitsData["ĐẠI PHẪU"].sterilDate = "2026-08-12T04:04:57.871Z";
 // Data for HC Ố CỔ TAY
 allKitsData["HC Ố CỔ TAY"] = [
   {
@@ -3500,6 +3500,7 @@ allKitsData["HC Ố CỔ TAY"] = [
   }
 ];
 allKitsData["HC Ố CỔ TAY"].footer = "ĐÃ KIỂM";
+allKitsData["HC Ố CỔ TAY"].sterilDate = "2026-08-20T13:43:18.079Z";
 // Data for KHOAN PIN
 allKitsData["KHOAN PIN"] = [
   {
@@ -3858,7 +3859,7 @@ allKitsData["NIỆU 1"] = [
   }
 ];
 allKitsData["NIỆU 1"].footer = "ĐÃ KIỂM";
-allKitsData["NIỆU 1"].sterilDate = "2026-03-21T04:55:19.014Z";
+allKitsData["NIỆU 1"].sterilDate = "2026-08-12T05:22:34.838Z";
 // Data for NIỆU 2
 allKitsData["NIỆU 2"] = [
   {
@@ -6309,7 +6310,7 @@ allKitsData["THẦN KINH 10"] = [
     "name": "KELLY NHỎ 111R",
     "code": "BH111R",
     "quantity": 5,
-    "note": "Gãy 1"
+    "note": "1 HEBU"
   },
   {
     "stt": 2,
@@ -6427,7 +6428,7 @@ allKitsData["THẦN KINH 10"] = [
   }
 ];
 allKitsData["THẦN KINH 10"].footer = "ĐÃ KIỂM";
-allKitsData["THẦN KINH 10"].sterilDate = "2026-07-17T19:44:51.661Z";
+allKitsData["THẦN KINH 10"].sterilDate = "2026-09-21T07:48:50.883Z";
 // Data for THẦN KINH 11
 allKitsData["THẦN KINH 11"] = [
   {
