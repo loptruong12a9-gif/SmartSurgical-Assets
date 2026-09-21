@@ -1,4 +1,4 @@
-var APP_VERSION = "v3.7 GOLD (FINAL) (14:49:00 21/9/2026)";
+var APP_VERSION = "v3.7 GOLD (FINAL) (14:50:26 21/9/2026)";
 var kitReportDataStore = {};
 var kitDefinitions = [
     {
@@ -6939,9 +6939,9 @@ allKitsData["THẦN KINH 15"] = [
   {
     "stt": 15,
     "name": "KÉO MAYO",
-    "code": "HB1798",
+    "code": "BC236",
     "quantity": 1,
-    "note": "HƯ, LỆCH"
+    "note": ""
   },
   {
     "stt": "",
@@ -6952,7 +6952,7 @@ allKitsData["THẦN KINH 15"] = [
   }
 ];
 allKitsData["THẦN KINH 15"].footer = "ĐÃ KIỂM";
-allKitsData["THẦN KINH 15"].sterilDate = "2026-03-21T04:55:19.014Z";
+allKitsData["THẦN KINH 15"].sterilDate = "2026-09-21T07:50:21.596Z";
 // Data for TIỂU PHẪU 1
 allKitsData["TIỂU PHẪU 1"] = [
   {
